@@ -8,12 +8,15 @@
 	var gulp = require('gulp');
 	var inject = require('gulp-inject');
 	var jshint = require('gulp-jshint');
+	var minifycss = require('gulp-minify-css');
+	var minifyHTML = require('gulp-minify-html');
 	var ngAnnotate = require('gulp-ng-annotate');
 	var nodemon = require('gulp-nodemon');
 	var plumber = require('gulp-plumber');
 	var sass = require('gulp-ruby-sass');
 	var stylish = require('jshint-stylish');
 	var uglify = require('gulp-uglify');
+	var using = require('gulp-using');
 
 	/**
 	 * Define third-party CSS and JS dependencies.
@@ -46,6 +49,9 @@
 					app: 'js/app/',
 					vendor: 'js/vendor/'
 				}
+			},
+			dist: {
+				base: 'app/dist/'
 			},
 			src: {
 				assets: 'assets/',
@@ -129,9 +135,65 @@
 		return result;
 	}
 
-	gulp.task('clean', function () {
+	gulp.task('cleanBuild', function () {
 		return gulp.src(paths.app.build.base, {read: false})
 			.pipe(clean());
+	});
+
+	gulp.task('cleanDist', function () {
+		return gulp.src(paths.app.dist.base, {read: false})
+			.pipe(clean());
+	});
+
+	gulp.task('distCSS', ['build'], function () {
+		var sources = {
+			app: prefixPath(paths.app.build.base + paths.app.build.css.app, files.css.app),
+			vendor: prefixPath(paths.app.build.base + paths.app.build.css.vendor, files.css.vendor)
+		};
+
+		return gulp.src(sources.vendor.concat(sources.app))
+			.pipe(plumber())
+			.pipe(concat('styles.min.css'))
+			.pipe(minifycss())
+			.pipe(gulp.dest(paths.app.dist.base));
+	});
+
+	gulp.task('distJS', ['build'], function () {
+		var sources = {
+			app: prefixPath(paths.app.build.base + paths.app.build.js.app, files.js.app),
+			vendor: prefixPath(paths.app.build.base + paths.app.build.js.vendor, files.js.vendor)
+		};
+
+		return gulp.src(sources.vendor.concat(sources.app))
+			.pipe(ngAnnotate({add: true, single_quotes: true}))
+			.pipe(concat('app.min.js'))
+			.pipe(uglify())
+			.pipe(gulp.dest(paths.app.dist.base));
+	});
+
+	gulp.task('distCopyIndex', ['build'], function () {
+		return gulp.src(['app/src/index.html'])
+			.pipe(gulp.dest(paths.app.dist.base));
+	});
+
+	gulp.task('distIndex', ['distCopyIndex', 'distCSS', 'distJS'], function () {
+		var sources = {
+			css: ['app/dist/styles.min.css'],
+			index: ['app/dist/index.html'],
+			js: ['app/dist/app.min.js']
+		};
+
+		return gulp.src(sources.index)
+			.pipe(using())
+			.pipe(inject(gulp.src(sources.js, {read:false}), {name: 'app', relative:true}))
+			.pipe(inject(gulp.src(sources.css, {read:false}), {name: 'app', relative:true}))
+			.pipe(gulp.dest(paths.app.dist.base));
+	});
+
+	gulp.task('minifyIndex', ['distIndex'], function () {
+		return gulp.src(['app/dist/index.html'])
+			.pipe(minifyHTML({empty: true}))
+			.pipe(gulp.dest(paths.app.dist.base));
 	});
 
 	gulp.task('jshint', function () {
@@ -156,7 +218,7 @@
 	/**
 	 * Concatenate the contents of all .html files and save as template.js
 	 */
-	gulp.task('html2js', ['clean'], function () {
+	gulp.task('html2js', ['cleanBuild'], function () {
 		var sources = {
 			html: prefixPath(paths.app.src.base, files.html.all),
 			ignore: ['!' + paths.app.src.base + files.html.index]
@@ -169,14 +231,14 @@
 			.pipe(gulp.dest(paths.app.build.base + paths.app.build.js.app));
 	});
 
-	gulp.task('copyVendorJS', ['clean'], function () {
+	gulp.task('copyVendorJS', ['cleanBuild'], function () {
 		var sources = prefixPath(paths.bower, files.js.vendor);
 
 		return gulp.src(sources, {base: paths.bower})
 			.pipe(gulp.dest(paths.app.build.base + paths.app.build.js.vendor));
 	});
 
-	gulp.task('copyAppJS', ['clean', 'jshint'], function () {
+	gulp.task('copyAppJS', ['cleanBuild', 'jshint'], function () {
 		var sources = {
 			js: prefixPath(paths.app.src.base, files.js.app),
 			ignore: ['!' + paths.app.src.base + files.js.unitTest]
@@ -186,14 +248,14 @@
 			.pipe(gulp.dest(paths.app.build.base + paths.app.build.js.app));
 	});
 
-	gulp.task('copyVendorCSS', ['clean'], function () {
+	gulp.task('copyVendorCSS', ['cleanBuild'], function () {
 		var sources = prefixPath(paths.bower, files.css.vendor);
 
 		return gulp.src(sources, {base: paths.bower})
 			.pipe(gulp.dest(paths.app.build.base + paths.app.build.css.vendor));
 	});
 
-	gulp.task('compileSASS', ['clean'], function () {
+	gulp.task('compileSASS', ['cleanBuild'], function () {
 		return gulp.src(paths.app.src.base + files.scss.app)
 			.pipe(plumber())
 			.pipe(sass({style: 'expanded'}))
@@ -201,7 +263,7 @@
 			.pipe(gulp.dest(paths.app.build.base + paths.app.build.css.app));
 	});
 
-	gulp.task('copyIndex', ['clean'], function () {
+	gulp.task('copyIndex', ['cleanBuild'], function () {
 		return gulp.src(paths.app.src.base + files.html.index)
 			.pipe(gulp.dest(paths.app.build.base));
 	});
@@ -209,7 +271,7 @@
 	/**
 	 *
 	 */
-	gulp.task('copyAssets', ['clean'], function () {
+	gulp.task('copyAssets', ['cleanBuild'], function () {
 		return gulp.src(paths.app.src.base + paths.app.src.assets + files.assets.all)
 			.pipe(gulp.dest(paths.app.build.base + paths.app.build.assets));
 	});
@@ -240,7 +302,7 @@
 	});
 
 	gulp.task('build', [
-		'clean',
+		'cleanBuild',
 		'compileSASS',
 		'copyAppJS',
 		'copyAssets',
@@ -265,15 +327,21 @@
 		gulp.watch(paths.app.src.base + '**/*.html', ['build']);
 	});
 
-	gulp.task('dist', function () {
+	gulp.task('dist', [
+		'cleanBuild',
+		'cleanDist',
+		'build',
+		'distCopyIndex',
+		'distCSS',
+		'distJS',
+		'distIndex',
+		'minifyIndex'
+
+	], function () {
 
 	});
 
 	gulp.task('default', ['build', 'watch'], function () {
 
 	});
-
-	//gulp.task('develop', function () {
-	//	nodemon({ script: './build/server.js'})
-	//});
 })();
