@@ -14,7 +14,21 @@
 	var uglify = require('gulp-uglify');
 
 	/**
-	 * Configure project paths
+	 * Define third-party CSS and JS dependencies.
+	 * These will be injected into index.html in the given order.
+	 */
+	var dependencies = {
+		css: [
+			'bootstrap/dist/css/bootstrap.css'
+		],
+		js: [
+			'angular/angular.min.js',
+			'ui-router/release/angular-ui-router.min.js'
+		]
+	};
+
+	/**
+	 * Configure project paths.
 	 */
 	var paths = {
 		app: {
@@ -40,7 +54,7 @@
 	};
 
 	/**
-	 * Configure project files
+	 * Configure file patterns.
 	 */
 	var files = {
 		assets: {
@@ -55,11 +69,23 @@
 			app: [
 				'**/*.css'
 			],
-			vendor: [
-				'bootstrap/dist/css/bootstrap.css'
+			vendor: dependencies.css
+		},
+		/**
+		 * Configuration file for Gulp
+		 */
+		gulpfile: [
+			'gulpfile.js'
+		],
+		html: {
+			index: [
+				'index.html'
 			]
 		},
 		js: {
+			/**
+			 * Define the order in which app js files are injected into index.html
+			 */
 			app: [
 				'**/**/*.module.js',
 				'**/**/*.config.js',
@@ -71,14 +97,7 @@
 			unitTest: [
 				'**/*.spec.js'
 			],
-			/**
-			 * Define third-party JS dependencies
-			 * These will be injected into index.html in the given order
-			 */
-			vendor: [
-				'angular/angular.min.js',
-				'ui-router/release/angular-ui-router.min.js'
-			]
+			vendor: dependencies.js
 		},
 		scss: {
 			/**
@@ -112,7 +131,7 @@
 	gulp.task('jshint', function () {
 		var sources = {
 			js: prefixPath(paths.app.src.base, files.js.app),
-			gulpfile: ['gulpfile.js']
+			gulpfile: files.gulpfile
 		};
 
 		return gulp.src(sources.js.concat(sources.gulpfile))
@@ -161,7 +180,7 @@
 	});
 
 	gulp.task('copyIndex', ['clean'], function () {
-		return gulp.src(paths.app.src.base + 'index.html')
+		return gulp.src(paths.app.src.base + files.html.index)
 			.pipe(gulp.dest(paths.app.build.base));
 	});
 
@@ -179,7 +198,7 @@
 			css: prefixPath(paths.app.build.base + paths.app.build.css.vendor, files.css.vendor)
 		};
 
-		return gulp.src(paths.app.build.base + 'index.html')
+		return gulp.src(paths.app.build.base + files.html.index)
 			.pipe(inject(gulp.src(sources.js, {read: false}), {name: 'vendor', relative: true}))
 			.pipe(inject(gulp.src(sources.css, {read: false}), {name: 'vendor', relative: true}))
 			.pipe(gulp.dest(paths.app.build.base));
@@ -191,7 +210,7 @@
 			js: prefixPath(paths.app.build.base + paths.app.build.js.app, files.js.app)
 		};
 
-		return gulp.src(paths.app.build.base + 'index.html')
+		return gulp.src(paths.app.build.base + files.html.index)
 			.pipe(inject(gulp.src(sources.js, {read: false}), {name: 'app', relative: true}))
 			.pipe(inject(gulp.src(sources.css, {read: false}), {name: 'app', relative: true}))
 			.pipe(gulp.dest(paths.app.build.base));
@@ -215,6 +234,7 @@
 	});
 
 	gulp.task('watch', ['build'], function () {
+		gulp.watch(files.gulpfile, ['build']);
 		gulp.watch('./src/server/**/*.js', ['build']);
 		gulp.watch('./src/client/**/*.js', ['build']);
 		gulp.watch('./src/client/**/*.scss', ['build']);
