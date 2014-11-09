@@ -3,6 +3,11 @@
 
 	angular
 		.module('dainingu', [
-			'dainingu.core'
+			'dainingu.core',
+			'dainingu.header',
+			'dainingu.footer',
+			'dainingu.home',
+			'templates'
+
 		]);
 })();

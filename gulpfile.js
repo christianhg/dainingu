@@ -1,6 +1,7 @@
 (function () {
 	'use strict';
 
+	var templateCache = require('gulp-angular-templatecache');
 	var autoprefixer = require('gulp-autoprefixer');
 	var clean = require('gulp-clean');
 	var concat = require('gulp-concat');
@@ -22,8 +23,8 @@
 			'bootstrap/dist/css/bootstrap.css'
 		],
 		js: [
-			'angular/angular.min.js',
-			'ui-router/release/angular-ui-router.min.js'
+			'angular/angular.js',
+			'ui-router/release/angular-ui-router.js'
 		]
 	};
 
@@ -78,6 +79,9 @@
 			'gulpfile.js'
 		],
 		html: {
+			all: [
+				'**/*.html'
+			],
 			index: [
 				'index.html'
 			]
@@ -145,6 +149,22 @@
 			.pipe(plumber())
 			.pipe(jshint())
 			.pipe(jshint.reporter(stylish));
+	});
+
+	/**
+	 * Concatenate the contents of all .html files and save as template.js
+	 */
+	gulp.task('html2js', ['clean'], function () {
+		var sources = {
+			html: prefixPath(paths.app.src.base, files.html.all),
+			ignore: ['!' + paths.app.src.base + files.html.index]
+		};
+
+		console.log(sources.ignore);
+
+		return gulp.src(sources.html.concat(sources.ignore))
+			.pipe(templateCache('templates.js', {standalone: true}))
+			.pipe(gulp.dest(paths.app.build.base + paths.app.build.js.app));
 	});
 
 	gulp.task('copyVendorJS', ['clean'], function () {
@@ -219,26 +239,28 @@
 
 	gulp.task('build', [
 		'clean',
-		'jshint',
-		'jshintServerJS',
+		'compileSASS',
+		'copyAppJS',
 		'copyAssets',
 		'copyIndex',
-		'copyVendorJS',
-		'copyAppJS',
 		'copyVendorCSS',
-		'compileSASS',
+		'copyVendorJS',
+		'html2js',
+		'injectApp',
 		'injectVendor',
-		'injectApp'
+		'jshint',
+		'jshintServerJS'
+
 	], function () {
 
 	});
 
 	gulp.task('watch', ['build'], function () {
 		gulp.watch(files.gulpfile, ['build']);
-		gulp.watch('./src/server/**/*.js', ['build']);
-		gulp.watch('./src/client/**/*.js', ['build']);
-		gulp.watch('./src/client/**/*.scss', ['build']);
-		gulp.watch('./src/client/**/*.html', ['build']);
+		gulp.watch(paths.server.base + '**/*.js', ['build']);
+		gulp.watch(paths.app.src.base + '**/*.js', ['build']);
+		gulp.watch(paths.app.src.base + '**/*.scss', ['build']);
+		gulp.watch(paths.app.src.base + '**/*.html', ['build']);
 	});
 
 	gulp.task('dist', function () {
