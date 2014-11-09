@@ -1,0 +1,13 @@
+{
+  "name": "dainingu",
+  "version": "0.0.1",
+  "authors": [
+    "Christian Grøngaard <christianhg@gmail.com>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "angular": "~1.3.2",
+    "ui-router": "~0.2.11",
+    "bootstrap": "~3.3.0"
+  }
+}
