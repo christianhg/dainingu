@@ -8,6 +8,7 @@
 	var gulp = require('gulp');
 	var inject = require('gulp-inject');
 	var jshint = require('gulp-jshint');
+	var ngAnnotate = require('gulp-ng-annotate');
 	var nodemon = require('gulp-nodemon');
 	var plumber = require('gulp-plumber');
 	var sass = require('gulp-ruby-sass');
@@ -20,7 +21,8 @@
 	 */
 	var dependencies = {
 		css: [
-			'bootstrap/dist/css/bootstrap.css'
+			'bootstrap/dist/css/bootstrap.css',
+			'bootstrap/dist/css/bootstrap.css.map'
 		],
 		js: [
 			'angular/angular.js',
