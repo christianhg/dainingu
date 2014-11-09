@@ -7,27 +7,113 @@
 	var gulp = require('gulp');
 	var inject = require('gulp-inject');
 	var jshint = require('gulp-jshint');
+	var nodemon = require('gulp-nodemon');
 	var plumber = require('gulp-plumber');
 	var sass = require('gulp-ruby-sass');
 	var stylish = require('jshint-stylish');
 	var uglify = require('gulp-uglify');
 
-	var vendorJS = [
-		'angular/angular.min.js',
-		'ui-router/release/angular-ui-router.min.js'
-	];
+	/**
+	 * Define third-party CSS and JS dependencies.
+	 * These will be injected into index.html in the given order.
+	 */
+	var dependencies = {
+		css: [
+			'bootstrap/dist/css/bootstrap.css'
+		],
+		js: [
+			'angular/angular.min.js',
+			'ui-router/release/angular-ui-router.min.js'
+		]
+	};
 
-	var appJS = [
-		'**/**/*.module.js',
-		'**/**/*.config.js',
-		'**/**/*.js'
-	];
+	/**
+	 * Configure project paths.
+	 */
+	var paths = {
+		app: {
+			build: {
+				assets: 'assets/',
+				base: 'app/build/',
+				css: {
+					app: 'css/app/',
+					vendor: 'css/vendor/'
+				},
+				js: {
+					app: 'js/app/',
+					vendor: 'js/vendor/'
+				}
+			},
+			src: {
+				assets: 'assets/',
+				base: 'app/src/'
+			}
+		},
+		bower: 'bower_components/',
+		server: 'server/'
+	};
 
-	var vendorCSS = [
-		'bootstrap/dist/css/bootstrap.css'
-	];
+	/**
+	 * Configure file patterns.
+	 */
+	var files = {
+		assets: {
+			all: [
+				'**/*'
+			],
+			images: [
+				'images/**/*'
+			]
+		},
+		css: {
+			app: [
+				'**/*.css'
+			],
+			vendor: dependencies.css
+		},
+		/**
+		 * Configuration file for Gulp
+		 */
+		gulpfile: [
+			'gulpfile.js'
+		],
+		html: {
+			index: [
+				'index.html'
+			]
+		},
+		js: {
+			/**
+			 * Define the order in which app js files are injected into index.html
+			 */
+			app: [
+				'**/**/*.module.js',
+				'**/**/*.config.js',
+				'**/**/*.js'
+			],
+			server: [
+				'**/*.js'
+			],
+			unitTest: [
+				'**/*.spec.js'
+			],
+			vendor: dependencies.js
+		},
+		scss: {
+			/**
+			 * Define app specific SCSS files
+			 */
+			app: [
+				'scss/**/*.scss'
+			]
+		}
+	};
 
-	function addPath(path, files) {
+
+	/**
+	 *
+	 */
+	function prefixPath(path, files) {
 		var result = [];
 
 		for (var i = 0; i < files.length; i++) {
@@ -38,80 +124,104 @@
 	}
 
 	gulp.task('clean', function () {
-		return gulp.src('./build', {read: false})
+		return gulp.src(paths.app.build.base, {read: false})
 			.pipe(clean());
 	});
 
 	gulp.task('jshint', function () {
-		var files = addPath('./src/client/', appJS);
+		var sources = {
+			js: prefixPath(paths.app.src.base, files.js.app),
+			gulpfile: files.gulpfile
+		};
 
-		return gulp.src(files)
+		return gulp.src(sources.js.concat(sources.gulpfile))
+			.pipe(plumber())
+			.pipe(jshint())
+			.pipe(jshint.reporter(stylish));
+	});
+
+	gulp.task('jshintServerJS', function () {
+		return gulp.src(['./server.js', paths.server + files.js.server])
 			.pipe(plumber())
 			.pipe(jshint())
 			.pipe(jshint.reporter(stylish));
 	});
 
 	gulp.task('copyVendorJS', ['clean'], function () {
-		var files = addPath('bower_components/', vendorJS);
+		var sources = prefixPath(paths.bower, files.js.vendor);
 
-		return gulp.src(files, {base: 'bower_components'})
-			.pipe(gulp.dest('./build/js/vendor'));
+		return gulp.src(sources, {base: paths.bower})
+			.pipe(gulp.dest(paths.app.build.base + paths.app.build.js.vendor));
 	});
 
 	gulp.task('copyAppJS', ['clean', 'jshint'], function () {
-		var files = addPath('./src/client/', appJS);
-		return gulp.src(files)
-			.pipe(gulp.dest('./build/js/app'));
+		var sources = {
+			js: prefixPath(paths.app.src.base, files.js.app),
+			ignore: ['!' + paths.app.src.base + files.js.unitTest]
+		};
+
+		return gulp.src(sources.js.concat(sources.ignore))
+			.pipe(gulp.dest(paths.app.build.base + paths.app.build.js.app));
 	});
 
 	gulp.task('copyVendorCSS', ['clean'], function () {
-		var files = addPath('bower_components/', vendorCSS);
+		var sources = prefixPath(paths.bower, files.css.vendor);
 
-		return gulp.src(files, {base: 'bower_components'})
-			.pipe(gulp.dest('./build/css/vendor'));
+		return gulp.src(sources, {base: paths.bower})
+			.pipe(gulp.dest(paths.app.build.base + paths.app.build.css.vendor));
 	});
 
 	gulp.task('compileSASS', ['clean'], function () {
-		return gulp.src('./src/client/scss/**/*.scss')
+		return gulp.src(paths.app.src.base + files.scss.app)
 			.pipe(plumber())
 			.pipe(sass({style: 'expanded'}))
 			.pipe(autoprefixer('last 2 version'))
-			.pipe(gulp.dest('./build/css/app'));
+			.pipe(gulp.dest(paths.app.build.base + paths.app.build.css.app));
 	});
 
 	gulp.task('copyIndex', ['clean'], function () {
-		return gulp.src('./src/client/index.html')
-			.pipe(gulp.dest('./build'));
+		return gulp.src(paths.app.src.base + files.html.index)
+			.pipe(gulp.dest(paths.app.build.base));
 	});
 
-	gulp.task('copyHTML', ['clean'], function () {
-		return gulp.src('./src/client/**/*.html')
-
+	/**
+	 *
+	 */
+	gulp.task('copyAssets', ['clean'], function () {
+		return gulp.src(paths.app.src.base + paths.app.src.assets + files.assets.all)
+			.pipe(gulp.dest(paths.app.build.base + paths.app.build.assets));
 	});
 
 	gulp.task('injectVendor', ['copyIndex', 'copyVendorJS', 'copyAppJS', 'copyVendorCSS', 'compileSASS'], function () {
-		var filesJS = addPath('./build/js/vendor/', vendorJS);
-		var filesCSS = addPath('./build/css/vendor/', vendorCSS);
+		var sources = {
+			js: prefixPath(paths.app.build.base + paths.app.build.js.vendor, files.js.vendor),
+			css: prefixPath(paths.app.build.base + paths.app.build.css.vendor, files.css.vendor)
+		};
 
-		return gulp.src('./build/index.html')
-			.pipe(inject(gulp.src(filesJS, {read: false}), {name: 'vendor', relative: true}))
-			.pipe(inject(gulp.src(filesCSS, {read: false}), {name: 'vendor', relative: true}))
-			.pipe(gulp.dest('./build'));
+		return gulp.src(paths.app.build.base + files.html.index)
+			.pipe(inject(gulp.src(sources.js, {read: false}), {name: 'vendor', relative: true}))
+			.pipe(inject(gulp.src(sources.css, {read: false}), {name: 'vendor', relative: true}))
+			.pipe(gulp.dest(paths.app.build.base));
 	});
 
 	gulp.task('injectApp', ['injectVendor'], function () {
-		var filesJS = addPath('./build/js/app/', appJS);
+		var sources = {
+			css: [paths.app.build.base + paths.app.build.css.app + files.css.app],
+			js: prefixPath(paths.app.build.base + paths.app.build.js.app, files.js.app)
+		};
 
-		return gulp.src('./build/index.html')
-			.pipe(inject(gulp.src(filesJS, {read: false}), {name: 'app', relative: true}))
-			.pipe(inject(gulp.src(['./build/css/app/*.css'], {read: false}), {name: 'app', relative: true}))
-			.pipe(gulp.dest('./build'));
+		return gulp.src(paths.app.build.base + files.html.index)
+			.pipe(inject(gulp.src(sources.js, {read: false}), {name: 'app', relative: true}))
+			.pipe(inject(gulp.src(sources.css, {read: false}), {name: 'app', relative: true}))
+			.pipe(gulp.dest(paths.app.build.base));
 
 	});
 
 	gulp.task('build', [
 		'clean',
 		'jshint',
+		'jshintServerJS',
+		'copyAssets',
 		'copyIndex',
 		'copyVendorJS',
 		'copyAppJS',
@@ -120,9 +230,12 @@
 		'injectVendor',
 		'injectApp'
 	], function () {
+
 	});
 
 	gulp.task('watch', ['build'], function () {
+		gulp.watch(files.gulpfile, ['build']);
+		gulp.watch('./src/server/**/*.js', ['build']);
 		gulp.watch('./src/client/**/*.js', ['build']);
 		gulp.watch('./src/client/**/*.scss', ['build']);
 		gulp.watch('./src/client/**/*.html', ['build']);
@@ -135,4 +248,8 @@
 	gulp.task('default', ['build', 'watch'], function () {
 
 	});
+
+	//gulp.task('develop', function () {
+	//	nodemon({ script: './build/server.js'})
+	//});
 })();
