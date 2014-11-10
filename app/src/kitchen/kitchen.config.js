@@ -9,7 +9,7 @@
 		$stateProvider
 			.state('kitchen', {
 				url: '/kitchen',
-				templateUrl: 'components/kitchen/kitchen.view.html',
+				templateUrl: 'kitchen/kitchen.view.html',
 				controller: 'KitchenController',
 				controllerAs: 'vm',
 				data: {

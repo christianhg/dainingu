@@ -9,7 +9,7 @@
 		$stateProvider
 			.state('waiter', {
 				url: '/waiter',
-				templateUrl: 'components/waiter/waiter.view.html',
+				templateUrl: 'waiter/waiter.view.html',
 				controller: 'WaiterController',
 				controllerAs: 'vm',
 				data: {

@@ -280,8 +280,6 @@
 			ignore: ['!' + paths.app.src.base + files.html.index]
 		};
 
-		console.log(sources.ignore);
-
 		return gulp.src(sources.html.concat(sources.ignore))
 			.pipe(templateCache('dainingu.templates.js', {module: 'dainingu.templates', standalone: true}))
 			.pipe(gulp.dest(paths.app.build.base + paths.app.build.js.app + 'templates/'));

@@ -7,7 +7,6 @@
 			 * Core modules
 			 */
 			'dainingu.core',
-			'dainingu.menus',
 			/**
 			 * Components
 			 */

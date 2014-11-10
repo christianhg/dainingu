@@ -5,9 +5,9 @@
 		.module('dainingu.menucard')
 		.controller('MenucardController', MenucardController);
 
-	function MenucardController(MenusFactory) {
+	function MenucardController(menus) {
 		var vm = this;
 
-		vm.menus = MenusFactory;
+		vm.menus = menus.query();
 	}
 })();

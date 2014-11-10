@@ -9,7 +9,7 @@
 		$stateProvider
 			.state('menucard', {
 				url: '/menucard',
-				templateUrl: 'components/menucard/menucard.view.html',
+				templateUrl: 'menucard/menucard.view.html',
 				controller: 'MenucardController',
 				controllerAs: 'vm',
 				data: {

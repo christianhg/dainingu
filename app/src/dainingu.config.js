@@ -3,13 +3,10 @@
 
 	angular
 		.module('dainingu')
-		.run(run);
+		.run(runBlock);
 
-	/**
-	 *
-	 * @param $rootScope
-	 */
-	function run($rootScope) {
+
+	function runBlock() {
 
 	}
 })();
