@@ -5,7 +5,7 @@
 
     var server = express();
 
-    server.use(express.static('app/dist'));
+    server.use(express.static('app/build'));
 
     server.listen(3000);
 

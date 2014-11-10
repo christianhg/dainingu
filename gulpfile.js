@@ -31,6 +31,7 @@
 		],
 		js: [
 			'angular/angular.js',
+			'angular-animate/angular-animate.js',
 			'ui-router/release/angular-ui-router.js'
 		]
 	};
