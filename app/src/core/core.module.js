@@ -7,6 +7,7 @@
 			 * Angular modules
 			 */
 			'ngAnimate',
+			'ngResource',
 			/**
 			 * Third-party modules
 			 */

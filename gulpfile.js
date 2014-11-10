@@ -33,6 +33,7 @@
 		js: [
 			'angular/angular.js',
 			'angular-animate/angular-animate.js',
+			'angular-resource/angular-resource.js',
 			'ui-router/release/angular-ui-router.js'
 		]
 	};
@@ -239,9 +240,10 @@
 	 * Minify images and copy to dist dir
 	 */
 	gulp.task('distMinifyImages', ['build'], function () {
+		var dest = paths.app.dist.base + paths.app.dist.assets.base + paths.app.dist.assets.images;
 		return gulp.src(prefixPath(paths.app.build.base + paths.app.build.assets, files.assets.images))
 			.pipe(imagemin())
-			.pipe(gulp.dest(paths.app.dist.base + paths.app.dist.assets.base + paths.app.dist.assets.images));
+			.pipe(gulp.dest(dest));
 	});
 
 	/**
@@ -281,8 +283,8 @@
 		console.log(sources.ignore);
 
 		return gulp.src(sources.html.concat(sources.ignore))
-			.pipe(templateCache('templates.js', {standalone: true}))
-			.pipe(gulp.dest(paths.app.build.base + paths.app.build.js.app));
+			.pipe(templateCache('dainingu.templates.js', {module: 'dainingu.templates', standalone: true}))
+			.pipe(gulp.dest(paths.app.build.base + paths.app.build.js.app + 'templates/'));
 	});
 
 	/**

@@ -8,8 +8,8 @@
 	function config($stateProvider) {
 		$stateProvider
 			.state('menucard', {
-				url: '/',
-				templateUrl: 'menucard/menucard.html',
+				url: '/menucard',
+				templateUrl: 'components/menucard/menucard.view.html',
 				controller: 'MenucardController',
 				controllerAs: 'vm',
 				data: {

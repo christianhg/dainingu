@@ -3,9 +3,19 @@
 
 	angular
 		.module('dainingu', [
+			/**
+			 * Core module
+			 */
 			'dainingu.core',
+			/**
+			 * Components
+			 */
+			'dainingu.cashregister',
 			'dainingu.dashboard',
+			'dainingu.home',
+			'dainingu.kitchen',
 			'dainingu.menucard',
-			'templates'
+			'dainingu.templates',
+			'dainingu.waiter',
 		]);
 })();

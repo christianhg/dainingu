@@ -5,11 +5,11 @@
 		.module('dainingu.dashboard')
 		.config(config);
 
-	function config($stateProvider) {
+	function config ($stateProvider) {
 		$stateProvider
 			.state('dashboard', {
 				url: '/dashboard',
-				templateUrl: 'dashboard/dashboard.html',
+				templateUrl: 'components/dashboard/dashboard.view.html',
 				controller: 'DashboardController',
 				controllerAs: 'vm',
 				data: {
