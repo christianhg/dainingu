@@ -2,18 +2,20 @@
 	'use strict';
 
 	var templateCache = require('gulp-angular-templatecache');
-	var autoprefixer = require('gulp-autoprefixer');
+	var autoPrefixer = require('gulp-autoprefixer');
 	var clean = require('gulp-clean');
 	var concat = require('gulp-concat');
 	var gulp = require('gulp');
+	var imagemin = require('gulp-imagemin');
 	var inject = require('gulp-inject');
 	var jshint = require('gulp-jshint');
-	var minifycss = require('gulp-minify-css');
+	var minifyCSS = require('gulp-minify-css');
 	var minifyHTML = require('gulp-minify-html');
 	var ngAnnotate = require('gulp-ng-annotate');
 	var nodemon = require('gulp-nodemon');
 	var plumber = require('gulp-plumber');
 	var sass = require('gulp-ruby-sass');
+	var sourcemaps = require('gulp-sourcemaps');
 	var stylish = require('jshint-stylish');
 	var uglify = require('gulp-uglify');
 	var using = require('gulp-using');
@@ -118,12 +120,20 @@
 			app: [
 				'scss/**/*.scss'
 			]
+		},
+		dist: {
+			css: [
+				'styles.min.css'
+			],
+			js: [
+				'app.min.js'
+			]
 		}
 	};
 
 
 	/**
-	 *
+	 * Prefix path to an array of files
 	 */
 	function prefixPath(path, files) {
 		var result = [];
@@ -135,16 +145,26 @@
 		return result;
 	}
 
+	/**
+	 * Remove the build dir
+	 */
 	gulp.task('cleanBuild', function () {
 		return gulp.src(paths.app.build.base, {read: false})
 			.pipe(clean());
 	});
 
+	/**
+	 * Remove the dist dir
+	 */
 	gulp.task('cleanDist', function () {
 		return gulp.src(paths.app.dist.base, {read: false})
 			.pipe(clean());
 	});
 
+	/**
+	 * Concatenate and minify vendor and app CSS.
+	 * Place concatenated file in dist dir
+	 */
 	gulp.task('distCSS', ['build'], function () {
 		var sources = {
 			app: prefixPath(paths.app.build.base + paths.app.build.css.app, files.css.app),
@@ -153,11 +173,15 @@
 
 		return gulp.src(sources.vendor.concat(sources.app))
 			.pipe(plumber())
-			.pipe(concat('styles.min.css'))
-			.pipe(minifycss())
+			.pipe(concat(files.dist.css[0]))
+			.pipe(minifyCSS())
 			.pipe(gulp.dest(paths.app.dist.base));
 	});
 
+	/**
+	 * Annotate, concatenate and minify vendor and app JS
+	 * Place concatenated file in dist dir
+	 */
 	gulp.task('distJS', ['build'], function () {
 		var sources = {
 			app: prefixPath(paths.app.build.base + paths.app.build.js.app, files.js.app),
@@ -166,21 +190,27 @@
 
 		return gulp.src(sources.vendor.concat(sources.app))
 			.pipe(ngAnnotate({add: true, single_quotes: true}))
-			.pipe(concat('app.min.js'))
+			.pipe(concat(files.dist.js[0]))
 			.pipe(uglify())
 			.pipe(gulp.dest(paths.app.dist.base));
 	});
 
+	/**
+	 * Copy index.html to dist dir
+	 */
 	gulp.task('distCopyIndex', ['build'], function () {
-		return gulp.src(['app/src/index.html'])
+		return gulp.src(prefixPath(paths.app.src.base, files.html.index))
 			.pipe(gulp.dest(paths.app.dist.base));
 	});
 
-	gulp.task('distIndex', ['distCopyIndex', 'distCSS', 'distJS'], function () {
+	/**
+	 * Inject CSS and JS files into index.html in dist dir
+	 */
+	gulp.task('distInject', ['distCopyIndex', 'distCSS', 'distJS'], function () {
 		var sources = {
-			css: ['app/dist/styles.min.css'],
-			index: ['app/dist/index.html'],
-			js: ['app/dist/app.min.js']
+			css: prefixPath(paths.app.dist.base, files.dist.css),
+			index: prefixPath(paths.app.dist.base, files.html.index),
+			js: prefixPath(paths.app.dist.base, files.dist.js)
 		};
 
 		return gulp.src(sources.index)
@@ -190,12 +220,22 @@
 			.pipe(gulp.dest(paths.app.dist.base));
 	});
 
-	gulp.task('minifyIndex', ['distIndex'], function () {
-		return gulp.src(['app/dist/index.html'])
+	/**
+	 * Minify index.html in dist dir
+	 */
+	gulp.task('distMinifyIndex', ['distInject'], function () {
+		return gulp.src(prefixPath(paths.app.dist.base, files.html.index))
 			.pipe(minifyHTML({empty: true}))
 			.pipe(gulp.dest(paths.app.dist.base));
 	});
 
+	/**
+	 *
+	 */
+
+	/**
+	 * jshint app JS
+	 */
 	gulp.task('jshint', function () {
 		var sources = {
 			js: prefixPath(paths.app.src.base, files.js.app),
@@ -208,7 +248,10 @@
 			.pipe(jshint.reporter(stylish));
 	});
 
-	gulp.task('jshintServerJS', function () {
+	/**
+	 * jshint server JS
+	 */
+	gulp.task('jshintServer', function () {
 		return gulp.src(['./server.js', paths.server + files.js.server])
 			.pipe(plumber())
 			.pipe(jshint())
@@ -231,6 +274,9 @@
 			.pipe(gulp.dest(paths.app.build.base + paths.app.build.js.app));
 	});
 
+	/**
+	 * Copy vendor JS to build dir
+	 */
 	gulp.task('copyVendorJS', ['cleanBuild'], function () {
 		var sources = prefixPath(paths.bower, files.js.vendor);
 
@@ -238,6 +284,9 @@
 			.pipe(gulp.dest(paths.app.build.base + paths.app.build.js.vendor));
 	});
 
+	/**
+	 * Copy app JS to build dir
+	 */
 	gulp.task('copyAppJS', ['cleanBuild', 'jshint'], function () {
 		var sources = {
 			js: prefixPath(paths.app.src.base, files.js.app),
@@ -248,6 +297,9 @@
 			.pipe(gulp.dest(paths.app.build.base + paths.app.build.js.app));
 	});
 
+	/**
+	 * Copy vendor CSS to build dir
+	 */
 	gulp.task('copyVendorCSS', ['cleanBuild'], function () {
 		var sources = prefixPath(paths.bower, files.css.vendor);
 
@@ -255,27 +307,36 @@
 			.pipe(gulp.dest(paths.app.build.base + paths.app.build.css.vendor));
 	});
 
+	/**
+	 * Compile SASS to CSS and place in build dir
+	 */
 	gulp.task('compileSASS', ['cleanBuild'], function () {
 		return gulp.src(paths.app.src.base + files.scss.app)
 			.pipe(plumber())
 			.pipe(sass({style: 'expanded'}))
-			.pipe(autoprefixer('last 2 version'))
+			.pipe(autoPrefixer('last 2 version'))
 			.pipe(gulp.dest(paths.app.build.base + paths.app.build.css.app));
 	});
 
+	/**
+	 * Copy index.html to build dir
+	 */
 	gulp.task('copyIndex', ['cleanBuild'], function () {
 		return gulp.src(paths.app.src.base + files.html.index)
 			.pipe(gulp.dest(paths.app.build.base));
 	});
 
 	/**
-	 *
+	 * Copy assets to build dir
 	 */
 	gulp.task('copyAssets', ['cleanBuild'], function () {
 		return gulp.src(paths.app.src.base + paths.app.src.assets + files.assets.all)
 			.pipe(gulp.dest(paths.app.build.base + paths.app.build.assets));
 	});
 
+	/**
+	 * Inject vendor CSS and JS into index.html in build dir
+	 */
 	gulp.task('injectVendor', ['copyIndex', 'copyVendorJS', 'copyAppJS', 'copyVendorCSS', 'compileSASS'], function () {
 		var sources = {
 			js: prefixPath(paths.app.build.base + paths.app.build.js.vendor, files.js.vendor),
@@ -288,6 +349,9 @@
 			.pipe(gulp.dest(paths.app.build.base));
 	});
 
+	/**
+	 * Inject app CSS and JS into index.html in build dir
+	 */
 	gulp.task('injectApp', ['injectVendor'], function () {
 		var sources = {
 			css: [paths.app.build.base + paths.app.build.css.app + files.css.app],
@@ -301,6 +365,9 @@
 
 	});
 
+	/**
+	 * Build project
+	 */
 	gulp.task('build', [
 		'cleanBuild',
 		'compileSASS',
@@ -313,20 +380,27 @@
 		'injectApp',
 		'injectVendor',
 		'jshint',
-		'jshintServerJS'
+		'jshintServer'
 
 	], function () {
 
 	});
 
+	/**
+	 * Watch project
+	 */
 	gulp.task('watch', ['build'], function () {
 		gulp.watch(files.gulpfile, ['build']);
 		gulp.watch(paths.server.base + '**/*.js', ['build']);
 		gulp.watch(paths.app.src.base + '**/*.js', ['build']);
 		gulp.watch(paths.app.src.base + '**/*.scss', ['build']);
 		gulp.watch(paths.app.src.base + '**/*.html', ['build']);
+		gulp.watch(paths.app.src.base + 'assets/**/*', ['build']);
 	});
 
+	/**
+	 * Distribute project
+	 */
 	gulp.task('dist', [
 		'cleanBuild',
 		'cleanDist',
@@ -334,13 +408,16 @@
 		'distCopyIndex',
 		'distCSS',
 		'distJS',
-		'distIndex',
-		'minifyIndex'
+		'distInject',
+		'distMinifyIndex'
 
 	], function () {
 
 	});
 
+	/**
+	 * Build and watch project
+	 */
 	gulp.task('default', ['build', 'watch'], function () {
 
 	});
