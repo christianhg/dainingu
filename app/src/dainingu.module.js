@@ -4,9 +4,10 @@
 	angular
 		.module('dainingu', [
 			/**
-			 * Core module
+			 * Core modules
 			 */
 			'dainingu.core',
+			'dainingu.menus',
 			/**
 			 * Components
 			 */

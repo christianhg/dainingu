@@ -1,1 +1,12 @@
-menucard
+<ul>
+    <li ng-repeat="menu in vm.menus">{{menu.title}}
+        <ul>
+            <li ng-repeat="menu in menu.menus">{{menu.title}}
+                <ul>
+                    <li ng-repeat="dish in menu.dishes">{{dish}}</li>
+                </ul>
+            </li>
+            <li ng-repeat="dish in menu.dishes">{{dish}}</li>
+        </ul>
+    </li>
+</ul>
