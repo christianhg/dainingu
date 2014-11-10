@@ -20,6 +20,43 @@
 	var uglify = require('gulp-uglify');
 	var using = require('gulp-using');
 
+	gulp.task('express', function() {
+		var express = require('express');
+		var app = express();
+		app.use(require('connect-livereload')({port: 4002}));
+		app.use(express.static('app/build'));
+		app.listen(4000);
+	});
+
+	var tinylr;
+	gulp.task('livereload', function() {
+		tinylr = require('tiny-lr')();
+		tinylr.listen(4002);
+	});
+
+	/*
+	function notifyLiveReload(event) {
+
+
+		var fileName = require('path').relative(__dirname, event.path);
+
+		tinylr.changed({
+			body: {
+				files: [fileName]
+			}
+		});
+
+		console.log(event);
+	}*/
+
+	function notifyLiveReload() {
+		tinylr.changed({
+			body: {
+				files: 'app/build'
+			}
+		});
+	}
+
 	/**
 	 * Define third-party CSS and JS dependencies.
 	 * These will be injected into index.html in the given order.
@@ -156,7 +193,7 @@
 	 * Remove the build dir
 	 */
 	gulp.task('cleanBuild', function () {
-		return gulp.src(paths.app.build.base, {read: false})
+		return gulp.src(['app/build/*'], {read: false})
 			.pipe(clean());
 	});
 
@@ -392,9 +429,8 @@
 		'injectVendor',
 		'jshint',
 		'jshintServer'
-
 	], function () {
-
+		notifyLiveReload();
 	});
 
 	/**
@@ -407,6 +443,8 @@
 		gulp.watch(paths.app.src.base + '**/*.scss', ['build']);
 		gulp.watch(paths.app.src.base + '**/*.html', ['build']);
 		gulp.watch(paths.app.src.base + 'assets/**/*', ['build']);
+
+		//gulp.watch('app/build/**/*', notifyLiveReload);
 	});
 
 	/**
@@ -430,7 +468,7 @@
 	/**
 	 * Build and watch project
 	 */
-	gulp.task('default', ['build', 'watch'], function () {
+	gulp.task('default', ['build', 'express', 'livereload', 'watch'], function () {
 
 	});
 })();
