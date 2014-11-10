@@ -53,6 +53,10 @@
 				}
 			},
 			dist: {
+				assets: {
+					base: 'assets/',
+					images: 'images/'
+				},
 				base: 'app/dist/'
 			},
 			src: {
@@ -230,8 +234,13 @@
 	});
 
 	/**
-	 *
+	 * Minify images and copy to dist dir
 	 */
+	gulp.task('distMinifyImages', ['build'], function () {
+		return gulp.src(prefixPath(paths.app.build.base + paths.app.build.assets, files.assets.images))
+			.pipe(imagemin())
+			.pipe(gulp.dest(paths.app.dist.base + paths.app.dist.assets.base + paths.app.dist.assets.images));
+	});
 
 	/**
 	 * jshint app JS
@@ -409,7 +418,8 @@
 		'distCSS',
 		'distJS',
 		'distInject',
-		'distMinifyIndex'
+		'distMinifyIndex',
+		'distMinifyImages'
 
 	], function () {
 
