@@ -26,8 +26,9 @@
 	 */
 	var dependencies = {
 		css: [
-			'bootstrap/dist/css/bootstrap.css',
-			'bootstrap/dist/css/bootstrap.css.map'
+			'reset-css/reset.css'//,
+			//'bootstrap/dist/css/bootstrap.css',
+			//'bootstrap/dist/css/bootstrap.css.map'
 		],
 		js: [
 			'angular/angular.js',
@@ -123,7 +124,7 @@
 			 * Define app specific SCSS files
 			 */
 			app: [
-				'scss/**/*.scss'
+				'**/*.scss'
 			]
 		},
 		dist: {

@@ -12,7 +12,9 @@
 				templateUrl: 'dashboard/dashboard.html',
 				controller: 'DashboardController',
 				controllerAs: 'vm',
-				title: 'Dashboard'
+				data: {
+					pageTitle: 'Dashboard'
+				}
 			});
 	}
 })();

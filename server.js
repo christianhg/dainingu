@@ -3,10 +3,13 @@
 
     var express = require('express');
 
-    var server = express();
+    var buildServer = express();
+    var distServer = express();
 
-    server.use(express.static('app/build'));
+    buildServer.use(express.static('app/build'));
+    distServer.use(express.static('app/dist'));
 
-    server.listen(3000);
+    buildServer.listen(3000);
+    distServer.listen(4000);
 
 })();
