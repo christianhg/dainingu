@@ -128,7 +128,9 @@
 			}
 		},
 		bower: 'bower_components/',
-		server: 'server/'
+		server: {
+			base: 'server/'
+		}
 	};
 
 	/**
@@ -247,18 +249,18 @@
 	}
 
 	/**
-	 * Remove the build dir
+	 * Remove all files in build dir
 	 */
 	gulp.task('cleanBuild', function () {
-		return gulp.src(['app/build/*'], {read: false})
+		return gulp.src([paths.app.build.base + '*'], {read: false})
 			.pipe(clean());
 	});
 
 	/**
-	 * Remove the dist dir
+	 * Remove all files in dist dir
 	 */
 	gulp.task('cleanDist', function () {
-		return gulp.src(['app/dist/*'], {read: false})
+		return gulp.src([paths.app.dist.base + '*'], {read: false})
 			.pipe(clean());
 	});
 
@@ -359,7 +361,7 @@
 	 * jshint server JS
 	 */
 	gulp.task('jshintServer', function () {
-		return gulp.src(['./server.js', paths.server + files.js.server])
+		return gulp.src([paths.server.base + files.js.server])
 			.pipe(plumber())
 			.pipe(jshint())
 			.pipe(jshint.reporter(stylish));
