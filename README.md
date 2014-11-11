@@ -3,9 +3,13 @@ dainingu
 
 Unfinished digital menu card system.
 
-Overview af AngularJS modules
+Overview of AngularJS modules
 -------------------
 ![Site Overview](assets/angular-modules.png)
+
+Overview of REST interactions with backend API
+-------------------
+![Site Overview](assets/rest-interactions.png)
 
 Technologies
 -------------------
