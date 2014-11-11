@@ -1,8 +1,11 @@
-ダイニング (dainingu)
+dainingu
 ===================
 
 Unfinished digital menu card system.
 
+Overview af AngularJS modules
+-------------------
+![Site Overview](assets/angular-modules.png)
 
 Technologies
 -------------------
