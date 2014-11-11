@@ -1,10 +1,10 @@
 (function () {
 	'use strict';
 
-	var templateCache = require('gulp-angular-templatecache');
 	var autoPrefixer = require('gulp-autoprefixer');
 	var clean = require('gulp-clean');
 	var concat = require('gulp-concat');
+	var express = require('express');
 	var gulp = require('gulp');
 	var imagemin = require('gulp-imagemin');
 	var inject = require('gulp-inject');
@@ -17,45 +17,68 @@
 	var sass = require('gulp-ruby-sass');
 	var sourcemaps = require('gulp-sourcemaps');
 	var stylish = require('jshint-stylish');
+	var templateCache = require('gulp-angular-templatecache');
+	var tinylrBuild = require('tiny-lr')();
+	var tinylrDist = require('tiny-lr')();
 	var uglify = require('gulp-uglify');
 	var using = require('gulp-using');
 
-	gulp.task('express', function() {
-		var express = require('express');
-		var app = express();
-		app.use(require('connect-livereload')({port: 4002}));
-		app.use(express.static('app/build'));
-		app.listen(4000);
+	/**
+	 * Default task.
+	 * Build and watch project.
+	 */
+	gulp.task('default', ['build', 'express', 'livereload', 'watch'], function () {
+		reloadBuildServer();
 	});
 
-	var tinylr;
-	gulp.task('livereload', function() {
-		tinylr = require('tiny-lr')();
-		tinylr.listen(4002);
+	/**
+	 * Build project
+	 */
+	gulp.task('build', [
+		'cleanBuild',
+		'compileSASS',
+		'copyAppJS',
+		'copyAssets',
+		'copyIndex',
+		'copyVendorCSS',
+		'copyVendorJS',
+		'html2js',
+		'injectApp',
+		'injectVendor',
+		'jshint',
+		'jshintServer'
+	], function () {
+		reloadBuildServer();
 	});
 
-	/*
-	function notifyLiveReload(event) {
+	/**
+	 * Watch project
+	 */
+	gulp.task('watch', ['build'], function () {
+		gulp.watch(files.gulpfile, ['build']);
+		gulp.watch(paths.server.base + '**/*.js', ['build']);
+		gulp.watch(paths.app.src.base + '**/*.js', ['build']);
+		gulp.watch(paths.app.src.base + '**/*.scss', ['build']);
+		gulp.watch(paths.app.src.base + '**/*.html', ['build']);
+		gulp.watch(paths.app.src.base + 'assets/**/*', ['build']);
+	});
 
+	/**
+	 * Distribute project
+	 */
+	gulp.task('dist', [
+		'cleanBuild',
+		'cleanDist',
+		'build',
+		'distCopyIndex',
+		'distCSS',
+		'distJS',
+		'distInject',
+		'distMinifyIndex',
+		'distMinifyImages'
+	], function () {
 
-		var fileName = require('path').relative(__dirname, event.path);
-
-		tinylr.changed({
-			body: {
-				files: [fileName]
-			}
-		});
-
-		console.log(event);
-	}*/
-
-	function notifyLiveReload() {
-		tinylr.changed({
-			body: {
-				files: 'app/build'
-			}
-		});
-	}
+	});
 
 	/**
 	 * Define third-party CSS and JS dependencies.
@@ -175,6 +198,40 @@
 		}
 	};
 
+	/**
+	 * Create and run express servers for build og dist dir
+	 */
+	gulp.task('express', ['build'], function() {
+		var buildServer = express();
+		var distServer = express();
+
+		buildServer.use(require('connect-livereload')({port: 3001}));
+		buildServer.use(express.static(paths.app.build.base));
+		buildServer.listen(3000);
+
+		distServer.use(express.static(paths.app.dist.base));
+		distServer.listen(4000);
+	});
+
+	/**
+	 * Creates listeners for build and dist servers
+	 */
+	gulp.task('livereload', ['express'], function() {
+		tinylrBuild.listen(3001);
+		tinylrDist.listen(4001);
+	});
+
+	/**
+	 * Notifies tiny-lr of changes on the build server
+	 */
+	function reloadBuildServer() {
+		console.log('Reloading build server');
+		tinylrBuild.changed({
+			body: {
+				files: paths.app.build.base
+			}
+		});
+	}
 
 	/**
 	 * Prefix path to an array of files
@@ -201,7 +258,7 @@
 	 * Remove the dist dir
 	 */
 	gulp.task('cleanDist', function () {
-		return gulp.src(paths.app.dist.base, {read: false})
+		return gulp.src(['app/dist/*'], {read: false})
 			.pipe(clean());
 	});
 
@@ -410,65 +467,5 @@
 			.pipe(inject(gulp.src(sources.js, {read: false}), {name: 'app', relative: true}))
 			.pipe(inject(gulp.src(sources.css, {read: false}), {name: 'app', relative: true}))
 			.pipe(gulp.dest(paths.app.build.base));
-
-	});
-
-	/**
-	 * Build project
-	 */
-	gulp.task('build', [
-		'cleanBuild',
-		'compileSASS',
-		'copyAppJS',
-		'copyAssets',
-		'copyIndex',
-		'copyVendorCSS',
-		'copyVendorJS',
-		'html2js',
-		'injectApp',
-		'injectVendor',
-		'jshint',
-		'jshintServer'
-	], function () {
-		notifyLiveReload();
-	});
-
-	/**
-	 * Watch project
-	 */
-	gulp.task('watch', ['build'], function () {
-		gulp.watch(files.gulpfile, ['build']);
-		gulp.watch(paths.server.base + '**/*.js', ['build']);
-		gulp.watch(paths.app.src.base + '**/*.js', ['build']);
-		gulp.watch(paths.app.src.base + '**/*.scss', ['build']);
-		gulp.watch(paths.app.src.base + '**/*.html', ['build']);
-		gulp.watch(paths.app.src.base + 'assets/**/*', ['build']);
-
-		//gulp.watch('app/build/**/*', notifyLiveReload);
-	});
-
-	/**
-	 * Distribute project
-	 */
-	gulp.task('dist', [
-		'cleanBuild',
-		'cleanDist',
-		'build',
-		'distCopyIndex',
-		'distCSS',
-		'distJS',
-		'distInject',
-		'distMinifyIndex',
-		'distMinifyImages'
-
-	], function () {
-
-	});
-
-	/**
-	 * Build and watch project
-	 */
-	gulp.task('default', ['build', 'express', 'livereload', 'watch'], function () {
-
 	});
 })();
