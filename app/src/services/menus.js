@@ -13,31 +13,31 @@
 		function query () {
 			var allMenus = [
 				{
-					title: 'Forretter',
+					name: 'Forretter',
 					dishes: [
 						'De 5 små',
 						'Carpaccio'
 					]
 				},
 				{
-					title: 'Grillretter',
+					name: 'Grillretter',
 					dishes: [
 						'BQ Specialstreak',
 						'Peberbøf'
 					]
 				},
 				{
-					title: 'Tilbehør',
+					name: 'Tilbehør',
 					menus: [
 						{
-							title: 'Vælg én',
+							name: 'Vælg én',
 							dishes: [
 								'Råstegte kartofler',
 								'Pommes frites'
 							]
 						},
 						{
-							title: 'Samt en sauce',
+							name: 'Samt en sauce',
 							dishes: [
 								'Peber sauce',
 								'Barbecue sauce'
@@ -46,21 +46,21 @@
 					]
 				},
 				{
-					title: 'Salater',
+					name: 'Salater',
 					dishes: [
 						'Græsk salat',
 						'Mozzarella salat'
 					]
 				},
 				{
-					title: 'Børnemenu',
+					name: 'Børnemenu',
 					dishes: [
 						'BQ Specialsteak',
 						'Hakkebøf'
 					]
 				},
 				{
-					title: 'Dessert',
+					name: 'Dessert',
 					dishes: [
 						'Blødende chokoladekage',
 						'Crème Brûlée'

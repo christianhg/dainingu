@@ -4,18 +4,28 @@
 	angular
 		.module('dainingu', [
 			/**
-			 * Core modules
+			 * Core module
 			 */
 			'dainingu.core',
+
 			/**
-			 * Components
+			 * Feature areas
 			 */
 			'dainingu.cashregister',
 			'dainingu.dashboard',
 			'dainingu.home',
 			'dainingu.kitchen',
 			'dainingu.menucard',
+			'dainingu.floor',
+
+			/**
+			 * Widgets
+			 */
+			'dainingu.widgets',
+
+			/**
+			 * Misc
+			 */
 			'dainingu.templates',
-			'dainingu.waiter',
 		]);
 })();

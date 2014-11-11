@@ -5,7 +5,7 @@
 		.module('dainingu.home')
 		.config(config);
 
-	function config ($stateProvider) {
+	function config($stateProvider) {
 		$stateProvider
 			.state('home', {
 				url: '/',
@@ -13,7 +13,8 @@
 				controller: 'HomeController',
 				controllerAs: 'vm',
 				data: {
-					pageTitle: 'Home'
+					pageTitle: 'Home',
+					pageClass: 'home'
 				}
 			});
 	}

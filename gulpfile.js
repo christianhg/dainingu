@@ -18,8 +18,7 @@
 	var sourcemaps = require('gulp-sourcemaps');
 	var stylish = require('jshint-stylish');
 	var templateCache = require('gulp-angular-templatecache');
-	var tinylrBuild = require('tiny-lr')();
-	var tinylrDist = require('tiny-lr')();
+	var tinylr = require('tiny-lr')();
 	var uglify = require('gulp-uglify');
 	var using = require('gulp-using');
 
@@ -219,8 +218,7 @@
 	 * Creates listeners for build and dist servers
 	 */
 	gulp.task('livereload', ['express'], function() {
-		tinylrBuild.listen(3001);
-		tinylrDist.listen(4001);
+		tinylr.listen(3001);
 	});
 
 	/**
@@ -228,7 +226,7 @@
 	 */
 	function reloadBuildServer() {
 		console.log('Reloading build server');
-		tinylrBuild.changed({
+		tinylr.changed({
 			body: {
 				files: paths.app.build.base
 			}

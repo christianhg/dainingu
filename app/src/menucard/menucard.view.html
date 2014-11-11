@@ -1,4 +1,7 @@
-<ul>
+<menu ng-repeat="menu in vm.menus" menu-name="menu.name" menus="menu.menus" dishes="menu.dishes"></menu>
+
+
+<!--<ul>
     <li ng-repeat="menu in vm.menus">{{menu.title}}
         <ul>
             <li ng-repeat="menu in menu.menus">{{menu.title}}
@@ -9,4 +12,4 @@
             <li ng-repeat="dish in menu.dishes">{{dish}}</li>
         </ul>
     </li>
-</ul>
+</ul>-->
