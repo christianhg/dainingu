@@ -1,6 +1,9 @@
 (function () {
 	'use strict';
 
+	/**
+	 * Main app module
+	 */
 	angular
 		.module('dainingu', [
 			/**

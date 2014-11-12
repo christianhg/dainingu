@@ -1,6 +1,9 @@
 (function() {
 	'use strict';
 
+	/**
+	 * Cross app modules
+	 */
 	angular
 		.module('dainingu.core', [
 			/**
@@ -8,6 +11,7 @@
 			 */
 			'ngAnimate',
 			'ngResource',
+
 			/**
 			 * Third-party modules
 			 */

@@ -1,3 +1,7 @@
+/**
+ * Menus Factory
+ * @namespace Factories
+ */
 (function () {
 	'use strict';
 
@@ -5,10 +9,18 @@
 		.module('dainingu')
 		.factory('menus', menus);
 
+	/**
+	 * @namespace Menus
+	 * @desc
+	 */
 	function menus() {
 		var service = {
 			query: query
 		};
+
+		return service;
+
+		////////////////
 
 		function query () {
 			var allMenus = [
@@ -71,7 +83,6 @@
 			return allMenus;
 		}
 
-		return service;
 	}
 
 })();
