@@ -1,3 +1,4 @@
+![dainingu](assets/logo.png)
 # dainingu
 
 > Unfinished digital menu card system.
