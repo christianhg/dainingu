@@ -9,7 +9,7 @@
 		$stateProvider
 			.state('cashregister', {
 				url: '/cashregister',
-				templateUrl: 'components/cashregister/cashregister.view.html',
+				templateUrl: 'cashregister/cashregister.view.html',
 				controller: 'CashRegisterController',
 				controllerAs: 'vm',
 				data: {

@@ -1,0 +1,9 @@
+@import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic);
+body {
+  background: #e6e6e6;
+  font-family: 'PT Sans', sans-serif;
+}
+
+ul {
+  padding: 0 0 0 30px;
+}
