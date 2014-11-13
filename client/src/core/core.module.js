@@ -15,6 +15,7 @@
 			/**
 			 * Third-party modules
 			 */
+			'btford.socket-io',
 			'ui.router'
 		]);
 })();

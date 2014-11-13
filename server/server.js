@@ -12,6 +12,9 @@
 
     mongoose.connect('mongodb://localhost/dainingu');
 
+
+    require('./routes')(app);
+
     app.route('/')
         .get(function(req, res) {
             res.sendFile(__dirname + '/index.html');
