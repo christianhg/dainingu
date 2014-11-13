@@ -29,9 +29,8 @@
 	 */
 	var dependencies = {
 		css: [
-			'reset-css/reset.css'//,
-			//'bootstrap/dist/css/bootstrap.css',
-			//'bootstrap/dist/css/bootstrap.css.map'
+			'bootstrap/dist/css/bootstrap.css',
+			'bootstrap/dist/css/bootstrap.css.map'
 		],
 		fonts: [
 
@@ -404,12 +403,13 @@
 	 */
 	gulp.task('jshint', function () {
 		var sources = {
-			js: prefixPath(paths.client.src.base, files.js.app),
 			gulpfile: files.gulpfile,
+			ignore: [],
+			js: prefixPath(paths.client.src.base, files.js.app),
 			karma: files.karma
 		};
 
-		return gulp.src(sources.js.concat(sources.gulpfile).concat(sources.karma))
+		return gulp.src(sources.js.concat(sources.gulpfile).concat(sources.karma).concat(sources.ignore))
 			.pipe(plumber())
 			.pipe(jshint())
 			.pipe(jshint.reporter(stylish));
@@ -501,7 +501,12 @@
 	 * Compile SASS to CSS and place in build dir
 	 */
 	gulp.task('compileSASS', ['cleanBuild'], function () {
-		return gulp.src([paths.client.src.base + files.scss.all])
+		var sources = {
+			ignore: [],
+			scss: [paths.client.src.base + files.scss.all]
+		};
+
+		return gulp.src(sources.ignore.concat(sources.scss))
 			.pipe(plumber())
 			.pipe(sass({style: 'expanded'}))
 			.pipe(autoPrefixer('last 2 version'))

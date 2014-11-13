@@ -1,16 +1,32 @@
-![dainingu](assets/logo.png)
+<img src="./assets/logo@2x.png" width="50" height="50" alt="dainingu">
 # dainingu
 
 > Unfinished digital menu card system.
 
-## Structure
+## Direectory Layout
+    bower_components/
+        angular/
+        angular-animate/
+        angular-resource/
+        bootstrap/
+        jquery/
+        reset-css/
+        ui-router/
     client/
         build/ (created on the fly)
         dist/ (created on the fly)
         src/
+    node_modules/
+    server/
+    .bowerrc
+    .gitignore
+    .jshintrc
+    bower.json
     gulpfile.js
     karma.conf.js
-    server/
+    package.json
+    README.md
+
 
 
 ## Overview of AngularJS modules
@@ -32,7 +48,6 @@
         dainingu.templates,
         dainingu.widgets
     ]
-![Site Overview](assets/angular-modules.png)
 
 Overview of REST interactions with backend API
 -------------------

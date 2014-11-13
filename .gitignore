@@ -1,6 +1,6 @@
 bower_components
-client/build/*
-client/dist/*
+build
+dist
 .DS_Store
 .idea
 node_modules
