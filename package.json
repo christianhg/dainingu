@@ -51,7 +51,9 @@
     "postinstall": "node node_modules/bower/bin/bower install"
   },
   "dependencies": {
+    "body-parser": "^1.9.2",
     "express": "^4.10.2",
+    "method-override": "^2.3.0",
     "mongoose": "^3.8.19",
     "morgan": "^1.5.0",
     "socket.io": "^1.2.0"
