@@ -1,10 +1,36 @@
-dainingu
-===================
+# dainingu
 
-Unfinished digital menu card system.
+> Unfinished digital menu card system.
 
-Overview of AngularJS modules
--------------------
+## Structure
+    client/
+        build/ (created on the fly)
+        dist/ (created on the fly)
+        src/
+    gulpfile.js
+    karma.conf.js
+    server/
+
+
+## Overview of AngularJS modules
+    dainingu --> [
+        dainingu.core --> [
+            ngAnimate,
+            ngResource,
+            ui.router
+        ],
+
+        dainingu.home,
+
+        dainingu.cashregister,
+        dainingu.dashboard,
+        dainingu.floor,
+        dainingu.kitchen,
+        dainingu.menucard,
+
+        dainingu.templates,
+        dainingu.widgets
+    ]
 ![Site Overview](assets/angular-modules.png)
 
 Overview of REST interactions with backend API
@@ -20,9 +46,9 @@ Prerequisites
 -------------------
 Be sure to have the following prerequisites installed.
 
-- Node (0.10.x)
-- NPM (1.4.x)
-- Gulp (3.8.10)
+- [Node.js](http://nodejs.org/) (0.10.x)
+- [npm](https://www.npmjs.org/) (1.4.x)
+- [gulp](http://gulpjs.com/) (3.8.10)
 - ...
 
 Installation
@@ -35,7 +61,7 @@ $ npm install
 
 Run
 -------------------
-Run application using Gulp.
+Run application using gulp.
 
 ```
 $ gulp
