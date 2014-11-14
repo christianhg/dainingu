@@ -3,7 +3,7 @@
 
 > Unfinished digital menu card system.
 
-## Direectory Layout
+## Directory Layout
     bower_components/
         angular/
         angular-animate/
