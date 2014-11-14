@@ -18,6 +18,12 @@
         src/
     node_modules/
     server/
+        controllers
+            menus.js
+        models
+            menu.js
+        routes.js
+        server.js
     .bowerrc
     .gitignore
     .jshintrc
@@ -34,6 +40,7 @@
         dainingu.core --> [
             ngAnimate,
             ngResource,
+            btford.socket-io,
             ui.router
         ],
 
@@ -56,7 +63,9 @@ Overview of REST interactions with backend API
 Technologies
 -------------------
 - [AngularJS](http://angularjs.org) (Frontend JS framework)
-- ...
+- [Express](http://expressjs.com) (Backend JS framework)
+- [MongoDB](http://mongodb.com) (NoSQL database)
+- [Node.js](http://nodejs.org) (Server platform)
 
 Prerequisites
 -------------------
@@ -67,22 +76,34 @@ Be sure to have the following prerequisites installed.
 - [gulp](http://gulpjs.com/) (3.8.10)
 - ...
 
-Installation
--------------------
+## Installation
 Install application using npm.
 
 ```
 $ npm install
 ```
 
-Run
--------------------
-Run application using gulp.
+### Build
+Build frontend using gulp.
 
 ```
-$ gulp
+$ gulp build
+```
+
+### Dist
+Distribute frontend using gulp.
+
+```
+$ gulp dist
+```
+
+## Run
+Run application using node or nodemon.
+
+```
+$ nodemon server/server.js
 ```
 
 To-do
 -------------------
-- Add server application to the stack.
+- ...
