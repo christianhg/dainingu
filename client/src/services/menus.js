@@ -13,8 +13,23 @@
 	 * @namespace Menus
 	 * @desc
 	 */
-	function menus() {
-		var service = {
+	function menus($resource) {
+		return $resource('/api/menus/:id', { id: '@id' }, {
+			'save': {
+				method: 'POST',
+				isArray: true
+			},
+			'update': {
+				method: 'PUT',
+				isArray: true
+			},
+			'delete': {
+				method: 'DELETE',
+				isArray: true
+			}
+		});
+
+		/*var service = {
 			query: query
 		};
 
@@ -81,7 +96,7 @@
 			];
 
 			return allMenus;
-		}
+		}*/
 
 	}
 

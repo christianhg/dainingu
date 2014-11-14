@@ -39,7 +39,9 @@
 			'angular/angular.js',
 			'angular-animate/angular-animate.js',
 			'angular-resource/angular-resource.js',
-			'ui-router/release/angular-ui-router.js'
+			'ui-router/release/angular-ui-router.js',
+			'socket.io-client/socket.io.js',
+			'angular-socket-io/socket.js'
 		]
 	};
 
