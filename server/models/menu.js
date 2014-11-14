@@ -11,5 +11,6 @@
 
     var Menu = mongoose.model('Menu', menuSchema, 'menus');
 
+    // expose model
     module.exports = Menu;
 })();
