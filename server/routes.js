@@ -3,9 +3,24 @@
 
     module.exports = function(app, io) {
 
-        // bootstrap menus controller
         var menus = require('./controllers/menus');
+        var user = require('./controllers/users');
 
+        /**
+         * Users API routes
+         */
+        app.route('/api/users')
+            .get(function(req, res) {
+               users.index(req, res);
+            })
+            .post(function(req, res) {
+                users.store(req, res);
+            });
+
+
+        /**
+         * Menus API routes
+         */
         app.route('/api/menus')
             .get(function(req, res) {
                 menus.index(req, res);
