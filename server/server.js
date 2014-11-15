@@ -10,6 +10,8 @@
     var mongoose = require('mongoose');
     var morgan = require('morgan');
 
+    var secrets = require('./config/secrets');
+
     /**
      * Create Express server.
      */
@@ -18,14 +20,13 @@
     /**
      * Start Express server.
      */
-    var server = app.listen(2000);
+    var server = app.listen(secrets.port);
     var io = require('socket.io').listen(server);
-
 
     /**
      * Connect to MongoDB.
      */
-    mongoose.connect('mongodb://localhost/dainingu');
+    mongoose.connect(secrets.mongodb);
 
     /**
      * Express configuration.

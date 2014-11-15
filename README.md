@@ -1,4 +1,4 @@
-<img src="./assets/logo@2x.png" width="50" height="50" alt="dainingu">
+<img src="./assets/logo.png" width="50" height="50" alt="dainingu">
 # dainingu
 
 > Unfinished digital menu card system.
@@ -18,9 +18,12 @@
         src/
     node_modules/
     server/
-        controllers
+        config/
+            passport.js
+            secrets.js
+        controllers/
             menus.js
-        models
+        models/
             menu.js
         routes.js
         server.js

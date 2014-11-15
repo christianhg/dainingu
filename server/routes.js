@@ -3,7 +3,7 @@
 
     module.exports = function(app, io) {
 
-        // bootstrap menus controllers
+        // bootstrap menus controller
         var menus = require('./controllers/menus');
 
         app.route('/api/menus')
