@@ -1,22 +1,35 @@
 (function () {
     'use strict';
 
+    /**
+     * Module dependencies.
+     */
     var bodyParser = require('body-parser');
     var express = require('express');
     var methodOverride = require('method-override');
     var mongoose = require('mongoose');
     var morgan = require('morgan');
 
+    /**
+     * Create Express server.
+     */
     var app = express();
     var routes = require('./routes');
+    /**
+     * Start Express server.
+     */
     var server = app.listen(2000);
     var io = require('socket.io').listen(server);
 
-    //module.exports = server;
 
-    // Bootstrap MongoDB connection
+    /**
+     * Connect to MongoDB.
+     */
     mongoose.connect('mongodb://localhost/dainingu');
 
+    /**
+     * Express configuration.
+     */
     app.use(express.static(__dirname + '/../client/build'));
 
     // Get data from html forms.
@@ -32,5 +45,8 @@
         socket.emit('handshake', {data: 'hello client'});
     });
 
+    /**
+     * Routes.
+     */
     routes(app, io);
 })();

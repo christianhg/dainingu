@@ -71,9 +71,11 @@ Prerequisites
 -------------------
 Be sure to have the following prerequisites installed.
 
+- [gulp](http://gulpjs.com/) (3.8.10)
+- [MongoDB](http://mongodb.org)
 - [Node.js](http://nodejs.org/) (0.10.x)
 - [npm](https://www.npmjs.org/) (1.4.x)
-- [gulp](http://gulpjs.com/) (3.8.10)
+
 - ...
 
 ## Installation
