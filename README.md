@@ -23,8 +23,13 @@
             secrets.js
         controllers/
             menus.js
+            sessions.js
+            users.js
         models/
             menu.js
+            order.js
+            session.js
+            user.js
         routes.js
         server.js
     .bowerrc
