@@ -28,12 +28,12 @@
                 res.send(err);
             }
 
-            res.json(sessions);
-
             var data = {
                 message: 'Sessions shown',
                 sessions: sessions
             };
+
+            res.json(sessions);
 
             callback(data);
         });
@@ -71,12 +71,12 @@
                 res.send(err);
             }
 
-            res.json(session);
-
             var data = {
                 message: 'Session shown',
                 session: session
             };
+
+            res.json(session);
 
             callback(data);
         });
