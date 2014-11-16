@@ -241,6 +241,7 @@
 	 */
 	gulp.task('watch', ['build'], function () {
 		//gulp.watch(prefixPath(paths.server.base, files.js.all), ['build']);
+		gulp.watch(files.gulpfile, ['build']);
 		gulp.watch(prefixPath(paths.client.src.base, files.js.all), ['build']);
 		gulp.watch(prefixPath(paths.client.src.base, files.scss.all), ['build']);
 		gulp.watch(prefixPath(paths.client.src.base, files.html.all), ['build']);
