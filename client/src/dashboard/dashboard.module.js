@@ -4,6 +4,8 @@
 	angular
 		.module('dainingu.dashboard', [
 			'dainingu.dashboard.login',
-			'dainingu.dashboard.users'
+			'dainingu.dashboard.menus',
+			'dainingu.dashboard.users',
+			'dainingu.dashboard.sessions'
 		]);
 })();

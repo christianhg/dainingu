@@ -10,6 +10,6 @@
 
         vm.addUser = function(user) {
             console.log(user);
-        }
+        };
     }
 })();
