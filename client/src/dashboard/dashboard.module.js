@@ -2,5 +2,7 @@
 	'use strict';
 
 	angular
-		.module('dainingu.dashboard', []);
+		.module('dainingu.dashboard', [
+			'dainingu.dashboard.users'
+		]);
 })();

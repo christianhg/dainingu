@@ -8,6 +8,6 @@
 	function DashboardController() {
 		var vm = this;
 
-		vm.hej = 'dashhhshsh';
+		vm.hej = 'dashboard';
 	}
 })();

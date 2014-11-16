@@ -11,6 +11,7 @@
 			 */
 			'ngAnimate',
 			'ngResource',
+			'ngTouch',
 
 			/**
 			 * Third-party modules

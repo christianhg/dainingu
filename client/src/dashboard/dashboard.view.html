@@ -1,3 +1,10 @@
 <div id="dashboard">
-    {{vm.hej}}
+    <nav>
+        <ul class="nav nav-pills">
+            <li role="presentation"><a ui-sref=".users" ui-sref-active="active">Brugere</a></li>
+            <li role="presentation"><a ui-sref=".sessions" ui-sref-active="active">Sessioner</a></li>
+            <li role="presentation"><a ui-sref=".menus" ui-sref-active="active">Menuer</a></li>
+        </ul>
+    </nav>
+    <div ui-view></div>
 </div>

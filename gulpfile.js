@@ -36,12 +36,15 @@
 
 		],
 		js: [
+			'jquery/dist/jquery.js',
 			'angular/angular.js',
 			'angular-animate/angular-animate.js',
 			'angular-resource/angular-resource.js',
+			'angular-touch/angular-touch.js',
 			'ui-router/release/angular-ui-router.js',
 			'socket.io-client/socket.io.js',
-			'angular-socket-io/socket.js'
+			'angular-socket-io/socket.js',
+			'bootstrap/dist/js/bootstrap.js'
 		]
 	};
 
@@ -203,7 +206,12 @@
 	 * Default task.
 	 * Build and watch project.
 	 */
-	gulp.task('default', ['build', 'express', 'livereload', 'watch'], function () {
+	gulp.task('default', [
+		'build',
+		'express',
+		'livereload',
+		'watch'
+	], function () {
 		reloadBuildServer();
 	});
 
