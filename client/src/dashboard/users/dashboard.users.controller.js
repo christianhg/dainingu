@@ -8,6 +8,8 @@
     function DashboardUsersController() {
         var vm = this;
 
-        vm.hej = 'users';
+        vm.addUser = function(user) {
+            console.log(user);
+        }
     }
 })();
