@@ -10,9 +10,7 @@
             templateUrl: 'widgets/menu/menu.html',
             restrict: 'E',
             scope: {
-                menuName: '=',
-                menus: '=',
-                dishes: '='
+                info: '='
             },
             controller: MenuController,
             controllerAs: 'vm'
@@ -25,9 +23,8 @@
          */
         function MenuController($scope) {
             var vm = this;
-            vm.menuName = $scope.menuName;
-            vm.menus = $scope.menus;
-            vm.dishes = $scope.dishes;
+
+            vm.menu = $scope.info;
         }
     }
 })();

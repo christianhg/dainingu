@@ -8,7 +8,7 @@
             type: String
         },
         dishes: [{
-            title: String,
+            name: String,
             price: Number
         }]
     });

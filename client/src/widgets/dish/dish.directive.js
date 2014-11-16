@@ -9,6 +9,9 @@
         var directive = {
             templateUrl: 'widgets/dish/dish.html',
             restrict: 'E',
+            scope: {
+                info: '='
+            },
             controller: DishController,
             controllerAs: 'vm'
         };
@@ -21,6 +24,7 @@
         function DishController($scope) {
             var vm = this;
 
+            vm.dish = $scope.info;
         }
     }
 })();
