@@ -34,9 +34,7 @@
     app.use(express.static(__dirname + '/../client/build'));
 
     // Get data from html forms.
-    app.use(bodyParser.urlencoded({
-        extended: true
-    }));
+    app.use(bodyParser.json());
     // Faux http method support.
     app.use(methodOverride());
     // Log requests in console.

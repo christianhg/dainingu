@@ -59,7 +59,7 @@
     exports.store = function(req, res, callback) {
         var menu = new Menu();
 
-        menu.title = req.body.title;
+        menu.name = req.body.name;
 
         menu.save(function (err) {
             if (err) {

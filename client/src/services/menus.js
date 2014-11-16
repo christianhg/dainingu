@@ -17,7 +17,7 @@
 		return $resource('/api/menus/:id', { id: '@id' }, {
 			'save': {
 				method: 'POST',
-				isArray: true
+				isArray: false
 			},
 			'update': {
 				method: 'PUT',

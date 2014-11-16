@@ -30,6 +30,7 @@
             .post(function(req, res) {
                 menus.store(req, res, function(data) {
                     io.sockets.emit('menuAdded', data);
+                    console.log(data);
                 });
             });
         app.route('/api/menus/:id')
@@ -41,11 +42,13 @@
             .put(function(req, res) {
                 menus.update(req, res, function(data) {
                     io.sockets.emit('menuUpdated', data);
+                    console.log(data);
                 })
             })
             .delete(function(req, res) {
                 menus.destroy(req, res, function(data) {
                     io.sockets.emit('menuDeleted', data);
+                    console.log(data);
                 });
             });
 
