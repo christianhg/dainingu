@@ -5,7 +5,6 @@
     var mongoose = require('mongoose');
 
     var userSchema = new mongoose.Schema({
-        _id: Number,
         username: {
             type: String,
             unique: true
@@ -14,7 +13,7 @@
         access: {
             group: String,
             level: Number
-        },
+        }/*,
         profile: {
             email: {
                 type: String,
@@ -33,16 +32,17 @@
                 type: String,
                 default: ''
             }
-
-        }
+        }*/
     });
 
     var User = mongoose.model('User', userSchema, 'users');
 
+    module.exports = User;
+
     /**
      * Password hashing middleware.
      */
-    userSchema.pre('save', function(next) {
+    /*userSchema.pre('save', function(next) {
         var user = this;
 
         if(!user.isModified('password')) {
@@ -58,20 +58,17 @@
                 next();
             });
         });
-    });
+    });*/
 
     /**
      * Validate user's password.
      */
-    userSchema.method.comparePassword = function(condidatePassword, callback) {
+    /*userSchema.method.comparePassword = function(condidatePassword, callback) {
         bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
            if(err) {
                return callback(err);
            }
             callback(isMatch);
         });
-    };
-
-    // expose model
-    module.exports = User;
+    };*/
 })();

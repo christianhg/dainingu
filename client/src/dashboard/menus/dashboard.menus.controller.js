@@ -10,7 +10,7 @@
 
         vm.menus = menus.query();
 
-        vm.addMenu = function(menu) {
+        vm.addMenu = function() {
             menus.save(vm.menu, function(menu) {
                 console.log(menu);
             });

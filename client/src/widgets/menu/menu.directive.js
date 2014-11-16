@@ -7,7 +7,7 @@
 
     function menu() {
         var directive = {
-            templateUrl: 'widgets/menu/menu.html',
+            templateUrl: 'widgets/menu/menu.view.html',
             restrict: 'E',
             scope: {
                 info: '='

@@ -4,17 +4,22 @@
     module.exports = function(app, io) {
 
         var menus = require('./controllers/menus');
-        var user = require('./controllers/users');
+        var users = require('./controllers/users');
 
         /**
          * Users API routes
          */
         app.route('/api/users')
             .get(function(req, res) {
-               users.index(req, res);
+                users.index(req, res, function(data) {
+                    console.log(data);
+                });
             })
             .post(function(req, res) {
-                users.store(req, res);
+                users.store(req, res, function(data) {
+                    io.sockets.emit('userAdded', data);
+                    console.log(data);
+                });
             });
 
 

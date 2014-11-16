@@ -3,16 +3,16 @@
 
     angular
         .module('dainingu.widgets')
-        .directive('dish', dish);
+        .directive('user', user);
 
-    function dish() {
+    function user() {
         var directive = {
-            templateUrl: 'widgets/dish/dish.view.html',
+            templateUrl: 'widgets/user/user.view.html',
             restrict: 'E',
             scope: {
                 info: '='
             },
-            controller: DishController,
+            controller: UserController,
             controllerAs: 'vm'
         };
 
@@ -21,10 +21,10 @@
         /**
          * @ngInject
          */
-        function DishController($scope) {
+        function UserController($scope) {
             var vm = this;
 
-            vm.dish = $scope.info;
+            vm.user = $scope.info;
         }
     }
 })();

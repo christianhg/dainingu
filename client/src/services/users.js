@@ -1,3 +1,7 @@
+/**
+ * Users Factory
+ * @namespace Factories
+ */
 (function () {
 	'use strict';
 
@@ -5,7 +9,25 @@
 		.module('dainingu')
 		.factory('users', users);
 
-	function users() {
-
+	/**
+	 * @namespace Users
+	 * @desc
+	 */
+	function users($resource) {
+		return $resource('/api/users/:id', { id: '@id' }, {
+			'save': {
+				method: 'POST',
+				isArray: false
+			},
+			'update': {
+				method: 'PUT',
+				isArray: true
+			},
+			'delete': {
+				method: 'DELETE',
+				isArray: true
+			}
+		});
 	}
+
 })();

@@ -5,11 +5,15 @@
         .module('dainingu.dashboard.users')
         .controller('DashboardUsersController', DashboardUsersController);
 
-    function DashboardUsersController() {
+    function DashboardUsersController(users) {
         var vm = this;
 
-        vm.addUser = function(user) {
-            console.log(user);
+        vm.users = users.query();
+
+        vm.addUser = function() {
+            users.save(vm.user, function(user) {
+                console.log(user);
+            });
         };
     }
 })();
