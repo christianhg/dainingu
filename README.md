@@ -68,6 +68,7 @@
         dainingu.core --> [
             ngAnimate,
             ngResource,
+            ngTourch,
             btford.socket-io,
             ui.router
         ],
@@ -75,10 +76,16 @@
         dainingu.home,
 
         dainingu.cashregister,
-        dainingu.dashboard,
         dainingu.floor,
         dainingu.kitchen,
         dainingu.menucard,
+
+        dainingu.dashboard --> [
+            dainingu.dashboard.login,
+            dainingu.dashboard.menus,
+            dainingu.dashboard.sessions,
+            dainingu.dashboard.users
+        ],
 
         dainingu.templates,
         dainingu.widgets
@@ -107,7 +114,7 @@ Be sure to have the following prerequisites installed.
 - ...
 
 ## Installation
-Install application using npm.
+Install dependencies using npm. This will automatically run `bower install` afterwards.
 
 ```
 $ npm install
