@@ -9,10 +9,6 @@
 		.module('dainingu')
 		.factory('menus', menus);
 
-	/**
-	 * @namespace Menus
-	 * @desc
-	 */
 	function menus($resource) {
 		return $resource('/api/menus/:id', { id: '@id' }, {
 			'save': {

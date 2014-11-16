@@ -8,14 +8,34 @@
         angular/
         angular-animate/
         angular-resource/
+        angular-socket-io/
+        angular-touch/
         bootstrap/
         jquery/
-        reset-css/
+        socket.io-client
         ui-router/
     client/
         build/ (created on the fly)
         dist/ (created on the fly)
         src/
+            assets/
+            cashregister/
+            components/
+            dashboard/
+                login/
+                menus/
+                sessions/
+                users/
+            floor/
+            home/
+            kitchen/
+            menucard/
+            scss/
+            services/
+            widgets/
+                dish/
+                menu/
+                user/
     node_modules/
     server/
         config/

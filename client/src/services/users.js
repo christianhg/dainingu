@@ -9,10 +9,6 @@
 		.module('dainingu')
 		.factory('users', users);
 
-	/**
-	 * @namespace Users
-	 * @desc
-	 */
 	function users($resource) {
 		return $resource('/api/users/:id', { id: '@id' }, {
 			'save': {
