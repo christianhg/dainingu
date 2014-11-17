@@ -20,28 +20,102 @@
         </div>
     </div>
     <div class="col-sm-6 col-md-8">
-        <div class="panel panel-default">
+        <div class="panel panel-info">
             <div class="panel-heading">
-                Sessioner
+                Inaktive sessioner
             </div>
             <div class="panel-body">
-                ...
-
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nøgle</th>
+                            <th>Kunde</th>
+                            <th>Bord</th>
+                            <th>Active</th>
+                            <th>Expired</th>
+                            <th>Info</th>
+                            <th>Redigér</th>
+                            <th>Arkivér</th>
+                            <th>Slet</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="session in vm.sessions | filter:{active: false, expired: false}">
+                            <td>{{session.key}}</td>
+                            <td>{{session.customer.name}}</td>
+                            <td>{{session.table}}</td>
+                            <td>{{session.active}}</td>
+                            <td>{{session.expired}}</td>
+                            <td>
+                                <button type="submit" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                </button>
+                            </td>
+                            <td>
+                                <button type="submit" ng-click="vm.editSession(session)" class="btn btn-info">
+                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                </button>
+                            </td>
+                            <td>
+                                <button type="submit" ng-click="vm.expireSession(session)" class="btn btn-warning">
+                                    <span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>
+                                </button>
+                            </td>
+                            <td>
+                                <button type="submit" ng-click="vm.deleteSession(session._id)" class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <ul class="list-group">
-                <li ng-repeat="session in vm.sessions" class="list-group-item">
-                    {{session.key}} -
-                    <button type="submit" class="btn btn-sm btn-primary">
-                        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                    </button>
-                    <button type="submit" class="btn btn-sm btn-warning">
-                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                    </button>
-                    <button type="submit" ng-click="vm.deleteSession(session._id)" class="btn btn-sm btn-danger">
-                        <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
-                    </button>
-                </li>
-            </ul>
+        </div>
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                Aktive sessioner
+            </div>
+            <div class="panel-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Nøgle</th>
+                        <th>Kunde</th>
+                        <th>Bord</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="session in vm.sessions | filter:{active:true}">
+                        <td>{{session.key}}</td>
+                        <td>{{session.customer.name}}</td>
+                        <td>{{session.table}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                Udgåede sessioner
+            </div>
+            <div class="panel-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Nøgle</th>
+                        <th>Kunde</th>
+                        <th>Bord</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="session in vm.sessions | filter:{expired:true}">
+                        <td>{{session.key}}</td>
+                        <td>{{session.customer.name}}</td>
+                        <td>{{session.table}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

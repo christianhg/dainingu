@@ -7,13 +7,16 @@
 
     var sessionSchema = new mongoose.Schema({
         active: {
-            type: Boolean
+            type: Boolean,
+            default: false
         },
         createdOn: {
-            type: Date
+            type: Date,
+            default: Date.now
         },
         expired: {
-            type: String
+            type: String,
+            default: false
         },
         key: {
             type: String

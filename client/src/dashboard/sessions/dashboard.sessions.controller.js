@@ -21,5 +21,13 @@
                 vm.sessions = sessions.query();
             });
         };
+
+        vm.expireSession = function(expiredSession) {
+            expiredSession.expired = true;
+
+            sessions.update({'id': expiredSession._id}, expiredSession, function(session) {
+
+            });
+        };
     }
 })();
