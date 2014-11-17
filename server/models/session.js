@@ -2,6 +2,8 @@
     'use strict';
 
     var mongoose = require('mongoose');
+    var bcrypt = require('bcrypt');
+    var randToken = require('rand-token');
 
     var sessionSchema = new mongoose.Schema({
         active: {
@@ -29,4 +31,13 @@
     var Session = mongoose.model('Session', sessionSchema);
 
     module.exports = Session;
+
+    sessionSchema.pre('save', function(next) {
+        var session = this;
+
+        session.key = randToken.generate(6, 'ABCDEFGHJKMNPQRSTUVWXYZ23456789');
+
+        next();
+    });
+
 })();

@@ -52,7 +52,7 @@
     "postinstall": "node node_modules/bower/bin/bower install"
   },
   "dependencies": {
-    "bcrypt-nodejs": "0.0.3",
+    "bcrypt": "^0.8.0",
     "body-parser": "^1.9.2",
     "express": "^4.10.2",
     "method-override": "^2.3.0",
@@ -60,6 +60,7 @@
     "morgan": "^1.5.0",
     "passport": "^0.2.1",
     "passport-local": "^1.0.0",
+    "rand-token": "^0.2.1",
     "socket.io": "^1.2.0"
   }
 }
