@@ -19,10 +19,21 @@
             .post(function(req, res) {
                 users.store(req, res, function(data) {
                     io.sockets.emit('userAdded', data);
-                    console.log(data);
+                    //console.log(data);
                 });
             });
+        app.route('/api/users/:id')
+            .get(function(req, res) {
 
+            })
+            .put(function(req, res) {
+
+            })
+            .delete(function(req, res) {
+                users.destroy(req, res, function(data) {
+                   io.sockets.emit('userDeleted', data);
+                });
+            });
 
         /**
          * Menus API routes

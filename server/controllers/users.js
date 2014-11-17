@@ -5,7 +5,22 @@
     var User = require('../models/user');
 
     exports.destroy = function(req, res, callback) {
+        User.findById(req.params.id, function(err, user) {
+            user.remove(function(err) {
+                if(err) {
+                    res.send(err);
+                }
 
+                var data = {
+                    message: 'User deleted',
+                    user: user
+                };
+
+                res.json(data);
+
+                callback(data);
+            });
+        });
     };
 
     exports.index = function(req, res, callback) {

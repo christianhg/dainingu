@@ -39,13 +39,25 @@
                     <thead>
                         <tr>
                             <th>Brugernavn</th>
-                            <th>Password</th>
+                            <th>Rolle</th>
+                            <th>Redigér</th>
+                            <th>Slet</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="user in vm.users">
                             <td>{{user.username}}</td>
-                            <td>{{user.password}}</td>
+                            <td></td>
+                            <td>
+                                <button type="submit" ng-click="vm.editUser(user)" class="btn btn-info">
+                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                </button>
+                            </td>
+                            <td>
+                                <button type="submit" ng-click="vm.deleteUser(user._id)" class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
