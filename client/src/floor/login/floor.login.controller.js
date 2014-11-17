@@ -12,6 +12,6 @@
 
         vm.floorLogin = function() {
             console.log(vm.loginData);
-        }
+        };
     }
 })();

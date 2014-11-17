@@ -1,22 +1,20 @@
 <div class="row">
-    <div class="col-sm-4 col-sm-offset-4">
+    <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
         <div class="panel panel-default">
             <div class="panel-heading">Login</div>
             <div class="panel-body">
-                <form name="loginForm">
+                <form name="dashboardLoginForm" ng-submit="dashboardLoginForm.$valid && vm.dashboardLogin()" novalidate>
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="Indtast email">
+                        <label for="username">Brugernavn</label>
+                        <input ng-model="vm.loginData.username" type="username" class="form-control" id="username" placeholder="Indtast dit brugernavn" required>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Dit password">
+                        <input ng-model="vm.loginData.password" type="password" class="form-control" id="password" placeholder="Indtast dit password" required>
                     </div>
-
                     <div class="form-group">
                         <button type="submit" class="btn btn-success">Login</button>
                     </div>
-
                 </form>
             </div>
         </div>

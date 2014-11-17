@@ -8,6 +8,11 @@
     function DashboardLoginController() {
         var vm = this;
 
+        vm.loginData = {};
+
+        vm.dashboardLogin = function() {
+            console.log(vm.loginData);
+        };
 
     }
 })();
