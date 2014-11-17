@@ -5,7 +5,7 @@
                 Opret menu
             </div>
             <div class="panel-body">
-                <form name="addMenuForm" ng-submit="addMenuForm.$valid && vm.addMenu()" novalidate>
+                <form name="addMenuForm" ng-submit="addMenuForm.$valid && vm.addMenu(vm.menu)" novalidate>
                     <div class="form-group">
                         <label for="name">Navn</label>
                         <input type="text" class="form-control" ng-model="vm.menu.name" placeholder="Navn" required>

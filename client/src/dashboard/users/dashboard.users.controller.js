@@ -10,10 +10,16 @@
 
         vm.users = users.query();
 
-        vm.addUser = function() {
-            users.save(vm.user, function(user) {
+        vm.addUser = function(newUser) {
+            users.save(newUser, function(user) {
                 console.log(user);
             });
         };
+
+        vm.deleteUser = function(id) {
+            users.delete({}, {'id': id}, function(menu) {
+                vm.users = users.query();
+            });
+        }
     }
 })();
