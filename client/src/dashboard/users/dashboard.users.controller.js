@@ -20,6 +20,6 @@
             users.delete({}, {'id': id}, function(menu) {
                 vm.users = users.query();
             });
-        }
+        };
     }
 })();
