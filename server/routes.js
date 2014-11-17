@@ -19,7 +19,7 @@
             .post(function(req, res) {
                 users.store(req, res, function(data) {
                     io.sockets.emit('userAdded', data);
-                    //console.log(data);
+                    console.log(data);
                 });
             });
 

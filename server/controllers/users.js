@@ -48,6 +48,7 @@
             if (err) {
                 res.send(err);
             }
+
             var data = {
                 message: 'User added',
                 user: user

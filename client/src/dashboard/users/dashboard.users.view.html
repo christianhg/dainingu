@@ -35,7 +35,20 @@
                 Brugere
             </div>
             <div class="panel-body">
-                <user ng-repeat="user in vm.users" info="user"></user>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Brugernavn</th>
+                            <th>Password</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="user in vm.users">
+                            <td>{{user.username}}</td>
+                            <td>{{user.password}}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

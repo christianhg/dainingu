@@ -13,7 +13,7 @@
 				controller: 'HomeController',
 				controllerAs: 'vm',
 				data: {
-					pageTitle: 'Home',
+					pageTitle: 'dainingu',
 					pageClass: 'home'
 				}
 			});

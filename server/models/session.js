@@ -1,8 +1,8 @@
 (function () {
     'use strict';
 
-    var mongoose = require('mongoose');
     var bcrypt = require('bcrypt');
+    var mongoose = require('mongoose');
     var randToken = require('rand-token');
 
     var sessionSchema = new mongoose.Schema({
