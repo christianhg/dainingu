@@ -2,5 +2,7 @@
 	'use strict';
 
 	angular
-		.module('dainingu.menucard', []);
+		.module('dainingu.menucard', [
+			'dainingu.menucard.activate'
+		]);
 })();

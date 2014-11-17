@@ -1,0 +1,16 @@
+<div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Aktivér menukort
+        </div>
+        <div class="panel-body">
+            <form name="activateSessionForm" ng-submit="vm.activateSession(vm.activateSessionFormData.key)">
+                <div class="form-group">
+                    <label for="key">Nøgle</label>
+                    <input type="text" id="key" ng-model="vm.activateSessionFormData.key" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-success">Aktivér</button>
+            </form>
+        </div>
+    </div>
+</div>
