@@ -5,10 +5,14 @@
      * Module dependencies.
      */
     var bodyParser = require('body-parser');
+    var cookieParser = require('cookie-parser');
     var express = require('express');
+    var flash = require('connect-flash');
     var methodOverride = require('method-override');
     var mongoose = require('mongoose');
     var morgan = require('morgan');
+    var passport = require('passport');
+    var session = require('express-session');
 
     var secrets = require('./config/secrets');
 
@@ -28,6 +32,9 @@
      */
     mongoose.connect(secrets.mongodb);
 
+    // configure passport object
+    require('./config/passport')(passport);
+
     /**
      * Express configuration.
      */
@@ -39,6 +46,20 @@
     app.use(methodOverride());
     // Log requests in console.
     app.use(morgan('dev'));
+    // cookie middleware must be used before session middleware
+    app.use(cookieParser());
+    // session middleware
+    app.use(session({
+        resave: true,
+        saveUninitialized: true,
+        secret: secrets.sessionSecret
+    }));
+    // authentication middleware
+    app.use(passport.initialize());
+    // login sessions
+    app.use(passport.session());
+    // store and retrieve messages from session
+    app.use(flash());
 
     io.sockets.on('connection', function (socket) {
         socket.emit('handshake', {data: 'hello client'});
@@ -47,5 +68,5 @@
     /**
      * Routes.
      */
-    routes(app, io);
+    routes(app, io, passport);
 })();

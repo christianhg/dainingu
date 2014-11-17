@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    module.exports = function(app, io) {
+    module.exports = function(app, io, passport) {
 
         var menus = require('./controllers/menus');
         var users = require('./controllers/users');

@@ -3,7 +3,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">Login</div>
             <div class="panel-body">
-                <form name="dashboardLoginForm" ng-submit="dashboardLoginForm.$valid && vm.dashboardLogin()" novalidate>
+                <form name="dashboardLoginForm" ng-submit="dashboardLoginForm.$valid && vm.dashboardLogin(vn.loginData)" novalidate autocomplete="off">
                     <div class="form-group">
                         <label for="username">Brugernavn</label>
                         <input ng-model="vm.loginData.username" type="username" class="form-control" id="username" placeholder="Indtast dit brugernavn" required>
