@@ -17,11 +17,11 @@
 			},
 			'update': {
 				method: 'PUT',
-				isArray: true
+				isArray: false
 			},
 			'delete': {
 				method: 'DELETE',
-				isArray: true
+				isArray: false
 			}
 		});
 

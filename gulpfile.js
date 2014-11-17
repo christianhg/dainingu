@@ -15,6 +15,7 @@
 	var ngAnnotate = require('gulp-ng-annotate');
 	var nodemon = require('gulp-nodemon');
 	var plumber = require('gulp-plumber');
+	var replace = require('gulp-replace');
 	var sass = require('gulp-ruby-sass');
 	var sourcemaps = require('gulp-sourcemaps');
 	var stylish = require('jshint-stylish');
@@ -33,7 +34,10 @@
 			'bootstrap/dist/css/bootstrap.css.map'
 		],
 		fonts: [
-
+			'bootstrap/dist/fonts/glyphicons-halflings-regular.eot',
+			'bootstrap/dist/fonts/glyphicons-halflings-regular.svg',
+			'bootstrap/dist/fonts/glyphicons-halflings-regular.ttf',
+			'bootstrap/dist/fonts/glyphicons-halflings-regular.woff'
 		],
 		js: [
 			'jquery/dist/jquery.js',
@@ -61,7 +65,8 @@
 				base: './client/build/',
 				assets: {
 					base: './client/build/assets/',
-					images: './client/build/assets/images/'
+					images: './client/build/assets/images/',
+					fonts: './client/build/assets/fonts/'
 				},
 				css: {
 					base: './client/build/css/',
@@ -123,6 +128,9 @@
 				'**/*.css'
 			],
 			vendor: dependencies.css
+		},
+		fonts: {
+			vendor: dependencies.fonts
 		},
 		html: {
 			all: [
@@ -225,6 +233,7 @@
 		'copyAssets',
 		'copyIndex',
 		'copyVendorCSS',
+		'copyVendorFonts',
 		'copyVendorJS',
 		'html2js',
 		'injectApp',
@@ -505,7 +514,17 @@
 		var sources = prefixPath(paths.bower, files.css.vendor);
 
 		return gulp.src(sources, {base: paths.bower})
+			.pipe(replace('../fonts/', '../../../../../../assets/fonts/'))
 			.pipe(gulp.dest(paths.client.build.css.vendor));
+	});
+
+	gulp.task('copyVendorFonts', ['cleanBuild'], function() {
+		var sources = {
+			fonts: prefixPath(paths.bower, files.fonts.vendor)
+		};
+
+		return gulp.src(sources.fonts)
+			.pipe(gulp.dest(paths.client.build.assets.fonts));
 	});
 
 	/**

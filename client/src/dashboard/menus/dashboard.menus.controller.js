@@ -15,5 +15,11 @@
                 console.log(menu);
             });
         };
+
+        vm.deleteMenu = function(id) {
+            menus.delete({}, {'id': id}, function(menu) {
+                vm.menus = menus.query();
+            });
+        };
     }
 })();

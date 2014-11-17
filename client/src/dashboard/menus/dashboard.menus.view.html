@@ -10,7 +10,7 @@
                         <label for="name">Navn</label>
                         <input type="text" class="form-control" ng-model="vm.menu.name" placeholder="Navn" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Opret menu</button>
+                    <button type="submit" class="btn btn-success">Opret menu</button>
                 </form>
             </div>
         </div>
@@ -26,7 +26,18 @@
             </div>
             <ul class="list-group">
                 <li ng-repeat="menu in vm.menus" class="list-group-item">
-                    <menu info="menu"></menu>
+                    {{menu.name}} -
+                    <button type="submit" class="btn btn-sm btn-primary">
+                        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                    </button>
+                    <button type="submit" class="btn btn-sm btn-warning">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    </button>
+                    <button type="submit" ng-click="vm.deleteMenu(menu._id)" class="btn btn-sm btn-danger">
+                        <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+                    </button>
+                    <!--<menu info="menu"></menu>-->
+
                 </li>
             </ul>
         </div>
