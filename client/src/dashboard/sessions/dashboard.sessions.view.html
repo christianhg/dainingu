@@ -57,7 +57,7 @@
                                 </button>
                             </td>
                             <td>
-                                <button type="submit" ng-click="vm.expireSession(session)" class="btn btn-warning">
+                                <button type="submit" ng-click="vm.closeSession(session)" class="btn btn-warning">
                                     <span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>
                                 </button>
                             </td>
@@ -105,6 +105,10 @@
                         <th>Nøgle</th>
                         <th>Kunde</th>
                         <th>Bord</th>
+                        <th>Info</th>
+                        <th>Redigér</th>
+                        <th>Rekvirér</th>
+                        <th>Slet</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -112,6 +116,26 @@
                         <td>{{session.key}}</td>
                         <td>{{session.customer.name}}</td>
                         <td>{{session.table}}</td>
+                        <td>
+                            <button type="submit" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="submit" ng-click="vm.editSession(session)" class="btn btn-info">
+                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="submit" ng-click="vm.openSession(session)" class="btn btn-warning">
+                                <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="submit" ng-click="vm.deleteSession(session._id)" class="btn btn-danger">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </button>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

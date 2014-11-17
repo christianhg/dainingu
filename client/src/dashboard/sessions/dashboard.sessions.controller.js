@@ -22,10 +22,18 @@
             });
         };
 
-        vm.expireSession = function(expiredSession) {
-            expiredSession.expired = true;
+        vm.closeSession = function(closedSession) {
+            closedSession.expired = true;
 
-            sessions.update({'id': expiredSession._id}, expiredSession, function(session) {
+            sessions.update({'id': closedSession._id}, closedSession, function(session) {
+
+            });
+        };
+
+        vm.openSession = function(openedSession) {
+            openedSession.expired = false;
+
+            sessions.update({'id': openedSession._id}, openedSession, function(session) {
 
             });
         };
