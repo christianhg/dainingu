@@ -83,9 +83,10 @@
     };
 
     exports.store = function(req, res, callback) {
-        var session = new Menu();
+        var session = new Session();
 
-        session.title = req.body.title;
+        session.customer.name = req.body.customer.name;
+        session.table = req.body.table;
 
         session.save(function (err) {
             if (err) {

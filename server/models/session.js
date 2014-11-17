@@ -5,7 +5,7 @@
 
     var sessionSchema = new mongoose.Schema({
         active: {
-            type: bool
+            type: Boolean
         },
         createdOn: {
             type: Date
@@ -14,6 +14,14 @@
             type: String
         },
         key: {
+            type: String
+        },
+        customer: {
+            name: {
+                type: String
+            }
+        },
+        table: {
             type: String
         }
     });

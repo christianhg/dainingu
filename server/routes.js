@@ -5,6 +5,7 @@
 
         var menus = require('./controllers/menus');
         var users = require('./controllers/users');
+        var sessions = require('./controllers/sessions');
 
         /**
          * Users API routes
@@ -69,6 +70,7 @@
             .post(function(req, res) {
                 sessions.store(req, res, function(data) {
                     io.sockets.emit('sessionAdded', data);
+                    console.log(data);
                 });
             });
         app.route('/api/sessions/:id')
@@ -80,11 +82,13 @@
             .put(function(req, res) {
                 sessions.update(req, res, function(data) {
                     io.sockets.emit('sessionUpdated', data);
+                    console.log(data);
                 })
             })
             .delete(function(req, res) {
                 sessions.destroy(req, res, function(data) {
                     io.sockets.emit('sessionDeleted', data);
+                    console.log(data);
                 });
             });
 
