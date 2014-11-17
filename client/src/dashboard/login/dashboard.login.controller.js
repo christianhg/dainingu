@@ -8,6 +8,6 @@
     function DashboardLoginController() {
         var vm = this;
 
-        vm.hej = 'users';
+
     }
 })();

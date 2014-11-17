@@ -2,6 +2,8 @@
 	'use strict';
 
 	angular
-		.module('dainingu.floor', []);
+		.module('dainingu.floor', [
+			'dainingu.floor.login'
+		]);
 
 })();
