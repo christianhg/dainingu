@@ -6,6 +6,14 @@
         var menus = require('./controllers/menus');
         var users = require('./controllers/users');
         var sessions = require('./controllers/sessions');
+        var auth = require('./controllers/auth');
+
+        app.route('/api/auth')
+            .post(function(req, res) {
+                auth.signin(req, res, function(data) {
+
+                });
+            });
 
         /**
          * Users API routes

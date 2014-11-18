@@ -8,11 +8,13 @@
     var cookieParser = require('cookie-parser');
     var express = require('express');
     var flash = require('connect-flash');
+    var jwt = require('jsonwebtoken');
     var methodOverride = require('method-override');
     var mongoose = require('mongoose');
     var morgan = require('morgan');
     var passport = require('passport');
     var session = require('express-session');
+    var socketioJwt = require('socketio-jwt');
 
     var secrets = require('./config/secrets');
 

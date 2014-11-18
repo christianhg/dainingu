@@ -16,11 +16,6 @@
         }
     });
 
-    var User = mongoose.model('User', userSchema, 'users');
-
-    module.exports = User;
-
-
     /*,
      profile: {
      email: {
@@ -74,12 +69,26 @@
     /**
      * Validate user's password.
      */
-    userSchema.method.comparePassword = function(condidatePassword, callback) {
-        bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
-           if(err) {
-               return callback(err);
-           }
+    /*userSchema.methods.comparePassword = function(candidatePassword, callback) {
+        //console.log(bcrypt.compare(candidatePassword, this.password));
+
+        /*bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
+            if(err) {
+                return callback(err);
+            }
             callback(isMatch);
         });
+    };*/
+
+    userSchema.methods.comparePassword = function(candidatePassword, callback) {
+        bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
+            if(err) {
+                return callback(err);
+            }
+            callback(null, isMatch);
+        });
     };
+
+    var User = mongoose.model('User', userSchema, 'users');
+    module.exports = User;
 })();
