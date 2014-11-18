@@ -13,6 +13,7 @@
                 controller: 'DashboardUsersController',
                 controllerAs: 'vm',
                 data: {
+                    restricted: true,
                     pageTitle: 'Dashboard > Brugere'
                 }
             });

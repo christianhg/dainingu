@@ -5,14 +5,8 @@
         .module('dainingu.dashboard.menus')
         .controller('DashboardMenusController', DashboardMenusController);
 
-    function DashboardMenusController(menus, socket, auth, $window, $state) {
+    function DashboardMenusController(menus, socket) {
         var vm = this;
-
-        auth.validateToken(function(validToken) {
-            if(!validToken) {
-                $state.go('dashboard.login');
-            }
-        });
 
         socket.init().on('menuAdded', function(data) {
             console.log(data.message);

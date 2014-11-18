@@ -13,6 +13,7 @@
                 controller: 'DashboardSessionsController',
                 controllerAs: 'vm',
                 data: {
+                    restricted: true,
                     pageTitle: 'Dashboard > Sessioner'
                 }
             });
