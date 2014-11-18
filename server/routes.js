@@ -7,11 +7,15 @@
         var users = require('./controllers/users');
         var sessions = require('./controllers/sessions');
         var auth = require('./controllers/auth');
+        var jwt = require('jsonwebtoken');
 
         app.route('/api/auth')
             .post(function(req, res) {
-                auth.signin(req, res, function(data) {
+                auth.signin(req, res, function(isAuthenticated, data) {
+                    /*if(isAuthenticated) {
+                        var token = jwt.sign(data.user, 'secret', { expiresInMinutes: 60*5 });
 
+                    }*/
                 });
             });
 
@@ -26,7 +30,7 @@
             })
             .post(function(req, res) {
                 users.store(req, res, function(data) {
-                    io.sockets.emit('userAdded', data);
+                    //io.sockets.emit('userAdded', data);
                     //console.log(data);
                 });
             });
@@ -39,7 +43,7 @@
             })
             .delete(function(req, res) {
                 users.destroy(req, res, function(data) {
-                   io.sockets.emit('userDeleted', data);
+                    //io.sockets.emit('userDeleted', data);
                 });
             });
 
@@ -54,7 +58,7 @@
             })
             .post(function(req, res) {
                 menus.store(req, res, function(data) {
-                    io.sockets.emit('menuAdded', data);
+                    //io.sockets.emit('menuAdded', data);
                     //console.log(data);
                 });
             });
@@ -66,13 +70,13 @@
             })
             .put(function(req, res) {
                 menus.update(req, res, function(data) {
-                    io.sockets.emit('menuUpdated', data);
+                    //io.sockets.emit('menuUpdated', data);
                     //console.log(data);
                 })
             })
             .delete(function(req, res) {
                 menus.destroy(req, res, function(data) {
-                    io.sockets.emit('menuDeleted', data);
+                    //io.sockets.emit('menuDeleted', data);
                     //console.log(data);
                 });
             });
@@ -88,7 +92,7 @@
             })
             .post(function(req, res) {
                 sessions.store(req, res, function(data) {
-                    io.sockets.emit('sessionAdded', data);
+                    // io.sockets.emit('sessionAdded', data);
                     //console.log(data);
                 });
             });
@@ -100,13 +104,13 @@
             })
             .put(function(req, res) {
                 sessions.update(req, res, function(data) {
-                    io.sockets.emit('sessionUpdated', data);
+                    //io.sockets.emit('sessionUpdated', data);
                     //console.log(data);
                 })
             })
             .delete(function(req, res) {
                 sessions.destroy(req, res, function(data) {
-                    io.sockets.emit('sessionDeleted', data);
+                    //io.sockets.emit('sessionDeleted', data);
                     //console.log(data);
                 });
             });

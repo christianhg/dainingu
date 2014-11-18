@@ -14,8 +14,8 @@
     var morgan = require('morgan');
     var passport = require('passport');
     var session = require('express-session');
+    var socketIo = require('socket.io');
     var socketioJwt = require('socketio-jwt');
-
     var secrets = require('./config/secrets');
 
     /**
@@ -27,7 +27,7 @@
      * Start Express server.
      */
     var server = app.listen(secrets.port);
-    var io = require('socket.io').listen(server);
+    var io = socketIo.listen(server);
 
     /**
      * Connect to MongoDB.
@@ -62,10 +62,23 @@
     app.use(passport.session());
     // store and retrieve messages from session
     app.use(flash());
+    
+    io.set('authorization', socketioJwt.authorize({
+        secret: secrets.jwt_secret,
+        handshake: true
+    }));
 
-    io.sockets.on('connection', function (socket) {
-        socket.emit('handshake', {data: 'hello client'});
-    });
+    io.sockets
+        .on('connection', function(socket) {
+            console.log(socket.client.request.decoded_token.username, 'connected');
+            socket.on('ping', function(m) {
+                socket.emit('pong', m);
+            });
+        });
+
+    /*io.sockets.on('connection', function (socket) {
+     socket.emit('handshake', {data: 'hello client'});
+     });*/
 
     /**
      * Routes.
