@@ -5,16 +5,12 @@
      * Module dependencies.
      */
     var bodyParser = require('body-parser');
-    //var cookieParser = require('cookie-parser');
     var express = require('express');
     var expressJwt = require('express-jwt');
-    //var flash = require('connect-flash');
     var jwt = require('jsonwebtoken');
     var methodOverride = require('method-override');
     var mongoose = require('mongoose');
     var morgan = require('morgan');
-    //var passport = require('passport');
-    //var session = require('express-session');
     var socketIo = require('socket.io');
     var socketioJwt = require('socketio-jwt');
     var secrets = require('./config/secrets');
@@ -35,9 +31,6 @@
      * Connect to MongoDB.
      */
     mongoose.connect(secrets.mongodb);
-
-    // configure passport object
-    //require('./config/passport')(passport);
 
     /**
      * Express configuration.

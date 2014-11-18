@@ -1,7 +1,6 @@
 (function () {
     'use strict';
 
-    var password = require('passport');
     var User = require('../models/user');
 
     exports.destroy = function(req, res, callback) {
