@@ -10,7 +10,7 @@
 		.factory('auth', auth);
 
 	function auth($resource) {
-		return $resource('/api/auth/:id', { id: '@id' }, {
+		return $resource('/auth/:id', { id: '@id' }, {
 			'save': {
 				method: 'POST',
 				isArray: false

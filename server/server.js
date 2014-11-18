@@ -7,6 +7,7 @@
     var bodyParser = require('body-parser');
     var cookieParser = require('cookie-parser');
     var express = require('express');
+    var expressJwt = require('express-jwt');
     var flash = require('connect-flash');
     var jwt = require('jsonwebtoken');
     var methodOverride = require('method-override');
@@ -42,6 +43,8 @@
      */
     app.use(express.static(__dirname + '/../client/build'));
 
+    // We are going to protect /api routes with JWT
+    app.use('/api', expressJwt({secret: secrets.jwt_secret}));
     // Get data from html forms.
     app.use(bodyParser.json());
     // Faux http method support.
@@ -62,7 +65,7 @@
     app.use(passport.session());
     // store and retrieve messages from session
     app.use(flash());
-    
+
     io.set('authorization', socketioJwt.authorize({
         secret: secrets.jwt_secret,
         handshake: true

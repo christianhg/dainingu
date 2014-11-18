@@ -9,7 +9,7 @@
         var auth = require('./controllers/auth');
         var jwt = require('jsonwebtoken');
 
-        app.route('/api/auth')
+        app.route('/auth')
             .post(function(req, res) {
                 auth.signin(req, res, function(isAuthenticated, data) {
                     /*if(isAuthenticated) {

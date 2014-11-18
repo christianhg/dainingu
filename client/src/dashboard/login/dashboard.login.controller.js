@@ -5,10 +5,21 @@
         .module('dainingu.dashboard.login')
         .controller('DashboardLoginController', DashboardLoginController);
 
-    function DashboardLoginController(auth) {
+    function DashboardLoginController(auth, $window) {
         var vm = this;
 
-        var token;
+        vm.dashboardLogin = function(loginData) {
+            auth.save(loginData, function(data) {
+                if(data.success) {
+                    $window.sessionStorage.token = data.token;
+                    //token = data.token;
+                } else {
+                    delete $window.sessionStorage.token;
+                }
+            });
+        };
+
+        /*var token;
         var socket;
 
         function connect() {
@@ -51,7 +62,7 @@
                 }
 
             });
-        };
+        };*/
 
     }
 })();
