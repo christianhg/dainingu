@@ -5,8 +5,12 @@
         .module('dainingu.dashboard.users')
         .controller('DashboardUsersController', DashboardUsersController);
 
-    function DashboardUsersController(users) {
+    function DashboardUsersController(users, socket) {
         var vm = this;
+
+        socket.init().on('userAdded', function(data) {
+            console.log(data.message);
+        });
 
         vm.users = users.query();
 

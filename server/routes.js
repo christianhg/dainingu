@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    module.exports = function(app, io, passport) {
+    module.exports = function(app, io) {
 
         var menus = require('./controllers/menus');
         var users = require('./controllers/users');
@@ -9,13 +9,20 @@
         var auth = require('./controllers/auth');
         var jwt = require('jsonwebtoken');
 
-        app.route('/auth')
+        app.route('/auth/signin')
             .post(function(req, res) {
                 auth.signin(req, res, function(isAuthenticated, data) {
                     /*if(isAuthenticated) {
                         var token = jwt.sign(data.user, 'secret', { expiresInMinutes: 60*5 });
 
                     }*/
+                });
+            });
+
+        app.route('/auth/validateToken')
+            .post(function(req, res) {
+                auth.validateToken(req, res, function(data) {
+
                 });
             });
 
@@ -30,7 +37,7 @@
             })
             .post(function(req, res) {
                 users.store(req, res, function(data) {
-                    //io.sockets.emit('userAdded', data);
+                    io.sockets.emit('userAdded', data);
                     //console.log(data);
                 });
             });
@@ -58,7 +65,7 @@
             })
             .post(function(req, res) {
                 menus.store(req, res, function(data) {
-                    //io.sockets.emit('menuAdded', data);
+                    io.sockets.emit('menuAdded', data);
                     //console.log(data);
                 });
             });

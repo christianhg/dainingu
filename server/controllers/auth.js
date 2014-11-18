@@ -5,6 +5,40 @@
 	var jwt = require('jsonwebtoken');
 	var secrets = require('../config/secrets');
 
+
+	exports.validateToken = function(req, res, callback) {
+		var candidateToken = req.body.token;
+
+		jwt.verify(candidateToken, secrets.jwt_secret, function(err, decodedToken) {
+			console.log(decodedToken.username);
+
+			User.findOne({ username: decodedToken.username }, function(err, user) {
+				if(err) {
+					res.send(err);
+				}
+
+				if(user) {
+					res.send(true);
+				} else {
+					res.send(false);
+				}
+			});
+
+		});
+
+		/*User.findOne({ username: username }, function(err, user) {
+			if(err) {
+				res.send(err);
+			}
+
+			if(user) {
+				var token = jwt.sign(user, secrets.jwt_secret, { expiresInMinutes: 60*5 });
+
+				if(token === candidateToken)
+			}
+		});*/
+	};
+
 	exports.signin = function(req, res, callback) {
 		var username = req.body.username;
 		var password = req.body.password;

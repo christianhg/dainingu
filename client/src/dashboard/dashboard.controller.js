@@ -5,9 +5,13 @@
 		.module('dainingu.dashboard')
 		.controller('DashboardController', DashboardController);
 
-	function DashboardController() {
+	function DashboardController($state, $window, socket) {
 		var vm = this;
 
-		vm.hej = 'dashboard';
+		vm.dashboardLogout = function() {
+			//socket.disconnect();
+			delete $window.sessionStorage.token;
+			$state.go('dashboard.login');
+		};
 	}
 })();

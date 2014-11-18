@@ -9,20 +9,23 @@
 		.module('dainingu')
 		.factory('auth', auth);
 
-	function auth($resource) {
-		return $resource('/auth/:id', { id: '@id' }, {
-			'save': {
-				method: 'POST',
-				isArray: false
+	function auth($http, $window) {
+		return {
+			signin: function(loginData, callback) {
+				$http.post('/auth/signin', loginData).success(function(data) {
+					callback(data);
+				});
 			},
-			'update': {
-				method: 'PUT',
-				isArray: false
-			},
-			'delete': {
-				method: 'DELETE',
-				isArray: false
+			validateToken: function(callback) {
+				if($window.sessionStorage.token) {
+					$http.post('/auth/validateToken', {token: $window.sessionStorage.token})
+						.success(function(validToken) {
+							callback(validToken);
+						});
+				} else {
+					callback(false);
+				}
 			}
-		});
+		};
 	}
 })();

@@ -5,64 +5,42 @@
         .module('dainingu.dashboard.login')
         .controller('DashboardLoginController', DashboardLoginController);
 
-    function DashboardLoginController(auth, $window) {
+    function DashboardLoginController(auth, $window, socket) {
         var vm = this;
 
         vm.dashboardLogin = function(loginData) {
-            auth.save(loginData, function(data) {
+            /*auth.save(loginData, function(data) {
                 if(data.success) {
-                    $window.sessionStorage.token = data.token;
-                    //token = data.token;
+                    // Get generated JWT token.
+                    var token = data.token;
+                    // Store token in sessionStorage.
+                    $window.sessionStorage.token = token;
+                    // Initiate socket
+                    socket.init();
                 } else {
+                    // Something went wrong. Delete token from sessionStorage if it exists.
                     delete $window.sessionStorage.token;
                 }
-            });
-        };
+            });*/
 
-        /*var token;
-        var socket;
-
-        function connect() {
-            if(token !== undefined) {
-                socket = io.connect('http://localhost:2000', {
-                    query: 'token=' + token,
-                    forceNew: true
-                });
-            } else {
-                socket = io.connect('http://localhost:2000', {
-                    forceNew: true
-                });
-            }
-
-
-            socket.on('connect', function() {
-                console.log('authenticated');
-            }).on('disconnect', function () {
-                console.log('disconnected');
-            }).on('pong', function() {
-                console.log('pong');
-            });
-        }
-
-        connect();
-
-        vm.loginData = {};
-
-        vm.ping = function() {
-            socket.emit('ping');
-        };
-
-        vm.dashboardLogin = function(loginData) {
-             auth.save(loginData, function(data) {
-
+            auth.signin(loginData, function(data) {
+                console.log(data);
                 if(data.success) {
-                    token = data.token;
-                    connect();
+                    // Get generated JWT token.
+                    var token = data.token;
+                    var user = data.user;
+                    // Store token in sessionStorage.
+                    $window.sessionStorage.token = token;
 
+                    $window.sessionStorage.username = user.username;
+                    // Initiate socket
+                    socket.init();
+                } else {
+                    // Something went wrong. Delete token from sessionStorage if it exists.
+                    delete $window.sessionStorage.token;
+                    delete $window.sessionStorage.user;
                 }
-
             });
-        };*/
-
+        };
     }
 })();
