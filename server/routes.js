@@ -9,13 +9,13 @@
         var auth = require('./controllers/auth');
         var jwt = require('jsonwebtoken');
 
+        /**
+         * Authentication routes.
+         */
         app.route('/auth/signin')
             .post(function(req, res) {
                 auth.signin(req, res, function(isAuthenticated, data) {
-                    /*if(isAuthenticated) {
-                        var token = jwt.sign(data.user, 'secret', { expiresInMinutes: 60*5 });
 
-                    }*/
                 });
             });
 
@@ -27,7 +27,7 @@
             });
 
         /**
-         * Users API routes
+         * Users API routes.
          */
         app.route('/api/users')
             .get(function(req, res) {
@@ -55,7 +55,7 @@
             });
 
         /**
-         * Menus API routes
+         * Menus API routes.
          */
         app.route('/api/menus')
             .get(function(req, res) {
@@ -89,7 +89,7 @@
             });
 
         /**
-         * Session API routes
+         * Session API routes.
          */
         app.route('/api/sessions')
             .get(function(req, res) {

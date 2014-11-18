@@ -23,20 +23,7 @@
 					res.send(false);
 				}
 			});
-
 		});
-
-		/*User.findOne({ username: username }, function(err, user) {
-			if(err) {
-				res.send(err);
-			}
-
-			if(user) {
-				var token = jwt.sign(user, secrets.jwt_secret, { expiresInMinutes: 60*5 });
-
-				if(token === candidateToken)
-			}
-		});*/
 	};
 
 	exports.signin = function(req, res, callback) {
