@@ -4,10 +4,14 @@
             Aktivér menukort
         </div>
         <div class="panel-body">
-            <form name="activateSessionForm" ng-submit="vm.activateSession(vm.activateSessionFormData.key)">
+            <form name="activateMenucardForm" ng-submit="vm.activateMenucard(vm.session.key) && activateMenucardForm.$valid" novalidate>
+                <div class="alert alert-success" role="alert" ng-show="vm.activationSuccessful">{{vm.activationMessage}}</div>
+                <div class="alert alert-danger" role="alert" ng-show="activateMenucardForm.$submitted && !vm.activationSuccessful">{{vm.activationMessage}}</div>
+                <div class="alert alert-warning" role="alert" ng-show="activateMenucardForm.$submitted && activateMenucardForm.key.$error.required">
+      Husk at indtaste en nøgle.</div>
                 <div class="form-group">
                     <label for="key">Nøgle</label>
-                    <input type="text" id="key" ng-model="vm.activateSessionFormData.key" class="form-control" placeholder="Indtast nøgle" required>
+                    <input type="text" id="key" name="key" ng-model="vm.session.key" class="form-control" placeholder="Indtast nøgle" required>
                 </div>
                 <button type="submit" class="btn btn-success">Aktivér</button>
             </form>
