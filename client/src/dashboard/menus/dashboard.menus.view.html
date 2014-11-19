@@ -21,25 +21,39 @@
                 Menuer
             </div>
             <div class="panel-body">
-                ...
-
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Navn</th>
+                            <th>Info</th>
+                            <th>Redigér</th>
+                            <th>Slet</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="menu in vm.menus">
+                            <td>
+                                {{menu.name}}
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-sm btn-primary">
+                                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                </button>
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-sm btn-warning">
+                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                </button>
+                            </td>
+                            <td>
+                                <button type="submit" ng-click="vm.deleteMenu(menu._id)" class="btn btn-sm btn-danger">
+                                    <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <ul class="list-group">
-                <li ng-repeat="menu in vm.menus" class="list-group-item">
-                    {{menu.name}} -
-                    <button type="submit" class="btn btn-sm btn-primary">
-                        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                    </button>
-                    <button type="submit" class="btn btn-sm btn-warning">
-                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                    </button>
-                    <button type="submit" ng-click="vm.deleteMenu(menu._id)" class="btn btn-sm btn-danger">
-                        <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
-                    </button>
-                    <!--<menu info="menu"></menu>-->
-
-                </li>
-            </ul>
         </div>
     </div>
 </div>

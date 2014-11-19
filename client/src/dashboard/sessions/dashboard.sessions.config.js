@@ -14,7 +14,7 @@
                 controllerAs: 'vm',
                 data: {
                     restricted: true,
-                    pageTitle: 'Dashboard > Sessioner'
+                    pageTitle: 'dainingu > dashboard > sessioner'
                 }
             });
     }

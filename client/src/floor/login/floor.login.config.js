@@ -13,7 +13,7 @@
                 controller: 'FloorLoginController',
                 controllerAs: 'vm',
                 data: {
-                    pageTitle: 'Floor > Log in'
+                    pageTitle: 'dainingu > floor > log ind'
                 }
             });
     }

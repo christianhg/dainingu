@@ -13,7 +13,7 @@
                 controller: 'MenucardActivateController',
                 controllerAs: 'vm',
                 data: {
-                    pageTitle: 'Menucard > Activate'
+                    pageTitle: 'dainingu > menucard > aktivér'
                 }
             });
     }

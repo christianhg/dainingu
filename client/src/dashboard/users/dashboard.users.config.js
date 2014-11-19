@@ -14,7 +14,7 @@
                 controllerAs: 'vm',
                 data: {
                     restricted: true,
-                    pageTitle: 'Dashboard > Brugere'
+                    pageTitle: 'dainingu > dashboard > brugere'
                 }
             });
     }

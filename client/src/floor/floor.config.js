@@ -13,7 +13,7 @@
 				controller: 'FloorController',
 				controllerAs: 'vm',
 				data: {
-					pageTitle: 'Floor'
+					pageTitle: 'dainingu > floor'
 				}
 			});
 	}

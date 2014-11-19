@@ -13,7 +13,7 @@
 				controller: 'KitchenController',
 				controllerAs: 'vm',
 				data: {
-					pageTitle: 'Kitchen'
+					pageTitle: 'dainingu > kitchen'
 				}
 			});
 	}

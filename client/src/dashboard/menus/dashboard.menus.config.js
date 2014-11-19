@@ -14,7 +14,7 @@
                 controllerAs: 'vm',
                 data: {
                     restricted: true,
-                    pageTitle: 'Dashboard > Menuer'
+                    pageTitle: 'dainingu > dashboard > menuer'
                 }
             });
     }
