@@ -4,6 +4,7 @@
 	var autoPrefixer = require('gulp-autoprefixer');
 	var clean = require('gulp-clean');
 	var concat = require('gulp-concat');
+	var del = require('del');
 	var express = require('express');
 	var gulp = require('gulp');
 	var imagemin = require('gulp-imagemin');
@@ -227,7 +228,7 @@
 	 * Build project
 	 */
 	gulp.task('build', [
-		'cleanBuild',
+		'clean:build',
 		'compileSASS',
 		'copyAppJS',
 		'copyAssets',
@@ -261,8 +262,8 @@
 	 * Distribute project
 	 */
 	gulp.task('dist', [
-		'cleanBuild',
-		'cleanDist',
+		'clean:build',
+		'clean:dist',
 		'build',
 		'distCopyIndex',
 		'distCSS',
@@ -328,17 +329,19 @@
 	/**
 	 * Remove all files in build dir
 	 */
-	gulp.task('cleanBuild', function () {
-		return gulp.src([paths.client.build.base + files.all], {read: false})
-			.pipe(clean());
+	gulp.task('clean:build', function () {
+		/*return gulp.src([paths.client.build.base + files.all], {read: false})
+			.pipe(clean());*/
+		del([paths.client.build.base + files.all]);
 	});
 
 	/**
 	 * Remove all files in dist dir
 	 */
-	gulp.task('cleanDist', function () {
-		return gulp.src([paths.client.dist.base + files.all], {read: false})
-			.pipe(clean());
+	gulp.task('clean:dist', function () {
+		/*return gulp.src([paths.client.dist.base + files.all], {read: false})
+			.pipe(clean());*/
+		del([paths.client.dist.base + files.all]);
 	});
 
 	/**
@@ -470,7 +473,7 @@
 	/**
 	 * Concatenate the contents of all .html files and save as template.js
 	 */
-	gulp.task('html2js', ['cleanBuild'], function () {
+	gulp.task('html2js', ['clean:build'], function () {
 		var sources = {
 			html: [paths.client.src.base + files.html.all],
 			ignore: ['!' + paths.client.src.base + files.index]
@@ -487,7 +490,7 @@
 	/**
 	 * Copy vendor JS to build dir
 	 */
-	gulp.task('copyVendorJS', ['cleanBuild'], function () {
+	gulp.task('copyVendorJS', ['clean:build'], function () {
 		var sources = prefixPath(paths.bower, files.js.vendor);
 
 		return gulp.src(sources, {base: paths.bower})
@@ -497,7 +500,7 @@
 	/**
 	 * Copy app JS to build dir
 	 */
-	gulp.task('copyAppJS', ['cleanBuild', 'jshint'], function () {
+	gulp.task('copyAppJS', ['clean:build', 'jshint'], function () {
 		var sources = {
 			js: prefixPath(paths.client.src.base, files.js.app),
 			ignore: ['!' + paths.client.src.base + files.js.unitTest]
@@ -510,7 +513,7 @@
 	/**
 	 * Copy vendor CSS to build dir
 	 */
-	gulp.task('copyVendorCSS', ['cleanBuild'], function () {
+	gulp.task('copyVendorCSS', ['clean:build'], function () {
 		var sources = prefixPath(paths.bower, files.css.vendor);
 
 		return gulp.src(sources, {base: paths.bower})
@@ -518,7 +521,7 @@
 			.pipe(gulp.dest(paths.client.build.css.vendor));
 	});
 
-	gulp.task('copyVendorFonts', ['cleanBuild'], function() {
+	gulp.task('copyVendorFonts', ['clean:build'], function() {
 		var sources = {
 			fonts: prefixPath(paths.bower, files.fonts.vendor)
 		};
@@ -530,7 +533,7 @@
 	/**
 	 * Compile SASS to CSS and place in build dir
 	 */
-	gulp.task('compileSASS', ['cleanBuild'], function () {
+	gulp.task('compileSASS', ['clean:build'], function () {
 		var sources = {
 			ignore: [],
 			scss: [paths.client.src.base + files.scss.all]
@@ -546,7 +549,7 @@
 	/**
 	 * Copy index.html to build dir
 	 */
-	gulp.task('copyIndex', ['cleanBuild'], function () {
+	gulp.task('copyIndex', ['clean:build'], function () {
 		return gulp.src(paths.client.src.base + files.index)
 			.pipe(gulp.dest(paths.client.build.base));
 	});
@@ -554,7 +557,7 @@
 	/**
 	 * Copy assets to build dir
 	 */
-	gulp.task('copyAssets', ['cleanBuild'], function () {
+	gulp.task('copyAssets', ['clean:build'], function () {
 		return gulp.src([paths.client.src.assets.base + files.assets.all])
 			.pipe(gulp.dest(paths.client.build.assets.base));
 	});
