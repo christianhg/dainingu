@@ -5,12 +5,12 @@
         .module('dainingu.dashboard.login')
         .controller('DashboardLoginController', DashboardLoginController);
 
-    function DashboardLoginController(auth) {
+    function DashboardLoginController(auth, $state) {
         var vm = this;
 
         vm.dashboardLogin = function(loginData) {
             auth.signin(loginData, function(data) {
-                console.log(data);
+                $state.go('dashboard', null, { reload: true });
             });
         };
     }

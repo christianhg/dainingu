@@ -117,10 +117,8 @@
 	exports.validateLoginToken = function(req, res, callback) {
 		var candidateToken = req.body.token;
 
-		jwt.verify(candidateToken, secrets.jwt_secret, function(err, decodedToken) {
-			console.log(decodedToken.username);
-
-			User.findOne({ id: decodedToken.user }, function(err, user) {
+		jwt.verify(candidateToken, secrets.jwt_secret, function(err, userId) {
+			User.findOne({ _id: userId }, function(err, user) {
 				if(err) {
 					res.send(err);
 				}
@@ -137,8 +135,9 @@
 	exports.validateMenucardToken = function(req, res, callback) {
 		var menucardToken = req.body.token;
 
-		jwt.verify(menucardToken, secrets.jwt_secret, function(err, decodedToken) {
-			Session.findOne({ id: decodedToken.session }, function(err, session) {
+		jwt.verify(menucardToken, secrets.jwt_secret, function(err, sessionId) {
+
+			Session.findOne({ _id: sessionId }, function(err, session) {
 				if(err) {
 					res.send(err);
 				}
@@ -146,18 +145,14 @@
 				if(!session) {
 					res.send(false);
 				} else {
-					console.log(session);
+					//console.log(session);
 					session.status(function(isActive, isExpired) {
-						/*if(!isActive || isExpired) {
+						if(!isActive || isExpired) {
 							res.send(false);
 						} else {
 							res.send(true);
-						}*/
-					//	console.log(isActive, isExpired);
+						}
 					});
-
-					res.send(true);
-
 				}
 			});
 		})

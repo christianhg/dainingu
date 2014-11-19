@@ -5,13 +5,17 @@
 		.module('dainingu.dashboard')
 		.controller('DashboardController', DashboardController);
 
-	function DashboardController($state, $window, socket) {
+	function DashboardController(auth, $state, $window) {
 		var vm = this;
+
+		auth.validateLoginToken(function(validToken) {
+			vm.loggedIn = validToken;
+		});
 
 		vm.dashboardLogout = function() {
 			//socket.disconnect();
 			delete $window.sessionStorage.loginToken;
-			$state.go('dashboard.login');
+			$state.go('dashboard.login', null, { reload: true });
 		};
 	}
 })();

@@ -5,19 +5,17 @@
         .module('dainingu.menucard.activate')
         .controller('MenucardActivateController', MenucardActivateController);
 
-    function MenucardActivateController(auth) {
+    function MenucardActivateController(auth, $state) {
         var vm = this;
 
         vm.activateMenucard = function(key) {
-
             auth.activateSession(key, function(data) {
-                console.log(data);
-
                 vm.activationMessage = data.message;
 
                 // If activation was successful.
                 if(data.success) {
-                    vm.activationSuccessful = true;
+                    //vm.activationSuccessful = true;
+                    $state.go('menucard', null, { refresh: true });
                 } else {
                     vm.activationSuccessful = false;
                 }

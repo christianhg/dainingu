@@ -13,7 +13,7 @@
 				controller: 'MenucardController',
 				controllerAs: 'vm',
 				data: {
-					pageTitle: 'Menucard'
+					pageTitle: 'dainingu > menukort'
 				}
 			});
 	}
