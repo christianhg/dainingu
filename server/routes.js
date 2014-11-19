@@ -12,6 +12,13 @@
         /**
          * Authentication routes.
          */
+        app.route('/auth/activateSession')
+            .post(function(req, res) {
+                auth.activateSession(req, res, function(data) {
+
+                });
+            });
+
         app.route('/auth/signin')
             .post(function(req, res) {
                 auth.signin(req, res, function(isAuthenticated, data) {

@@ -4,26 +4,56 @@
 	var User = require('../models/user');
 	var jwt = require('jsonwebtoken');
 	var secrets = require('../config/secrets');
+	var Session = require('../models/session');
 
 
-	exports.validateToken = function(req, res, callback) {
-		var candidateToken = req.body.token;
+	exports.activateSession = function(req, res, callback) {
+		var candidateKey = req.body.key;
 
-		jwt.verify(candidateToken, secrets.jwt_secret, function(err, decodedToken) {
-			console.log(decodedToken.username);
+		Session.findOne({ key: candidateKey }, function(err, session) {
+			if(err) {
+				res.send(err);
+			}
 
-			User.findOne({ username: decodedToken.username }, function(err, user) {
-				if(err) {
-					res.send(err);
-				}
+			// Session doesn't exist
+			if(!session) {
+				var data = {
+					message: 'Session activation failed',
+					session: { key: candidateKey }
+				};
 
-				if(user) {
-					res.send(true);
-				} else {
-					res.send(false);
-				}
-			});
+				res.json(data);
+
+				return callback(data);
+			} else {
+				session.status(function(isActive, isExpired) {
+					if(isActive || isExpired) {
+						var data = {
+							message: 'Session activation failed',
+							session: { key: candidateKey }
+						};
+
+						res.json(data);
+
+						return callback(data);
+					} else {
+						var token = jwt.sign(session, secrets.jwt_secret, { expiresInMinutes: 60*5 });
+
+						var data = {
+							message: 'Session activation successful',
+							session: session,
+							success: true,
+							token: token
+						};
+
+						res.json(data);
+
+						return callback(data);
+					}
+				})
+			}
 		});
+
 	};
 
 	exports.signin = function(req, res, callback) {
@@ -76,6 +106,26 @@
 				}
 
 
+			});
+		});
+	};
+
+	exports.validateToken = function(req, res, callback) {
+		var candidateToken = req.body.token;
+
+		jwt.verify(candidateToken, secrets.jwt_secret, function(err, decodedToken) {
+			console.log(decodedToken.username);
+
+			User.findOne({ username: decodedToken.username }, function(err, user) {
+				if(err) {
+					res.send(err);
+				}
+
+				if(user) {
+					res.send(true);
+				} else {
+					res.send(false);
+				}
 			});
 		});
 	};

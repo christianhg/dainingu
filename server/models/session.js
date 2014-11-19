@@ -15,7 +15,7 @@
             default: Date.now
         },
         expired: {
-            type: String,
+            type: Boolean,
             default: false
         },
         key: {
@@ -31,9 +31,7 @@
         }
     });
 
-    var Session = mongoose.model('Session', sessionSchema);
 
-    module.exports = Session;
 
     sessionSchema.pre('save', function(next) {
         var session = this;
@@ -43,4 +41,12 @@
         next();
     });
 
+    sessionSchema.methods.status = function(callback) {
+        callback(this.active, this.expired);
+    };
+
+
+    var Session = mongoose.model('Session', sessionSchema);
+
+    module.exports = Session;
 })();
