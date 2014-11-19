@@ -46,6 +46,7 @@
             }
 
             // Update data
+            session.active = req.body.active;
             session.expired = req.body.expired;
 
             session.save(function(err) {

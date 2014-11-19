@@ -36,13 +36,22 @@
     sessionSchema.pre('save', function(next) {
         var session = this;
 
-        session.key = randToken.generate(6, 'ABCDEFGHJKMNPQRSTUVWXYZ23456789');
+        if(!session.isModified('key')) {
+            return next();
+        } else {
+            session.key = randToken.generate(6, 'ABCDEFGHJKMNPQRSTUVWXYZ23456789');
+        }
 
         next();
     });
 
     sessionSchema.methods.status = function(callback) {
         callback(this.active, this.expired);
+    };
+
+    sessionSchema.methods.activate = function(callback) {
+        this.active = true;
+        callback(this.active);
     };
 
 

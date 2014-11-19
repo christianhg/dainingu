@@ -27,7 +27,7 @@
 				return callback(data);
 			} else {
 				session.status(function(isActive, isExpired) {
-					if(isActive || isExpired) {
+					if(isExpired) {
 						var data = {
 							message: 'Session activation failed',
 							session: { key: candidateKey }
@@ -37,6 +37,14 @@
 
 						return callback(data);
 					} else {
+						session.activate(function(activated) {
+							if(activated) {
+								session.save();
+							}
+						});
+
+						console.log(session);
+
 						var token = jwt.sign(session, secrets.jwt_secret, { expiresInMinutes: 60*5 });
 
 						var data = {
