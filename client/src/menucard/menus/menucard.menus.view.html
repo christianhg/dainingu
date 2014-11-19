@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+        <div class="panel panel-default" ng-repeat="menu in vm.menus">
+            <div class="panel-heading">
+                {{menu.name}}
+            </div>
+            <div class="panel-body">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<menu ng-repeat="menu in vm.menus" menu-name="menu.name" menus="menu.menus" dishes="menu.dishes"></menu>-->
+
+
+
+
+
+<!--<ul>
+    <li ng-repeat="menu in vm.menus">{{menu.title}}
+        <ul>
+            <li ng-repeat="menu in menu.menus">{{menu.title}}
+                <ul>
+                    <li ng-repeat="dish in menu.dishes">{{dish}}</li>
+                </ul>
+            </li>
+            <li ng-repeat="dish in menu.dishes">{{dish}}</li>
+        </ul>
+    </li>
+</ul>-->

@@ -15,7 +15,7 @@
                 // If activation was successful.
                 if(data.success) {
                     //vm.activationSuccessful = true;
-                    $state.go('menucard', null, { refresh: true });
+                    $state.go('menucard.menus', null, { refresh: true });
                 } else {
                     vm.activationSuccessful = false;
                 }

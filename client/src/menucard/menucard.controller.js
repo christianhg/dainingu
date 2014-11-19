@@ -5,28 +5,11 @@
 		.module('dainingu.menucard')
 		.controller('MenucardController', MenucardController);
 
-	function MenucardController(auth, menus) {
+	function MenucardController(auth) {
 		var vm = this;
 
 		auth.validateMenucardToken(function(validToken) {
 			vm.menucardActivated = validToken;
 		});
-
-		vm.menus = menus.query();
-
-		/*socket.on('menuAdded', function(data) {
-			console.log(data.message);
-
-			// Push the newly added menu to the list of menus.
-			//vm.menus.push(data.menu);
-		});
-
-		socket.on('menuUpdated', function(data) {
-			console.log(data.message);
-		});
-
-		socket.on('menuDeleted', function(data) {
-			console.log(data.message);
-		});*/
 	}
 })();

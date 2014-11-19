@@ -3,6 +3,7 @@
 
 	angular
 		.module('dainingu.menucard', [
-			'dainingu.menucard.activate'
+			'dainingu.menucard.activate',
+			'dainingu.menucard.menus'
 		]);
 })();

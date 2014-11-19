@@ -12,7 +12,7 @@
             </div>
             <div class="collapse navbar-collapse" id="floor-navigation">
                 <ul class="nav navbar-nav">
-                    <li><a ui-sref="menucard">Menuer</a></li>
+                    <li><a ui-sref=".menus">Menuer</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right" ng-hide="vm.menucardActivated">
                     <li><a ui-sref=".activate">Aktivér</a></li>
@@ -20,39 +20,14 @@
             </div>
         </div>
     </nav>
-    <div class="row">
-        <div ui-view>
-            <div class="col-sm-8 col-sm-offset-2">
-                <div class="panel panel-default" ng-repeat="menu in vm.menus">
-                    <div class="panel-heading">
-                        {{menu.name}}
-                    </div>
-                    <div class="panel-body">
-
-                    </div>
+    <div ui-view>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="jumbotron">
+                    <h1>dainingu.menucard</h1>
+                    <p>Donec id elit non mi porta gravida at eget metus. Donec sed odio dui.</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-
-<!--<menu ng-repeat="menu in vm.menus" menu-name="menu.name" menus="menu.menus" dishes="menu.dishes"></menu>-->
-
-
-
-
-
-<!--<ul>
-    <li ng-repeat="menu in vm.menus">{{menu.title}}
-        <ul>
-            <li ng-repeat="menu in menu.menus">{{menu.title}}
-                <ul>
-                    <li ng-repeat="dish in menu.dishes">{{dish}}</li>
-                </ul>
-            </li>
-            <li ng-repeat="dish in menu.dishes">{{dish}}</li>
-        </ul>
-    </li>
-</ul>-->
