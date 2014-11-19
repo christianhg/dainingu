@@ -10,7 +10,7 @@
 
 		vm.dashboardLogout = function() {
 			//socket.disconnect();
-			delete $window.sessionStorage.token;
+			delete $window.sessionStorage.loginToken;
 			$state.go('dashboard.login');
 		};
 	}

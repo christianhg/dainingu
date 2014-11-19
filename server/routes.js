@@ -26,9 +26,9 @@
                 });
             });
 
-        app.route('/auth/validateToken')
+        app.route('/auth/validateLoginToken')
             .post(function(req, res) {
-                auth.validateToken(req, res, function(data) {
+                auth.validateLoginToken(req, res, function(data) {
 
                 });
             });

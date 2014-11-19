@@ -74,8 +74,7 @@
 			// username doesn't exist
 			if(!user) {
 				var data = {
-					message: 'User signin failed',
-					user: { username: username, password: password }
+					message: 'User signin failed.'
 				};
 
 				res.json(data);
@@ -88,13 +87,13 @@
 				var data = {};
 
 				if(isMatch) {
-					var token = jwt.sign(user, secrets.jwt_secret, { expiresInMinutes: 60*5 });
+					var token = jwt.sign(user._id, secrets.jwt_secret, { expiresInMinutes: 60*5 });
 
 					data = {
-						message: 'User signed in',
+						message: 'User signin successful.',
 						success: true,
 						token: token,
-						user: user
+						user: user._id
 					};
 
 					res.json(data);
@@ -102,8 +101,7 @@
 					callback(true, data);
 				} else {
 					data = {
-						message: 'User signin failed',
-						user: { username: username, password: password }
+						message: 'User signin failed.'
 					};
 
 					res.json(data);
@@ -116,13 +114,13 @@
 		});
 	};
 
-	exports.validateToken = function(req, res, callback) {
+	exports.validateLoginToken = function(req, res, callback) {
 		var candidateToken = req.body.token;
 
 		jwt.verify(candidateToken, secrets.jwt_secret, function(err, decodedToken) {
 			console.log(decodedToken.username);
 
-			User.findOne({ username: decodedToken.username }, function(err, user) {
+			User.findOne({ id: decodedToken.user }, function(err, user) {
 				if(err) {
 					res.send(err);
 				}
