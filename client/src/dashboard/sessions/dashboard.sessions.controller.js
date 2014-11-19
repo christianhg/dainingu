@@ -10,6 +10,15 @@
 
         vm.sessions = sessions.query();
 
+
+        vm.deactivateSession = function(deactivatedSession) {
+            deactivatedSession.active = false;
+
+            sessions.update({'id': deactivatedSession._id}, deactivatedSession, function(session) {
+
+            });
+        };
+
         vm.addSession = function(newSession) {
             sessions.save(newSession, function(session) {
                vm.sessions = sessions.query();

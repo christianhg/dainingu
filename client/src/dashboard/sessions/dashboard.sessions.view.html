@@ -82,6 +82,7 @@
                         <th>Nøgle</th>
                         <th>Kunde</th>
                         <th>Bord</th>
+                        <th>Deaktivér</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -89,6 +90,12 @@
                         <td>{{session.key}}</td>
                         <td>{{session.customer.name}}</td>
                         <td>{{session.table}}</td>
+                        <td>
+                            <button type="submit" ng-click="vm.deactivateSession(session)" class="btn btn-danger">
+                                <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
+                            </button>
+                        </td>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
