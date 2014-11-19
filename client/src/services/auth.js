@@ -49,9 +49,28 @@
 				if($window.sessionStorage.loginToken) {
 					$http.post('/auth/validateLoginToken', {token: $window.sessionStorage.loginToken})
 						.success(function(validLoginToken) {
+							if(!validLoginToken) {
+								delete $window.sessionStorage.loginToken;
+							}
 							callback(validLoginToken);
 						})
-						.error(function(validLoginToken) {
+						.error(function() {
+							callback(false);
+						});
+				} else {
+					callback(false);
+				}
+			},
+			validateMenucardToken: function(callback) {
+				if($window.sessionStorage.menucardToken) {
+					$http.post('/auth/validateMenucardToken', {token: $window.sessionStorage.menucardToken})
+						.success(function(validMenucardToken) {
+							if(!validMenucardToken) {
+								delete $window.sessionStorage.menucardToken;
+							}
+							callback(validMenucardToken);
+						})
+						.error(function() {
 							callback(false);
 						});
 				} else {

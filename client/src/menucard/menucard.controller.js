@@ -5,10 +5,18 @@
 		.module('dainingu.menucard')
 		.controller('MenucardController', MenucardController);
 
-	function MenucardController(menus) {
+	function MenucardController(auth, menus) {
 		var vm = this;
 
 		vm.menus = menus.query();
+
+		auth.validateMenucardToken(function(validToken) {
+			if(validToken) {
+				console.log('using valid menucard token');
+			} else {
+				console.log('anonymous user');
+			}
+		});
 
 		/*socket.on('menuAdded', function(data) {
 			console.log(data.message);

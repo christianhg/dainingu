@@ -134,4 +134,33 @@
 		});
 	};
 
+	exports.validateMenucardToken = function(req, res, callback) {
+		var menucardToken = req.body.token;
+
+		jwt.verify(menucardToken, secrets.jwt_secret, function(err, decodedToken) {
+			Session.findOne({ id: decodedToken.session }, function(err, session) {
+				if(err) {
+					res.send(err);
+				}
+
+				if(!session) {
+					res.send(false);
+				} else {
+					console.log(session);
+					session.status(function(isActive, isExpired) {
+						/*if(!isActive || isExpired) {
+							res.send(false);
+						} else {
+							res.send(true);
+						}*/
+					//	console.log(isActive, isExpired);
+					});
+
+					res.send(true);
+
+				}
+			});
+		})
+	}
+
 })();

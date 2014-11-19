@@ -33,6 +33,13 @@
                 });
             });
 
+        app.route('/auth/validateMenucardToken')
+            .post(function(req, res) {
+                auth.validateMenucardToken(req, res, function(data) {
+
+                });
+            });
+
         /**
          * Users API routes.
          */
