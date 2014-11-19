@@ -27,7 +27,7 @@
                     delete $window.sessionStorage.menucardToken;
                 }
             });
-            
+
         };
     }
 })();

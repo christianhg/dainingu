@@ -18,8 +18,7 @@
 			// Session doesn't exist
 			if(!session) {
 				var data = {
-					message: 'Session activation failed',
-					session: { key: candidateKey }
+					message: 'Session activation failed.'
 				};
 
 				res.json(data);
@@ -29,27 +28,26 @@
 				session.status(function(isActive, isExpired) {
 					if(isExpired) {
 						var data = {
-							message: 'Session activation failed',
-							session: { key: candidateKey }
+							message: 'Session activation failed.',
+							session: session._id
 						};
 
 						res.json(data);
 
 						return callback(data);
 					} else {
+						// Activate session.
 						session.activate(function(activated) {
 							if(activated) {
 								session.save();
 							}
 						});
 
-						console.log(session);
-
-						var token = jwt.sign(session, secrets.jwt_secret, { expiresInMinutes: 60*5 });
+						var token = jwt.sign(session._id, secrets.jwt_secret, { expiresInMinutes: 60*5 });
 
 						var data = {
-							message: 'Session activation successful',
-							session: session,
+							message: 'Session activation successful.',
+							session: session._id,
 							success: true,
 							token: token
 						};

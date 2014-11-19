@@ -19,7 +19,8 @@
             default: false
         },
         key: {
-            type: String
+            type: String,
+            unique: true
         },
         customer: {
             name: {
