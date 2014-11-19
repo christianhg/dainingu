@@ -12,10 +12,10 @@
             </div>
             <div class="collapse navbar-collapse" id="floor-navigation">
                 <ul class="nav navbar-nav">
-                    <li><a ui-sref=".menus">Menuer</a></li>
+                    <li ui-sref-active="active"><a ui-sref=".menus">Menuer</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right" ng-hide="vm.menucardActivated">
-                    <li><a ui-sref=".activate">Aktivér</a></li>
+                    <li ui-sref-active="active"><a ui-sref=".activate">Aktivér</a></li>
                 </ul>
             </div>
         </div>
