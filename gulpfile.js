@@ -4,7 +4,6 @@
 	var autoPrefixer = require('gulp-autoprefixer');
 	var clean = require('gulp-clean');
 	var concat = require('gulp-concat');
-	var del = require('del');
 	var express = require('express');
 	var gulp = require('gulp');
 	var imagemin = require('gulp-imagemin');
@@ -330,18 +329,16 @@
 	 * Remove all files in build dir
 	 */
 	gulp.task('clean:build', function () {
-		/*return gulp.src([paths.client.build.base + files.all], {read: false})
-			.pipe(clean());*/
-		del([paths.client.build.base + files.all]);
+		return gulp.src([paths.client.build.base + files.all], {read: false})
+			.pipe(clean());
 	});
 
 	/**
 	 * Remove all files in dist dir
 	 */
 	gulp.task('clean:dist', function () {
-		/*return gulp.src([paths.client.dist.base + files.all], {read: false})
-			.pipe(clean());*/
-		del([paths.client.dist.base + files.all]);
+		return gulp.src([paths.client.dist.base + files.all], {read: false})
+			.pipe(clean());
 	});
 
 	/**
