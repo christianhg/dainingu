@@ -5,7 +5,7 @@
         .module('dainingu.dashboard.menus')
         .controller('DashboardMenusController', DashboardMenusController);
 
-    function DashboardMenusController(menus, socket) {
+    function DashboardMenusController(dishes, menus, socket) {
         var vm = this;
 
         socket.init().on('menuAdded', function(data) {
@@ -25,5 +25,19 @@
                 vm.menus = menus.query();
             });
         };
+
+        vm.addDish = function(menuId, dish) {
+
+            dishes.save(dish, function(dish) {
+                menus.update({'id': menuId}, {dish: dish}, function(menu) {
+                   console.log(menu);
+                });
+            });
+
+            /*menus.update({'id': menuId}, {dish: dish}, function(menu) {
+
+            });*/
+        };
+
     }
 })();

@@ -49,6 +49,8 @@
 	exports.show = function(req, res, callback) {
 		var id = req.params.id;
 
+		console.log(Menu);
+
 		Menu.find({ where: { id: id }})
 			.complete(function(err, menu) {
 				if(!!err) {
@@ -69,10 +71,24 @@
 
 	exports.store = function(req, res, callback) {
 		var name = req.body.name;
+		var dishes = req.body.dishes;
 
-		var menu = Menu.build({
+		Menu.create({
+			name: name
+		}).success(function(menu) {
+			/*menu.getDishes().success(function(dishes) {
+				console.log(dishes);
+			});*/
+			menu.setDishes(dishes).success(function(dishes) {
+				console.log(dishes);
+			});
+		});
+
+		/*var menu = Menu.build({
 			name: name
 		});
+
+		console.log(menu);
 
 		menu
 			.save()
@@ -89,14 +105,27 @@
 				res.json(menu);
 
 				callback(data);
-			});
+			});*/
 	};
 
 	exports.update = function(req, res, callback) {
 		var id = req.params.id;
 		var name = req.body.name;
+		var dish = req.body.dish;
 
 		Menu.find({ where: { id: id }})
+			.complete(function(err, menu) {
+				menu.setDishes([dish.id]).success(function(dishes) {
+				 console.log(dishes);
+				 });
+			});
+
+
+	};
+
+
+
+		/*Menu.find({ where: { id: id }})
 			.complete(function(err, menu) {
 				if(!!err) {
 					res.send(err);
@@ -104,16 +133,23 @@
 
 				menu.updateAttributes({
 					name: name
-				}).success(function() {
-					var data = {
-						message: 'Menu updated',
-						menu: menu
-					};
+				}).success(function(menu) {
 
-					res.json(menu);
+					menu.setDishes(dish.id).success(function() {
+						var data = {
+							message: 'Menu updated',
+							menu: menu
+						};
 
-					callback(data);
+						res.json(menu);
+
+						callback(data);
+					});
+
+
+
+
 				});
-			});
-	};
+			});*/
+
 })();
