@@ -3,24 +3,24 @@
 
 	var sequelize = require("../config/sequelize");
 
-	var Menu = sequelize.model('menu');
+	var Dish = sequelize.model('dish');
 
 	exports.destroy = function(req, res, callback) {
 		var id = req.params.id;
 
-		Menu.find({ where: { id: id }})
-			.complete(function(err, menu) {
+		Dish.find({ where: { id: id }})
+			.complete(function(err, dish) {
 				if(!!err) {
 					res.send(err);
 				}
 
-				menu.destroy().success(function() {
+				dish.destroy().success(function() {
 					var data = {
-						message: 'Menu deleted',
-						menu: menu
+						message: 'Dish deleted',
+						dish: dish
 					};
 
-					res.json(menu);
+					res.json(dish);
 
 					callback(data);
 				});
@@ -28,18 +28,18 @@
 	};
 
 	exports.index = function(req, res, callback) {
-		Menu.findAll()
-			.complete(function(err, menus) {
+		Dish.findAll()
+			.complete(function(err, dishes) {
 				if(!!err) {
 					res.send(err);
 				}
 
 				var data = {
-					message: 'Menus shown',
-					menus: menus
+					message: 'Dishes shown',
+					dishes: dishes
 				};
 
-				res.json(menus);
+				res.json(dishes);
 
 				callback(data);
 
@@ -49,18 +49,18 @@
 	exports.show = function(req, res, callback) {
 		var id = req.params.id;
 
-		Menu.find({ where: { id: id }})
-			.complete(function(err, menu) {
+		Dish.find({ where: { id: id }})
+			.complete(function(err, dish) {
 				if(!!err) {
 					res.send(err);
 				}
 
 				var data = {
-					message: 'Menu shown',
-					menu: menu
+					message: 'Dish shown',
+					dish: dish
 				};
 
-				res.json(menu);
+				res.json(dish);
 
 				callback(data);
 
@@ -70,11 +70,11 @@
 	exports.store = function(req, res, callback) {
 		var name = req.body.name;
 
-		var menu = Menu.build({
+		var dish = Dish.build({
 			name: name
 		});
 
-		menu
+		dish
 			.save()
 			.complete(function(err) {
 				if(!!err) {
@@ -82,11 +82,11 @@
 				}
 
 				var data = {
-					message: 'Menu added',
-					menu: menu
+					message: 'Dish added',
+					dish: dish
 				};
 
-				res.json(menu);
+				res.json(dish);
 
 				callback(data);
 			});
@@ -96,21 +96,21 @@
 		var id = req.params.id;
 		var name = req.body.name;
 
-		Menu.find({ where: { id: id }})
-			.complete(function(err, menu) {
+		Dish.find({ where: { id: id }})
+			.complete(function(err, dish) {
 				if(!!err) {
 					res.send(err);
 				}
 
-				menu.updateAttributes({
+				dish.updateAttributes({
 					name: name
 				}).success(function() {
 					var data = {
-						message: 'Menu updated',
-						menu: menu
+						message: 'Dish updated',
+						dish: dish
 					};
 
-					res.json(menu);
+					res.json(dish);
 
 					callback(data);
 				});
