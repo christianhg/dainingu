@@ -79,7 +79,7 @@
             })
             .post(function(req, res) {
                 menus.store(req, res, function(data) {
-                    io.sockets.emit('menuAdded', data);
+                    //io.sockets.emit('menuAdded', data);
                     //console.log(data);
                 });
             });
