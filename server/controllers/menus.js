@@ -49,8 +49,6 @@
 	exports.show = function(req, res, callback) {
 		var id = req.params.id;
 
-		console.log(Menu);
-
 		Menu.find({ where: { id: id }})
 			.complete(function(err, menu) {
 				if(!!err) {

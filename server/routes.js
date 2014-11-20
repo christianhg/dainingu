@@ -5,6 +5,7 @@
 
         var dishes = require('./controllers/dishes');
         var menus = require('./controllers/menus');
+        var menusDishes = require('./controllers/menusDishes');
         var users = require('./controllers/users');
         var sessions = require('./controllers/sessions');
         var auth = require('./controllers/auth');
@@ -100,6 +101,12 @@
                 menus.destroy(req, res, function(data) {
                     //io.sockets.emit('menuDeleted', data);
                     //console.log(data);
+                });
+            });
+        app.route('/api/menus/:id/dishes')
+            .get(function(req, res) {
+                menusDishes.index(req, res, function(data) {
+
                 });
             });
 

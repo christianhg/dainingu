@@ -1,5 +1,5 @@
 /**
- * Menus Factory
+ * Dishes Factory
  * @namespace Factories
  */
 (function () {

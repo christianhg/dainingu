@@ -29,6 +29,16 @@
                     <button type="submit" class="btn btn-success">Tilføj ret</button>
                 </form>
             </div>
+            <table class="table">
+                <thead>
+                    <th>Navn</th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="dish in menu.dishes">
+                        <td>{{dish.name}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
         <!--<div class="panel panel-default">
