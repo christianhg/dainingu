@@ -26,28 +26,31 @@
 
         vm.addMenu = function(newMenu) {
             menus.save(newMenu, function(menu) {
-                vm.menus = menus.query();
+                //vm.menus = menus.query();
             });
         };
 
         vm.deleteMenu = function(id) {
             menus.delete({}, {'id': id}, function(menu) {
-                vm.menus = menus.query();
+                //vm.menus = menus.query();
             });
         };
 
-        vm.addDish = function(menuId, dish) {
+        vm.addDishToMenu = function(menuId, dish) {
+            menusDishes.save({'id': menuId}, dish, function(dish) {
 
+            });
+        };
+
+
+/*
+        vm.addDish = function(menuId, dish) {
             dishes.save(dish, function(dish) {
                 menus.update({'id': menuId}, {dish: dish}, function(menu) {
-                   console.log(menu);
+                    vm.menu[menuId].dish = {};
                 });
             });
-
-            /*menus.update({'id': menuId}, {dish: dish}, function(menu) {
-
-            });*/
         };
-
+*/
     }
 })();

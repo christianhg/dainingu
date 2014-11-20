@@ -14,6 +14,10 @@
 			'find': {
 				method: 'GET',
 				isArray: true
+			},
+			'save': {
+				method: 'POST',
+				isArray: true
 			}
 		});
 	}

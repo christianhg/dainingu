@@ -10,6 +10,8 @@
 
 		vm.menus = menus.query();
 
+
+
 		/*socket.on('menuAdded', function(data) {
 		 console.log(data.message);
 

@@ -103,9 +103,18 @@
                     //console.log(data);
                 });
             });
+
+        /**
+         * Menus Dishes API routes.
+         */
         app.route('/api/menus/:id/dishes')
             .get(function(req, res) {
                 menusDishes.index(req, res, function(data) {
+
+                });
+            }).
+            post(function(req, res) {
+                menusDishes.store(req, res, function(data) {
 
                 });
             });

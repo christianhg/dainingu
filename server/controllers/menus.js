@@ -69,41 +69,23 @@
 
 	exports.store = function(req, res, callback) {
 		var name = req.body.name;
-		var dishes = req.body.dishes;
 
 		Menu.create({
 			name: name
-		}).success(function(menu) {
-			/*menu.getDishes().success(function(dishes) {
-				console.log(dishes);
-			});*/
-			menu.setDishes(dishes).success(function(dishes) {
-				console.log(dishes);
-			});
+		}).success(function(err, menu) {
+			if(err) {
+				res.send(err);
+			}
+
+			var data = {
+				message: 'Menu added',
+				menu: menu
+			};
+
+			res.json(menu);
+
+			callback(data);
 		});
-
-		/*var menu = Menu.build({
-			name: name
-		});
-
-		console.log(menu);
-
-		menu
-			.save()
-			.complete(function(err) {
-				if(!!err) {
-					res.send(err);
-				}
-
-				var data = {
-					message: 'Menu added',
-					menu: menu
-				};
-
-				res.json(menu);
-
-				callback(data);
-			});*/
 	};
 
 	exports.update = function(req, res, callback) {
@@ -113,41 +95,18 @@
 
 		Menu.find({ where: { id: id }})
 			.complete(function(err, menu) {
-				menu.setDishes([dish.id]).success(function(dishes) {
-				 console.log(dishes);
-				 });
+				menu.addDish([dish.id]).success(function(dish) {
+					var data = {
+						message: 'Menu updated',
+						menu: menu
+					};
+
+					res.json(menu);
+
+					callback(data);
+				});
 			});
 
-
 	};
-
-
-
-		/*Menu.find({ where: { id: id }})
-			.complete(function(err, menu) {
-				if(!!err) {
-					res.send(err);
-				}
-
-				menu.updateAttributes({
-					name: name
-				}).success(function(menu) {
-
-					menu.setDishes(dish.id).success(function() {
-						var data = {
-							message: 'Menu updated',
-							menu: menu
-						};
-
-						res.json(menu);
-
-						callback(data);
-					});
-
-
-
-
-				});
-			});*/
 
 })();
