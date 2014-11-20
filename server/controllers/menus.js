@@ -1,104 +1,112 @@
 (function () {
-    'use strict';
+	'use strict';
 
-    var Menu  = require('../models/menu');
+	var sequelize = require("../config/sequelize");
 
-    exports.destroy = function(req, res, callback) {
-        Menu.findById(req.params.id, function(err, menu) {
-            menu.remove(function(err) {
-                if(err) {
-                    res.send(err);
-                }
+	var Menu = sequelize.model('menu');
 
-                var data = {
-                    message: 'Menu deleted',
-                    menu: menu
-                };
+	exports.destroy = function(req, res, callback) {
+		var id = req.params.id;
 
-                res.json(data);
+		Menu.find({ where: { id: id }})
+			.complete(function(err, menu) {
+				if(!!err) {
+					res.send(err);
+				}
 
-                callback(data);
-            });
-        });
-    };
+				menu.destroy().success(function() {
+					var data = {
+						message: 'Menu deleted',
+						menus: menu
+					};
 
-    exports.index = function(req, res, callback) {
-        Menu.find(function(err, menus) {
-            if(err) {
-                res.send(err);
-            }
+					res.json(menu);
 
-            var data = {
-                message: 'Menus shown',
-                menus: menus
-            };
+					callback(data);
+				});
+			});
+	};
 
-            res.json(menus);
+	exports.index = function(req, res, callback) {
+		Menu.findAll()
+			.complete(function(err, menus) {
+				if(!!err) {
+					res.send(err);
+				}
 
-            callback(data);
-        });
-    };
+				var data = {
+					message: 'Menus shown',
+					menus: menus
+				};
 
-    exports.show = function(req, res, callback) {
-        Menu.findById(req.params.id, function(err, menu) {
-            if(err) {
-                res.send(err);
-            }
+				res.json(menus);
 
-            var data = {
-                message: 'Menu shown',
-                menus: menu
-            };
+				callback(data);
 
-            res.json(menu);
+			});
+	};
 
-            callback(data);
-        });
-    };
+	exports.show = function(req, res, callback) {
+		var id = req.params.id;
 
-    exports.store = function(req, res, callback) {
-        var menu = new Menu();
+		Menu.find({ where: { id: id }})
+			.complete(function(err, menu) {
+				if(!!err) {
+					res.send(err);
+				}
 
-        menu.name = req.body.name;
+				var data = {
+					message: 'Menu shown',
+					menus: menu
+				};
 
-        menu.save(function (err) {
-            if (err) {
-                res.send(err);
-            }
-            var data = {
-                message: 'Menu added',
-                menu: menu
-            };
+				res.json(menu);
 
-            res.json(data);
+				callback(data);
 
-            callback(data);
-        });
-    };
+			});
+	};
 
-    exports.update = function(req, res, callback) {
-        Menu.findById(req.params.id, function(err, menu) {
-            if(err) {
-                res.send(err);
-            }
+	exports.store = function(req, res, callback) {
+		var name = req.body.name;
 
-            menu.title = req.body.title;
+		var menu = Menu.build({
+			name: name
+		});
 
-            menu.save(function(err) {
-                if(err) {
-                    res.send(err);
-                }
+		menu
+			.save()
+			.complete(function(err) {
+				if(!!err) {
+					console.log('The instance has not been saved:', err);
+				} else {
+					console.log('We have a persisted instance now')
+				}
+			});
+	};
 
-                var data = {
-                    message: 'Menu updated',
-                    menu: menu
-                };
+	exports.update = function(req, res, callback) {
+		var id = req.params.id;
+		var name = req.body.name;
 
-                res.json({message: 'Menu updated'});
+		Menu.find({ where: { id: id }})
+			.complete(function(err, menu) {
+				if(!!err) {
+					res.send(err);
+				}
 
-                callback(data);
-            });
-        });
-    };
+				menu.updateAttributes({
+					name: name
+				}).success(function() {
+					var data = {
+						message: 'Menu updated',
+						menus: menu
+					};
 
+					res.json(menu);
+
+					callback(data);
+				});
+			});
+	};
 })();

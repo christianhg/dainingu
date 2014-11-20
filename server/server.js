@@ -33,6 +33,13 @@
     mongoose.connect(secrets.mongodb);
 
     /**
+     * Connect to MySQL and wire up our models.
+     */
+    require("./config/sequelize").setup(__dirname + '/models/sequelize', "dainingu", "root", null, {
+        host: 'localhost'
+    });
+
+    /**
      * Express configuration.
      */
     app.use(express.static(__dirname + '/../client/build'));
