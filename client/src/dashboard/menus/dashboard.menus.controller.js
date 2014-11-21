@@ -24,7 +24,7 @@
 
         menus.query(function(menus) {
             angular.forEach(menus, function(menu) {
-                menusDishes.find({id: menu.id}, function(dishes) {
+                menusDishes.find({menuId: menu.id}, function(dishes) {
                     menu.dishes = dishes;
                     vm.menus.push(menu);
                 });
@@ -39,7 +39,7 @@
 
         vm.deleteMenu = function(id) {
             menus.delete({}, {'id': id}, function(menu) {
-                //vm.menus = menus.query();
+                vm.menus = menus.query();
             });
         };
 
@@ -48,5 +48,11 @@
 
             });
         };
+
+        vm.deleteDishFromMenu = function(menuId, dishId) {
+            menusDishes.delete({ 'menuId': menuId, 'dishId': dishId }, function(dish) {
+
+            });
+        }
     }
 })();

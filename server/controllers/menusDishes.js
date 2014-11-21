@@ -6,9 +6,9 @@
 	var Menu = sequelize.model('menu');
 
 	exports.index = function(req, res, callback) {
-		var id = req.params.id;
+		var menuId = req.params.menuId;
 
-		Menu.find({ where: { id: id }})
+		Menu.find({ where: { id: menuId }})
 			.complete(function(err, menu) {
 				if(err) {
 					res.send(err);
@@ -30,10 +30,10 @@
 	};
 
 	exports.store = function(req, res, callback) {
-		var id = req.params.id;
+		var menuId = req.params.menuId;
 		var dish = req.body;
 
-		Menu.find({ where: { id: id }})
+		Menu.find({ where: { id: menuId }})
 			.complete(function(err, menu) {
 				if(err) {
 					res.send(err);
@@ -50,8 +50,6 @@
 							dish: dish
 						};
 
-						console.log(dish);
-
 						res.json(dish);
 
 						callback(data);
@@ -59,6 +57,33 @@
 				});
 
 
+			});
+	};
+
+	exports.destroy = function(req, res, callback) {
+		var menuId = req.params.menuId;
+		var dishId = req.params.dishId;
+
+		Menu.find({ where: { id: menuId}})
+			.complete(function(err, menu) {
+				if(err) {
+					res.send(err);
+				}
+
+				Dish.find({ where: { id: dishId}})
+					.complete(function(err, dish) {
+						menu.removeDish(dish).success(function(menuId) {
+							var data = {
+								message: 'Dish removed from menu',
+								menu: menu,
+								dish: dish
+							};
+
+							res.json(dish);
+
+							callback(data);
+						});
+					});
 			});
 	};
 

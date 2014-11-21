@@ -8,7 +8,15 @@
     function DashboardUsersController(users, socket) {
         var vm = this;
 
-        socket.init().on('userAdded', function(data) {
+        socket.on('userAdded', function(data) {
+            console.log(data.message);
+        });
+
+        socket.on('userUpdated', function(data) {
+            console.log(data.message);
+        });
+
+        socket.on('userDeleted', function(data) {
             console.log(data.message);
         });
 

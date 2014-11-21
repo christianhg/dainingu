@@ -17,8 +17,11 @@
     </div>
     <div class="col-sm-6 col-md-8">
         <div class="panel panel-default" ng-repeat="menu in vm.menus | orderBy:name">
-            <div class="panel-heading">
+            <div class="panel-heading clearfix">
                 {{menu.name}}
+                <button type="submit" ng-click="vm.deleteMenu(menu.id)" class="pull-right btn btn-sm btn-danger">
+                    <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+                </button>
             </div>
             <div class="panel-body">
                 <form role="form" class="form-inline" name="addDishToMenuForm" ng-submit="vm.addDishToMenu(menu.id, vm.menu[menu.id].dish)" novalidate>
@@ -35,7 +38,11 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="dish in menu.dishes | orderBy:name">
-                        <td>{{dish.name}}</td>
+                        <td>{{dish.name}}
+                            <button type="submit" ng-click="vm.deleteDishFromMenu(menu.id, dish.id)" class="pull-right btn btn-sm btn-danger">
+                                <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
