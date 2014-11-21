@@ -16,7 +16,7 @@
         </div>
     </div>
     <div class="col-sm-6 col-md-8">
-        <div class="panel panel-default" ng-repeat="menu in vm.menus">
+        <div class="panel panel-default" ng-repeat="menu in vm.menus | orderBy:name">
             <div class="panel-heading">
                 {{menu.name}}
             </div>
@@ -34,7 +34,7 @@
                     <th>Navn</th>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="dish in menu.dishes">
+                    <tr ng-repeat="dish in menu.dishes | orderBy:name">
                         <td>{{dish.name}}</td>
                     </tr>
                 </tbody>

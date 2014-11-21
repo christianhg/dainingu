@@ -23,7 +23,6 @@
 			});
 		});
 
-
 		vm.addDishToSession = function(dish) {
 			var token = $window.sessionStorage.menucardToken;
 

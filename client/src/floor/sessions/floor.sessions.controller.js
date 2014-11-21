@@ -5,7 +5,9 @@
         .module('dainingu.floor.sessions')
         .controller('FloorSessionsController', FloorSessionsController);
 
-    function FloorSessionsController() {
+    function FloorSessionsController(sessions) {
         var vm = this;
+
+        vm.sessions = sessions.query();
     }
 })();
