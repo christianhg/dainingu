@@ -22,7 +22,15 @@
                 } else {
                     session.addDish(dish, function(dishes) {
                         session.save();
-                        res.send(dishes);
+
+                        var data = {
+                            message: 'Session updated',
+                            dishes: dishes
+                        };
+
+                        res.json(dishes);
+
+                        callback(data);
                     });
                 }
             });

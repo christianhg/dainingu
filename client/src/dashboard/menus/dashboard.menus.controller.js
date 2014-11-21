@@ -8,7 +8,15 @@
     function DashboardMenusController(dishes, menus, menusDishes, socket) {
         var vm = this;
 
-        socket.init().on('menuAdded', function(data) {
+        socket.on('menuAdded', function(data) {
+            console.log(data.message);
+        });
+
+        socket.on('menuUpdated', function(data) {
+            console.log(data.message);
+        });
+
+        socket.on('menuDeleted', function(data) {
             console.log(data.message);
         });
 
@@ -22,7 +30,6 @@
                 });
             });
         });
-
 
         vm.addMenu = function(newMenu) {
             menus.save(newMenu, function(menu) {
@@ -41,16 +48,5 @@
 
             });
         };
-
-
-/*
-        vm.addDish = function(menuId, dish) {
-            dishes.save(dish, function(dish) {
-                menus.update({'id': menuId}, {dish: dish}, function(menu) {
-                    vm.menu[menuId].dish = {};
-                });
-            });
-        };
-*/
     }
 })();

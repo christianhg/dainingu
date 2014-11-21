@@ -5,7 +5,7 @@
 		.module('dainingu.menucard')
 		.controller('MenucardMenusController', MenucardController);
 
-	function MenucardController(auth, menus, menusDishes, sessions, sessionsDishes, $window) {
+	function MenucardController(auth, menus, menusDishes, sessionsDishes, $window, socket) {
 		var vm = this;
 
 		auth.validateMenucardToken(function(validToken) {
@@ -33,19 +33,16 @@
 			});
 		};
 
-		/*socket.on('menuAdded', function(data) {
-		 console.log(data.message);
+		socket.on('menuAdded', function(data) {
+			console.log(data.message);
+		});
 
-		 // Push the newly added menu to the list of menus.
-		 //vm.menus.push(data.menu);
-		 });
+		socket.on('menuUpdated', function(data) {
+			console.log(data.message);
+		});
 
-		 socket.on('menuUpdated', function(data) {
-		 console.log(data.message);
-		 });
-
-		 socket.on('menuDeleted', function(data) {
-		 console.log(data.message);
-		 });*/
+		socket.on('menuDeleted', function(data) {
+			console.log(data.message);
+		});
 	}
 })();

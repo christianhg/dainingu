@@ -33,8 +33,6 @@
 						if(data.success) {
 							// Get generated JWT token and store token in sessionStorage.
 							$window.sessionStorage.loginToken = data.token;
-							// Initiate socket
-							socket.init();
 						} else {
 							// Something went wrong. Delete token from sessionStorage if it exists.
 							delete $window.sessionStorage.loginToken;

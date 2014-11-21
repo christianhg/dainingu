@@ -22,5 +22,4 @@
 			$scope.pageClass = toState.data.pageClass;
 		});
 	}
-
 })();

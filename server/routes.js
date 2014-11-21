@@ -10,7 +10,9 @@
         var sessions = require('./controllers/sessions');
         var sessionsDishes = require('./controllers/sessionsDishes');
         var auth = require('./controllers/auth');
+        var expressJwt = require('express-jwt');
         var jwt = require('jsonwebtoken');
+        var secrets = require('./config/secrets');
 
         /**
          * Authentication routes.
@@ -54,15 +56,15 @@
          * Users API routes.
          */
         app.route('/api/users')
-            .get(function(req, res) {
+            .get(expressJwt({secret: secrets.jwt_secret}), function(req, res) {
                 users.index(req, res, function(data) {
-                    //console.log(data);
+
                 });
             })
             .post(function(req, res) {
                 users.store(req, res, function(data) {
                     io.sockets.emit('userAdded', data);
-                    //console.log(data);
+
                 });
             });
         app.route('/api/users/:id')
@@ -74,7 +76,7 @@
             })
             .delete(function(req, res) {
                 users.destroy(req, res, function(data) {
-                    //io.sockets.emit('userDeleted', data);
+                    io.sockets.emit('userDeleted', data);
                 });
             });
 
@@ -84,31 +86,30 @@
         app.route('/api/menus')
             .get(function(req, res) {
                 menus.index(req, res, function(data) {
-                    //console.log(data);
+
                 });
             })
             .post(function(req, res) {
                 menus.store(req, res, function(data) {
-                    //io.sockets.emit('menuAdded', data);
-                    //console.log(data);
+                    io.sockets.emit('menuAdded', data);
                 });
             });
         app.route('/api/menus/:id')
             .get(function(req, res) {
                 menus.show(req, res, function(data) {
-                    //console.log(data);
+
                 })
             })
             .put(function(req, res) {
                 menus.update(req, res, function(data) {
-                    //io.sockets.emit('menuUpdated', data);
-                    //console.log(data);
+                    io.sockets.emit('menuUpdated', data);
+
                 })
             })
             .delete(function(req, res) {
                 menus.destroy(req, res, function(data) {
-                    //io.sockets.emit('menuDeleted', data);
-                    //console.log(data);
+                    io.sockets.emit('menuDeleted', data);
+
                 });
             });
 
@@ -159,38 +160,36 @@
         app.route('/api/sessions')
             .get(function(req, res) {
                 sessions.index(req, res, function(data) {
-                    //console.log(data);
+
                 });
             })
             .post(function(req, res) {
                 sessions.store(req, res, function(data) {
-                    // io.sockets.emit('sessionAdded', data);
-                    //console.log(data);
+                    io.sockets.emit('sessionAdded', data);
+
                 });
             });
         app.route('/api/sessions/:id')
             .get(function(req, res) {
                 sessions.show(req, res, function(data) {
-                    //console.log(data);
+
                 })
             })
             .put(function(req, res) {
                 sessions.update(req, res, function(data) {
-                    //io.sockets.emit('sessionUpdated', data);
-                    //console.log(data);
+                    io.sockets.emit('sessionUpdated', data);
                 })
             })
             .delete(function(req, res) {
                 sessions.destroy(req, res, function(data) {
-                    //io.sockets.emit('sessionDeleted', data);
-                    //console.log(data);
+                    io.sockets.emit('sessionDeleted', data);
                 });
             });
 
         app.route('/api/sessions/:id/dishes')
             .post(function(req, res) {
                 sessionsDishes.store(req, res, function(data) {
-
+                    io.sockets.emit('sessionUpdated', data);
                 });
             })
 

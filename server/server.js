@@ -43,11 +43,6 @@
      * Express configuration.
      */
     app.use(express.static(__dirname + '/../client/build'));
-    // Protect /api/users with JWT
-    //app.use('/api/users', expressJwt({secret: secrets.jwt_secret}));
-    // Protect /api/sessions with JWT
-    //app.use('/api/sessions', expressJwt({secret: secrets.jwt_secret}));
-    //app.use('/api/sessions/dishes', expressJwt({secret: secrets.jwt_secret}));
     // Get data from html forms.
     app.use(bodyParser.json());
     // Faux http method support.
@@ -55,13 +50,15 @@
     // Log requests in console.
     app.use(morgan('dev'));
 
-    io.use(socketioJwt.authorize({
+    /*io.use(socketioJwt.authorize({
         secret: secrets.jwt_secret,
         handshake: true
-    }));
+    }));*/
 
     io.on('connection', function(socket) {
-        console.log(socket.decoded_token.username, 'connected');
+        //console.log(socket.decoded_token, 'connected');
+        console.log('connection established');
+        socket.emit('connected')
     }).on('disconnect', function() {
         console.log('disconnected');
     });
