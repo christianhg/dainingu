@@ -29,10 +29,18 @@
         },
         table: {
             type: String
-        }
+        },
+        dishes: [{
+            id: {
+                type: Number,
+                required: true
+            },
+            name: {
+                type: String,
+                required: true
+            }
+        }]
     });
-
-
 
     sessionSchema.pre('save', function(next) {
         var session = this;
@@ -55,6 +63,10 @@
         callback(this.active);
     };
 
+    sessionSchema.methods.addDish = function(dish, callback) {
+        this.dishes.push(dish);
+        callback(this.dishes);
+    };
 
     var Session = mongoose.model('Session', sessionSchema);
 

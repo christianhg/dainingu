@@ -15,7 +15,7 @@
 			},
 			responseError: function(response) {
 				if(response.status === 401 || response.status === 403) {
-					$injector.get('$state').go('dashboard.login');
+					//$injector.get('$state').go('dashboard.login');
 					delete $window.sessionStorage.loginToken;
 				}
 				return $q.reject(response);

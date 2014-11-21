@@ -44,9 +44,10 @@
      */
     app.use(express.static(__dirname + '/../client/build'));
     // Protect /api/users with JWT
-    app.use('/api/users', expressJwt({secret: secrets.jwt_secret}));
+    //app.use('/api/users', expressJwt({secret: secrets.jwt_secret}));
     // Protect /api/sessions with JWT
-    app.use('/api/sessions', expressJwt({secret: secrets.jwt_secret}));
+    //app.use('/api/sessions', expressJwt({secret: secrets.jwt_secret}));
+    //app.use('/api/sessions/dishes', expressJwt({secret: secrets.jwt_secret}));
     // Get data from html forms.
     app.use(bodyParser.json());
     // Faux http method support.

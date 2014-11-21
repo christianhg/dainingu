@@ -7,6 +7,26 @@
 	var Session = require('../models/session');
 
 
+	exports.getSessionId = function(req, res, callback) {
+		var menucardToken = req.body.token;
+
+		jwt.verify(menucardToken, secrets.jwt_secret, function(err, sessionId) {
+
+			Session.findOne({ _id: sessionId }, function(err, session) {
+				if(err) {
+					res.send(err);
+				}
+
+				if(!session) {
+					res.send(false);
+				} else {
+					res.send(sessionId);
+
+				}
+			});
+		});
+	};
+
 	exports.activateSession = function(req, res, callback) {
 		var candidateKey = req.body.key;
 

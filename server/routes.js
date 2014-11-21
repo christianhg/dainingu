@@ -8,6 +8,7 @@
         var menusDishes = require('./controllers/menusDishes');
         var users = require('./controllers/users');
         var sessions = require('./controllers/sessions');
+        var sessionsDishes = require('./controllers/sessionsDishes');
         var auth = require('./controllers/auth');
         var jwt = require('jsonwebtoken');
 
@@ -17,6 +18,13 @@
         app.route('/auth/activateSession')
             .post(function(req, res) {
                 auth.activateSession(req, res, function(data) {
+
+                });
+            });
+
+        app.route('/auth/getSessionId')
+            .post(function(req, res) {
+                auth.getSessionId(req, res, function(data) {
 
                 });
             });
@@ -178,6 +186,13 @@
                     //console.log(data);
                 });
             });
+
+        app.route('/api/sessions/:id/dishes')
+            .post(function(req, res) {
+                sessionsDishes.store(req, res, function(data) {
+
+                });
+            })
 
     };
 })();

@@ -45,6 +45,19 @@
 						callback(data);
 					});
 			},
+			getSessionId: function(callback) {
+				if($window.sessionStorage.menucardToken) {
+					$http.post('/auth/getSessionId', { token: $window.sessionStorage.menucardToken })
+						.success(function(sessionId) {
+							callback(sessionId);
+						})
+						.error(function() {
+							callback(false);
+						});
+				} else {
+					callback(false);
+				}
+			},
 			validateLoginToken: function(callback) {
 				if($window.sessionStorage.loginToken) {
 					$http.post('/auth/validateLoginToken', {token: $window.sessionStorage.loginToken})
