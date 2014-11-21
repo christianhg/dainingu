@@ -140,23 +140,28 @@
         app.route('/api/dishes')
             .get(function(req, res) {
                 dishes.index(req, res, function(data) {
+
                 });
             })
             .post(function(req, res) {
                 dishes.store(req, res, function(data) {
+
                 });
             });
         app.route('/api/dishes/:id')
             .get(function(req, res) {
                 dishes.show(req, res, function(data) {
+
                 })
             })
             .put(function(req, res) {
                 dishes.update(req, res, function(data) {
-                })
+
+                });
             })
             .delete(function(req, res) {
                 dishes.destroy(req, res, function(data) {
+
                 });
             });
 
