@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-sm-6 col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Opret ret
+            </div>
+            <div class="panel-body">
+                <form name="addDishForm" ng-submit="addDishForm.$valid && vm.addDish(vm.dish)" novalidate>
+                    <div class="form-group">
+                        <label for="dishName">Navn</label>
+                        <input type="text" id="dishName" name="dishName" class="form-control" ng-model="vm.dish.name" placeholder="Navn" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Opret Ret</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-8">
+        <div class="panel panel-default" ng-repeat="dish in vm.dishes | orderBy:name">
+            <div class="panel-heading clearfix">
+                {{dish.name}}
+                <button type="submit" ng-click="vm.deleteDish(dish.id)" class="pull-right btn btn-sm btn-danger">
+                    <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="panel-body">
+                ...
+            </div>
+        </div>
+    </div>
+</div>

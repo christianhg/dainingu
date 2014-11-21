@@ -53,6 +53,6 @@
             menusDishes.delete({ 'menuId': menuId, 'dishId': dishId }, function(dish) {
 
             });
-        }
+        };
     }
 })();
