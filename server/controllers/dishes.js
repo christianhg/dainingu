@@ -8,6 +8,8 @@
 	exports.destroy = function(req, res, callback) {
 		var id = req.params.id;
 
+		console.log(id);
+
 		Dish.find({ where: { id: id }})
 			.complete(function(err, dish) {
 				if(!!err) {

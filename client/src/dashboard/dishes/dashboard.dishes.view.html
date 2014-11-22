@@ -22,7 +22,7 @@
                 {{dish.name}}
                 <a ui-sref=".id({id: dish.id})" class="pull-right btn btn-sm btn-info">Info</a>
                 <a ui-sref=".id.edit({id: dish.id})" class="pull-right btn btn-sm btn-warning">Redigér</a>
-                <button type="submit" ng-click="vm.deleteDish(dish.id)" class="pull-right btn btn-sm btn-danger">Slet</button>
+                <a ui-sref=".id.delete({id: dish.id})" class="pull-right btn btn-sm btn-danger">Slet</a>
             </div>
             <div class="panel-body">
                 ...

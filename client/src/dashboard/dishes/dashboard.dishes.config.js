@@ -27,6 +27,16 @@
                     pageTitle: 'dainingu > dashboard > retter'
                 }
             })
+            .state('dashboard.dishes.id.delete', {
+                url: '/delete',
+                templateUrl: 'dashboard/dishes/dashboard.dishes.id.delete.view.html',
+                controller: 'DashboardDishesIdDeleteController',
+                controllerAs: 'vm',
+                data: {
+                    restricted: true,
+                    pageTitle: 'dainingu > dashboard > retter'
+                }
+            })
             .state('dashboard.dishes.id.edit', {
                 url: '/edit',
                 templateUrl: 'dashboard/dishes/dashboard.dishes.id.edit.view.html',
