@@ -4,9 +4,10 @@
     var jwt = require('jsonwebtoken');
     var secrets = require('../config/secrets');
     var Session = require('../models/session');
+    var Order = require('../models/order');
 
-    exports.store = function(req, res, callback) {
-        var sessionId = req.params.id;
+    exports.index = function(req, res, callback) {
+        var sessionId = req.params.sessionId;
 
         Session.findOne({ _id: sessionId }, function(err, session) {
             if(err) {
@@ -16,18 +17,41 @@
             if(!session) {
                 res.send(false);
             } else {
-                session.addDish(dish, function(dishes) {
-                    session.save();
+                res.send(session.orders);
+            }
+        });
+    };
+
+    exports.store = function(req, res, callback) {
+        var sessionId = req.params.sessionId;
+
+        Session.findOne({ _id: sessionId }, function(err, session) {
+            if(err) {
+                res.send(err);
+            }
+
+            if(!session) {
+                res.send(false);
+            } else {
+                var order = new Order();
+
+                session.orders.push(order);
+
+                session.save(function(err) {
+                    if(err) {
+                        res.send(err);
+                    }
 
                     var data = {
-                        message: 'Session updated',
-                        dishes: dishes
+                        message: 'Order added to session',
+                        session: session
                     };
 
-                    res.json(dishes);
+                    res.json(data);
 
                     callback(data);
                 });
+
             }
         });
 

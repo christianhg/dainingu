@@ -4,6 +4,7 @@
     var bcrypt = require('bcrypt');
     var mongoose = require('mongoose');
     var randToken = require('rand-token');
+    var Order = require('./order');
 
     var sessionSchema = new mongoose.Schema({
         active: {
@@ -39,7 +40,8 @@
                 type: String,
                 required: true
             }
-        }]
+        }],
+        orders: []
     });
 
     sessionSchema.pre('save', function(next) {
@@ -66,6 +68,10 @@
     sessionSchema.methods.addDish = function(dish, callback) {
         this.dishes.push(dish);
         callback(this.dishes);
+    };
+
+    sessionSchema.methods.addOrder = function(callback) {
+        callback(this.orders);
     };
 
     var Session = mongoose.model('Session', sessionSchema);

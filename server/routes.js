@@ -9,6 +9,7 @@
         var users = require('./controllers/users');
         var sessions = require('./controllers/sessions');
         var sessionsDishes = require('./controllers/sessionsDishes');
+        var sessionsOrders = require('./controllers/sessionsOrders');
         var auth = require('./controllers/auth');
         var expressJwt = require('express-jwt');
         var jwt = require('jsonwebtoken');
@@ -212,6 +213,11 @@
 
 
         app.route('/api/sessions/:sessionId/orders')
+            .get(function(req, res) {
+                sessionsOrders.index(req, res, function(data) {
+
+                });
+            })
             .post(function(req, res) {
                 sessionsOrders.store(req, res, function(data) {
 
