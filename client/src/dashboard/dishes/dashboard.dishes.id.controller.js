@@ -11,8 +11,5 @@
         dishes.get({id: $stateParams.id}, function(dish) {
             vm.dish = dish;
         });
-
-        console.log("hej");
-
     }
 })();

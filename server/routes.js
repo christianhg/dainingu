@@ -98,13 +98,13 @@
             .get(function(req, res) {
                 menus.show(req, res, function(data) {
 
-                })
+                });
             })
             .put(function(req, res) {
                 menus.update(req, res, function(data) {
                     io.sockets.emit('menuUpdated', data);
 
-                })
+                });
             })
             .delete(function(req, res) {
                 menus.destroy(req, res, function(data) {

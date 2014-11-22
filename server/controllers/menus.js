@@ -93,9 +93,19 @@
 		var name = req.body.name;
 		var dish = req.body.dish;
 
+		console.log(id, name);
+
 		Menu.find({ where: { id: id }})
 			.complete(function(err, menu) {
-				menu.addDish([dish.id]).success(function(dish) {
+				menu.updateAttributes({
+					name: name
+				}).success(function() {
+					if(dish) {
+						menu.addDish([dish.id]).success(function(dish) {
+
+						});
+					}
+
 					var data = {
 						message: 'Menu updated',
 						menu: menu

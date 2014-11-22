@@ -1,0 +1,16 @@
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Redigér {{vm.menu.name}}
+        </div>
+        <div class="panel-body">
+            <form name="editMenuForm" ng-submit="vm.editMenu()">
+                <div class="form-group">
+                    <label for="menuName">Navn</label>
+                    <input type="text" name="menuName" id="menuName" class="form-control" ng-model="vm.menu.name">
+                </div>
+                <button type="submit" class="btn btn-warning">Redigér</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,91 +1,52 @@
 <div class="row">
-    <div class="col-sm-6 col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                Opret menu
-            </div>
-            <div class="panel-body">
-                <form name="addMenuForm" ng-submit="addMenuForm.$valid && vm.addMenu(vm.menu)" novalidate>
-                    <div class="form-group">
-                        <label for="menuName">Navn</label>
-                        <input type="text" id="menuName" name="menuName" class="form-control" ng-model="vm.menu.name" placeholder="Navn" required>
-                    </div>
-                    <button type="submit" class="btn btn-success">Opret menu</button>
-                </form>
+    <div ui-view>
+        <div class="col-sm-6 col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Opret menu
+                </div>
+                <div class="panel-body">
+                    <form name="addMenuForm" ng-submit="addMenuForm.$valid && vm.addMenu(vm.menu)" novalidate>
+                        <div class="form-group">
+                            <label for="menuName">Navn</label>
+                            <input type="text" id="menuName" name="menuName" class="form-control" ng-model="vm.menu.name" placeholder="Navn" required>
+                        </div>
+                        <button type="submit" class="btn btn-success">Opret menu</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-sm-6 col-md-8">
-        <div class="panel panel-default" ng-repeat="menu in vm.menus | orderBy:name">
-            <div class="panel-heading clearfix">
-                {{menu.name}}
-                <button type="submit" ng-click="vm.deleteMenu(menu.id)" class="pull-right btn btn-sm btn-danger">
-                    <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
-                </button>
-            </div>
-            <div class="panel-body">
-                <form role="form" class="form-inline" name="addDishToMenuForm" ng-submit="vm.addDishToMenu(menu.id, vm.menu[menu.id].dish)" novalidate>
-                    <div class="form-group">
-                        <label for="dishName">Navn</label>
-                        <input type="text" name="dishName" id="dishName" class="form-control" ng-model="vm.menu[menu.id].dish.name">
-                    </div>
-                    <button type="submit" class="btn btn-success">Tilføj ret</button>
-                </form>
-            </div>
-            <table class="table">
-                <thead>
-                    <th>Navn</th>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="dish in menu.dishes | orderBy:name">
-                        <td>{{dish.name}}
-                            <button type="submit" ng-click="vm.deleteDishFromMenu(menu.id, dish.id)" class="pull-right btn btn-sm btn-danger">
-                                <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!--<div class="panel panel-default">
-            <div class="panel-heading">
-                Menuer
-            </div>
-            <div class="panel-body">
+        <div class="col-sm-6 col-md-8">
+            <div class="panel panel-default" ng-repeat="menu in vm.menus | orderBy:name">
+                <div class="panel-heading clearfix">
+                    {{menu.name}}
+                    <a ui-sref=".id({id: menu.id})" class="btn btn-info">Info</a>
+                    <a ui-sref=".id.edit({id: menu.id})" class="btn btn-warning">Redigér</a>
+                    <button type="submit" ng-click="vm.deleteMenu(menu.id)" class="pull-right btn btn-danger">Slet menu</button>
+                </div>
+                <div class="panel-body">
+                    <form role="form" class="form-inline" name="addDishToMenuForm" ng-submit="vm.addDishToMenu(menu.id, vm.menu[menu.id].dish)" novalidate>
+                        <div class="form-group">
+                            <label for="dishName">Navn</label>
+                            <input type="text" name="dishName" id="dishName" class="form-control" ng-model="vm.menu[menu.id].dish.name">
+                        </div>
+                        <button type="submit" class="btn btn-success">Tilføj ret</button>
+                    </form>
+                </div>
                 <table class="table">
                     <thead>
-                        <tr>
-                            <th>Navn</th>
-                            <th>Info</th>
-                            <th>Redigér</th>
-                            <th>Slet</th>
-                        </tr>
+                        <th>Retter</th>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="menu in vm.menus">
-                            <td>
-                                {{menu.name}}
-                            </td>
-                            <td>
-                                <button type="submit" class="btn btn-sm btn-primary">
-                                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                                </button>
-                            </td>
-                            <td>
-                                <button type="submit" class="btn btn-sm btn-warning">
-                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                                </button>
-                            </td>
-                            <td>
-                                <button type="submit" ng-click="vm.deleteMenu(menu.id)" class="btn btn-sm btn-danger">
-                                    <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+                        <tr ng-repeat="dish in menu.dishes | orderBy:name">
+                            <td>{{dish.name}}
+                                <button type="submit" ng-click="vm.deleteDishFromMenu(menu.id, dish.id)" class="pull-right btn btn-warning">Fjern fra menu
                                 </button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-        </div>-->
+        </div>
     </div>
 </div>
