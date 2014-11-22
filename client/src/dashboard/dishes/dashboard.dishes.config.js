@@ -16,9 +16,26 @@
                     restricted: true,
                     pageTitle: 'dainingu > dashboard > retter'
                 }
+            })
+            .state('dashboard.dishes.id', {
+                url: '/:id',
+                templateUrl: 'dashboard/dishes/dashboard.dishes.id.view.html',
+                controller: 'DashboardDishesIdController',
+                controllerAs: 'vm',
+                data: {
+                    restricted: true,
+                    pageTitle: 'dainingu > dashboard > retter'
+                }
+            })
+            .state('dashboard.dishes.id.edit', {
+                url: '/edit',
+                templateUrl: 'dashboard/dishes/dashboard.dishes.id.edit.view.html',
+                controller: 'DashboardDishesIdEditController',
+                controllerAs: 'vm',
+                data: {
+                    restricted: true,
+                    pageTitle: 'dainingu > dashboard > retter'
+                }
             });
     }
-})();(function () {
-    'use strict';
-
 })();

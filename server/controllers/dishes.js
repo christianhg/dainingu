@@ -95,6 +95,7 @@
 	exports.update = function(req, res, callback) {
 		var id = req.params.id;
 		var name = req.body.name;
+		var menuId = req.body.menuId;
 
 		Dish.find({ where: { id: id }})
 			.complete(function(err, dish) {
@@ -103,7 +104,8 @@
 				}
 
 				dish.updateAttributes({
-					name: name
+					name: name,
+					menuId: menuId
 				}).success(function() {
 					var data = {
 						message: 'Dish updated',

@@ -1,0 +1,22 @@
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Redigér {{vm.dish.name}}
+        </div>
+        <div class="panel-body">
+            <form name="editDishForm" ng-submit="vm.editDish()">
+                <div class="form-group">
+                    <label for="dishName">Navn</label>
+                    <input type="text" name="dishName" id="dishName" class="form-control" ng-model="vm.dish.name">
+                </div>
+                <div class="form-group">
+                    <label for="dishMenuId">Menu</label>
+                    <select class="form-control" id="dishMenuId" id="dishMenuId" ng-model="vm.dish.menuId">
+                        <option ng-repeat="menu in vm.menus" value="{{menu.id}}">{{menu.name}}</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-warning">Redigér</button>
+            </form>
+        </div>
+    </div>
+</div>

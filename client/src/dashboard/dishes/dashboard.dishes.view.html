@@ -1,4 +1,5 @@
 <div class="row">
+    <div ui-view>
     <div class="col-sm-6 col-md-4">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -19,13 +20,14 @@
         <div class="panel panel-default" ng-repeat="dish in vm.dishes | orderBy:name">
             <div class="panel-heading clearfix">
                 {{dish.name}}
-                <button type="submit" ng-click="vm.deleteDish(dish.id)" class="pull-right btn btn-sm btn-danger">
-                    <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
-                </button>
+                <a ui-sref=".id({id: dish.id})" class="pull-right btn btn-sm btn-info">Info</a>
+                <a ui-sref=".id.edit({id: dish.id})" class="pull-right btn btn-sm btn-warning">Redigér</a>
+                <button type="submit" ng-click="vm.deleteDish(dish.id)" class="pull-right btn btn-sm btn-danger">Slet</button>
             </div>
             <div class="panel-body">
                 ...
             </div>
         </div>
+    </div>
     </div>
 </div>
