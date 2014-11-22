@@ -10,6 +10,7 @@
         var sessions = require('./controllers/sessions');
         var sessionsDishes = require('./controllers/sessionsDishes');
         var sessionsOrders = require('./controllers/sessionsOrders');
+        var sessionsOrdersDishes = require('./controllers/sessionsOrdersDishes');
         var auth = require('./controllers/auth');
         var expressJwt = require('express-jwt');
         var jwt = require('jsonwebtoken');
@@ -223,8 +224,19 @@
 
                 });
             });
+        app.route('/api/sessions/:sessionId/orders/:orderId')
+            .get(function(req, res) {
+                sessionsOrders.show(req, res, function(data) {
 
-        //app.route('/api/sessions/:sessionId/orders/:orderId/dishes/:dishId')
+                });
+            });
+
+        app.route('/api/sessions/:sessionId/orders/:orderId/dishes')
+            .post(function(req, res) {
+                sessionsOrdersDishes.store(req, res, function(data) {
+
+                });
+            });
 
 
     };

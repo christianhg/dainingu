@@ -22,6 +22,30 @@
         });
     };
 
+    exports.show = function(req, res, callback) {
+        var sessionId = req.params.sessionId;
+        var orderId = req.params.orderId;
+
+        Session.findOne({_id: sessionId}, function(err, session) {
+            var orders = session.orders;
+            var order;
+
+            for(var i = 0; i < orders.length; i++) {
+                if(orders[i]._id == orderId) {
+                    order = orders[i];
+                    break;
+                }
+            }
+
+            if(!order) {
+                res.send(false);
+            } else {
+                res.send(order);
+            }
+
+        });
+    };
+
     exports.store = function(req, res, callback) {
         var sessionId = req.params.sessionId;
 
