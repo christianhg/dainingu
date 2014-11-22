@@ -21,7 +21,28 @@
     </div>
 
     <div class="col-md-8">
-        <div class="panel panel-info">
+        <div class="panel panel-info" ng-repeat="session in vm.sessions">
+            <div class="panel-heading clearfix">
+                <h3 class="panel-title"><strong>{{session.customer.name}}</strong> (bord {{session.table}})</h3>
+            </div>
+            <div class="panel-body">
+                {{session.key}}
+                <button type="submit" ng-click="vm.confirmOrder()">Godkend</button>
+            </div>
+            <div class="list-group">
+                <div class="list-group-item">
+                    <a ui-sref=".id({id: dish.id})" class="btn btn-info">Info</a>
+                </div>
+                <div class="list-group-item">
+                    <a ui-sref=".id.edit({id: dish.id})" class="btn btn-warning">Redigér</a>
+                </div>
+                <div class="list-group-item">
+                    <a ui-sref=".id.delete({id: dish.id})" class="btn btn-danger">Slet</a>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!--<div class="panel panel-info">
             <div class="panel-heading">
                 Inaktive sessioner
             </div>
@@ -149,5 +170,5 @@
                 </table>
             </div>
         </div>
-    </div>
+    </div>-->
 </div>

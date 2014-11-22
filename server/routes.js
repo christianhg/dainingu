@@ -116,6 +116,12 @@
         /**
          * Menus Dishes API routes.
          */
+        app.route('/api/menus/dishes')
+            .get(function(req, res) {
+                menusDishes.getMenusWithDishes(req, res, function(data) {
+
+                });
+            });
         app.route('/api/menus/:menuId/dishes')
             .get(function(req, res) {
                 menusDishes.index(req, res, function(data) {
@@ -202,7 +208,18 @@
                 sessionsDishes.store(req, res, function(data) {
                     io.sockets.emit('sessionUpdated', data);
                 });
-            })
+            });
+
+
+        app.route('/api/sessions/:sessionId/orders')
+            .post(function(req, res) {
+                sessionsOrders.store(req, res, function(data) {
+
+                });
+            });
+
+        //app.route('/api/sessions/:sessionId/orders/:orderId/dishes/:dishId')
+
 
     };
 })();
