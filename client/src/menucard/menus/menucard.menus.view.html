@@ -1,5 +1,13 @@
 <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
+        <form>
+            <div class="form-group">
+                <select class="form-control" ng-model="vm.activeOrder">
+                    <option ng-repeat="order in vm.orders" value="{{order._id}}">Ordre fra {{order.createdOn | date: 'HH:mm:ss'}}</option>
+                </select>
+            </div>
+        </form>
+
         <div class="panel panel-default" ng-repeat="menu in vm.menus | orderBy:name">
             <div class="panel-heading">
                 {{menu.name}}
@@ -8,9 +16,10 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         {{dish.name}}
+                        <button ng-show="vm.menucardActivated && vm.activeOrder" class="btn btn-success" type="submit" ng-click="vm.addDishToOrder(dish)">Tilføj til ordre</button>
                     </div>
                     <div class="panel-body">
-                        <button ng-show="vm.menucardActivated" class="btn btn-success" type="submit" ng-click="vm.addDishToSession(dish)">Vælg</button>
+                        ...
                     </div>
                 </div>
             </div>

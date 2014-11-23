@@ -50,7 +50,7 @@
     exports.store = function(req, res, callback) {
         var sessionId = req.params.sessionId;
         var orderId = req.params.orderId;
-        var dish = req.body.dish;
+        var dish = req.body;
 
         Session.findOne({_id: sessionId}, function(err, session) {
             session.addDish(orderId, dish, function(dishes) {

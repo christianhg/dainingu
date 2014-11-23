@@ -50,7 +50,11 @@
         };
 
         vm.removeDishFromOrder = function(orderId, dishId) {
-
+            auth.getSessionId(function(sessionId) {
+                sessionsOrdersDishes.delete({sessionId: sessionId, orderId: orderId, dishId: dishId}, function(data) {
+                    console.log(data);
+                });
+            })
         };
 
         /*
