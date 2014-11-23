@@ -83,6 +83,68 @@
         });
     };
 
+    exports.activate = function(req, res, callback) {
+        var sessionId = req.params.sessionId;
+
+        Session.findById(sessionId, function(err, session) {
+            if(err) {
+                res.send(err);
+            }
+
+            if(!session) {
+                res.send(false);
+            } else {
+                session.activate(function(active) {
+                    session.save(function(err) {
+                        if(err) {
+                            res.send(err);
+                        }
+
+                        var data = {
+                            message: 'Session activated',
+                            session: session
+                        };
+
+                        res.json(data);
+
+                        callback(data);
+                    });
+                });
+            }
+        });
+    };
+
+    exports.deactivate = function(req, res, callback) {
+        var sessionId = req.params.sessionId;
+
+        Session.findById(sessionId, function(err, session) {
+            if(err) {
+                res.send(err);
+            }
+
+            if(!session) {
+                res.send(false);
+            } else {
+                session.deactivate(function(active) {
+                    session.save(function(err) {
+                        if(err) {
+                            res.send(err);
+                        }
+
+                        var data = {
+                            message: 'Session deactivated',
+                            session: session
+                        };
+
+                        res.json(data);
+
+                        callback(data);
+                    });
+                });
+            }
+        });
+    };
+
     exports.store = function(req, res, callback) {
         var session = new Session();
 

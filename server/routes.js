@@ -206,6 +206,20 @@
                 });
             });
 
+        app.route('/api/sessions/:sessionId/activate')
+            .post(function(req, res) {
+                sessions.activate(req, res, function(data) {
+
+                });
+            });
+
+        app.route('/api/sessions/:sessionId/deactivate')
+            .post(function(req, res) {
+                sessions.deactivate(req, res, function(data) {
+
+                });
+            });
+
         /**
          * Orders in specific session
          */
@@ -230,6 +244,13 @@
 
                 });
             });
+
+        /*app.route('/api/sessions/:sessionId/orders/:orderId/activate')
+            .post(function(req, res) {
+                sessionsOrders.activate(req, res, function(data) {
+
+                });
+            });*/
 
         /**
          * Dishes in specific order in specific session.

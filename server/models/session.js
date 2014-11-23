@@ -190,6 +190,11 @@
         callback(this.active);
     };
 
+    sessionSchema.methods.deactivate = function(callback) {
+        this.active = false;
+        callback(this.active);
+    };
+
     sessionSchema.methods.expire = function(callback) {
         this.expired = true;
         callback(this.expired);
