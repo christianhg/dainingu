@@ -10,13 +10,13 @@
             type: Boolean,
             default: false
         },
-        createdOn: {
-            type: Date,
-            default: Date.now
-        },
         expired: {
             type: Boolean,
             default: false
+        },
+        createdOn: {
+            type: Date,
+            default: Date.now
         },
         key: {
             type: String,
@@ -181,28 +181,112 @@
         }
     };
 
+    /**
+     * Get status of session
+     */
     sessionSchema.methods.status = function(callback) {
         callback(this.active, this.expired);
     };
 
+    /**
+     * Activate session
+     */
     sessionSchema.methods.activate = function(callback) {
         this.active = true;
         callback(this.active);
     };
 
+    /**
+     * Deactivate session
+     */
     sessionSchema.methods.deactivate = function(callback) {
         this.active = false;
         callback(this.active);
     };
 
+    /**
+     * Expire session
+     */
     sessionSchema.methods.expire = function(callback) {
         this.expired = true;
         callback(this.expired);
     };
 
+    /**
+     * Resume session
+     */
     sessionSchema.methods.resume = function(callback) {
         this.expired = false;
         callback(this.expired);
+    };
+
+    /**
+     * Finish order in session
+     */
+    sessionSchema.methods.finishOrder = function(orderId, callback) {
+        var order;
+
+        for(var i = 0; i < this.orders.length; i++) {
+            if(this.orders[i]._id == orderId) {
+                order = this.orders[i];
+
+                this.orders[i].finished = true;
+
+                break;
+            }
+        }
+
+        if(!order) {
+            callback(false);
+        } else {
+            callback(order);
+        }
+    };
+
+    /**
+     * Confirm order in session
+     */
+    sessionSchema.methods.confirmOrder = function(orderId, callback) {
+        var order;
+
+        for(var i = 0; i < this.orders.length; i++) {
+            if(this.orders[i]._id == orderId) {
+                order = this.orders[i];
+
+                this.orders[i].confirmed = true;
+
+                break;
+            }
+        }
+
+        if(!order) {
+            callback(false);
+        } else {
+            callback(order);
+        }
+    };
+
+    /**
+     * Mark order in session as done
+     */
+    sessionSchema.methods.doneOrder = function(orderId, callback) {
+        var order;
+
+        for(var i = 0; i < this.orders.length; i++) {
+            if(this.orders[i]._id == orderId) {
+                order = this.orders[i];
+
+                this.orders[i].done = true;
+
+                break;
+            }
+        }
+
+        if(!order) {
+            callback(false);
+        } else {
+            callback(order);
+        }
     };
 
     var Session = mongoose.model('Session', sessionSchema);

@@ -207,28 +207,24 @@
             });
 
         app.route('/api/sessions/:sessionId/activate')
-            .post(function(req, res) {
+            .put(function(req, res) {
                 sessions.activate(req, res, function(data) {
 
                 });
-            });
-
-        app.route('/api/sessions/:sessionId/deactivate')
-            .post(function(req, res) {
+            })
+            .delete(function(req, res) {
                 sessions.deactivate(req, res, function(data) {
 
                 });
             });
 
         app.route('/api/sessions/:sessionId/expire')
-            .post(function(req, res) {
+            .put(function(req, res) {
                 sessions.expire(req, res, function(data) {
 
                 });
-            });
-
-        app.route('/api/sessions/:sessionId/resume')
-            .post(function(req, res) {
+            })
+            .delete(function(req, res) {
                 sessions.resume(req, res, function(data) {
 
                 });
@@ -259,12 +255,26 @@
                 });
             });
 
-        /*app.route('/api/sessions/:sessionId/orders/:orderId/activate')
-            .post(function(req, res) {
-                sessionsOrders.activate(req, res, function(data) {
+        app.route('/api/sessions/:sessionId/orders/:orderId/finish')
+            .put(function(req, res) {
+                sessionsOrders.finish(req, res, function(data) {
 
                 });
-            });*/
+            });
+
+        app.route('/api/sessions/:sessionId/orders/:orderId/confirm')
+            .put(function(req, res) {
+                sessionsOrders.confirm(req, res, function(data) {
+
+                });
+            });
+
+        app.route('/api/sessions/:sessionId/orders/:orderId/done')
+            .put(function(req, res) {
+                sessionsOrders.done(req, res, function(data) {
+
+                });
+            });
 
         /**
          * Dishes in specific order in specific session.
