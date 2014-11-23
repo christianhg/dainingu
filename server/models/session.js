@@ -200,6 +200,11 @@
         callback(this.expired);
     };
 
+    sessionSchema.methods.resume = function(callback) {
+        this.expired = false;
+        callback(this.expired);
+    };
+
     var Session = mongoose.model('Session', sessionSchema);
 
     module.exports = Session;

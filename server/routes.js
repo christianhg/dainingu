@@ -220,6 +220,20 @@
                 });
             });
 
+        app.route('/api/sessions/:sessionId/expire')
+            .post(function(req, res) {
+                sessions.expire(req, res, function(data) {
+
+                });
+            });
+
+        app.route('/api/sessions/:sessionId/resume')
+            .post(function(req, res) {
+                sessions.resume(req, res, function(data) {
+
+                });
+            });
+
         /**
          * Orders in specific session
          */

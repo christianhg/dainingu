@@ -145,6 +145,68 @@
         });
     };
 
+    exports.expire = function(req, res, callback) {
+        var sessionId = req.params.sessionId;
+
+        Session.findById(sessionId, function(err, session) {
+            if(err) {
+                res.send(err);
+            }
+
+            if(!session) {
+                res.send(false);
+            } else {
+                session.expire(function(expired) {
+                    session.save(function(err) {
+                        if(err) {
+                            res.send(err);
+                        }
+
+                        var data = {
+                            message: 'Session expired',
+                            session: session
+                        };
+
+                        res.json(data);
+
+                        callback(data);
+                    });
+                });
+            }
+        });
+    };
+
+    exports.resume = function(req, res, callback) {
+        var sessionId = req.params.sessionId;
+
+        Session.findById(sessionId, function(err, session) {
+            if(err) {
+                res.send(err);
+            }
+
+            if(!session) {
+                res.send(false);
+            } else {
+                session.resume(function(expired) {
+                    session.save(function(err) {
+                        if(err) {
+                            res.send(err);
+                        }
+
+                        var data = {
+                            message: 'Session resumed',
+                            session: session
+                        };
+
+                        res.json(data);
+
+                        callback(data);
+                    });
+                });
+            }
+        });
+    };
+
     exports.store = function(req, res, callback) {
         var session = new Session();
 
