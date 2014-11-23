@@ -254,6 +254,11 @@
                 sessionsOrdersDishes.show(req, res, function(data) {
 
                 });
+            })
+            .delete(function(req, res) {
+                sessionsOrdersDishes.destroy(req, res, function(data) {
+
+                });
             });
     };
 })();

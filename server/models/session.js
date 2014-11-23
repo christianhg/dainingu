@@ -156,6 +156,31 @@
         }
     };
 
+    sessionSchema.methods.removeDish = function(orderId, dishId, callback) {
+        var dishes;
+
+        for(var i = 0; i < this.orders.length; i++) {
+            if(this.orders[i]._id == orderId) {
+
+                for(var j = 0; j < this.orders[i].dishes.length; j++) {
+                    if(this.orders[i].dishes[j]._id == dishId) {
+                        this.orders[i].dishes.splice(j, 1);
+
+                        dishes = this.orders[i].dishes;
+
+                        break;
+                    }
+                }
+            }
+        }
+
+        if(!dishes) {
+            callback(false);
+        } else {
+            callback(dishes);
+        }
+    };
+
     sessionSchema.methods.status = function(callback) {
         callback(this.active, this.expired);
     };

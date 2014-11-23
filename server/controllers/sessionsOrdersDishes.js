@@ -29,6 +29,24 @@
 
     };
 
+    exports.destroy = function(req, res, callback) {
+        var sessionId = req.params.sessionId;
+        var orderId = req.params.orderId;
+        var dishId = req.params.dishId;
+
+        Session.findOne({_id: sessionId}, function(err, session) {
+            session.removeDish(orderId, dishId, function(dish) {
+                session.save(function(err) {
+                    if(err) {
+                       res.send(err);
+                    }
+
+                    res.send(session);
+                });
+            });
+        });
+    };
+
     exports.store = function(req, res, callback) {
         var sessionId = req.params.sessionId;
         var orderId = req.params.orderId;
