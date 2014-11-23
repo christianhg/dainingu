@@ -4,65 +4,69 @@
     var jwt = require('jsonwebtoken');
     var secrets = require('../config/secrets');
     var Session = require('../models/session');
-    var Order = require('../models/order');
 
-    exports.store = function(req, res, callback) {
+    exports.index = function(req, res, callback) {
         var sessionId = req.params.sessionId;
         var orderId = req.params.orderId;
 
-        Session.findOne({ _id: sessionId }, function(err, session) {
-            if(err) {
-                res.send(err);
-            }
+        Session.findOne({_id: sessionId}, function(err, session) {
+            for(var i = 0; i < session.orders.length; i++) {
+                if(session.orders[i]._id == orderId) {
+                    res.send(session.orders[i].dishes);
 
-            if(!session) {
-                res.send(false);
-            } else {
-                session.orders.find({ _id: orderId }, function(err, order) {
-                    if(err) {
-                        res.send(err);
+                    break;
+                }
+            }
+        });
+    };
+
+    exports.show = function(req, res, callback) {
+        var sessionId = req.params.sessionId;
+        var orderId = req.params.orderId;
+        var dishId = req.params.dishId;
+
+        Session.findOne({_id: sessionId}, function(err, session) {
+            for(var i = 0; i < session.orders.length; i++) {
+                if(session.orders[i]._id == orderId) {
+
+                    for(var j = 0; j < session.orders[i].dishes.length; j++) {
+                        if(session.orders[i].dishes[j]._id == dishId) {
+                            res.send(session.orders[i].dishes[j]);
+
+                            break;
+                        }
                     }
 
-                    res.send(order);
-                });
-
-
+                }
             }
         });
 
     };
 
-
-/*    exports.store = function(req, res, callback) {
-        var sessionId = req.params.id;
+    exports.store = function(req, res, callback) {
+        var sessionId = req.params.sessionId;
+        var orderId = req.params.orderId;
         var dish = req.body.dish;
-        var menucardToken = req.body.token;
 
-        jwt.verify(menucardToken, secrets.jwt_secret, function(err, sessionId) {
+        Session.findOne({_id: sessionId}, function(err, session) {
 
-            Session.findOne({ _id: sessionId }, function(err, session) {
-                if(err) {
-                    res.send(err);
-                }
+            for(var i = 0; i < session.orders.length; i++) {
+                if(session.orders[i]._id == orderId) {
+                    session.orders[i].dishes.push(dish);
 
-                if(!session) {
-                    res.send(false);
-                } else {
-                    session.addDish(dish, function(dishes) {
-                        session.save();
+                    session.save(function(err) {
+                        if(err) {
+                            res.send(err);
+                        }
 
-                        var data = {
-                            message: 'Session updated',
-                            dishes: dishes
-                        };
-
-                        res.json(dishes);
-
-                        callback(data);
+                        res.send(session);
                     });
-                }
-            });
-        })
-    };*/
 
+                    break;
+                }
+            }
+
+
+        });
+    };
 })();

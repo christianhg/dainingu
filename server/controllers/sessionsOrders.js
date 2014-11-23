@@ -57,7 +57,26 @@
             if(!session) {
                 res.send(false);
             } else {
-                var order = new Order();
+                session.addOrder(function(orders) {
+                    session.save();
+                    res.send(session);
+                });
+
+
+                    /*session.save();
+
+                        var data = {
+                            message: 'Order added to session',
+                            session: session
+                        };
+
+                        res.json(data);
+
+                        callback(data);
+*/
+
+
+                /*var order = new Order();
 
                 session.orders.push(order);
 
@@ -75,7 +94,7 @@
 
                     callback(data);
                 });
-
+*/
             }
         });
 

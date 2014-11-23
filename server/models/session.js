@@ -31,17 +31,34 @@
         table: {
             type: String
         },
-        dishes: [{
-            id: {
-                type: Number,
-                required: true
+        orders: [{
+            createdOn: {
+                type: Date,
+                default: Date.now
             },
-            name: {
-                type: String,
-                required: true
-            }
-        }],
-        orders: []
+            finished: {
+                type: Boolean,
+                default: false
+            },
+            confirmed: {
+                type: Boolean,
+                default: false
+            },
+            done: {
+                type: Boolean,
+                default: false
+            },
+            dishes: [{
+                id: {
+                    type: Number,
+                    required: true
+                },
+                name: {
+                    type: String,
+                    required: true
+                }
+            }]
+        }]
     });
 
     sessionSchema.pre('save', function(next) {
@@ -56,6 +73,13 @@
         next();
     });
 
+    sessionSchema.methods.addOrder = function(callback) {
+        this.orders.push({});
+
+        console.log(this.orders);
+        callback(this.orders);
+    };
+
     sessionSchema.methods.status = function(callback) {
         callback(this.active, this.expired);
     };
@@ -68,10 +92,6 @@
     sessionSchema.methods.addDish = function(dish, callback) {
         this.dishes.push(dish);
         callback(this.dishes);
-    };
-
-    sessionSchema.methods.addOrder = function(callback) {
-        callback(this.orders);
     };
 
     var Session = mongoose.model('Session', sessionSchema);

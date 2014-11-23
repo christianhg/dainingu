@@ -232,12 +232,22 @@
             });
 
         app.route('/api/sessions/:sessionId/orders/:orderId/dishes')
+            .get(function(req, res) {
+                sessionsOrdersDishes.index(req, res, function(data) {
+
+                });
+            })
             .post(function(req, res) {
                 sessionsOrdersDishes.store(req, res, function(data) {
 
                 });
             });
 
+        app.route('/api/sessions/:sessionId/orders/:orderId/dishes/:dishId')
+            .get(function(req, res) {
+                sessionsOrdersDishes.show(req, res, function(data) {
 
+                });
+            });
     };
 })();
