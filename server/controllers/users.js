@@ -58,8 +58,8 @@
             user: user
         };
 
-        user.save(function (err) {
-            if (err) {
+        user.save(function(err) {
+            if(err) {
                 res.send(err);
             }
 

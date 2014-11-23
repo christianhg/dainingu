@@ -1,43 +1,45 @@
 <div class="row">
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                Opret session
-            </div>
-            <div class="panel-body">
-                <form name="addSessionForm" ng-submit="addSessionForm.$valid && vm.addSession(vm.session)" novalidate>
-                    <div class="form-group">
-                        <label for="sessionCustomerName">Kundens navn</label>
-                        <input type="text" id="sessionCustomerName" class="form-control" ng-model="vm.session.customer.name" placeholder="Kundens navn" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="sessionTable">Tilknyttet bord</label>
-                        <input type="text" id="sessionTable" class="form-control" ng-model="vm.session.table" placeholder="Tilknyttet bord" required>
-                    </div>
-                    <button type="submit" class="btn btn-success">Opret session</button>
-                </form>
+    <div ui-view>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Opret session
+                </div>
+                <div class="panel-body">
+                    <form name="addSessionForm" ng-submit="addSessionForm.$valid && vm.addSession(vm.session)" novalidate>
+                        <div class="form-group">
+                            <label for="sessionCustomerName">Kundens navn</label>
+                            <input type="text" id="sessionCustomerName" class="form-control" ng-model="vm.session.customer.name" placeholder="Kundens navn" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sessionTable">Tilknyttet bord</label>
+                            <input type="text" id="sessionTable" class="form-control" ng-model="vm.session.table" placeholder="Tilknyttet bord" required>
+                        </div>
+                        <button type="submit" class="btn btn-success">Opret session</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-md-8">
-        <div class="panel panel-info" ng-repeat="session in vm.sessions">
-            <div class="panel-heading clearfix">
-                <h3 class="panel-title"><strong>{{session.customer.name}}</strong> (bord {{session.table}})</h3>
-            </div>
-            <div class="panel-body">
-                {{session.key}}
-                <button type="submit" ng-click="vm.confirmOrder()">Godkend</button>
-            </div>
-            <div class="list-group">
-                <div class="list-group-item">
-                    <a ui-sref=".id({id: dish.id})" class="btn btn-info">Info</a>
+        <div class="col-md-8">
+            <div class="panel panel-info" ng-repeat="session in vm.sessions">
+                <div class="panel-heading clearfix">
+                    <h3 class="panel-title"><strong>{{session.customer.name}}</strong> (bord {{session.table}})</h3>
                 </div>
-                <div class="list-group-item">
-                    <a ui-sref=".id.edit({id: dish.id})" class="btn btn-warning">Redigér</a>
+                <div class="panel-body">
+                    {{session.key}}
+                    <button type="submit" ng-click="vm.confirmOrder()">Godkend</button>
                 </div>
-                <div class="list-group-item">
-                    <a ui-sref=".id.delete({id: dish.id})" class="btn btn-danger">Slet</a>
+                <div class="list-group">
+                    <div class="list-group-item">
+                        <a ui-sref=".id({id: session._id})" class="btn btn-info">Info</a>
+                    </div>
+                    <div class="list-group-item">
+                        <a ui-sref=".id.edit({id: session._id})" class="btn btn-warning">Redigér</a>
+                    </div>
+                    <div class="list-group-item">
+                        <a ui-sref=".id.delete({id: session._id})" class="btn btn-danger">Slet</a>
+                    </div>
                 </div>
             </div>
         </div>

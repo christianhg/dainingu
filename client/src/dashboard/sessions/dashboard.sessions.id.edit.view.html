@@ -1,0 +1,16 @@
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Redigér session
+        </div>
+        <div class="panel-body">
+            <form name="editSessionForm" ng-submit="vm.editSession()">
+                <div class="form-group">
+                    <label for="sessionKey">Nøgle</label>
+                    <input type="text" name="sessionKey" id="sessionKey" class="form-control" ng-model="vm.session.key">
+                </div>
+                <button type="submit" class="btn btn-warning">Redigér</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -14,13 +14,8 @@
 
 		vm.menus = [];
 
-		menus.query(function(menus) {
-			angular.forEach(menus, function(menu) {
-				menusDishes.find({id: menu.id}, function(dishes) {
-					menu.dishes = dishes;
-					vm.menus.push(menu);
-				});
-			});
+		menus.query({deep: true}, function(menus) {
+			vm.menus = menus;
 		});
 
 		vm.addDishToSession = function(dish) {

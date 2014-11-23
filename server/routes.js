@@ -186,7 +186,6 @@
             .post(function(req, res) {
                 sessions.store(req, res, function(data) {
                     io.sockets.emit('sessionAdded', data);
-
                 });
             });
         app.route('/api/sessions/:id')

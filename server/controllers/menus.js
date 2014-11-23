@@ -144,7 +144,9 @@
 
 		console.log(id, name);
 
-		Menu.find({ where: { id: id }})
+		Menu.find({
+			where: { id: id }
+		})
 			.complete(function(err, menu) {
 				menu.updateAttributes({
 					name: name

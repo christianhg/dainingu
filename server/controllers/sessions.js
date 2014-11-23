@@ -210,6 +210,8 @@
     exports.store = function(req, res, callback) {
         var session = new Session();
 
+        session.key = '';
+
         if(req.body.customer) {
             session.customer.name = req.body.customer.name;
         }
@@ -217,8 +219,8 @@
             session.table = req.body.table;
         }
 
-        session.save(function (err) {
-            if (err) {
+        session.save(function(err) {
+            if(err) {
                 res.send(err);
             }
 
