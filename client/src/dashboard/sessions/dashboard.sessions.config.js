@@ -18,14 +18,9 @@
                 }
             })
             .state('dashboard.sessions.id', {
+                abstract: true,
                 url: '/:id',
-                templateUrl: 'dashboard/sessions/dashboard.sessions.id.view.html',
-                controller: 'DashboardSessionsIdController',
-                controllerAs: 'vm',
-                data: {
-                    restricted: true,
-                    pageTitle: 'dainingu > dashboard > sessioner'
-                }
+                template: '<ui-view/>'
             })
             .state('dashboard.sessions.id.delete', {
                 url: '/delete',

@@ -18,14 +18,9 @@
                 }
             })
             .state('dashboard.dishes.id', {
+                abstract: true,
                 url: '/:id',
-                templateUrl: 'dashboard/dishes/dashboard.dishes.id.view.html',
-                controller: 'DashboardDishesIdController',
-                controllerAs: 'vm',
-                data: {
-                    restricted: true,
-                    pageTitle: 'dainingu > dashboard > retter'
-                }
+                template: '<ui-view/>'
             })
             .state('dashboard.dishes.id.delete', {
                 url: '/delete',

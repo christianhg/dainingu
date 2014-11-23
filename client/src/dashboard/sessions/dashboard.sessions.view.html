@@ -24,22 +24,11 @@
         <div class="col-md-8">
             <div class="panel panel-info" ng-repeat="session in vm.sessions">
                 <div class="panel-heading clearfix">
-                    <h3 class="panel-title"><strong>{{session.customer.name}}</strong> (bord {{session.table}})</h3>
+                    <h3 class="panel-title"><strong>{{session.customer.name}}</strong> (bord {{session.table}}) - {{session.key}}</h3>
                 </div>
                 <div class="panel-body">
-                    {{session.key}}
-                    <button type="submit" ng-click="vm.confirmOrder()">Godkend</button>
-                </div>
-                <div class="list-group">
-                    <div class="list-group-item">
-                        <a ui-sref=".id({id: session._id})" class="btn btn-info">Info</a>
-                    </div>
-                    <div class="list-group-item">
-                        <a ui-sref=".id.edit({id: session._id})" class="btn btn-warning">Redigér</a>
-                    </div>
-                    <div class="list-group-item">
-                        <a ui-sref=".id.delete({id: session._id})" class="btn btn-danger">Slet</a>
-                    </div>
+                    <a ui-sref=".id.edit({id: session._id})" class="btn btn-warning">Redigér</a>
+                    <a ui-sref=".id.delete({id: session._id})" class="btn btn-danger">Slet</a>
                 </div>
             </div>
         </div>

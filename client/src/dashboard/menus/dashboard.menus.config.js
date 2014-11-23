@@ -18,9 +18,14 @@
                 }
             })
             .state('dashboard.menus.id', {
+                abstract: true,
                 url: '/:id',
-                templateUrl: 'dashboard/menus/dashboard.menus.id.view.html',
-                controller: 'DashboardMenusIdController',
+                template: '<ui-view/>'
+            })
+            .state('dashboard.menus.id.delete', {
+                url: '/delete',
+                templateUrl: 'dashboard/menus/dashboard.menus.id.delete.view.html',
+                controller: 'DashboardMenusIdDeleteController',
                 controllerAs: 'vm',
                 data: {
                     restricted: true,

@@ -5,7 +5,7 @@
         .module('dainingu.dashboard.menus')
         .controller('DashboardMenusIdEditController', DashboardMenusIdEditController);
 
-    function DashboardMenusIdEditController(dishes, menus, $stateParams) {
+    function DashboardMenusIdEditController(dishes, menus, $state, $stateParams) {
         var vm = this;
 
         menus.get({id: $stateParams.id}, function(menu) {
@@ -18,7 +18,7 @@
 
         vm.editMenu = function() {
             menus.update({id: vm.menu.id}, vm.menu, function(menu) {
-                console.log(menu);
+                $state.go('dashboard.menus', null, {reload: true});
             });
         };
 
