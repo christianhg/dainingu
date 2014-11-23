@@ -5,7 +5,7 @@
         .module('dainingu.dashboard.sessions')
         .controller('DashboardSessionsIdEditController', DashboardSessionsIdEditController);
 
-    function DashboardSessionsIdEditController(sessions, $stateParams) {
+    function DashboardSessionsIdEditController(sessions, $state, $stateParams) {
         var vm = this;
 
         sessions.get({id: $stateParams.id}, function(session) {
@@ -15,7 +15,7 @@
 
         vm.editSession = function() {
             sessions.update({id: vm.session._id}, vm.session, function(session) {
-                console.log(session);
+                $state.go('dashboard.sessions', null, { reload: true });
             });
         };
 

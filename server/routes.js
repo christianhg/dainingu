@@ -72,10 +72,14 @@
             });
         app.route('/api/users/:id')
             .get(function(req, res) {
+                users.show(req, res, function(data) {
 
+                });
             })
             .put(function(req, res) {
+                users.update(req, res, function(data) {
 
+                });
             })
             .delete(function(req, res) {
                 users.destroy(req, res, function(data) {

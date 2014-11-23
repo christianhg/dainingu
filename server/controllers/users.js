@@ -40,11 +40,49 @@
     };
 
     exports.update = function(req, res, callback) {
+        var userId = req.params.id;
 
+        User.findById(userId, function(err, user) {
+            if(err) {
+                res.send(err);
+            }
+
+            user.username = req.body.username;
+
+            user.save(function(err) {
+                if(err) {
+                    res.send(err);
+                }
+
+                var data = {
+                    message: 'User updated',
+                    user: user
+                };
+
+                res.json(user);
+
+                callback(data);
+            });
+        });
     };
 
     exports.show = function(req, res, callback) {
+        var userId = req.params.id;
 
+        User.findById(userId, function(err, user) {
+            if(err) {
+                res.send(err);
+            }
+
+            var data = {
+                message: 'User shown',
+                user: user
+            };
+
+            res.json(user);
+
+            callback(data);
+        });
     };
 
     exports.store = function(req, res, callback) {

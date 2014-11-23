@@ -45,9 +45,8 @@
                 res.send(err);
             }
 
-            // Update data
-            session.active = req.body.active;
-            session.expired = req.body.expired;
+            session.table = req.body.table;
+            session.customer.name = req.body.customer.name;
 
             session.save(function(err) {
                 if(err) {

@@ -7,7 +7,15 @@
             <form name="editSessionForm" ng-submit="vm.editSession()">
                 <div class="form-group">
                     <label for="sessionKey">Nøgle</label>
-                    <input type="text" name="sessionKey" id="sessionKey" class="form-control" ng-model="vm.session.key">
+                    <input type="text" name="sessionKey" id="sessionKey" class="form-control" ng-model="vm.session.key" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="sessionCustomer">Kunde</label>
+                    <input type="text" name="sessionCustomer" id="sessionCustomer" class="form-control" ng-model="vm.session.customer.name">
+                </div>
+                <div class="form-group">
+                    <label for="sessionTable">Bord</label>
+                    <input type="text" name="sessionTable" id="sessionTable" class="form-control" ng-model="vm.session.table">
                 </div>
                 <button type="submit" class="btn btn-warning">Redigér</button>
             </form>

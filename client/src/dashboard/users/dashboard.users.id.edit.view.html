@@ -1,0 +1,16 @@
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Redigér bruger
+        </div>
+        <div class="panel-body">
+            <form name="editUserForm" ng-submit="vm.editUser()">
+                <div class="form-group">
+                    <label for="userUsername">Brugernavn</label>
+                    <input type="text" name="userUsername" id="userUsername" class="form-control" ng-model="vm.user.username">
+                </div>
+                <button type="submit" class="btn btn-warning">Redigér</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,66 +1,39 @@
 <div class="row">
-    <div class="col-sm-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                Opret bruger
-            </div>
-            <div class="panel-body">
-                <form name="addUserForm" ng-submit="addUserForm.$valid && vm.addUser(vm.user)" novalidate autocomplete="off">
-                    <!--<div class="form-group">
-                        <label for="role">Rolle</label>
-                        <select name="" id="role" ng-model="vm.user.role" class="form-control">
-
-                        </select>
-                    </div>-->
-                    <div class="form-group">
-                        <label for="username">Brugernavn</label>
-                        <input type="text" id="username" class="form-control" placeholder="Brugernavn" ng-model="vm.user.username" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" class="form-control" placeholder="Password" ng-model="vm.user.password" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password-again">Password (igen)</label>
-                        <input type="password" id="password-again" class="form-control" placeholder="Password (igen)" ng-model="vm.user.passwordAgain" required>
-                    </div>
-                    <button type="submit" class="btn btn-success">Opret bruger</button>
-                </form>
+    <div ui-view>
+        <div class="col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Opret bruger
+                </div>
+                <div class="panel-body">
+                    <form name="addUserForm" ng-submit="addUserForm.$valid && vm.addUser(vm.user)" novalidate autocomplete="off">
+                        <div class="form-group">
+                            <label for="username">Brugernavn</label>
+                            <input type="text" id="username" class="form-control" placeholder="Brugernavn" ng-model="vm.user.username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" class="form-control" placeholder="Password" ng-model="vm.user.password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password-again">Password (igen)</label>
+                            <input type="password" id="password-again" class="form-control" placeholder="Password (igen)" ng-model="vm.user.passwordAgain" required>
+                        </div>
+                        <button type="submit" class="btn btn-success">Opret bruger</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-sm-8">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                Brugere
-            </div>
-            <div class="panel-body">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Brugernavn</th>
-                            <th>Rolle</th>
-                            <th>Redigér</th>
-                            <th>Slet</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="user in vm.users">
-                            <td>{{user.username}}</td>
-                            <td></td>
-                            <td>
-                                <button type="submit" ng-click="vm.editUser(user)" class="btn btn-info">
-                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                                </button>
-                            </td>
-                            <td>
-                                <button type="submit" ng-click="vm.deleteUser(user._id)" class="btn btn-danger">
-                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+        <div class="col-sm-8">
+            <div class="panel panel-default" ng-repeat="user in vm.users">
+                <div class="panel-heading">
+                    {{user.username}}
+                    <a ui-sref=".id.edit({id: user._id})" class="btn btn-warning">Redigér</a>
+                    <a ui-sref=".id.delete({id:user._id})" class="btn btn-danger">Slet</a>
+                </div>
+                <div class="panel-body">
+                    ...
+                </div>
             </div>
         </div>
     </div>

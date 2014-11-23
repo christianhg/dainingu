@@ -16,6 +16,31 @@
                     restricted: true,
                     pageTitle: 'dainingu > dashboard > brugere'
                 }
+            })
+            .state('dashboard.users.id', {
+                abstract: true,
+                url: '/:id',
+                template: '<ui-view/>'
+            })
+            .state('dashboard.users.id.delete', {
+                url: '/delete',
+                templateUrl: 'dashboard/users/dashboard.users.id.delete.view.html',
+                controller: 'DashboardUsersIdDeleteController',
+                controllerAs: 'vm',
+                data: {
+                    restricted: true,
+                    pageTitle: 'dainingu > dashboard > brugere'
+                }
+            })
+            .state('dashboard.users.id.edit', {
+                url: '/edit',
+                templateUrl: 'dashboard/users/dashboard.users.id.edit.view.html',
+                controller: 'DashboardUsersIdEditController',
+                controllerAs: 'vm',
+                data: {
+                    restricted: true,
+                    pageTitle: 'dainingu > dashboard > brugere'
+                }
             });
     }
 })();
