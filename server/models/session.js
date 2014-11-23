@@ -221,7 +221,7 @@
     };
 
     /**
-     * Finish order in session
+     * Mark order in session as finished
      */
     sessionSchema.methods.finishOrder = function(orderId, callback) {
         var order;
@@ -244,7 +244,30 @@
     };
 
     /**
-     * Confirm order in session
+     * Mark order in session as unfinished
+     */
+    sessionSchema.methods.unFinishOrder = function(orderId, callback) {
+        var order;
+
+        for(var i = 0; i < this.orders.length; i++) {
+            if(this.orders[i]._id == orderId) {
+                order = this.orders[i];
+
+                this.orders[i].finished = false;
+
+                break;
+            }
+        }
+
+        if(!order) {
+            callback(false);
+        } else {
+            callback(order);
+        }
+    };
+
+    /**
+     * Mark order in session as confirmed
      */
     sessionSchema.methods.confirmOrder = function(orderId, callback) {
         var order;
@@ -254,6 +277,29 @@
                 order = this.orders[i];
 
                 this.orders[i].confirmed = true;
+
+                break;
+            }
+        }
+
+        if(!order) {
+            callback(false);
+        } else {
+            callback(order);
+        }
+    };
+
+    /**
+     * Mark order in session as unconfirmed
+     */
+    sessionSchema.methods.unConfirmOrder = function(orderId, callback) {
+        var order;
+
+        for(var i = 0; i < this.orders.length; i++) {
+            if(this.orders[i]._id == orderId) {
+                order = this.orders[i];
+
+                this.orders[i].confirmed = false;
 
                 break;
             }
@@ -277,6 +323,29 @@
                 order = this.orders[i];
 
                 this.orders[i].done = true;
+
+                break;
+            }
+        }
+
+        if(!order) {
+            callback(false);
+        } else {
+            callback(order);
+        }
+    };
+
+    /**
+     * Mark order in session as undone
+     */
+    sessionSchema.methods.unDoneOrder = function(orderId, callback) {
+        var order;
+
+        for(var i = 0; i < this.orders.length; i++) {
+            if(this.orders[i]._id == orderId) {
+                order = this.orders[i];
+
+                this.orders[i].done = false;
 
                 break;
             }

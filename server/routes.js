@@ -260,6 +260,11 @@
                 sessionsOrders.finish(req, res, function(data) {
 
                 });
+            })
+            .delete(function(req, res) {
+                sessionsOrders.unFinish(req, res, function(data) {
+
+                });
             });
 
         app.route('/api/sessions/:sessionId/orders/:orderId/confirm')
@@ -267,11 +272,21 @@
                 sessionsOrders.confirm(req, res, function(data) {
 
                 });
+            })
+            .delete(function(req, res) {
+                sessionsOrders.unConfirm(req, res, function(data) {
+
+                });
             });
 
         app.route('/api/sessions/:sessionId/orders/:orderId/done')
             .put(function(req, res) {
                 sessionsOrders.done(req, res, function(data) {
+
+                });
+            })
+            .delete(function(req, res) {
+                sessionsOrders.unDone(req, res, function(data) {
 
                 });
             });
