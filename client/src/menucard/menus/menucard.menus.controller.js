@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-		.module('dainingu.menucard')
+		.module('dainingu.menucard.menus')
 		.controller('MenucardMenusController', MenucardController);
 
 	function MenucardController(auth, menus, menusDishes, sessionsDishes, $window, socket) {

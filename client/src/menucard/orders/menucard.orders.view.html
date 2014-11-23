@@ -1,0 +1,90 @@
+<div class="row">
+    <div ui-view>
+        <div class="col-sm-6 col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Opret ordre
+                </div>
+                <div class="panel-body">
+                    <form name="addOrderForm" ng-submit="vm.addOrder()" novalidate>
+                        <button type="submit" class="btn btn-success">Opret ordre</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-8">
+            <div class="panel panel-default" ng-repeat="order in vm.orders | filter:{finished: false}">
+                <div class="panel-heading">
+                    Ordre fra {{order.createdOn | date: 'HH:mm:ss'}}
+                    <button type="submit" class="btn btn-info" ng-click="vm.finishOrder(order._id)">Færdiggør ordre</button>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Retter</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="dish in order.dishes">
+                            <td>
+                                {{dish.name}}
+                                <button type="submit" class="btn btn-danger" ng-click="vm.removeDishFromOrder(order._id, dish._id)">Fjern fra ordre</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="panel panel-info" ng-repeat="order in vm.orders | filter:{finished: true}">
+                <div class="panel-heading">
+                    Ordre fra order.createdOn
+                </div>
+                <div class="panel-body">
+                    {{order.dishes}}
+                </div>
+            </div>
+
+            <div class="panel panel-primary" ng-repeat="order in vm.orders | filter:{confirmed: true}">
+                <div class="panel-heading">
+                    Ordre fra order.createdOn
+                </div>
+                <div class="panel-body">
+                    {{order.dishes}}
+                </div>
+            </div>
+
+            <div class="panel panel-success" ng-repeat="order in vm.orders | filter:{done: true}">
+                <div class="panel-heading">
+                    Ordre fra order.createdOn
+                </div>
+                <div class="panel-body">
+                    {{order.dishes}}
+                </div>
+            </div>
+
+           <!-- <div class="panel panel-default" ng-repeat="menu in vm.menus | orderBy:name">
+                <div class="panel-heading clearfix">
+                    {{menu.name}}
+                    <a ui-sref=".id.edit({id: menu.id})" class="btn btn-warning">Redigér</a>
+                    <a ui-sref=".id.delete({id: menu.id})" class="btn btn-danger">Slet</a>
+                </div>
+                <div class="panel-body">
+                    ...
+                </div>
+                <table class="table">
+                    <thead>
+                    <th>Retter</th>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="dish in menu.dishes | orderBy:name">
+                        <td>{{dish.name}}
+                            <button type="submit" ng-click="vm.deleteDishFromMenu(menu.id, dish.id)" class="pull-right btn btn-warning">Fjern fra menu
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>-->
+        </div>
+    </div>
+</div>

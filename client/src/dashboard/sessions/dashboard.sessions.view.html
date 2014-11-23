@@ -22,7 +22,27 @@
         </div>
 
         <div class="col-md-8">
-            <div class="panel panel-info" ng-repeat="session in vm.sessions">
+            <div class="panel panel-info" ng-repeat="session in vm.sessions | filter:{active: false, expired: false}">
+                <div class="panel-heading clearfix">
+                    <h3 class="panel-title"><strong>{{session.customer.name}}</strong> (bord {{session.table}}) - {{session.key}}</h3>
+                </div>
+                <div class="panel-body">
+                    <a ui-sref=".id.edit({id: session._id})" class="btn btn-warning">Redigér</a>
+                    <a ui-sref=".id.delete({id: session._id})" class="btn btn-danger">Slet</a>
+                </div>
+            </div>
+
+            <div class="panel panel-success" ng-repeat="session in vm.sessions | filter:{active: true, expired: false}">
+                <div class="panel-heading clearfix">
+                    <h3 class="panel-title"><strong>{{session.customer.name}}</strong> (bord {{session.table}}) - {{session.key}}</h3>
+                </div>
+                <div class="panel-body">
+                    <a ui-sref=".id.edit({id: session._id})" class="btn btn-warning">Redigér</a>
+                    <a ui-sref=".id.delete({id: session._id})" class="btn btn-danger">Slet</a>
+                </div>
+            </div>
+
+            <div class="panel panel-warning" ng-repeat="session in vm.sessions | filter:{expired: true}">
                 <div class="panel-heading clearfix">
                     <h3 class="panel-title"><strong>{{session.customer.name}}</strong> (bord {{session.table}}) - {{session.key}}</h3>
                 </div>

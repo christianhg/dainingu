@@ -250,8 +250,21 @@
                 res.send(false);
             } else {
                 session.addOrder(function(orders) {
-                    session.save();
-                    res.send(session);
+                    session.save(function(err) {
+                        if(err) {
+                            res.send(err);
+                        }
+
+                        var data = {
+                            message: 'Order added to session',
+                            session: session
+                        };
+
+                        res.json(session);
+
+                        callback(data);
+                    });
+
                 });
             }
         });
