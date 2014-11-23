@@ -5,13 +5,24 @@
         .module('dainingu.menucard.orders')
         .controller('MenucardOrdersController', MenucardOrdersController);
 
-    function MenucardOrdersController(auth, menus, menusDishes, sessionsOrders, $window, socket) {
+    function MenucardOrdersController(auth, menus, menusDishes, sessionsOrders, sessionsOrdersFinish, sessionsOrdersDishes, $window, socket) {
         var vm = this;
 
-        auth.getSessionId(function(sessionId) {
-            sessionsOrders.find({sessionId: sessionId}, function(orders) {
-                vm.orders = orders;
+
+
+        vm.getOrders = function() {
+            auth.getSessionId(function(sessionId) {
+                sessionsOrders.find({sessionId: sessionId}, function(orders) {
+                    vm.orders = orders;
+                });
             });
+        };
+
+        vm.getOrders();
+
+
+        socket.on('orderUpdated', function(data) {
+            vm.getOrders();
         });
 
         vm.addOrder = function() {
@@ -20,6 +31,26 @@
                     vm.orders = orders;
                 });
             });
+        };
+
+        vm.finishOrder = function(orderId) {
+            auth.getSessionId(function(sessionId) {
+                sessionsOrdersFinish.finish({sessionId: sessionId, orderId: orderId}, function(orders) {
+                    console.log(orders);
+                });
+            })
+        };
+
+        vm.unFinishOrder = function(orderId) {
+            auth.getSessionId(function(sessionId) {
+                sessionsOrdersFinish.unFinish({sessionId: sessionId, orderId: orderId}, function(orders) {
+                    console.log(orders);
+                });
+            })
+        };
+
+        vm.removeDishFromOrder = function(orderId, dishId) {
+
         };
 
         /*

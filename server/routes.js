@@ -264,12 +264,12 @@
         app.route('/api/sessions/:sessionId/orders/:orderId/finish')
             .put(function(req, res) {
                 sessionsOrders.finish(req, res, function(data) {
-
+                    io.sockets.emit('orderUpdated', data);
                 });
             })
             .delete(function(req, res) {
                 sessionsOrders.unFinish(req, res, function(data) {
-
+                    io.sockets.emit('orderUpdated', data);
                 });
             });
 
