@@ -4,6 +4,7 @@
 	var sequelize = require("../config/sequelize");
 
 	var Menu = sequelize.model('menu');
+	var Dish = sequelize.model('dish');
 
 	exports.destroy = function(req, res, callback) {
 		var id = req.params.id;
@@ -28,43 +29,91 @@
 	};
 
 	exports.index = function(req, res, callback) {
-		Menu.findAll()
-			.complete(function(err, menus) {
-				if(!!err) {
-					res.send(err);
-				}
+		var deep = req.query.deep;
 
-				var data = {
-					message: 'Menus shown',
-					menus: menus
-				};
+		if(deep) {
+			Menu.findAll({
+				include: [Dish]
+			})
+				.complete(function(err, menus) {
+					if(!!err) {
+						res.send(err);
+					}
 
-				res.json(menus);
+					var data = {
+						message: 'Menus shown with dishes',
+						menus: menus
+					};
 
-				callback(data);
+					res.json(menus);
 
-			});
+					callback(data);
+
+				});
+		} else {
+			Menu.findAll({
+
+			})
+				.complete(function(err, menus) {
+					if(!!err) {
+						res.send(err);
+					}
+
+					var data = {
+						message: 'Menus shown',
+						menus: menus
+					};
+
+					res.json(menus);
+
+					callback(data);
+
+				});
+		}
 	};
 
 	exports.show = function(req, res, callback) {
 		var id = req.params.id;
+		var deep = req.query.deep;
 
-		Menu.find({ where: { id: id }})
-			.complete(function(err, menu) {
-				if(!!err) {
-					res.send(err);
-				}
+		if(deep) {
+			Menu.find({
+				where: { id: id },
+				include: [Dish]
+			})
+				.complete(function(err, menu) {
+					if(!!err) {
+						res.send(err);
+					}
 
-				var data = {
-					message: 'Menu shown',
-					menu: menu
-				};
+					var data = {
+						message: 'Menu shown with dishes',
+						menu: menu
+					};
 
-				res.json(menu);
+					res.json(menu);
 
-				callback(data);
+					callback(data);
 
-			});
+				});
+		} else {
+			Menu.find({ where: { id: id }})
+				.complete(function(err, menu) {
+					if(!!err) {
+						res.send(err);
+					}
+
+					var data = {
+						message: 'Menu shown',
+						menu: menu
+					};
+
+					res.json(menu);
+
+					callback(data);
+
+				});
+		}
 	};
 
 	exports.store = function(req, res, callback) {

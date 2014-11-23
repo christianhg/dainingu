@@ -255,6 +255,9 @@
                 });
             });
 
+        /**
+         * Add or remove finished-flag from order
+         */
         app.route('/api/sessions/:sessionId/orders/:orderId/finish')
             .put(function(req, res) {
                 sessionsOrders.finish(req, res, function(data) {
@@ -267,6 +270,9 @@
                 });
             });
 
+        /**
+         * Add or remove confirmed-flag from order
+         */
         app.route('/api/sessions/:sessionId/orders/:orderId/confirm')
             .put(function(req, res) {
                 sessionsOrders.confirm(req, res, function(data) {
@@ -279,6 +285,9 @@
                 });
             });
 
+        /**
+         * Add or remove done-flag from order
+         */
         app.route('/api/sessions/:sessionId/orders/:orderId/done')
             .put(function(req, res) {
                 sessionsOrders.done(req, res, function(data) {
