@@ -5,6 +5,9 @@
     var secrets = require('../config/secrets');
     var Session = require('../models/session');
 
+    /**
+     * Find all orders in specific session
+     */
     exports.index = function(req, res, callback) {
         var sessionId = req.params.sessionId;
 
@@ -21,27 +24,25 @@
         });
     };
 
+    /**
+     * Find specific order in specific session
+     */
     exports.show = function(req, res, callback) {
         var sessionId = req.params.sessionId;
         var orderId = req.params.orderId;
 
         Session.findOne({_id: sessionId}, function(err, session) {
-            var orders = session.orders;
-            var order;
-
-            for(var i = 0; i < orders.length; i++) {
-                if(orders[i]._id == orderId) {
-                    order = orders[i];
-                    break;
-                }
+            if(err) {
+                res.send(err);
             }
 
-            if(!order) {
+            if(!session) {
                 res.send(false);
             } else {
-                res.send(order);
+                session.findOrder(orderId, function(order) {
+                    res.send(order);
+                });
             }
-
         });
     };
 
@@ -60,40 +61,6 @@
                     session.save();
                     res.send(session);
                 });
-
-
-                    /*session.save();
-
-                        var data = {
-                            message: 'Order added to session',
-                            session: session
-                        };
-
-                        res.json(data);
-
-                        callback(data);
-*/
-
-
-                /*var order = new Order();
-
-                session.orders.push(order);
-
-                session.save(function(err) {
-                    if(err) {
-                        res.send(err);
-                    }
-
-                    var data = {
-                        message: 'Order added to session',
-                        session: session
-                    };
-
-                    res.json(data);
-
-                    callback(data);
-                });
-*/
             }
         });
 

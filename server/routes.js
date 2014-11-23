@@ -9,7 +9,6 @@
         var users = require('./controllers/users');
 
         var sessions = require('./controllers/sessions');
-        var sessionsDishes = require('./controllers/sessionsDishes');
         var sessionsOrders = require('./controllers/sessionsOrders');
         var sessionsOrdersDishes = require('./controllers/sessionsOrdersDishes');
 
@@ -207,14 +206,9 @@
                 });
             });
 
-        app.route('/api/sessions/:id/dishes')
-            .post(function(req, res) {
-                sessionsDishes.store(req, res, function(data) {
-                    io.sockets.emit('sessionUpdated', data);
-                });
-            });
-
-
+        /**
+         * Orders in specific session
+         */
         app.route('/api/sessions/:sessionId/orders')
             .get(function(req, res) {
                 sessionsOrders.index(req, res, function(data) {
@@ -227,6 +221,9 @@
                 });
             });
 
+        /**
+         * Specific order in specific session
+         */
         app.route('/api/sessions/:sessionId/orders/:orderId')
             .get(function(req, res) {
                 sessionsOrders.show(req, res, function(data) {
