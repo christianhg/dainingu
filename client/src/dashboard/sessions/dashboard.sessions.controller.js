@@ -5,10 +5,20 @@
         .module('dainingu.dashboard.sessions')
         .controller('DashboardSessionsController', DashboardSessionsController);
 
-    function DashboardSessionsController(sessions) {
+    function DashboardSessionsController(sessions, sessionsOrders, sessionsOrdersFinish, socket) {
         var vm = this;
 
-        vm.sessions = sessions.query();
+
+        vm.getSessions = function() {
+            vm.sessions = sessions.query();
+        };
+
+        vm.getSessions();
+
+        socket.on('orderUpdated', function(data) {
+            vm.getSessions();
+        });
+
 
 
         vm.deactivateSession = function(deactivatedSession) {
@@ -45,6 +55,22 @@
             sessions.update({'id': openedSession._id}, openedSession, function(session) {
 
             });
+        };
+
+        vm.finishOrder = function(sessionId, orderId) {
+            sessionsOrdersFinish.finish({sessionId: sessionId, orderId: orderId}, function(data) {
+                console.log(data);
+            });
+        };
+
+        vm.unFinishOrder = function(sessionId, orderId) {
+            sessionsOrdersFinish.unFinish({sessionId: sessionId, orderId: orderId}, function(data) {
+                console.log(data);
+            });
+        };
+
+        vm.confirmOrder = function(sessionId, orderId) {
+            console.log(sessionId, orderId);
         };
     }
 })();

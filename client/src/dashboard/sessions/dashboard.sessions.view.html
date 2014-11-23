@@ -35,10 +35,48 @@
             <div class="panel panel-success" ng-repeat="session in vm.sessions | filter:{active: true, expired: false}">
                 <div class="panel-heading clearfix">
                     <h3 class="panel-title"><strong>{{session.customer.name}}</strong> (bord {{session.table}}) - {{session.key}}</h3>
-                </div>
-                <div class="panel-body">
                     <a ui-sref=".id.edit({id: session._id})" class="btn btn-warning">Redigér</a>
                     <a ui-sref=".id.delete({id: session._id})" class="btn btn-danger">Slet</a>
+                </div>
+                <div class="panel-body">
+                    <div class="panel panel-default" ng-repeat="order in session.orders | filter:{finished:false}">
+                        <div class="panel-heading">
+                            Ordre fra {{order.createdOn | date: 'HH:mm:ss'}}
+                            <button type="submit" class="btn btn-info" ng-click="vm.finishOrder(session._id, order._id)">Færdiggør ordre</button>
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Retter</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="dish in order.dishes">
+                                    <td>{{dish.name}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="panel panel-info" ng-repeat="order in session.orders | filter:{finished:true}">
+                        <div class="panel-heading">
+                            Ordre fra {{order.createdOn | date: 'HH:mm:ss'}}
+                            <button type="submit" class="btn btn-primary" ng-click="vm.confirmOrder(session._id, order._id)">Konfirmér ordre</button>
+                            <button type="submit" class="btn btn-default" ng-click="vm.unFinishOrder(session._id, order._id)">Fortryd færdiggørelse af ordre</button>
+                        </div>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Retter</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="dish in order.dishes">
+                                <td>{{dish.name}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
