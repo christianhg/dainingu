@@ -10,13 +10,9 @@
         var orderId = req.params.orderId;
 
         Session.findOne({_id: sessionId}, function(err, session) {
-            for(var i = 0; i < session.orders.length; i++) {
-                if(session.orders[i]._id == orderId) {
-                    res.send(session.orders[i].dishes);
-
-                    break;
-                }
-            }
+            session.findDishes(orderId, function(dishes) {
+                res.send(dishes);
+            });
         });
     };
 
@@ -26,19 +22,9 @@
         var dishId = req.params.dishId;
 
         Session.findOne({_id: sessionId}, function(err, session) {
-            for(var i = 0; i < session.orders.length; i++) {
-                if(session.orders[i]._id == orderId) {
-
-                    for(var j = 0; j < session.orders[i].dishes.length; j++) {
-                        if(session.orders[i].dishes[j]._id == dishId) {
-                            res.send(session.orders[i].dishes[j]);
-
-                            break;
-                        }
-                    }
-
-                }
-            }
+            session.findDish(orderId, dishId, function(dish) {
+                res.send(dish);
+            });
         });
 
     };
@@ -49,24 +35,15 @@
         var dish = req.body.dish;
 
         Session.findOne({_id: sessionId}, function(err, session) {
+            session.addDish(orderId, dish, function(dishes) {
+                session.save(function(err) {
+                    if(err) {
+                        res.send(err);
+                    }
 
-            for(var i = 0; i < session.orders.length; i++) {
-                if(session.orders[i]._id == orderId) {
-                    session.orders[i].dishes.push(dish);
-
-                    session.save(function(err) {
-                        if(err) {
-                            res.send(err);
-                        }
-
-                        res.send(session);
-                    });
-
-                    break;
-                }
-            }
-
-
+                    res.send(session);
+                });
+            });
         });
     };
 })();

@@ -7,10 +7,12 @@
         var menus = require('./controllers/menus');
         var menusDishes = require('./controllers/menusDishes');
         var users = require('./controllers/users');
+
         var sessions = require('./controllers/sessions');
         var sessionsDishes = require('./controllers/sessionsDishes');
         var sessionsOrders = require('./controllers/sessionsOrders');
         var sessionsOrdersDishes = require('./controllers/sessionsOrdersDishes');
+
         var auth = require('./controllers/auth');
         var expressJwt = require('express-jwt');
         var jwt = require('jsonwebtoken');
@@ -224,6 +226,7 @@
 
                 });
             });
+
         app.route('/api/sessions/:sessionId/orders/:orderId')
             .get(function(req, res) {
                 sessionsOrders.show(req, res, function(data) {
@@ -231,6 +234,9 @@
                 });
             });
 
+        /**
+         * Dishes in specific order in specific session.
+         */
         app.route('/api/sessions/:sessionId/orders/:orderId/dishes')
             .get(function(req, res) {
                 sessionsOrdersDishes.index(req, res, function(data) {
@@ -243,6 +249,9 @@
                 });
             });
 
+        /**
+         * Specific dish in specific order in specific session.
+         */
         app.route('/api/sessions/:sessionId/orders/:orderId/dishes/:dishId')
             .get(function(req, res) {
                 sessionsOrdersDishes.show(req, res, function(data) {

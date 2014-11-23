@@ -4,7 +4,6 @@
     var bcrypt = require('bcrypt');
     var mongoose = require('mongoose');
     var randToken = require('rand-token');
-    var Order = require('./order');
 
     var sessionSchema = new mongoose.Schema({
         active: {
@@ -73,11 +72,88 @@
         next();
     });
 
+    sessionSchema.methods.findOrder = function(orderId, callback) {
+        var order;
+
+        for(var i = 0; i < this.orders.length; i++) {
+            if(this.orders[i]._id == orderId) {
+                order = this.orders[i];
+                break;
+            }
+        }
+
+        if(!order) {
+            callback(false);
+        } else {
+            callback(order);
+        }
+
+    };
+
     sessionSchema.methods.addOrder = function(callback) {
         this.orders.push({});
-
-        console.log(this.orders);
         callback(this.orders);
+    };
+
+    sessionSchema.methods.findDish = function(orderId, dishId, callback) {
+        var dish;
+
+        for(var i = 0; i < this.orders.length; i++) {
+            if(this.orders[i]._id == orderId) {
+
+                for(var j = 0; j < this.orders[i].dishes.length; j++) {
+                    if(this.orders[i].dishes[j]._id == dishId) {
+                        dish = this.orders[i].dishes[j];
+
+                        break;
+                    }
+                }
+            }
+        }
+
+        if(!dish) {
+            callback(false);
+        } else {
+            callback(dish);
+        }
+    };
+
+    sessionSchema.methods.findDishes = function(orderId, callback) {
+        var dishes;
+
+        for(var i = 0; i < this.orders.length; i++) {
+            if(this.orders[i]._id == orderId) {
+                dishes = this.orders[i].dishes;
+
+                break;
+            }
+        }
+
+        if(!dishes) {
+            callback(false);
+        } else {
+            callback(dishes);
+        }
+    };
+
+    sessionSchema.methods.addDish = function(orderId, dish, callback) {
+        var order;
+
+        for(var i = 0; i < this.orders.length; i++) {
+            if(this.orders[i]._id == orderId) {
+                order = this.orders[i];
+
+                this.orders[i].dishes.push(dish);
+
+                break;
+            }
+        }
+
+        if(!order) {
+            callback(false);
+        } else {
+            callback(order.dishes);
+        }
     };
 
     sessionSchema.methods.status = function(callback) {
@@ -89,9 +165,9 @@
         callback(this.active);
     };
 
-    sessionSchema.methods.addDish = function(dish, callback) {
-        this.dishes.push(dish);
-        callback(this.dishes);
+    sessionSchema.methods.expire = function(callback) {
+        this.expired = true;
+        callback(this.expired);
     };
 
     var Session = mongoose.model('Session', sessionSchema);
