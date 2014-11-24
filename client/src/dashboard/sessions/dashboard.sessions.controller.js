@@ -5,7 +5,7 @@
         .module('dainingu.dashboard.sessions')
         .controller('DashboardSessionsController', DashboardSessionsController);
 
-    function DashboardSessionsController(sessions, sessionsOrders, sessionsOrdersFinish, socket) {
+    function DashboardSessionsController(sessions, sessionsOrders, sessionsOrdersFinish, sessionsOrdersConfirm, socket) {
         var vm = this;
 
 
@@ -15,7 +15,7 @@
 
         vm.getSessions();
 
-        socket.on('orderUpdated', function(data) {
+        socket.on('ordersUpdated', function(data) {
             vm.getSessions();
         });
 
@@ -75,7 +75,15 @@
         };
 
         vm.confirmOrder = function(sessionId, orderId) {
-            console.log(sessionId, orderId);
+            sessionsOrdersConfirm.confirm({sessionId: sessionId, orderId: orderId}, function(data) {
+                console.log(data);
+            });
+        };
+
+        vm.unConfirmOrder = function(sessionId, orderId) {
+            sessionsOrdersConfirm.unConfirm({sessionId: sessionId, orderId: orderId}, function(data) {
+                console.log(data);
+            });
         };
     }
 })();

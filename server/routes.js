@@ -244,7 +244,7 @@
             })
             .post(function(req, res) {
                 sessionsOrders.store(req, res, function(data) {
-
+                    io.sockets.emit('ordersUpdated', data);
                 });
             });
 
@@ -259,7 +259,7 @@
             })
             .delete(function(req, res) {
                 sessionsOrders.destroy(req, res, function(data) {
-                    io.sockets.emit('orderUpdated', data);
+                    io.sockets.emit('ordersUpdated', data);
                 });
             });
 
@@ -269,12 +269,12 @@
         app.route('/api/sessions/:sessionId/orders/:orderId/finish')
             .put(function(req, res) {
                 sessionsOrders.finish(req, res, function(data) {
-                    io.sockets.emit('orderUpdated', data);
+                    io.sockets.emit('ordersUpdated', data);
                 });
             })
             .delete(function(req, res) {
                 sessionsOrders.unFinish(req, res, function(data) {
-                    io.sockets.emit('orderUpdated', data);
+                    io.sockets.emit('ordersUpdated', data);
                 });
             });
 
@@ -284,12 +284,12 @@
         app.route('/api/sessions/:sessionId/orders/:orderId/confirm')
             .put(function(req, res) {
                 sessionsOrders.confirm(req, res, function(data) {
-
+                    io.sockets.emit('ordersUpdated', data);
                 });
             })
             .delete(function(req, res) {
                 sessionsOrders.unConfirm(req, res, function(data) {
-
+                    io.sockets.emit('ordersUpdated', data);
                 });
             });
 

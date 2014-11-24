@@ -7,9 +7,7 @@
 
     function MenucardOrdersController(auth, menus, menusDishes, sessionsOrders, sessionsOrdersFinish, sessionsOrdersDishes, $window, socket, $state) {
         var vm = this;
-
-
-
+        
         vm.getOrders = function() {
             auth.getSessionId(function(sessionId) {
                 sessionsOrders.find({sessionId: sessionId}, function(orders) {
@@ -20,8 +18,7 @@
 
         vm.getOrders();
 
-
-        socket.on('orderUpdated', function(data) {
+        socket.on('ordersUpdated', function(data) {
             vm.getOrders();
         });
 

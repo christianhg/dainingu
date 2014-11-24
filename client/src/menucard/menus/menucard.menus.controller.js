@@ -12,10 +12,18 @@
 			vm.menucardActivated = validToken;
 		});
 
-		auth.getSessionId(function(sessionId) {
-			sessionsOrders.find({sessionId: sessionId}, function(orders) {
-				vm.orders = orders;
+		vm.getOrders = function() {
+			auth.getSessionId(function(sessionId) {
+				sessionsOrders.find({sessionId: sessionId}, function(orders) {
+					vm.orders = orders;
+				});
 			});
+		};
+
+		vm.getOrders();
+
+		socket.on('ordersUpdated', function(data) {
+			vm.getOrders();
 		});
 
 		vm.menus = [];

@@ -35,7 +35,7 @@
                 </table>
             </div>
 
-            <div class="panel panel-info" ng-repeat="order in vm.orders | filter:{finished: true}">
+            <div class="panel panel-info" ng-repeat="order in vm.orders | filter:{finished: true, confirmed: false}">
                 <div class="panel-heading">
                     Ordre fra {{order.createdOn | date: 'HH:mm:ss'}}
                     <button type="submit" class="btn btn-default" ng-click="vm.unFinishOrder(order._id)">Fortryd færdiggørelse af ordre</button>
@@ -60,9 +60,20 @@
                 <div class="panel-heading">
                     Ordre fra {{order.createdOn | date: 'HH:mm:ss'}}
                 </div>
-                <div class="panel-body">
-                    {{order.dishes}}
-                </div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Retter</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="dish in order.dishes">
+                        <td>
+                            {{dish.name}}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
 
             <div class="panel panel-success" ng-repeat="order in vm.orders | filter:{done: true}">
