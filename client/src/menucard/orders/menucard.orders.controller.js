@@ -5,7 +5,7 @@
         .module('dainingu.menucard.orders')
         .controller('MenucardOrdersController', MenucardOrdersController);
 
-    function MenucardOrdersController(auth, menus, menusDishes, sessionsOrders, sessionsOrdersFinish, sessionsOrdersDishes, $window, socket) {
+    function MenucardOrdersController(auth, menus, menusDishes, sessionsOrders, sessionsOrdersFinish, sessionsOrdersDishes, $window, socket, $state) {
         var vm = this;
 
 
@@ -28,7 +28,7 @@
         vm.addOrder = function() {
             auth.getSessionId(function(sessionId) {
                 sessionsOrders.save({sessionId: sessionId}, {}, function(orders) {
-                    vm.orders = orders;
+                    $state.go('menucard.menus', null, {reload: true});
                 });
             });
         };

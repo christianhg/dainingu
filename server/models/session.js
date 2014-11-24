@@ -87,7 +87,24 @@
         } else {
             callback(order);
         }
+    };
 
+    sessionSchema.methods.removeOrder = function(orderId, callback) {
+        var orders;
+
+        for(var i = 0; i < this.orders.length; i++) {
+            if(this.orders[i]._id == orderId) {
+                this.orders.splice(i, 1);
+                orders = this.orders;
+                break;
+            }
+        }
+
+        if(!orders) {
+            callback(false);
+        } else {
+            callback(orders);
+        }
     };
 
     sessionSchema.methods.addOrder = function(callback) {

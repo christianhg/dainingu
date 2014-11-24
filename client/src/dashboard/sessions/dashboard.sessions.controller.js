@@ -19,6 +19,11 @@
             vm.getSessions();
         });
 
+        vm.deleteOrder = function(sessionId, orderId) {
+            sessionsOrders.delete({sessionId: sessionId, orderId: orderId}, function(data) {
+
+            });
+        };
 
 
         vm.deactivateSession = function(deactivatedSession) {

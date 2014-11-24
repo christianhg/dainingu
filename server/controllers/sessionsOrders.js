@@ -46,6 +46,38 @@
         });
     };
 
+    exports.destroy = function(req, res, callback) {
+        var sessionId = req.params.sessionId;
+        var orderId = req.params.orderId;
+
+        Session.findOne({_id: sessionId}, function(err, session) {
+            if(err) {
+                res.send(err);
+            }
+
+            if(!session) {
+                res.send(false);
+            } else {
+                session.removeOrder(orderId, function(orders) {
+                    session.save(function(err) {
+                        if(err) {
+                           res.send(err);
+                        }
+
+                        var data = {
+                            message: 'Order deleted',
+                            session: session
+                        };
+
+                        res.json(data);
+
+                        callback(data);
+                    });
+                });
+            }
+        });
+    };
+
     exports.finish = function(req, res, callback) {
         var sessionId = req.params.sessionId;
         var orderId = req.params.orderId;

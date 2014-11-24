@@ -256,6 +256,11 @@
                 sessionsOrders.show(req, res, function(data) {
 
                 });
+            })
+            .delete(function(req, res) {
+                sessionsOrders.destroy(req, res, function(data) {
+                    io.sockets.emit('orderUpdated', data);
+                });
             });
 
         /**

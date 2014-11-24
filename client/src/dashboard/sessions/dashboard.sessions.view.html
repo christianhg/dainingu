@@ -43,6 +43,7 @@
                         <div class="panel-heading">
                             Ordre fra {{order.createdOn | date: 'HH:mm:ss'}}
                             <button type="submit" class="btn btn-info" ng-click="vm.finishOrder(session._id, order._id)">Færdiggør ordre</button>
+                            <button type="submit" class="btn btn-danger" ng-click="vm.deleteOrder(session._id, order._id)">Slet</button>
                         </div>
                         <table class="table">
                             <thead>
