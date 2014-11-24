@@ -1,0 +1,18 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Opret session
+    </div>
+    <div class="panel-body">
+        <form name="addSessionForm" ng-submit="addSessionForm.$valid && vm.addSession(vm.session)" novalidate>
+            <div class="form-group">
+                <label for="sessionCustomerName">Kundens navn</label>
+                <input type="text" id="sessionCustomerName" class="form-control" ng-model="vm.session.customer.name" placeholder="Kundens navn" required>
+            </div>
+            <div class="form-group">
+                <label for="sessionTable">Tilknyttet bord</label>
+                <input type="text" id="sessionTable" class="form-control" ng-model="vm.session.table" placeholder="Tilknyttet bord" required>
+            </div>
+            <button type="submit" class="btn btn-success">Opret session</button>
+        </form>
+    </div>
+</div>

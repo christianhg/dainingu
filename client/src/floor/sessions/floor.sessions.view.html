@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-4">
-
+        <create-session></create-session>
     </div>
     <div class="col-md-8">
         <div ng-repeat="session in vm.sessions | filter:{expired:false}" ng-class="session.active ? 'panel-success' : 'panel-info'" class="panel">
