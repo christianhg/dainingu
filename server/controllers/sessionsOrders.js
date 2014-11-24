@@ -78,6 +78,9 @@
         });
     };
 
+    /**
+     * Commit order.
+     */
     exports.commit = function(req, res, callback) {
         var sessionId = req.params.sessionId;
         var orderId = req.params.orderId;
@@ -110,6 +113,9 @@
         });
     };
 
+    /**
+     * Pull order.
+     */
     exports.pull = function(req, res, callback) {
         var sessionId = req.params.sessionId;
         var orderId = req.params.orderId;
@@ -142,6 +148,9 @@
         });
     };
 
+    /**
+     * Confirm order.
+     */
     exports.confirm = function(req, res, callback) {
         var sessionId = req.params.sessionId;
         var orderId = req.params.orderId;
@@ -174,70 +183,9 @@
         });
     };
 
-    exports.disconfirm = function(req, res, callback) {
-        var sessionId = req.params.sessionId;
-        var orderId = req.params.orderId;
-
-        Session.findOne({_id: sessionId}, function(err, session) {
-            if(err) {
-                res.send(err);
-            }
-
-            if(!session) {
-                res.send(false);
-            } else {
-                session.disconfirmOrder(orderId, function(order) {
-                    session.save(function(err) {
-                        if(err) {
-                            res.send(err);
-                        }
-
-                        var data = {
-                            message: 'Order disconfirmed',
-                            session: session
-                        };
-
-                        res.json(data);
-
-                        callback(data);
-                    });
-                });
-            }
-        });
-    };
-
-    exports.complete = function(req, res, callback) {
-        var sessionId = req.params.sessionId;
-        var orderId = req.params.orderId;
-
-        Session.findOne({_id: sessionId}, function(err, session) {
-            if(err) {
-                res.send(err);
-            }
-
-            if(!session) {
-                res.send(false);
-            } else {
-                session.completeOrder(orderId, function(order) {
-                    session.save(function(err) {
-                        if(err) {
-                            res.send(err);
-                        }
-
-                        var data = {
-                            message: 'Order completed',
-                            session: session
-                        };
-
-                        res.json(data);
-
-                        callback(data);
-                    });
-                });
-            }
-        });
-    };
-
+    /**
+     * Reject order.
+     */
     exports.reject = function(req, res, callback) {
         var sessionId = req.params.sessionId;
         var orderId = req.params.orderId;
@@ -270,12 +218,144 @@
         });
     };
 
-    exports.close = function(req, res, callback) {
+    /**
+     * Complete order.
+     */
+    exports.complete = function(req, res, callback) {
+        var sessionId = req.params.sessionId;
+        var orderId = req.params.orderId;
 
+        Session.findOne({_id: sessionId}, function(err, session) {
+            if(err) {
+                res.send(err);
+            }
+
+            if(!session) {
+                res.send(false);
+            } else {
+                session.completeOrder(orderId, function(order) {
+                    session.save(function(err) {
+                        if(err) {
+                            res.send(err);
+                        }
+
+                        var data = {
+                            message: 'Order completed',
+                            session: session
+                        };
+
+                        res.json(data);
+
+                        callback(data);
+                    });
+                });
+            }
+        });
     };
 
-    exports.open = function(req, res, callback) {
+    /**
+     * Incomplete order.
+     */
+    exports.incomplete = function(req, res, callback) {
+        var sessionId = req.params.sessionId;
+        var orderId = req.params.orderId;
 
+        Session.findOne({_id: sessionId}, function(err, session) {
+            if(err) {
+                res.send(err);
+            }
+
+            if(!session) {
+                res.send(false);
+            } else {
+                session.incompleteOrder(orderId, function(order) {
+                    session.save(function(err) {
+                        if(err) {
+                            res.send(err);
+                        }
+
+                        var data = {
+                            message: 'Order incompleted',
+                            session: session
+                        };
+
+                        res.json(data);
+
+                        callback(data);
+                    });
+                });
+            }
+        });
+    };
+
+    /**
+     * Close order.
+     */
+    exports.close = function(req, res, callback) {
+        var sessionId = req.params.sessionId;
+        var orderId = req.params.orderId;
+
+        Session.findOne({_id: sessionId}, function(err, session) {
+            if(err) {
+                res.send(err);
+            }
+
+            if(!session) {
+                res.send(false);
+            } else {
+                session.closeOrder(orderId, function(order) {
+                    session.save(function(err) {
+                        if(err) {
+                            res.send(err);
+                        }
+
+                        var data = {
+                            message: 'Order closed',
+                            session: session
+                        };
+
+                        res.json(data);
+
+                        callback(data);
+                    });
+                });
+            }
+        });
+    };
+
+    /**
+     * Open order.
+     */
+    exports.open = function(req, res, callback) {
+        var sessionId = req.params.sessionId;
+        var orderId = req.params.orderId;
+
+        Session.findOne({_id: sessionId}, function(err, session) {
+            if(err) {
+                res.send(err);
+            }
+
+            if(!session) {
+                res.send(false);
+            } else {
+                session.openOrder(orderId, function(order) {
+                    session.save(function(err) {
+                        if(err) {
+                            res.send(err);
+                        }
+
+                        var data = {
+                            message: 'Order opened',
+                            session: session
+                        };
+
+                        res.json(data);
+
+                        callback(data);
+                    });
+                });
+            }
+        });
     };
 
     exports.store = function(req, res, callback) {

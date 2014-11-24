@@ -79,10 +79,50 @@
                         </table>
                     </div>
 
-                    <div class="panel panel-primary" ng-repeat="order in session.orders | filter:{confirmed:true}">
+                    <div class="panel panel-primary" ng-repeat="order in session.orders | filter:{confirmed:true, completed: false}">
                         <div class="panel-heading">
                             Ordre fra {{order.createdOn | date: 'HH:mm:ss'}}
-                            <button type="submit" class="btn btn-default" ng-click="vm.rejectOrder(session._id, order._id)">Reject</button>
+                            <button type="submit" class="btn btn-info" ng-click="vm.rejectOrder(session._id, order._id)">Reject</button>
+                            <button type="submit" class="btn btn-success" ng-click="vm.completeOrder(session._id, order._id)">Complete</button>
+                        </div>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Retter</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="dish in order.dishes">
+                                <td>{{dish.name}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="panel panel-success" ng-repeat="order in session.orders | filter:{completed:true, closed:false}">
+                        <div class="panel-heading">
+                            Ordre fra {{order.createdOn | date: 'HH:mm:ss'}}
+                            <button type="submit" class="btn btn-primary" ng-click="vm.incompleteOrder(session._id, order._id)">Incomplete</button>
+                            <button type="submit" class="btn btn-danger" ng-click="vm.closeOrder(session._id, order._id)">Close</button>
+                        </div>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Retter</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="dish in order.dishes">
+                                <td>{{dish.name}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="panel panel-danger" ng-repeat="order in session.orders | filter:{closed:true}">
+                        <div class="panel-heading">
+                            Ordre fra {{order.createdOn | date: 'HH:mm:ss'}}
+                            <button type="submit" class="btn btn-success" ng-click="vm.openOrder(session._id, order._id)">Open</button>
                         </div>
                         <table class="table">
                             <thead>

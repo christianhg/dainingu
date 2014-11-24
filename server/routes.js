@@ -299,12 +299,12 @@
         app.route('/api/sessions/:sessionId/orders/:orderId/complete')
             .put(function(req, res) {
                 sessionsOrders.complete(req, res, function(data) {
-
+                    io.sockets.emit('ordersUpdated', data);
                 });
             })
             .delete(function(req, res) {
                 sessionsOrders.incomplete(req, res, function(data) {
-
+                    io.sockets.emit('ordersUpdated', data);
                 });
             });
 
@@ -314,12 +314,12 @@
         app.route('/api/sessions/:sessionId/orders/:orderId/close')
             .put(function(req, res) {
                 sessionsOrders.close(req, res, function(data) {
-
+                    io.sockets.emit('ordersUpdated', data);
                 });
             })
             .delete(function(req, res) {
                 sessionsOrders.open(req, res, function(data) {
-
+                    io.sockets.emit('ordersUpdated', data);
                 });
             });
 

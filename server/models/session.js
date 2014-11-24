@@ -379,6 +379,53 @@
         }
     };
 
+    /**
+     * Mark order in session as closed
+     */
+    sessionSchema.methods.closeOrder = function(orderId, callback) {
+        var order;
+
+        for(var i = 0; i < this.orders.length; i++) {
+            if(this.orders[i]._id == orderId) {
+                order = this.orders[i];
+
+                this.orders[i].closed = true;
+
+                break;
+            }
+        }
+
+        if(!order) {
+            callback(false);
+        } else {
+            callback(order);
+        }
+    };
+
+    /**
+     * Mark order in session as opened
+     */
+    sessionSchema.methods.openOrder = function(orderId, callback) {
+        var order;
+
+        for(var i = 0; i < this.orders.length; i++) {
+            if(this.orders[i]._id == orderId) {
+                order = this.orders[i];
+
+                this.orders[i].closed = false;
+
+                break;
+            }
+        }
+
+        if(!order) {
+            callback(false);
+        } else {
+            callback(order);
+        }
+    };
+
+
     var Session = mongoose.model('Session', sessionSchema);
 
     module.exports = Session;
