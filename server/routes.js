@@ -264,22 +264,22 @@
             });
 
         /**
-         * Add or remove finished-flag from order
+         * Add or remove commit-flag from order
          */
-        app.route('/api/sessions/:sessionId/orders/:orderId/finish')
+        app.route('/api/sessions/:sessionId/orders/:orderId/commit')
             .put(function(req, res) {
-                sessionsOrders.finish(req, res, function(data) {
+                sessionsOrders.commit(req, res, function(data) {
                     io.sockets.emit('ordersUpdated', data);
                 });
             })
             .delete(function(req, res) {
-                sessionsOrders.unFinish(req, res, function(data) {
+                sessionsOrders.pull(req, res, function(data) {
                     io.sockets.emit('ordersUpdated', data);
                 });
             });
 
         /**
-         * Add or remove confirmed-flag from order
+         * Add or remove confirm-flag from order
          */
         app.route('/api/sessions/:sessionId/orders/:orderId/confirm')
             .put(function(req, res) {
@@ -288,22 +288,37 @@
                 });
             })
             .delete(function(req, res) {
-                sessionsOrders.unConfirm(req, res, function(data) {
+                sessionsOrders.reject(req, res, function(data) {
                     io.sockets.emit('ordersUpdated', data);
                 });
             });
 
         /**
-         * Add or remove done-flag from order
+         * Add or remove complete-flag from order
          */
-        app.route('/api/sessions/:sessionId/orders/:orderId/done')
+        app.route('/api/sessions/:sessionId/orders/:orderId/complete')
             .put(function(req, res) {
-                sessionsOrders.done(req, res, function(data) {
+                sessionsOrders.complete(req, res, function(data) {
 
                 });
             })
             .delete(function(req, res) {
-                sessionsOrders.unDone(req, res, function(data) {
+                sessionsOrders.incomplete(req, res, function(data) {
+
+                });
+            });
+
+        /**
+         * Add or remove close-flag from order
+         */
+        app.route('/api/sessions/:sessionId/orders/:orderId/close')
+            .put(function(req, res) {
+                sessionsOrders.close(req, res, function(data) {
+
+                });
+            })
+            .delete(function(req, res) {
+                sessionsOrders.open(req, res, function(data) {
 
                 });
             });

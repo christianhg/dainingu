@@ -5,9 +5,9 @@
         .module('dainingu.menucard.orders')
         .controller('MenucardOrdersController', MenucardOrdersController);
 
-    function MenucardOrdersController(auth, menus, menusDishes, sessionsOrders, sessionsOrdersFinish, sessionsOrdersDishes, $window, socket, $state) {
+    function MenucardOrdersController(auth, menus, menusDishes, sessionsOrders, sessionsOrdersCommit, sessionsOrdersDishes, $window, socket, $state) {
         var vm = this;
-        
+
         vm.getOrders = function() {
             auth.getSessionId(function(sessionId) {
                 sessionsOrders.find({sessionId: sessionId}, function(orders) {
@@ -30,20 +30,20 @@
             });
         };
 
-        vm.finishOrder = function(orderId) {
+        vm.commitOrder = function(orderId) {
             auth.getSessionId(function(sessionId) {
-                sessionsOrdersFinish.finish({sessionId: sessionId, orderId: orderId}, function(orders) {
+                sessionsOrdersCommit.commit({sessionId: sessionId, orderId: orderId}, function(orders) {
                     console.log(orders);
                 });
-            })
+            });
         };
 
-        vm.unFinishOrder = function(orderId) {
+        vm.pullOrder = function(orderId) {
             auth.getSessionId(function(sessionId) {
-                sessionsOrdersFinish.unFinish({sessionId: sessionId, orderId: orderId}, function(orders) {
+                sessionsOrdersCommit.pull({sessionId: sessionId, orderId: orderId}, function(orders) {
                     console.log(orders);
                 });
-            })
+            });
         };
 
         vm.removeDishFromOrder = function(orderId, dishId) {
@@ -51,7 +51,7 @@
                 sessionsOrdersDishes.delete({sessionId: sessionId, orderId: orderId, dishId: dishId}, function(data) {
                     console.log(data);
                 });
-            })
+            });
         };
 
         /*

@@ -5,7 +5,7 @@
         .module('dainingu.dashboard.sessions')
         .controller('DashboardSessionsController', DashboardSessionsController);
 
-    function DashboardSessionsController(sessions, sessionsOrders, sessionsOrdersFinish, sessionsOrdersConfirm, socket) {
+    function DashboardSessionsController(sessions, sessionsOrders, sessionsOrdersCommit, sessionsOrdersConfirm, socket) {
         var vm = this;
 
 
@@ -62,14 +62,14 @@
             });
         };
 
-        vm.finishOrder = function(sessionId, orderId) {
-            sessionsOrdersFinish.finish({sessionId: sessionId, orderId: orderId}, function(data) {
+        vm.commitOrder = function(sessionId, orderId) {
+            sessionsOrdersCommit.commit({sessionId: sessionId, orderId: orderId}, function(data) {
                 console.log(data);
             });
         };
 
-        vm.unFinishOrder = function(sessionId, orderId) {
-            sessionsOrdersFinish.unFinish({sessionId: sessionId, orderId: orderId}, function(data) {
+        vm.pullOrder = function(sessionId, orderId) {
+            sessionsOrdersCommit.pull({sessionId: sessionId, orderId: orderId}, function(data) {
                 console.log(data);
             });
         };
@@ -80,8 +80,8 @@
             });
         };
 
-        vm.unConfirmOrder = function(sessionId, orderId) {
-            sessionsOrdersConfirm.unConfirm({sessionId: sessionId, orderId: orderId}, function(data) {
+        vm.rejectOrder = function(sessionId, orderId) {
+            sessionsOrdersConfirm.reject({sessionId: sessionId, orderId: orderId}, function(data) {
                 console.log(data);
             });
         };

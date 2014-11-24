@@ -3,7 +3,7 @@
         <form ng-show="vm.orders.length > 0">
             <div class="form-group">
                 <select class="form-control" ng-model="vm.activeOrder">
-                    <option ng-repeat="order in vm.orders | filter: {finished: false, confirmed: false, done: false}" value="{{order._id}}">Ordre fra {{order.createdOn | date: 'HH:mm:ss'}}</option>
+                    <option ng-repeat="order in vm.orders | filter: {committed: false}" value="{{order._id}}">Ordre fra {{order.createdOn | date: 'HH:mm:ss'}}</option>
                 </select>
             </div>
         </form>

@@ -35,7 +35,7 @@
                 type: Date,
                 default: Date.now
             },
-            finished: {
+            committed: {
                 type: Boolean,
                 default: false
             },
@@ -43,7 +43,11 @@
                 type: Boolean,
                 default: false
             },
-            done: {
+            completed: {
+                type: Boolean,
+                default: false
+            },
+            closed: {
                 type: Boolean,
                 default: false
             },
@@ -238,16 +242,16 @@
     };
 
     /**
-     * Mark order in session as finished
+     * Mark order in session as committed
      */
-    sessionSchema.methods.finishOrder = function(orderId, callback) {
+    sessionSchema.methods.commitOrder = function(orderId, callback) {
         var order;
 
         for(var i = 0; i < this.orders.length; i++) {
             if(this.orders[i]._id == orderId) {
                 order = this.orders[i];
 
-                this.orders[i].finished = true;
+                this.orders[i].committed = true;
 
                 break;
             }
@@ -261,16 +265,16 @@
     };
 
     /**
-     * Mark order in session as unfinished
+     * Mark order in session as pulled
      */
-    sessionSchema.methods.unFinishOrder = function(orderId, callback) {
+    sessionSchema.methods.pullOrder = function(orderId, callback) {
         var order;
 
         for(var i = 0; i < this.orders.length; i++) {
             if(this.orders[i]._id == orderId) {
                 order = this.orders[i];
 
-                this.orders[i].finished = false;
+                this.orders[i].committed = false;
 
                 break;
             }
@@ -307,9 +311,9 @@
     };
 
     /**
-     * Mark order in session as unconfirmed
+     * Mark order in session as rejected
      */
-    sessionSchema.methods.unConfirmOrder = function(orderId, callback) {
+    sessionSchema.methods.rejectOrder = function(orderId, callback) {
         var order;
 
         for(var i = 0; i < this.orders.length; i++) {
@@ -330,16 +334,16 @@
     };
 
     /**
-     * Mark order in session as done
+     * Mark order in session as completed
      */
-    sessionSchema.methods.doneOrder = function(orderId, callback) {
+    sessionSchema.methods.completeOrder = function(orderId, callback) {
         var order;
 
         for(var i = 0; i < this.orders.length; i++) {
             if(this.orders[i]._id == orderId) {
                 order = this.orders[i];
 
-                this.orders[i].done = true;
+                this.orders[i].completed = true;
 
                 break;
             }
@@ -353,16 +357,16 @@
     };
 
     /**
-     * Mark order in session as undone
+     * Mark order in session as incompleted
      */
-    sessionSchema.methods.unDoneOrder = function(orderId, callback) {
+    sessionSchema.methods.incompleteOrder = function(orderId, callback) {
         var order;
 
         for(var i = 0; i < this.orders.length; i++) {
             if(this.orders[i]._id == orderId) {
                 order = this.orders[i];
 
-                this.orders[i].done = false;
+                this.orders[i].completed = false;
 
                 break;
             }

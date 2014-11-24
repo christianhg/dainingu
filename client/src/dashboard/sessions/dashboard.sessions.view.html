@@ -39,10 +39,10 @@
                     <a ui-sref=".id.delete({id: session._id})" class="btn btn-danger">Slet</a>
                 </div>
                 <div class="panel-body">
-                    <div class="panel panel-default" ng-repeat="order in session.orders | filter:{finished:false}">
+                    <div class="panel panel-default" ng-repeat="order in session.orders | filter:{committed:false}">
                         <div class="panel-heading">
                             Ordre fra {{order.createdOn | date: 'HH:mm:ss'}}
-                            <button type="submit" class="btn btn-info" ng-click="vm.finishOrder(session._id, order._id)">Færdiggør ordre</button>
+                            <button type="submit" class="btn btn-info" ng-click="vm.commitOrder(session._id, order._id)">Commit</button>
                             <button type="submit" class="btn btn-danger" ng-click="vm.deleteOrder(session._id, order._id)">Slet</button>
                         </div>
                         <table class="table">
@@ -59,11 +59,11 @@
                         </table>
                     </div>
 
-                    <div class="panel panel-info" ng-repeat="order in session.orders | filter:{finished:true, confirmed: false}">
+                    <div class="panel panel-info" ng-repeat="order in session.orders | filter:{committed:true, confirmed: false}">
                         <div class="panel-heading">
                             Ordre fra {{order.createdOn | date: 'HH:mm:ss'}}
-                            <button type="submit" class="btn btn-primary" ng-click="vm.confirmOrder(session._id, order._id)">Konfirmér ordre</button>
-                            <button type="submit" class="btn btn-default" ng-click="vm.unFinishOrder(session._id, order._id)">Fortryd færdiggørelse af ordre</button>
+                            <button type="submit" class="btn btn-primary" ng-click="vm.confirmOrder(session._id, order._id)">Confirm</button>
+                            <button type="submit" class="btn btn-default" ng-click="vm.pullOrder(session._id, order._id)">Pull</button>
                         </div>
                         <table class="table">
                             <thead>
@@ -82,7 +82,7 @@
                     <div class="panel panel-primary" ng-repeat="order in session.orders | filter:{confirmed:true}">
                         <div class="panel-heading">
                             Ordre fra {{order.createdOn | date: 'HH:mm:ss'}}
-                            <button type="submit" class="btn btn-default" ng-click="vm.unConfirmOrder(session._id, order._id)">Fortryd konfirmering af ordre</button>
+                            <button type="submit" class="btn btn-default" ng-click="vm.rejectOrder(session._id, order._id)">Reject</button>
                         </div>
                         <table class="table">
                             <thead>

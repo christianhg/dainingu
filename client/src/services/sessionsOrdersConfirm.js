@@ -15,7 +15,7 @@
                 method: 'PUT',
                 isArray: false
             },
-            'unConfirm': {
+            'reject': {
                 method: 'DELETE',
                 isArray: false
             }

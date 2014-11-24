@@ -78,7 +78,7 @@
         });
     };
 
-    exports.finish = function(req, res, callback) {
+    exports.commit = function(req, res, callback) {
         var sessionId = req.params.sessionId;
         var orderId = req.params.orderId;
 
@@ -90,14 +90,14 @@
             if(!session) {
                 res.send(false);
             } else {
-                session.finishOrder(orderId, function(order) {
+                session.commitOrder(orderId, function(order) {
                     session.save(function(err) {
                         if(err) {
                             res.send(err);
                         }
 
                         var data = {
-                            message: 'Order finished',
+                            message: 'Order committed',
                             session: session
                         };
 
@@ -110,7 +110,7 @@
         });
     };
 
-    exports.unFinish = function(req, res, callback) {
+    exports.pull = function(req, res, callback) {
         var sessionId = req.params.sessionId;
         var orderId = req.params.orderId;
 
@@ -122,14 +122,14 @@
             if(!session) {
                 res.send(false);
             } else {
-                session.unFinishOrder(orderId, function(order) {
+                session.pullOrder(orderId, function(order) {
                     session.save(function(err) {
                         if(err) {
                             res.send(err);
                         }
 
                         var data = {
-                            message: 'Order unfinished',
+                            message: 'Order pulled',
                             session: session
                         };
 
@@ -174,7 +174,7 @@
         });
     };
 
-    exports.unConfirm = function(req, res, callback) {
+    exports.disconfirm = function(req, res, callback) {
         var sessionId = req.params.sessionId;
         var orderId = req.params.orderId;
 
@@ -186,14 +186,14 @@
             if(!session) {
                 res.send(false);
             } else {
-                session.unConfirmOrder(orderId, function(order) {
+                session.disconfirmOrder(orderId, function(order) {
                     session.save(function(err) {
                         if(err) {
                             res.send(err);
                         }
 
                         var data = {
-                            message: 'Order unconfirmed',
+                            message: 'Order disconfirmed',
                             session: session
                         };
 
@@ -206,7 +206,7 @@
         });
     };
 
-    exports.done = function(req, res, callback) {
+    exports.complete = function(req, res, callback) {
         var sessionId = req.params.sessionId;
         var orderId = req.params.orderId;
 
@@ -218,14 +218,14 @@
             if(!session) {
                 res.send(false);
             } else {
-                session.doneOrder(orderId, function(order) {
+                session.completeOrder(orderId, function(order) {
                     session.save(function(err) {
                         if(err) {
                             res.send(err);
                         }
 
                         var data = {
-                            message: 'Order done',
+                            message: 'Order completed',
                             session: session
                         };
 
@@ -238,7 +238,7 @@
         });
     };
 
-    exports.unDone = function(req, res, callback) {
+    exports.reject = function(req, res, callback) {
         var sessionId = req.params.sessionId;
         var orderId = req.params.orderId;
 
@@ -250,14 +250,14 @@
             if(!session) {
                 res.send(false);
             } else {
-                session.unDoneOrder(orderId, function(order) {
+                session.rejectOrder(orderId, function(order) {
                     session.save(function(err) {
                         if(err) {
                             res.send(err);
                         }
 
                         var data = {
-                            message: 'Order undone',
+                            message: 'Order rejected',
                             session: session
                         };
 
@@ -268,6 +268,14 @@
                 });
             }
         });
+    };
+
+    exports.close = function(req, res, callback) {
+
+    };
+
+    exports.open = function(req, res, callback) {
+
     };
 
     exports.store = function(req, res, callback) {
