@@ -1,0 +1,8 @@
+<div class="panel panel-info" ng-repeat="session in vm.sessions | filter:{active: false, expired: false}">
+    <div class="panel-heading clearfix">
+        <h3 class="panel-title"><strong>{{session.customer.name}}</strong> (bord {{session.table}}) - {{session.key}}</h3>
+    </div>
+    <div class="panel-body">
+
+    </div>
+</div>

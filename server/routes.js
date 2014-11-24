@@ -221,15 +221,18 @@
                 });
             });
 
+        /**
+         * Add og remove expire-flag from sessions
+         */
         app.route('/api/sessions/:sessionId/expire')
             .put(function(req, res) {
                 sessions.expire(req, res, function(data) {
-
+                    io.sockets.emit('sessionUpdated', data);
                 });
             })
             .delete(function(req, res) {
                 sessions.resume(req, res, function(data) {
-
+                    io.sockets.emit('sessionUpdated', data);
                 });
             });
 

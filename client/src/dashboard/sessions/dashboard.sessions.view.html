@@ -7,7 +7,12 @@
         <div class="col-md-8">
             <div class="panel panel-info" ng-repeat="session in vm.sessions | filter:{active: false, expired: false}">
                 <div class="panel-heading clearfix">
-                    <h3 class="panel-title"><strong>{{session.customer.name}}</strong> (bord {{session.table}}) - {{session.key}}</h3>
+                    <h3 class="panel-title pull-left"><strong>{{session.customer.name}}</strong> (bord {{session.table}}) - {{session.key}}</h3>
+                    <div class="pull-right">
+                        <button type="submit" ng-click="vm.activateSession(session._id)" class="btn btn-success">Aktivér</button>
+                        <button type="submit" ng-click="vm.expireSession(session._id)" class="btn btn-warning">Ophør</button>
+                    </div>
+
                 </div>
                 <div class="panel-body">
                     <a ui-sref=".id.edit({id: session._id})" class="btn btn-warning">Redigér</a>
@@ -125,7 +130,10 @@
 
             <div class="panel panel-warning" ng-repeat="session in vm.sessions | filter:{expired: true}">
                 <div class="panel-heading clearfix">
-                    <h3 class="panel-title"><strong>{{session.customer.name}}</strong> (bord {{session.table}}) - {{session.key}}</h3>
+                    <h3 class="panel-title pull-left"><strong>{{session.customer.name}}</strong> (bord {{session.table}}) - {{session.key}}</h3>
+                    <div class="pull-right">
+                        <button type="submit" ng-click="vm.resumeSession(session._id)" class="btn btn-info">Genoptag</button>
+                    </div>
                 </div>
                 <div class="panel-body">
                     <a ui-sref=".id.edit({id: session._id})" class="btn btn-warning">Redigér</a>

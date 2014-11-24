@@ -3,15 +3,6 @@
         <create-session></create-session>
     </div>
     <div class="col-md-8">
-        <div ng-repeat="session in vm.sessions | filter:{expired:false}" ng-class="session.active ? 'panel-success' : 'panel-info'" class="panel">
-            <div class="panel-heading">
-                <strong>{{session.customer.name}}</strong> ved bord {{session.table}} ({{session.key}})
-            </div>
-            <div class="panel-body">
-                <ul class="list-group">
-                    <li ng-repeat="dish in session.dishes" class="list-group-item">{{dish.name}}</li>
-                </ul>
-            </div>
-        </div>
+        <sessions></sessions>
     </div>
 </div>
