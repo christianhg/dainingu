@@ -6,12 +6,10 @@
         var dishes = require('./controllers/dishes');
         var menus = require('./controllers/menus');
         var menusDishes = require('./controllers/menusDishes');
-        var users = require('./controllers/users');
-
         var sessions = require('./controllers/sessions');
         var sessionsOrders = require('./controllers/sessionsOrders');
         var sessionsOrdersDishes = require('./controllers/sessionsOrdersDishes');
-
+        var users = require('./controllers/users');
         var auth = require('./controllers/auth');
         var expressJwt = require('express-jwt');
         var jwt = require('jsonwebtoken');

@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    var Session = require('../models/session');
+    var Session = require('../models/mongoose/session');
 
     exports.destroy = function(req, res, callback) {
         Session.findById(req.params.id, function(err, session) {

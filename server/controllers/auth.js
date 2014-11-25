@@ -1,10 +1,10 @@
 (function () {
 	'use strict';
 
-	var User = require('../models/user');
+	var User = require('../models/mongoose/user');
 	var jwt = require('jsonwebtoken');
 	var secrets = require('../config/secrets');
-	var Session = require('../models/session');
+	var Session = require('../models/mongoose/session');
 
 
 	exports.getSessionId = function(req, res, callback) {

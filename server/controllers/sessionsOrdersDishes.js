@@ -3,7 +3,7 @@
 
     var jwt = require('jsonwebtoken');
     var secrets = require('../config/secrets');
-    var Session = require('../models/session');
+    var Session = require('../models/mongoose/session');
 
     exports.index = function(req, res, callback) {
         var sessionId = req.params.sessionId;

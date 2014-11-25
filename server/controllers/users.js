@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    var User = require('../models/user');
+    var User = require('../models/mongoose/user');
 
     exports.destroy = function(req, res, callback) {
         User.findById(req.params.id, function(err, user) {
