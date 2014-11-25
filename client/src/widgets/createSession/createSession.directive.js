@@ -10,7 +10,6 @@
             templateUrl: 'widgets/createSession/createSession.view.html',
             restrict: 'E',
             scope: {
-                //info: '='
             },
             controller: CreateSessionController,
             controllerAs: 'vm'
