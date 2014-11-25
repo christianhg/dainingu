@@ -1,0 +1,45 @@
+<div class="panel" ng-class="{
+    'panel-default': !vm.order.committed,
+    'panel-info': vm.order.committed && !vm.order.confirmed,
+    'panel-primary': vm.order.confirmed && !vm.order.completed,
+    'panel-success': vm.order.completed && !vm.order.closed,
+    'panel-warning': vm.order.closed
+    }">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            Ordre fra {{vm.order.createdOn | date: 'HH:mm:ss'}}
+            <span class="label label-default" ng-show="!vm.order.committed">Current</span>
+            <span class="label label-info" ng-show="vm.order.committed && !vm.order.confirmed">Committed</span>
+            <span class="label label-primary" ng-show="vm.order.confirmed && !vm.order.completed">Confirmed</span>
+            <span class="label label-success" ng-show="vm.order.completed && !vm.order.closed">Completed</span>
+            <span class="label label-warning" ng-show="vm.order.closed">Closed</span>
+        </h3>
+    </div>
+    <div class="panel-body">
+        <div class="well clearfix" ng-show="!vm.order.confirmed">
+            <div class="pull-right" ng-show="!vm.order.committed">
+                <button type="submit" class="btn btn-info" ng-click="vm.commitOrder(order._id)">Færdiggør ordre</button>
+            </div>
+            <div class="pull-right" ng-show="vm.order.committed && !vm.order.confirmed">
+                <button type="submit" class="btn btn-default" ng-click="vm.pullOrder(order._id)">Fortryd færdiggørelse af ordre</button>
+            </div>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Retter</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="dish in order.dishes">
+            <td>
+                {{dish.name}}
+                <div class="pull-right" ng-show="!vm.order.committed">
+                    <button type="submit" class="btn btn-danger" ng-click="vm.removeDishFromOrder(order._id, dish._id)">Fjern fra ordre</button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

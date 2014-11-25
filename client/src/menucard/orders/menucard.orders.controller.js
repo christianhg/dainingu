@@ -5,7 +5,7 @@
         .module('dainingu.menucard.orders')
         .controller('MenucardOrdersController', MenucardOrdersController);
 
-    function MenucardOrdersController(auth, menus, menusDishes, sessionsOrders, sessionsOrdersCommit, sessionsOrdersDishes, $window, socket, $state) {
+    function MenucardOrdersController(auth, menus, sessionsOrders, socket, $state) {
         var vm = this;
 
         vm.getOrders = function() {
@@ -30,29 +30,7 @@
             });
         };
 
-        vm.commitOrder = function(orderId) {
-            auth.getSessionId(function(sessionId) {
-                sessionsOrdersCommit.commit({sessionId: sessionId, orderId: orderId}, function(orders) {
-                    console.log(orders);
-                });
-            });
-        };
 
-        vm.pullOrder = function(orderId) {
-            auth.getSessionId(function(sessionId) {
-                sessionsOrdersCommit.pull({sessionId: sessionId, orderId: orderId}, function(orders) {
-                    console.log(orders);
-                });
-            });
-        };
-
-        vm.removeDishFromOrder = function(orderId, dishId) {
-            auth.getSessionId(function(sessionId) {
-                sessionsOrdersDishes.delete({sessionId: sessionId, orderId: orderId, dishId: dishId}, function(data) {
-                    console.log(data);
-                });
-            });
-        };
 
         /*
         vm.activateMenucard = function(key) {

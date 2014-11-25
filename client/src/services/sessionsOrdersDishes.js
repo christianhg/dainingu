@@ -18,6 +18,10 @@
             'save': {
                 method: 'POST',
                 isArray: false
+            },
+            'delete': {
+                method: 'DELETE',
+                isArray: true
             }
         });
     }
