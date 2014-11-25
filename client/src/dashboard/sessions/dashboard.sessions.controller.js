@@ -5,7 +5,7 @@
         .module('dainingu.dashboard.sessions')
         .controller('DashboardSessionsController', DashboardSessionsController);
 
-    function DashboardSessionsController(sessions, sessionsExpire, sessionsOrders, sessionsOrdersCommit, sessionsOrdersConfirm, sessionsOrdersComplete, sessionsOrdersClose, socket) {
+    function DashboardSessionsController(sessions, sessionsActivate, sessionsExpire, sessionsOrders, sessionsOrdersCommit, sessionsOrdersConfirm, sessionsOrdersComplete, sessionsOrdersClose, socket) {
         var vm = this;
 
 
@@ -41,12 +41,15 @@
             });
         };
 
+        vm.activateSession = function(sessionId) {
+            sessionsActivate.activate({sessionId: sessionId}, function(data) {
+                console.log(data);
+            });
+        };
 
-        vm.deactivateSession = function(deactivatedSession) {
-            deactivatedSession.active = false;
-
-            sessions.update({'id': deactivatedSession._id}, deactivatedSession, function(session) {
-
+        vm.deactivateSession = function(sessionId) {
+            sessionsActivate.deactivate({sessionId: sessionId}, function(data) {
+                console.log(data);
             });
         };
 

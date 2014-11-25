@@ -222,6 +222,21 @@
             });
 
         /**
+         * Add og remove active-flag from sessions
+         */
+        app.route('/api/sessions/:sessionId/active')
+            .put(function(req, res) {
+                sessions.activate(req, res, function(data) {
+                    io.sockets.emit('sessionUpdated', data);
+                });
+            })
+            .delete(function(req, res) {
+                sessions.deactivate(req, res, function(data) {
+                    io.sockets.emit('sessionUpdated', data);
+                });
+            });
+
+        /**
          * Add og remove expire-flag from sessions
          */
         app.route('/api/sessions/:sessionId/expire')
