@@ -3,25 +3,31 @@
 
     var Session = require('../models/mongoose/session');
 
+    /**
+     * Delete session.
+     */
     exports.destroy = function(req, res, callback) {
         Session.findById(req.params.id, function(err, session) {
-           session.remove(function(err) {
-               if(err) {
-                   res.send(err);
-               }
+            session.remove(function(err) {
+                if(err) {
+                    res.send(err);
+                }
 
-               var data = {
-                   message: 'Session deleted',
-                   session: session
-               };
+                var data = {
+                    message: 'Session deleted',
+                    session: session
+                };
 
-               res.json(data);
+                res.json(data);
 
-               callback(data);
+                callback(data);
             });
         });
     };
 
+    /**
+     * Get all sessions.
+     */
     exports.index = function(req, res, callback) {
         Session.find(function(err, sessions) {
             if(err) {
@@ -39,6 +45,60 @@
         });
     };
 
+    /**
+     * Get specific session.
+     */
+    exports.show = function(req, res, callback) {
+        Session.findById(req.params.id, function(err, session) {
+            if(err) {
+                res.send(err);
+            }
+
+            var data = {
+                message: 'Session shown',
+                session: session
+            };
+
+            res.json(session);
+
+            callback(data);
+        });
+    };
+
+    /**
+     * Add new session.
+     */
+    exports.store = function(req, res, callback) {
+        var session = new Session();
+
+        session.key = '';
+
+        if(req.body.customer) {
+            session.customer.name = req.body.customer.name;
+        }
+        if(req.body.table) {
+            session.table = req.body.table;
+        }
+
+        session.save(function(err) {
+            if(err) {
+                res.send(err);
+            }
+
+            var data = {
+                message: 'Session added',
+                session: session
+            };
+
+            res.json(data);
+
+            callback(data);
+        });
+    };
+
+    /**
+     * Update session.
+     */
     exports.update = function(req, res, callback) {
         Session.findById(req.params.id, function(err, session) {
             if(err) {
@@ -65,23 +125,9 @@
         });
     };
 
-    exports.show = function(req, res, callback) {
-        Session.findById(req.params.id, function(err, session) {
-            if(err) {
-                res.send(err);
-            }
-
-            var data = {
-                message: 'Session shown',
-                session: session
-            };
-
-            res.json(session);
-
-            callback(data);
-        });
-    };
-
+    /**
+     * Activate session.
+     */
     exports.activate = function(req, res, callback) {
         var sessionId = req.params.sessionId;
 
@@ -113,6 +159,9 @@
         });
     };
 
+    /**
+     * Deactivate session.
+     */
     exports.deactivate = function(req, res, callback) {
         var sessionId = req.params.sessionId;
 
@@ -144,6 +193,9 @@
         });
     };
 
+    /**
+     * Expire session.
+     */
     exports.expire = function(req, res, callback) {
         var sessionId = req.params.sessionId;
 
@@ -175,6 +227,9 @@
         });
     };
 
+    /**
+     * Resume session.
+     */
     exports.resume = function(req, res, callback) {
         var sessionId = req.params.sessionId;
 
@@ -203,34 +258,6 @@
                     });
                 });
             }
-        });
-    };
-
-    exports.store = function(req, res, callback) {
-        var session = new Session();
-
-        session.key = '';
-
-        if(req.body.customer) {
-            session.customer.name = req.body.customer.name;
-        }
-        if(req.body.table) {
-            session.table = req.body.table;
-        }
-
-        session.save(function(err) {
-            if(err) {
-                res.send(err);
-            }
-
-            var data = {
-                message: 'Session added',
-                session: session
-            };
-
-            res.json(data);
-
-            callback(data);
         });
     };
 

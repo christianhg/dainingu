@@ -11,7 +11,7 @@
 
     function sessionsOrders($resource) {
         return $resource('/api/sessions/:sessionId/orders/:orderId', {sessionId: '@sessionId', orderId: '@orderId'}, {
-            'find': {
+            'index': {
                 method: 'GET',
                 isArray: true
             },

@@ -2,9 +2,11 @@
 	'use strict';
 
 	var sequelize = require("../config/sequelize");
-
 	var Dish = sequelize.model('dish');
 
+	/**
+	 * Delete dish.
+	 */
 	exports.destroy = function(req, res, callback) {
 		var id = req.params.id;
 
@@ -27,6 +29,9 @@
 			});
 	};
 
+	/**
+	 * Get all dishes.
+	 */
 	exports.index = function(req, res, callback) {
 		Dish.findAll()
 			.complete(function(err, dishes) {
@@ -46,6 +51,9 @@
 			});
 	};
 
+	/**
+	 * Get specific dish.
+	 */
 	exports.show = function(req, res, callback) {
 		var id = req.params.id;
 
@@ -67,6 +75,9 @@
 			});
 	};
 
+	/**
+	 * Add new dish.
+	 */
 	exports.store = function(req, res, callback) {
 		var name = req.body.name;
 
@@ -92,6 +103,9 @@
 			});
 	};
 
+	/**
+	 * Update dish.
+	 */
 	exports.update = function(req, res, callback) {
 		var id = req.params.id;
 		var name = req.body.name;

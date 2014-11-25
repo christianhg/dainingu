@@ -15,6 +15,9 @@
         var jwt = require('jsonwebtoken');
         var secrets = require('./config/secrets');
 
+        //app.use(expressJwt({secret: secrets.jwt_secret})
+        //    .unless({path: ['/api/menus']}));
+
         /**
          * Authentication routes.
          */
@@ -180,7 +183,8 @@
          * Session API routes.
          */
         app.route('/api/sessions')
-            .get(function(req, res) {
+            .get(expressJwt({secret: secrets.jwt_secret}), function(req, res) {
+                console.log(req);
                 sessions.index(req, res, function(data) {
 
                 });
@@ -253,12 +257,12 @@
          * Orders in specific session
          */
         app.route('/api/sessions/:sessionId/orders')
-            .get(function(req, res) {
+            .get(expressJwt({secret: secrets.jwt_secret}), function(req, res) {
                 sessionsOrders.index(req, res, function(data) {
 
                 });
             })
-            .post(function(req, res) {
+            .post(expressJwt({secret: secrets.jwt_secret}), function(req, res) {
                 sessionsOrders.store(req, res, function(data) {
                     io.sockets.emit('ordersUpdated', data);
                 });
@@ -268,12 +272,12 @@
          * Specific order in specific session
          */
         app.route('/api/sessions/:sessionId/orders/:orderId')
-            .get(function(req, res) {
+            .get(expressJwt({secret: secrets.jwt_secret}), function(req, res) {
                 sessionsOrders.show(req, res, function(data) {
 
                 });
             })
-            .delete(function(req, res) {
+            .delete(expressJwt({secret: secrets.jwt_secret}), function(req, res) {
                 sessionsOrders.destroy(req, res, function(data) {
                     io.sockets.emit('ordersUpdated', data);
                 });

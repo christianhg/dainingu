@@ -1,32 +1,14 @@
 (function () {
 	'use strict';
 
-	var User = require('../models/mongoose/user');
 	var jwt = require('jsonwebtoken');
 	var secrets = require('../config/secrets');
 	var Session = require('../models/mongoose/session');
+	var User = require('../models/mongoose/user');
 
-
-	exports.getSessionId = function(req, res, callback) {
-		var menucardToken = req.body.token;
-
-		jwt.verify(menucardToken, secrets.jwt_secret, function(err, sessionId) {
-
-			Session.findOne({ _id: sessionId }, function(err, session) {
-				if(err) {
-					res.send(err);
-				}
-
-				if(!session) {
-					res.send(false);
-				} else {
-					res.send(sessionId);
-
-				}
-			});
-		});
-	};
-
+	/**
+	 * Activate session using session key.
+	 */
 	exports.activateSession = function(req, res, callback) {
 		var candidateKey = req.body.key;
 
@@ -79,9 +61,34 @@
 				})
 			}
 		});
-
 	};
 
+	/**
+	 * Get session id.
+	 */
+	exports.getSessionId = function(req, res, callback) {
+		var menucardToken = req.body.token;
+
+		jwt.verify(menucardToken, secrets.jwt_secret, function(err, sessionId) {
+
+			Session.findOne({ _id: sessionId }, function(err, session) {
+				if(err) {
+					res.send(err);
+				}
+
+				if(!session) {
+					res.send(false);
+				} else {
+					res.send(sessionId);
+
+				}
+			});
+		});
+	};
+
+	/**
+	 * Sign user in.
+	 */
 	exports.signin = function(req, res, callback) {
 		var username = req.body.username;
 		var password = req.body.password;
@@ -134,6 +141,9 @@
 		});
 	};
 
+	/**
+	 * Validate login token.
+	 */
 	exports.validateLoginToken = function(req, res, callback) {
 		var candidateToken = req.body.token;
 
@@ -152,6 +162,9 @@
 		});
 	};
 
+	/**
+	 * Validate menucard token.
+	 */
 	exports.validateMenucardToken = function(req, res, callback) {
 		var menucardToken = req.body.token;
 
@@ -165,7 +178,6 @@
 				if(!session) {
 					res.send(false);
 				} else {
-					//console.log(session);
 					session.status(function(isActive, isExpired) {
 						if(!isActive || isExpired) {
 							res.send(false);

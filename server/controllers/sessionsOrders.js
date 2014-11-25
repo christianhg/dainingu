@@ -1,9 +1,42 @@
 (function () {
     'use strict';
 
-    var jwt = require('jsonwebtoken');
-    var secrets = require('../config/secrets');
     var Session = require('../models/mongoose/session');
+
+    /**
+     * Delete specific order in specific session.
+     */
+    exports.destroy = function(req, res, callback) {
+        var sessionId = req.params.sessionId;
+        var orderId = req.params.orderId;
+
+        Session.findOne({_id: sessionId}, function(err, session) {
+            if(err) {
+                res.send(err);
+            }
+
+            if(!session) {
+                res.send(false);
+            } else {
+                session.removeOrder(orderId, function(orders) {
+                    session.save(function(err) {
+                        if(err) {
+                            res.send(err);
+                        }
+
+                        var data = {
+                            message: 'Order deleted',
+                            session: session
+                        };
+
+                        res.json(data);
+
+                        callback(data);
+                    });
+                });
+            }
+        });
+    };
 
     /**
      * Find all orders in specific session
@@ -19,7 +52,14 @@
             if(!session) {
                 res.send(false);
             } else {
-                res.send(session.orders);
+                var data = {
+                    message: 'Orders shown',
+                    orders: session.orders
+                };
+
+                res.json(session.orders);
+
+                callback(data);
             }
         });
     };
@@ -40,17 +80,26 @@
                 res.send(false);
             } else {
                 session.findOrder(orderId, function(order) {
-                    res.send(order);
+                    var data = {
+                        message: 'Order shown',
+                        order: order
+                    };
+
+                    res.json(order);
+
+                    callback(data);
                 });
             }
         });
     };
 
-    exports.destroy = function(req, res, callback) {
+    /**
+     * Add order to specific session.
+     */
+    exports.store = function(req, res, callback) {
         var sessionId = req.params.sessionId;
-        var orderId = req.params.orderId;
 
-        Session.findOne({_id: sessionId}, function(err, session) {
+        Session.findOne({ _id: sessionId }, function(err, session) {
             if(err) {
                 res.send(err);
             }
@@ -58,28 +107,30 @@
             if(!session) {
                 res.send(false);
             } else {
-                session.removeOrder(orderId, function(orders) {
+                session.addOrder(function(orders) {
                     session.save(function(err) {
                         if(err) {
-                           res.send(err);
+                            res.send(err);
                         }
 
                         var data = {
-                            message: 'Order deleted',
+                            message: 'Order added to session',
                             session: session
                         };
 
-                        res.json(data);
+                        res.json(session);
 
                         callback(data);
                     });
+
                 });
             }
         });
+
     };
 
     /**
-     * Commit order.
+     * Commit order in specific session.
      */
     exports.commit = function(req, res, callback) {
         var sessionId = req.params.sessionId;
@@ -114,7 +165,7 @@
     };
 
     /**
-     * Pull order.
+     * Pull order in specific session.
      */
     exports.pull = function(req, res, callback) {
         var sessionId = req.params.sessionId;
@@ -149,7 +200,7 @@
     };
 
     /**
-     * Confirm order.
+     * Confirm order in specific session.
      */
     exports.confirm = function(req, res, callback) {
         var sessionId = req.params.sessionId;
@@ -184,7 +235,7 @@
     };
 
     /**
-     * Reject order.
+     * Reject order in specific session.
      */
     exports.reject = function(req, res, callback) {
         var sessionId = req.params.sessionId;
@@ -219,7 +270,7 @@
     };
 
     /**
-     * Complete order.
+     * Complete order in specific session.
      */
     exports.complete = function(req, res, callback) {
         var sessionId = req.params.sessionId;
@@ -254,7 +305,7 @@
     };
 
     /**
-     * Incomplete order.
+     * Incomplete order in specific session.
      */
     exports.incomplete = function(req, res, callback) {
         var sessionId = req.params.sessionId;
@@ -289,7 +340,7 @@
     };
 
     /**
-     * Close order.
+     * Close order in specific session.
      */
     exports.close = function(req, res, callback) {
         var sessionId = req.params.sessionId;
@@ -324,7 +375,7 @@
     };
 
     /**
-     * Open order.
+     * Open order in specific session.
      */
     exports.open = function(req, res, callback) {
         var sessionId = req.params.sessionId;
@@ -356,39 +407,6 @@
                 });
             }
         });
-    };
-
-    exports.store = function(req, res, callback) {
-        var sessionId = req.params.sessionId;
-
-        Session.findOne({ _id: sessionId }, function(err, session) {
-            if(err) {
-                res.send(err);
-            }
-
-            if(!session) {
-                res.send(false);
-            } else {
-                session.addOrder(function(orders) {
-                    session.save(function(err) {
-                        if(err) {
-                            res.send(err);
-                        }
-
-                        var data = {
-                            message: 'Order added to session',
-                            session: session
-                        };
-
-                        res.json(session);
-
-                        callback(data);
-                    });
-
-                });
-            }
-        });
-
     };
 
 })();

@@ -21,7 +21,7 @@
 						menu: menu
 					};
 
-					res.json(menu);
+					res.json(data);
 
 					callback(data);
 				});
@@ -121,7 +121,7 @@
 
 		Menu.create({
 			name: name
-		}).success(function(err, menu) {
+		}).complete(function(err, menu) {
 			if(err) {
 				res.send(err);
 			}
@@ -131,7 +131,7 @@
 				menu: menu
 			};
 
-			res.json(menu);
+			res.json(data);
 
 			callback(data);
 		});
@@ -162,7 +162,7 @@
 						menu: menu
 					};
 
-					res.json(menu);
+					res.json(data);
 
 					callback(data);
 				});
