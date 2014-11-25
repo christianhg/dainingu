@@ -15,8 +15,9 @@
         var jwt = require('jsonwebtoken');
         var secrets = require('./config/secrets');
 
-        //app.use(expressJwt({secret: secrets.jwt_secret})
-        //    .unless({path: ['/api/menus']}));
+        var jwtCheck = expressJwt({
+            secret: secrets.jwt_secret
+        });
 
         /**
          * Authentication routes.
@@ -60,29 +61,29 @@
          * Users API routes.
          */
         app.route('/api/users')
-            .get(expressJwt({secret: secrets.jwt_secret}), function(req, res) {
+            .get(jwtCheck, function(req, res) {
                 users.index(req, res, function(data) {
 
                 });
             })
-            .post(function(req, res) {
+            .post(jwtCheck, function(req, res) {
                 users.store(req, res, function(data) {
                     io.sockets.emit('userAdded', data);
 
                 });
             });
         app.route('/api/users/:id')
-            .get(function(req, res) {
+            .get(jwtCheck, function(req, res) {
                 users.show(req, res, function(data) {
 
                 });
             })
-            .put(function(req, res) {
+            .put(jwtCheck, function(req, res) {
                 users.update(req, res, function(data) {
 
                 });
             })
-            .delete(function(req, res) {
+            .delete(jwtCheck, function(req, res) {
                 users.destroy(req, res, function(data) {
                     io.sockets.emit('userDeleted', data);
                 });
@@ -97,7 +98,7 @@
 
                 });
             })
-            .post(function(req, res) {
+            .post(jwtCheck, function(req, res) {
                 menus.store(req, res, function(data) {
                     io.sockets.emit('menuAdded', data);
                 });
@@ -108,13 +109,13 @@
 
                 });
             })
-            .put(function(req, res) {
+            .put(jwtCheck, function(req, res) {
                 menus.update(req, res, function(data) {
                     io.sockets.emit('menuUpdated', data);
 
                 });
             })
-            .delete(function(req, res) {
+            .delete(jwtCheck, function(req, res) {
                 menus.destroy(req, res, function(data) {
                     io.sockets.emit('menuDeleted', data);
 
@@ -136,13 +137,13 @@
 
                 });
             }).
-            post(function(req, res) {
+            post(jwtCheck, function(req, res) {
                 menusDishes.store(req, res, function(data) {
 
                 });
             });
         app.route('/api/menus/:menuId/dishes/:dishId')
-            .delete(function(req, res) {
+            .delete(jwtCheck, function(req, res) {
                 menusDishes.destroy(req, res, function(data) {
 
                 });
@@ -157,7 +158,7 @@
 
                 });
             })
-            .post(function(req, res) {
+            .post(jwtCheck, function(req, res) {
                 dishes.store(req, res, function(data) {
 
                 });
@@ -168,12 +169,12 @@
 
                 })
             })
-            .put(function(req, res) {
+            .put(jwtCheck, function(req, res) {
                 dishes.update(req, res, function(data) {
 
                 });
             })
-            .delete(function(req, res) {
+            .delete(jwtCheck, function(req, res) {
                 dishes.destroy(req, res, function(data) {
 
                 });
@@ -183,41 +184,40 @@
          * Session API routes.
          */
         app.route('/api/sessions')
-            .get(expressJwt({secret: secrets.jwt_secret}), function(req, res) {
-                console.log(req);
+            .get(jwtCheck, function(req, res) {
                 sessions.index(req, res, function(data) {
 
                 });
             })
-            .post(function(req, res) {
+            .post(jwtCheck, function(req, res) {
                 sessions.store(req, res, function(data) {
                     io.sockets.emit('sessionAdded', data);
                 });
             });
         app.route('/api/sessions/:id')
-            .get(function(req, res) {
+            .get(jwtCheck, function(req, res) {
                 sessions.show(req, res, function(data) {
 
                 })
             })
-            .put(function(req, res) {
+            .put(jwtCheck, function(req, res) {
                 sessions.update(req, res, function(data) {
                     io.sockets.emit('sessionUpdated', data);
                 })
             })
-            .delete(function(req, res) {
+            .delete(jwtCheck, function(req, res) {
                 sessions.destroy(req, res, function(data) {
                     io.sockets.emit('sessionDeleted', data);
                 });
             });
 
         app.route('/api/sessions/:sessionId/activate')
-            .put(function(req, res) {
+            .put(jwtCheck, function(req, res) {
                 sessions.activate(req, res, function(data) {
 
                 });
             })
-            .delete(function(req, res) {
+            .delete(jwtCheck, function(req, res) {
                 sessions.deactivate(req, res, function(data) {
 
                 });
@@ -227,12 +227,12 @@
          * Add og remove active-flag from sessions
          */
         app.route('/api/sessions/:sessionId/active')
-            .put(function(req, res) {
+            .put(jwtCheck, function(req, res) {
                 sessions.activate(req, res, function(data) {
                     io.sockets.emit('sessionUpdated', data);
                 });
             })
-            .delete(function(req, res) {
+            .delete(jwtCheck, function(req, res) {
                 sessions.deactivate(req, res, function(data) {
                     io.sockets.emit('sessionUpdated', data);
                 });
@@ -242,12 +242,12 @@
          * Add og remove expire-flag from sessions
          */
         app.route('/api/sessions/:sessionId/expire')
-            .put(function(req, res) {
+            .put(jwtCheck, function(req, res) {
                 sessions.expire(req, res, function(data) {
                     io.sockets.emit('sessionUpdated', data);
                 });
             })
-            .delete(function(req, res) {
+            .delete(jwtCheck, function(req, res) {
                 sessions.resume(req, res, function(data) {
                     io.sockets.emit('sessionUpdated', data);
                 });
@@ -257,12 +257,12 @@
          * Orders in specific session
          */
         app.route('/api/sessions/:sessionId/orders')
-            .get(expressJwt({secret: secrets.jwt_secret}), function(req, res) {
+            .get(jwtCheck, function(req, res) {
                 sessionsOrders.index(req, res, function(data) {
 
                 });
             })
-            .post(expressJwt({secret: secrets.jwt_secret}), function(req, res) {
+            .post(jwtCheck, function(req, res) {
                 sessionsOrders.store(req, res, function(data) {
                     io.sockets.emit('ordersUpdated', data);
                 });
@@ -272,12 +272,12 @@
          * Specific order in specific session
          */
         app.route('/api/sessions/:sessionId/orders/:orderId')
-            .get(expressJwt({secret: secrets.jwt_secret}), function(req, res) {
+            .get(jwtCheck, function(req, res) {
                 sessionsOrders.show(req, res, function(data) {
 
                 });
             })
-            .delete(expressJwt({secret: secrets.jwt_secret}), function(req, res) {
+            .delete(jwtCheck, function(req, res) {
                 sessionsOrders.destroy(req, res, function(data) {
                     io.sockets.emit('ordersUpdated', data);
                 });
@@ -287,12 +287,12 @@
          * Add or remove commit-flag from order
          */
         app.route('/api/sessions/:sessionId/orders/:orderId/commit')
-            .put(function(req, res) {
+            .put(jwtCheck, function(req, res) {
                 sessionsOrders.commit(req, res, function(data) {
                     io.sockets.emit('ordersUpdated', data);
                 });
             })
-            .delete(function(req, res) {
+            .delete(jwtCheck, function(req, res) {
                 sessionsOrders.pull(req, res, function(data) {
                     io.sockets.emit('ordersUpdated', data);
                 });
@@ -302,12 +302,12 @@
          * Add or remove confirm-flag from order
          */
         app.route('/api/sessions/:sessionId/orders/:orderId/confirm')
-            .put(function(req, res) {
+            .put(jwtCheck, function(req, res) {
                 sessionsOrders.confirm(req, res, function(data) {
                     io.sockets.emit('ordersUpdated', data);
                 });
             })
-            .delete(function(req, res) {
+            .delete(jwtCheck, function(req, res) {
                 sessionsOrders.reject(req, res, function(data) {
                     io.sockets.emit('ordersUpdated', data);
                 });
@@ -317,12 +317,12 @@
          * Add or remove complete-flag from order
          */
         app.route('/api/sessions/:sessionId/orders/:orderId/complete')
-            .put(function(req, res) {
+            .put(jwtCheck, function(req, res) {
                 sessionsOrders.complete(req, res, function(data) {
                     io.sockets.emit('ordersUpdated', data);
                 });
             })
-            .delete(function(req, res) {
+            .delete(jwtCheck, function(req, res) {
                 sessionsOrders.incomplete(req, res, function(data) {
                     io.sockets.emit('ordersUpdated', data);
                 });
@@ -332,12 +332,12 @@
          * Add or remove close-flag from order
          */
         app.route('/api/sessions/:sessionId/orders/:orderId/close')
-            .put(function(req, res) {
+            .put(jwtCheck, function(req, res) {
                 sessionsOrders.close(req, res, function(data) {
                     io.sockets.emit('ordersUpdated', data);
                 });
             })
-            .delete(function(req, res) {
+            .delete(jwtCheck, function(req, res) {
                 sessionsOrders.open(req, res, function(data) {
                     io.sockets.emit('ordersUpdated', data);
                 });
@@ -347,12 +347,12 @@
          * Dishes in specific order in specific session.
          */
         app.route('/api/sessions/:sessionId/orders/:orderId/dishes')
-            .get(function(req, res) {
+            .get(jwtCheck, function(req, res) {
                 sessionsOrdersDishes.index(req, res, function(data) {
 
                 });
             })
-            .post(function(req, res) {
+            .post(jwtCheck, function(req, res) {
                 sessionsOrdersDishes.store(req, res, function(data) {
 
                 });
@@ -362,12 +362,12 @@
          * Specific dish in specific order in specific session.
          */
         app.route('/api/sessions/:sessionId/orders/:orderId/dishes/:dishId')
-            .get(function(req, res) {
+            .get(jwtCheck, function(req, res) {
                 sessionsOrdersDishes.show(req, res, function(data) {
 
                 });
             })
-            .delete(function(req, res) {
+            .delete(jwtCheck, function(req, res) {
                 sessionsOrdersDishes.destroy(req, res, function(data) {
 
                 });
