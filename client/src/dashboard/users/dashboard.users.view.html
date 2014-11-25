@@ -26,10 +26,12 @@
         </div>
         <div class="col-sm-8">
             <div class="panel panel-default" ng-repeat="user in vm.users">
-                <div class="panel-heading">
-                    {{user.username}}
-                    <a ui-sref=".id.edit({id: user._id})" class="btn btn-warning">Redigér</a>
-                    <a ui-sref=".id.delete({id:user._id})" class="btn btn-danger">Slet</a>
+                <div class="panel-heading clearfix">
+                    <h3 class="panel-title pull-left">{{user.username}}</h3>
+                    <div class="pull-right">
+                        <a ui-sref=".id.edit({id: user._id})" class="btn btn-warning">Redigér</a>
+                        <a ui-sref=".id.delete({id:user._id})" class="btn btn-danger">Slet</a>
+                    </div>
                 </div>
                 <div class="panel-body">
                     ...

@@ -14,7 +14,7 @@
 
 		vm.getOrders = function() {
 			auth.getSessionId(function(sessionId) {
-				sessionsOrders.find({sessionId: sessionId}, function(orders) {
+				sessionsOrders.index({sessionId: sessionId}, function(orders) {
 					vm.orders = orders;
 				});
 			});

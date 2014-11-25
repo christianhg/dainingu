@@ -19,9 +19,11 @@
         <div class="col-sm-6 col-md-8">
             <div class="panel panel-default" ng-repeat="menu in vm.menus | orderBy:name">
                 <div class="panel-heading clearfix">
-                    {{menu.name}}
-                    <a ui-sref=".id.edit({id: menu.id})" class="btn btn-warning">Redigér</a>
-                    <a ui-sref=".id.delete({id: menu.id})" class="btn btn-danger">Slet</a>
+                    <h3 class="panel-title pull-left">{{menu.name}}</h3>
+                    <div class="pull-right">
+                        <a ui-sref=".id.edit({id: menu.id})" class="btn btn-warning">Redigér</a>
+                        <a ui-sref=".id.delete({id: menu.id})" class="btn btn-danger">Slet</a>
+                    </div>
                 </div>
                 <div class="panel-body">
                     ...

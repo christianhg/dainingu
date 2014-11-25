@@ -1,0 +1,32 @@
+<div class="panel" ng-class="{'panel-info': !vm.session.active, 'panel-success': vm.session.active, 'panel-warning': vm.session.expired}">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <h3 class="panel-title">
+                <strong>{{vm.session.customer.name}}</strong> (bord {{vm.session.table}}) - {{vm.session.key}}
+                <span class="label label-info" ng-hide="vm.session.active">Inaktiv</span>
+                <span class="label label-success" ng-show="vm.session.active && !vm.session.expired">Aktiv</span>
+                <span class="label label-warning" ng-show="vm.session.expired">Udløbet</span>
+            </h3>
+        </h3>
+    </div>
+    <div class="panel-body">
+        <div class="well clearfix">
+            <div class="pull-left">
+                <a ui-sref=".id.edit({id: session._id})" class="btn btn-warning">Redigér</a>
+                <a ui-sref=".id.delete({id: session._id})" class="btn btn-danger">Slet</a>
+            </div>
+            <div class="pull-right" ng-hide="vm.session.active">
+                <button type="submit" ng-click="vm.activateSession(session._id)" class="btn btn-success">Aktivér</button>
+                <button type="submit" ng-click="vm.expireSession(session._id)" class="btn btn-warning">Ophør</button>
+            </div>
+            <div class="pull-right" ng-show="vm.session.active && !vm.session.expired">
+                <button type="submit" ng-click="vm.deactivateSession(session._id)" class="btn btn-info">Deaktivér</button>
+                <button type="submit" ng-click="vm.expireSession(session._id)" class="btn btn-warning">Ophør</button>
+            </div>
+            <div class="pull-right" ng-show="vm.session.expired">
+                <button type="submit" ng-click="vm.resumeSession(session._id)" class="btn btn-info">Genoptag</button>
+            </div>
+        </div>
+        <div ng-transclude></div>
+    </div>
+</div>

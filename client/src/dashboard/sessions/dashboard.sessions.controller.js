@@ -5,9 +5,8 @@
         .module('dainingu.dashboard.sessions')
         .controller('DashboardSessionsController', DashboardSessionsController);
 
-    function DashboardSessionsController(sessions, sessionsActivate, sessionsExpire, sessionsOrders, sessionsOrdersCommit, sessionsOrdersConfirm, sessionsOrdersComplete, sessionsOrdersClose, socket) {
+    function DashboardSessionsController(sessions, socket) {
         var vm = this;
-
 
         vm.getSessions = function() {
             vm.sessions = sessions.query();
@@ -23,104 +22,6 @@
             vm.getSessions();
         });
 
-        vm.deleteOrder = function(sessionId, orderId) {
-            sessionsOrders.delete({sessionId: sessionId, orderId: orderId}, function(data) {
 
-            });
-        };
-
-        vm.expireSession = function(sessionId) {
-            sessionsExpire.expire({sessionId: sessionId}, function(data) {
-                console.log(data);
-            });
-        };
-
-        vm.resumeSession = function(sessionId) {
-            sessionsExpire.resume({sessionId: sessionId}, function(data) {
-                console.log(data);
-            });
-        };
-
-        vm.activateSession = function(sessionId) {
-            sessionsActivate.activate({sessionId: sessionId}, function(data) {
-                console.log(data);
-            });
-        };
-
-        vm.deactivateSession = function(sessionId) {
-            sessionsActivate.deactivate({sessionId: sessionId}, function(data) {
-                console.log(data);
-            });
-        };
-
-        vm.deleteSession = function(id) {
-            sessions.delete({}, {'id': id}, function(session) {
-                vm.sessions = sessions.query();
-            });
-        };
-
-        vm.closeSession = function(closedSession) {
-            closedSession.expired = true;
-
-            sessions.update({'id': closedSession._id}, closedSession, function(session) {
-
-            });
-        };
-
-        vm.openSession = function(openedSession) {
-            openedSession.expired = false;
-
-            sessions.update({'id': openedSession._id}, openedSession, function(session) {
-
-            });
-        };
-
-        vm.commitOrder = function(sessionId, orderId) {
-            sessionsOrdersCommit.commit({sessionId: sessionId, orderId: orderId}, function(data) {
-                console.log(data);
-            });
-        };
-
-        vm.pullOrder = function(sessionId, orderId) {
-            sessionsOrdersCommit.pull({sessionId: sessionId, orderId: orderId}, function(data) {
-                console.log(data);
-            });
-        };
-
-        vm.confirmOrder = function(sessionId, orderId) {
-            sessionsOrdersConfirm.confirm({sessionId: sessionId, orderId: orderId}, function(data) {
-                console.log(data);
-            });
-        };
-
-        vm.rejectOrder = function(sessionId, orderId) {
-            sessionsOrdersConfirm.reject({sessionId: sessionId, orderId: orderId}, function(data) {
-                console.log(data);
-            });
-        };
-
-        vm.completeOrder = function(sessionId, orderId) {
-            sessionsOrdersComplete.complete({sessionId: sessionId, orderId: orderId}, function(data) {
-                console.log(data);
-            });
-        };
-
-        vm.incompleteOrder = function(sessionId, orderId) {
-            sessionsOrdersComplete.incomplete({sessionId: sessionId, orderId: orderId}, function(data) {
-                console.log(data);
-            });
-        };
-
-        vm.closeOrder = function(sessionId, orderId) {
-            sessionsOrdersClose.close({sessionId: sessionId, orderId: orderId}, function(data) {
-                console.log(data);
-            });
-        };
-
-        vm.openOrder = function(sessionId, orderId) {
-            sessionsOrdersClose.open({sessionId: sessionId, orderId: orderId}, function(data) {
-                console.log(data);
-            });
-        };
     }
 })();
