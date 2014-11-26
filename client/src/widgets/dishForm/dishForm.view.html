@@ -1,0 +1,22 @@
+<div class="form-group">
+    <label for="dishName">Navn</label>
+    <input type="text" id="dishName" name="dishName" class="form-control" ng-model="vm.dish.name" placeholder="Navn" required>
+</div>
+<div class="form-group">
+    <label for="dishDescription">Beskrivelse</label>
+    <textarea id="dishDescription" name="dishDescription" class="form-control" ng-model="vm.dish.description" placeholder="Beskrivelse" rows="3" required></textarea>
+</div>
+<div class="form-group">
+    <label for="dishPrice">Pris</label>
+    <input type="number" id="dishPrice" name="dishPrice" class="form-control" ng-model="vm.dish.price" placeholder="Pris" required>
+</div>
+<div class="form-group">
+    <label for="dishStock">Lager</label>
+    <input type="number" id="dishStock" name="dishStock" class="form-control" ng-model="vm.dish.stock" placeholder="Lager" required>
+</div>
+<div class="form-group">
+    <label for="dishMenu">Menu</label>
+    <select class="form-control" name="dishMenu" id="dishMenu" ng-model="vm.dish.menuId">
+        <option ng-repeat="menu in vm.menus" value="{{menu.id}}">{{menu.name}}</option>
+    </select>
+</div>

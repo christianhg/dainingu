@@ -5,15 +5,17 @@
         </div>
         <div class="col-sm-6 col-md-8">
             <div class="panel panel-default" ng-repeat="dish in vm.dishes | orderBy:name">
-                <div class="panel-heading clearfix">
-                    <h3 class="panel-title pull-left">{{dish.name}}</h3>
-                    <div class="pull-right">
-                        <a ui-sref=".id.edit({id: dish.id})" class="btn btn-warning">Redigér</a>
-                        <a ui-sref=".id.delete({id: dish.id})" class="btn btn-danger">Slet</a>
-                    </div>
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{dish.name}}</h3>
                 </div>
                 <div class="panel-body">
-                    ...
+                    <div class="well clearfix">
+                        <div class="pull-right">
+                            <a ui-sref=".id.edit({id: dish.id})" class="btn btn-warning">Redigér</a>
+                            <a ui-sref=".id.delete({id: dish.id})" class="btn btn-danger">Slet</a>
+                        </div>
+                    </div>
+                    <dish-info dish="dish"></dish-info>
                 </div>
             </div>
         </div>

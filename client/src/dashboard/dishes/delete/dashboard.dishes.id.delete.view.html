@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<div class="col-md-4 col-md-offset-4">
     <div class="panel panel-default">
         <div class="panel-heading">
             Slet {{vm.dish.name}}
@@ -6,6 +6,7 @@
         <div class="panel-body">
             <form name="deleteDishForm" ng-submit="vm.deleteDish()">
                 <button type="submit" class="btn btn-danger">Slet</button>
+                <a ui-sref="dashboard.dishes" class="btn btn-default">Fortryd</a>
             </form>
         </div>
     </div>

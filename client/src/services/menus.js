@@ -22,6 +22,10 @@
 			'delete': {
 				method: 'DELETE',
 				isArray: false
+			},
+			'get': {
+				method: 'GET',
+				isArray: false
 			}
 		});
 
