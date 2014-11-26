@@ -12,7 +12,7 @@
             })
             .post(jwtCheck, function(req, res) {
                 menus.store(req, res, function(data) {
-                    io.sockets.emit('menuAdded', data);
+                    io.sockets.emit('menus:updated', data);
                 });
             });
         app.route('/api/menus/:id')
@@ -23,13 +23,13 @@
             })
             .put(jwtCheck, function(req, res) {
                 menus.update(req, res, function(data) {
-                    io.sockets.emit('menuUpdated', data);
+                    io.sockets.emit('menus:updated', data);
 
                 });
             })
             .delete(jwtCheck, function(req, res) {
                 menus.destroy(req, res, function(data) {
-                    io.sockets.emit('menuDeleted', data);
+                    io.sockets.emit('menus:updated', data);
 
                 });
             });

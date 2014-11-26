@@ -12,20 +12,5 @@
 		};
 
 		return directive;
-
-		/**
-		 * @ngInject
-		 */
-		/*function DishFormController($scope) {
-			var vm = this;
-
-			vm.dish = {};
-
-			$scope.$watch("dish",function(newValue,OldValue,scope){
-				if (newValue){
-					vm.dish = newValue;
-				}
-			});
-		}*/
 	}
 })();

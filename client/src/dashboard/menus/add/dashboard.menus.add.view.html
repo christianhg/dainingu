@@ -1,0 +1,14 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Opret menu
+    </div>
+    <div class="panel-body">
+        <form name="addMenuForm" ng-submit="addMenuForm.$valid && vm.addMenu(vm.menu)" novalidate>
+            <div class="form-group">
+                <label for="menuName">Navn</label>
+                <input type="text" id="menuName" name="menuName" class="form-control" ng-model="vm.menu.name" placeholder="Navn" required>
+            </div>
+            <button type="submit" class="btn btn-success">Opret menu</button>
+        </form>
+    </div>
+</div>

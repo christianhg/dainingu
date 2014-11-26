@@ -105,6 +105,9 @@
 	exports.update = function(req, res, callback) {
 		var id = req.params.id;
 		var name = req.body.name;
+		var description = req.body.description;
+		var price = req.body.price;
+		var stock = req.body.stock;
 		var menuId = req.body.menuId;
 
 		Dish.find({ where: { id: id }})
@@ -115,6 +118,9 @@
 
 				dish.updateAttributes({
 					name: name,
+					description: description,
+					price: price,
+					stock: stock,
 					menuId: menuId
 				}).success(function() {
 					var data = {

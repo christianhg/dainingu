@@ -8,29 +8,18 @@
     function DashboardMenusController(menus, menusDishes, socket) {
         var vm = this;
 
-        socket.on('menuAdded', function(data) {
-            console.log(data.message);
-        });
-
-        socket.on('menuUpdated', function(data) {
-            console.log(data.message);
-        });
-
-        socket.on('menuDeleted', function(data) {
-            console.log(data.message);
-        });
-
-        vm.menus = [];
-
-        menus.query({deep: true}, function(menus) {
-            vm.menus = menus;
-        });
-
-        vm.addMenu = function(newMenu) {
-            menus.save(newMenu, function(menu) {
-                //vm.menus = menus.query();
+        vm.getMenus = function() {
+            menus.query({deep: true}, function(menus) {
+                vm.menus = menus;
             });
         };
+
+        vm.getMenus();
+
+        socket.on('menus:updated', function(data) {
+            vm.getMenus();
+        });
+
 
         vm.deleteMenu = function(id) {
             menus.delete({}, {'id': id}, function(menu) {
