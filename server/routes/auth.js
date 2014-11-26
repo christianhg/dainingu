@@ -4,6 +4,9 @@
     module.exports = function(app, io, jwtCheck) {
         var auth = require('./../controllers/auth');
 
+        /**
+         * Route for activating a session without session id.
+         */
         app.route('/auth/activateSession')
             .post(function(req, res) {
                 auth.activateSession(req, res, function(data) {

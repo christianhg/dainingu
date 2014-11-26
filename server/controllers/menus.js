@@ -6,6 +6,12 @@
 	var Menu = sequelize.model('menu');
 	var Dish = sequelize.model('dish');
 
+	/**
+	 * Delete menu.
+	 * @param req
+	 * @param res
+	 * @param callback
+	 */
 	exports.destroy = function(req, res, callback) {
 		var id = req.params.id;
 
@@ -28,6 +34,14 @@
 			});
 	};
 
+	/**
+	 * Get all menus.
+	 * If query string parameter deep is true, the menus will be shown
+	 * with dishes.
+	 * @param req
+	 * @param res
+	 * @param callback
+	 */
 	exports.index = function(req, res, callback) {
 		var deep = req.query.deep;
 
@@ -72,6 +86,14 @@
 		}
 	};
 
+	/**
+	 * Get specific menu.
+	 * If query string parameter deep is true, the menu will be shown
+	 * with dishes.
+	 * @param req
+	 * @param res
+	 * @param callback
+	 */
 	exports.show = function(req, res, callback) {
 		var id = req.params.id;
 		var deep = req.query.deep;
@@ -116,6 +138,12 @@
 		}
 	};
 
+	/**
+	 * Add new menu.
+	 * @param req
+	 * @param res
+	 * @param callback
+	 */
 	exports.store = function(req, res, callback) {
 		var name = req.body.name;
 
@@ -137,12 +165,15 @@
 		});
 	};
 
+	/**
+	 * Update menu.
+	 * @param req
+	 * @param res
+	 * @param callback
+	 */
 	exports.update = function(req, res, callback) {
 		var id = req.params.id;
 		var name = req.body.name;
-		var dish = req.body.dish;
-
-		console.log(id, name);
 
 		Menu.find({
 			where: { id: id }
@@ -150,13 +181,7 @@
 			.complete(function(err, menu) {
 				menu.updateAttributes({
 					name: name
-				}).success(function() {
-					if(dish) {
-						menu.addDish([dish.id]).success(function(dish) {
-
-						});
-					}
-
+				}).complete(function(err, menu) {
 					var data = {
 						message: 'Menu updated',
 						menu: menu
@@ -167,7 +192,6 @@
 					callback(data);
 				});
 			});
-
 	};
 
 })();

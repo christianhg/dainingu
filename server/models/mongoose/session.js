@@ -64,6 +64,10 @@
         }]
     });
 
+    /**
+     * Generate random session key before session creation.
+     * TODO: The function needs to check if the key is unique.
+     */
     sessionSchema.pre('save', function(next) {
         var session = this;
 
@@ -76,6 +80,50 @@
         next();
     });
 
+    /**
+     * Get status of session.
+     */
+    sessionSchema.methods.status = function(callback) {
+        callback(this.active, this.expired);
+    };
+
+    /**
+     * Activate session.
+     */
+    sessionSchema.methods.activate = function(callback) {
+        this.active = true;
+        callback(this.active);
+    };
+
+    /**
+     * Deactivate session.
+     */
+    sessionSchema.methods.deactivate = function(callback) {
+        this.active = false;
+        callback(this.active);
+    };
+
+    /**
+     * Expire session.
+     */
+    sessionSchema.methods.expire = function(callback) {
+        this.expired = true;
+        callback(this.expired);
+    };
+
+    /**
+     * Resume session.
+     */
+    sessionSchema.methods.resume = function(callback) {
+        this.expired = false;
+        callback(this.expired);
+    };
+
+    /**
+     * Find specific order in session.
+     * @param orderId
+     * @param callback
+     */
     sessionSchema.methods.findOrder = function(orderId, callback) {
         var order;
 
@@ -93,6 +141,11 @@
         }
     };
 
+    /**
+     * Remove specific order in session.
+     * @param orderId
+     * @param callback
+     */
     sessionSchema.methods.removeOrder = function(orderId, callback) {
         var orders;
 
@@ -111,11 +164,21 @@
         }
     };
 
+    /**
+     * Add new order to session.
+     * @param callback
+     */
     sessionSchema.methods.addOrder = function(callback) {
         this.orders.push({});
         callback(this.orders);
     };
 
+    /**
+     * Find specific dish in specific order in session.
+     * @param orderId
+     * @param dishId
+     * @param callback
+     */
     sessionSchema.methods.findDish = function(orderId, dishId, callback) {
         var dish;
 
@@ -139,6 +202,11 @@
         }
     };
 
+    /**
+     * Find all dishes in specific order in session.
+     * @param orderId
+     * @param callback
+     */
     sessionSchema.methods.findDishes = function(orderId, callback) {
         var dishes;
 
@@ -157,6 +225,12 @@
         }
     };
 
+    /**
+     * Add dish to specific order in session.
+     * @param orderId
+     * @param dish
+     * @param callback
+     */
     sessionSchema.methods.addDish = function(orderId, dish, callback) {
         var order;
 
@@ -177,6 +251,12 @@
         }
     };
 
+    /**
+     * Remove dish from specific order in session.
+     * @param orderId
+     * @param dishId
+     * @param callback
+     */
     sessionSchema.methods.removeDish = function(orderId, dishId, callback) {
         var dishes;
 
@@ -203,46 +283,9 @@
     };
 
     /**
-     * Get status of session
-     */
-    sessionSchema.methods.status = function(callback) {
-        callback(this.active, this.expired);
-    };
-
-    /**
-     * Activate session
-     */
-    sessionSchema.methods.activate = function(callback) {
-        this.active = true;
-        callback(this.active);
-    };
-
-    /**
-     * Deactivate session
-     */
-    sessionSchema.methods.deactivate = function(callback) {
-        this.active = false;
-        callback(this.active);
-    };
-
-    /**
-     * Expire session
-     */
-    sessionSchema.methods.expire = function(callback) {
-        this.expired = true;
-        callback(this.expired);
-    };
-
-    /**
-     * Resume session
-     */
-    sessionSchema.methods.resume = function(callback) {
-        this.expired = false;
-        callback(this.expired);
-    };
-
-    /**
-     * Mark order in session as committed
+     * Mark specific order in session as committed.
+     * @param orderId
+     * @param callback
      */
     sessionSchema.methods.commitOrder = function(orderId, callback) {
         var order;
@@ -265,7 +308,9 @@
     };
 
     /**
-     * Mark order in session as pulled
+     * Mark specific order in session as pulled.
+     * @param orderId
+     * @param callback
      */
     sessionSchema.methods.pullOrder = function(orderId, callback) {
         var order;
@@ -288,7 +333,9 @@
     };
 
     /**
-     * Mark order in session as confirmed
+     * Mark specific order in session as confirmed.
+     * @param orderId
+     * @param callback
      */
     sessionSchema.methods.confirmOrder = function(orderId, callback) {
         var order;
@@ -311,7 +358,9 @@
     };
 
     /**
-     * Mark order in session as rejected
+     * Mark specific order in session as rejected.
+     * @param orderId
+     * @param callback
      */
     sessionSchema.methods.rejectOrder = function(orderId, callback) {
         var order;
@@ -334,7 +383,9 @@
     };
 
     /**
-     * Mark order in session as completed
+     * Mark specific order in session as completed.
+     * @param orderId
+     * @param callback
      */
     sessionSchema.methods.completeOrder = function(orderId, callback) {
         var order;
@@ -357,7 +408,9 @@
     };
 
     /**
-     * Mark order in session as incompleted
+     * Mark specific order in session as incompleted.
+     * @param orderId
+     * @param callback
      */
     sessionSchema.methods.incompleteOrder = function(orderId, callback) {
         var order;
@@ -380,7 +433,9 @@
     };
 
     /**
-     * Mark order in session as closed
+     * Mark specific order in session as closed.
+     * @param orderId
+     * @param callback
      */
     sessionSchema.methods.closeOrder = function(orderId, callback) {
         var order;
@@ -403,7 +458,9 @@
     };
 
     /**
-     * Mark order in session as opened
+     * Mark specific order in session as opened.
+     * @param orderId
+     * @param callback
      */
     sessionSchema.methods.openOrder = function(orderId, callback) {
         var order;
@@ -425,8 +482,8 @@
         }
     };
 
-
     var Session = mongoose.model('Session', sessionSchema);
 
+    // Expose model
     module.exports = Session;
 })();

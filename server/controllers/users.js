@@ -94,6 +94,7 @@
 
     /**
      * Update user.
+     * TODO: Needs to be able to update user passwords.
      */
     exports.update = function(req, res, callback) {
         var userId = req.params.id;
@@ -115,7 +116,7 @@
                     user: user
                 };
 
-                res.json(user);
+                res.json(data);
 
                 callback(data);
             });

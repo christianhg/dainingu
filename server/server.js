@@ -22,7 +22,7 @@
     var routes = require('./routes');
 
     /**
-     * Start Express server.
+     * Start Express server and have socket.io listen to the server.
      */
     var server = app.listen(secrets.port);
     var io = socketIo.listen(server);
@@ -33,7 +33,7 @@
     mongoose.connect(secrets.mongodb);
 
     /**
-     * Connect to MySQL and wire up our models.
+     * Connect to MySQL and wire up Sequelize models.
      */
     require("./config/sequelize").setup(__dirname + '/models/sequelize', "dainingu", "root", null, {
         host: 'localhost'
@@ -42,6 +42,7 @@
     /**
      * Express configuration.
      */
+    // set static dir.
     app.use(express.static(__dirname + '/../client/build'));
     // Get data from html forms.
     app.use(bodyParser.json());
@@ -64,7 +65,7 @@
     });
 
     /**
-     * Routes.
+     * Bootstrap routes and inject our app and WebSocket.
      */
     routes(app, io);
 })();

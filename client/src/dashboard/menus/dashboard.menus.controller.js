@@ -5,7 +5,7 @@
         .module('dainingu.dashboard.menus')
         .controller('DashboardMenusController', DashboardMenusController);
 
-    function DashboardMenusController(dishes, menus, menusDishes, socket) {
+    function DashboardMenusController(menus, menusDishes, socket) {
         var vm = this;
 
         socket.on('menuAdded', function(data) {

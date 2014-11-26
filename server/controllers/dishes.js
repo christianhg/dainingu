@@ -97,7 +97,7 @@
 					dish: dish
 				};
 
-				res.json(dish);
+				res.json(data);
 
 				callback(data);
 			});
@@ -126,7 +126,7 @@
 						dish: dish
 					};
 
-					res.json(dish);
+					res.json(data);
 
 					callback(data);
 				});

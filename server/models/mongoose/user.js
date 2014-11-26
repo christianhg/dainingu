@@ -38,7 +38,7 @@
      }*/
 
     /**
-     * Password hashing middleware.
+     * Hash password before creating user.
      */
     userSchema.pre('save', function(next) {
         var user = this;
@@ -68,18 +68,9 @@
 
     /**
      * Validate user's password.
+     * @param candidatePassword
+     * @param callback
      */
-    /*userSchema.methods.comparePassword = function(candidatePassword, callback) {
-        //console.log(bcrypt.compare(candidatePassword, this.password));
-
-        /*bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
-            if(err) {
-                return callback(err);
-            }
-            callback(isMatch);
-        });
-    };*/
-
     userSchema.methods.comparePassword = function(candidatePassword, callback) {
         bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
             if(err) {
@@ -90,5 +81,7 @@
     };
 
     var User = mongoose.model('User', userSchema, 'users');
+
+    // Expose model
     module.exports = User;
 })();

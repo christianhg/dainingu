@@ -27,7 +27,7 @@
 								dish: dish
 							};
 
-							res.json(dish);
+							res.json(data);
 
 							callback(data);
 						});
@@ -48,7 +48,6 @@
 				}
 
 				menu.getDishes().success(function(dishes) {
-
 					var data = {
 						message: 'Dishes shown',
 						dishes: dishes
@@ -86,7 +85,7 @@
 							dish: dish
 						};
 
-						res.json(dish);
+						res.json(data);
 
 						callback(data);
 					});
