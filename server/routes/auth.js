@@ -10,7 +10,7 @@
         app.route('/auth/activateSession')
             .post(function(req, res) {
                 auth.activateSession(req, res, function(data) {
-                    io.sockets.emit('menucard:activated');
+                    io.sockets.emit('sessionsUpdated');
                 });
             });
 

@@ -16,7 +16,7 @@
 			controllerAs: 'vm'
 		};
 
-		function MenucardOrdersController(auth, sessionsOrders, socket, sessionsOrdersCommit, sessionsOrdersDishes) {
+		function MenucardOrdersController($window, activeOrder, auth, sessionsOrders, socket, sessionsOrdersCommit, sessionsOrdersDishes) {
 			var vm = this;
 
 			vm.getOrders = function() {
@@ -31,22 +31,26 @@
 
 			vm.getOrders();
 
+			socket.on('sessionsUpdated', function() {
+				vm.getOrders();
+			});
+
 			socket.on('ordersUpdated', function() {
 				vm.getOrders();
 			});
 
 			vm.commitOrder = function(orderId) {
 				auth.getSessionId(function(sessionId) {
-					sessionsOrdersCommit.commit({sessionId: sessionId, orderId: orderId}, function(orders) {
-						console.log(orders);
+					sessionsOrdersCommit.commit({sessionId: sessionId, orderId: orderId}, function(data) {
+						vm.resetActiveOrder();
 					});
 				});
 			};
 
 			vm.pullOrder = function(orderId) {
 				auth.getSessionId(function(sessionId) {
-					sessionsOrdersCommit.pull({sessionId: sessionId, orderId: orderId}, function(orders) {
-						console.log(orders);
+					sessionsOrdersCommit.pull({sessionId: sessionId, orderId: orderId}, function(data) {
+						console.log(data);
 					});
 				});
 			};
@@ -60,8 +64,20 @@
 			};
 
 			vm.activateOrder = function(orderId) {
-				$window.sessionStorage.activeOrder = orderId;
-			}
+				activeOrder.set(orderId);
+			};
+
+			vm.resetActiveOrder = function() {
+				activeOrder.delete();
+			};
+
+			vm.getActiveOrder = function() {
+				return activeOrder.get();
+			};
+
+			vm.orderActive = function(orderId) {
+				return activeOrder.check(orderId);
+			};
 		}
 
 		return directive;

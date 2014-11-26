@@ -16,7 +16,7 @@
 
         vm.getDishes();
 
-        socket.on('dishes:add', function() {
+        socket.on('dishesUpdated', function() {
             vm.getDishes();
         });
 

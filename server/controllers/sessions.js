@@ -8,20 +8,22 @@
      */
     exports.destroy = function(req, res, callback) {
         Session.findById(req.params.id, function(err, session) {
-            session.remove(function(err) {
-                if(err) {
-                    res.send(err);
-                }
+            if(session) {
+                session.remove(function(err) {
+                    if(err) {
+                        res.send(err);
+                    }
 
-                var data = {
-                    message: 'Session deleted',
-                    session: session
-                };
+                    var data = {
+                        message: 'Session deleted',
+                        session: session
+                    };
 
-                res.json(data);
+                    res.json(data);
 
-                callback(data);
-            });
+                    callback(data);
+                });
+            }
         });
     };
 

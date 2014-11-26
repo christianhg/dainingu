@@ -5,7 +5,7 @@
 		.module('dainingu.menucard')
 		.controller('MenucardController', MenucardController);
 
-	function MenucardController(auth, socket) {
+	function MenucardController(activeOrder, auth, socket) {
 		var vm = this;
 
 		vm.activateMenucard = function() {
@@ -15,6 +15,10 @@
 		};
 
 		vm.activateMenucard();
+
+		vm.getActiveOrder = function() {
+			return activeOrder.get();
+		};
 
 		socket.on('sessionsUpdated', function() {
 			vm.activateMenucard();

@@ -27,6 +27,14 @@
 
 			vm.getMenus();
 
+			socket.on('menusUpdated', function() {
+				vm.getMenus();
+			});
+
+			socket.on('dishesUpdated', function() {
+				vm.getMenus();
+			});
+
 			vm.activateMenucard = function() {
 				auth.validateMenucardToken(function(validToken) {
 					vm.menucardActivated = validToken;
@@ -35,19 +43,31 @@
 
 			vm.activateMenucard();
 
+			vm.getActiveOrder = function() {
+				if($window.sessionStorage.activeOrder) {
+					return $window.sessionStorage.activeOrder;
+				} else {
+					return false;
+				}
+			};
+
 			socket.on('sessionsUpdated', function() {
 				vm.activateMenucard();
 			});
 
 			vm.addDishToOrder = function(dish) {
-				var orderId = $window.sessionStorage.activeOrder;
-				auth.getSessionId(function(sessionId) {
-					if(sessionId && orderId) {
-						sessionsOrdersDishes.save({sessionId: sessionId, orderId: orderId}, dish, function() {
+				var orderId = vm.getActiveOrder();
 
-						});
-					}
-				});
+				if(orderId) {
+					auth.getSessionId(function(sessionId) {
+						if(sessionId && orderId) {
+							sessionsOrdersDishes.save({sessionId: sessionId, orderId: orderId}, dish, function() {
+
+							});
+						}
+					});
+				}
+
 			};
 		}
 

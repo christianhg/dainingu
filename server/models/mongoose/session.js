@@ -170,7 +170,8 @@
      */
     sessionSchema.methods.addOrder = function(callback) {
         this.orders.push({});
-        callback(this.orders);
+        var order = this.orders[this.orders.length-1];
+        callback(order);
     };
 
     /**

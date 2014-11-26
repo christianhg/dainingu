@@ -14,12 +14,13 @@
             <span class="label label-primary" ng-show="order.confirmed && !order.completed">Confirmed</span>
             <span class="label label-success" ng-show="order.completed && !order.closed">Completed</span>
             <span class="label label-warning" ng-show="order.closed">Closed</span>
+            <span class="label label-success" ng-show="vm.orderActive(order._id)">Active</span>
         </h3>
     </div>
     <div class="panel-body">
         <div class="well clearfix" ng-show="!order.confirmed">
             <div class="pull-right" ng-show="!order.committed">
-                <button type="submit" class="btn btn-success" ng-click="vm.activateOrder(order._id)">Aktivér</button>
+                <button type="submit" class="btn btn-success" ng-hide="vm.orderActive(order._id)" ng-click="vm.activateOrder(order._id)">Aktivér</button>
                 <button type="submit" class="btn btn-info" ng-click="vm.commitOrder(order._id)">Commit</button>
             </div>
             <div class="pull-right" ng-show="order.committed && !order.confirmed">
@@ -37,7 +38,7 @@
         <tr ng-repeat="dish in order.dishes">
             <td>
                 {{dish.name}}
-                <div class="pull-right" ng-show="!vm.order.committed">
+                <div class="pull-right" ng-show="!order.committed">
                     <button type="submit" class="btn btn-danger" ng-click="vm.removeDishFromOrder(order._id, dish._id)">Fjern fra ordre</button>
                 </div>
             </td>

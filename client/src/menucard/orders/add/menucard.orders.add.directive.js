@@ -16,14 +16,14 @@
 			controllerAs: 'vm'
 		};
 
-		function MenucardOrdersAddController(auth, sessionsOrders) {
+		function MenucardOrdersAddController($window, activeOrder, auth, sessionsOrders) {
 			var vm = this;
 
 			vm.addOrder = function() {
 				auth.getSessionId(function(sessionId) {
 					if(sessionId) {
-						sessionsOrders.save({sessionId: sessionId}, {}, function() {
-
+						sessionsOrders.save({sessionId: sessionId}, {}, function(data) {
+							activeOrder.set(data.order._id);
 						});
 					}
 				});

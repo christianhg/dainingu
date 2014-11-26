@@ -25,12 +25,9 @@
 
 			vm.activateMenucard = function(key) {
 				auth.activateSession(key, function(data) {
-					// If activation was successful.
-					if(data.success) {
-						vm.session = {};
-					}
+					vm.session = {};
+					console.log(data);
 				});
-
 			};
 		}
 	}

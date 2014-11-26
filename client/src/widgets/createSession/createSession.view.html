@@ -3,7 +3,7 @@
         Opret session
     </div>
     <div class="panel-body">
-        <form name="addSessionForm" ng-submit="addSessionForm.$valid && vm.addSession(vm.session)" novalidate>
+        <form name="addSessionForm" ng-submit="addSessionForm.$valid && vm.addSession()" novalidate>
             <div class="form-group">
                 <label for="sessionCustomerName">Kundens navn</label>
                 <input type="text" id="sessionCustomerName" class="form-control" ng-model="vm.session.customer.name" placeholder="Kundens navn" required>

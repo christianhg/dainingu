@@ -23,9 +23,9 @@
         function CreateSessionController(sessions) {
             var vm = this;
 
-            vm.addSession = function(newSession) {
-                sessions.save(newSession, function(session) {
-                    console.log(session)
+            vm.addSession = function() {
+                sessions.save(vm.session, function(session) {
+                    vm.session = {};
                 });
             };
         }

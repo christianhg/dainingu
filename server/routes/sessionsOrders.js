@@ -15,7 +15,7 @@
             })
             .post(jwtCheck, function(req, res) {
                 sessionsOrders.store(req, res, function(data) {
-                    io.sockets.emit('orders:add', data);
+                    io.sockets.emit('ordersUpdated', data);
                 });
             });
 

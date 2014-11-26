@@ -107,7 +107,7 @@
             if(!session) {
                 res.send(false);
             } else {
-                session.addOrder(function(orders) {
+                session.addOrder(function(order) {
                     session.save(function(err) {
                         if(err) {
                             res.send(err);
@@ -115,10 +115,10 @@
 
                         var data = {
                             message: 'Order added to session',
-                            session: session
+                            order: order
                         };
 
-                        res.json(session);
+                        res.json(data);
 
                         callback(data);
                     });
