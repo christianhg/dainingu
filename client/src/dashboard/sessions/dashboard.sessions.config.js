@@ -24,7 +24,7 @@
             })
             .state('dashboard.sessions.id.delete', {
                 url: '/delete',
-                templateUrl: 'dashboard/sessions/dashboard.sessions.id.delete.view.html',
+                templateUrl: 'dashboard/sessions/delete/dashboard.sessions.id.delete.view.html',
                 controller: 'DashboardSessionsIdDeleteController',
                 controllerAs: 'vm',
                 data: {
@@ -34,7 +34,7 @@
             })
             .state('dashboard.sessions.id.edit', {
                 url: '/edit',
-                templateUrl: 'dashboard/sessions/dashboard.sessions.id.edit.view.html',
+                templateUrl: 'dashboard/sessions/edit/dashboard.sessions.id.edit.view.html',
                 controller: 'DashboardSessionsIdEditController',
                 controllerAs: 'vm',
                 data: {

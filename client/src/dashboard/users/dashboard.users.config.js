@@ -24,7 +24,7 @@
             })
             .state('dashboard.users.id.delete', {
                 url: '/delete',
-                templateUrl: 'dashboard/users/dashboard.users.id.delete.view.html',
+                templateUrl: 'dashboard/users/delete/dashboard.users.id.delete.view.html',
                 controller: 'DashboardUsersIdDeleteController',
                 controllerAs: 'vm',
                 data: {
@@ -34,7 +34,7 @@
             })
             .state('dashboard.users.id.edit', {
                 url: '/edit',
-                templateUrl: 'dashboard/users/dashboard.users.id.edit.view.html',
+                templateUrl: 'dashboard/users/edit/dashboard.users.id.edit.view.html',
                 controller: 'DashboardUsersIdEditController',
                 controllerAs: 'vm',
                 data: {
