@@ -23,9 +23,9 @@
 		function AddMenuController(menus) {
 			var vm = this;
 
-			vm.addMenu = function(newMenu) {
-				menus.save(newMenu, function(data) {
-					console.log(data);
+			vm.addMenu = function() {
+				menus.save(vm.menu, function(data) {
+					vm.menu = {};
 				});
 			};
 		}

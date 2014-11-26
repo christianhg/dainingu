@@ -155,7 +155,7 @@
 			}
 
 			var data = {
-				message: 'Menu added',
+				message: 'Menu tilføjet.',
 				menu: menu
 			};
 

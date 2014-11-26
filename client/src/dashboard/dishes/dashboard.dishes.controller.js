@@ -14,10 +14,13 @@
 
         vm.getDishes();
 
-        socket.on('dishes:updated', function() {
+        socket.on('dishes:add', function() {
             vm.getDishes();
         });
 
+        socket.on('menus:dishes:delete', function() {
+            vm.getDishes();
+        });
 
     }
 })();

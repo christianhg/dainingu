@@ -16,11 +16,15 @@
 
         vm.getMenus();
 
-        socket.on('menus:updated', function(data) {
+        socket.on('menus:add', function() {
             vm.getMenus();
         });
 
-        socket.on('menus:dishes:delete', function(data) {
+        socket.on('menus:dishes:delete', function() {
+            vm.getMenus();
+        });
+
+        socket.on('menus:dishes:add', function() {
             vm.getMenus();
         });
 

@@ -1,7 +1,7 @@
-<div class="col-md-12">
+<div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
     <div class="panel panel-default">
         <div class="panel-heading">
-            Redigér bruger
+            Redigér {{vm.user.username}}
         </div>
         <div class="panel-body">
             <form name="editUserForm" ng-submit="vm.editUser()">
@@ -10,6 +10,7 @@
                     <input type="text" name="userUsername" id="userUsername" class="form-control" ng-model="vm.user.username">
                 </div>
                 <button type="submit" class="btn btn-warning">Redigér</button>
+                <a ui-sref="dashboard.users" class="btn btn-default">Fortryd</a>
             </form>
         </div>
     </div>

@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
     <div class="panel panel-default">
         <div class="panel-heading">
             Slet {{vm.user.username}}
@@ -6,6 +6,7 @@
         <div class="panel-body">
             <form name="deleteUserForm" ng-submit="vm.deleteUser()">
                 <button type="submit" class="btn btn-danger">Slet</button>
+                <a ui-sref="dashboard.users" class="btn btn-default">Fortryd</a>
             </form>
         </div>
     </div>
