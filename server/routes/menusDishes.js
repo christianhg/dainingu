@@ -18,13 +18,14 @@
             }).
             post(jwtCheck, function(req, res) {
                 menusDishes.store(req, res, function(data) {
-
+                    io.emit('menus:updated');
                 });
             });
         app.route('/api/menus/:menuId/dishes/:dishId')
             .delete(jwtCheck, function(req, res) {
                 menusDishes.destroy(req, res, function(data) {
-
+                    io.emit('alert', {type: 'success', message: data.message});
+                    io.emit('menus:dishes:delete', data);
                 });
             });
     };

@@ -27,6 +27,11 @@
             </div>
         </div>
     </nav>
+    <div class="row">
+        <div class="col-md-12">
+            <alert ng-repeat="alert in vm.alerts" type="{{alert.type}}" close="vm.closeAlert($index)">{{alert.message}}</alert>
+        </div>
+    </div>
     <div ui-view>
         <div class="row">
             <div class="col-md-8 col-md-offset-2">

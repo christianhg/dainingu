@@ -20,12 +20,10 @@
             vm.getMenus();
         });
 
+        socket.on('menus:dishes:delete', function(data) {
+            vm.getMenus();
+        });
 
-        vm.deleteMenu = function(id) {
-            menus.delete({}, {'id': id}, function(menu) {
-                vm.menus = menus.query();
-            });
-        };
 
         vm.addDishToMenu = function(menuId, dish) {
             menusDishes.save({'id': menuId}, dish, function(dish) {

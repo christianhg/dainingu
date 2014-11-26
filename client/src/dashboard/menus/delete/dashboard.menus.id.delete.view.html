@@ -1,11 +1,12 @@
-<div class="col-md-12">
+<div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
     <div class="panel panel-default">
         <div class="panel-heading">
-            Slet menu
+            Slet {{vm.menu.name}}
         </div>
         <div class="panel-body">
             <form name="deleteMenuForm" ng-submit="vm.deleteMenu()">
                 <button type="submit" class="btn btn-danger">Slet</button>
+                <a ui-sref="dashboard.menus" class="btn btn-default">Fortryd</a>
             </form>
         </div>
     </div>
