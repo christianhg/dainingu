@@ -5,11 +5,19 @@
 		.module('dainingu.menucard')
 		.controller('MenucardController', MenucardController);
 
-	function MenucardController(auth) {
+	function MenucardController(auth, socket) {
 		var vm = this;
 
-		auth.validateMenucardToken(function(validToken) {
-			vm.menucardActivated = validToken;
+		vm.activateMenucard = function() {
+			auth.validateMenucardToken(function(validToken) {
+				vm.menucardActivated = validToken;
+			});
+		};
+
+		vm.activateMenucard();
+
+		socket.on('sessionsUpdated', function() {
+			vm.activateMenucard();
 		});
 	}
 })();

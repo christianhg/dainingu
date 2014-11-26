@@ -26,6 +26,10 @@
 			'get': {
 				method: 'GET',
 				isArray: false
+			},
+			'index': {
+				method: 'GET',
+				isArray: true
 			}
 		});
 

@@ -12,7 +12,7 @@
             })
             .post(jwtCheck, function(req, res) {
                 menus.store(req, res, function(data) {
-                    io.sockets.emit('menus:add');
+                    io.sockets.emit('menusUpdated');
                     io.sockets.emit('alert', {type: 'success', message: data.message});
                 });
             });
@@ -24,13 +24,13 @@
             })
             .put(jwtCheck, function(req, res) {
                 menus.update(req, res, function(data) {
-                    io.sockets.emit('menus:update');
+                    io.sockets.emit('menusUpdated');
                     io.sockets.emit('alert', {type: 'success', message: data.message});
                 });
             })
             .delete(jwtCheck, function(req, res) {
                 menus.destroy(req, res, function(data) {
-                    io.sockets.emit('menus:delete');
+                    io.sockets.emit('menusUpdated');
                     io.sockets.emit('alert', {type: 'success', message: data.message});
                 });
             });

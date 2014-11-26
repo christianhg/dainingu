@@ -12,7 +12,7 @@
             })
             .post(jwtCheck, function(req, res) {
                 sessions.store(req, res, function(data) {
-                    io.sockets.emit('sessionAdded', data);
+                    io.sockets.emit('sessionsUpdated');
                 });
             });
         app.route('/api/sessions/:id')
@@ -23,24 +23,24 @@
             })
             .put(jwtCheck, function(req, res) {
                 sessions.update(req, res, function(data) {
-                    io.sockets.emit('sessionUpdated', data);
+                    io.sockets.emit('sessionsUpdated');
                 })
             })
             .delete(jwtCheck, function(req, res) {
                 sessions.destroy(req, res, function(data) {
-                    io.sockets.emit('sessionDeleted', data);
+                    io.sockets.emit('sessionsUpdated');
                 });
             });
 
         app.route('/api/sessions/:sessionId/activate')
             .put(jwtCheck, function(req, res) {
                 sessions.activate(req, res, function(data) {
-
+                    io.sockets.emit('sessionsUpdated');
                 });
             })
             .delete(jwtCheck, function(req, res) {
                 sessions.deactivate(req, res, function(data) {
-
+                    io.sockets.emit('sessionsUpdated');
                 });
             });
 
@@ -50,12 +50,12 @@
         app.route('/api/sessions/:sessionId/active')
             .put(jwtCheck, function(req, res) {
                 sessions.activate(req, res, function(data) {
-                    io.sockets.emit('sessionUpdated', data);
+                    io.sockets.emit('sessionsUpdated');
                 });
             })
             .delete(jwtCheck, function(req, res) {
                 sessions.deactivate(req, res, function(data) {
-                    io.sockets.emit('sessionUpdated', data);
+                    io.sockets.emit('sessionsUpdated');
                 });
             });
 
@@ -65,12 +65,12 @@
         app.route('/api/sessions/:sessionId/expire')
             .put(jwtCheck, function(req, res) {
                 sessions.expire(req, res, function(data) {
-                    io.sockets.emit('sessionUpdated', data);
+                    io.sockets.emit('sessionsUpdated');
                 });
             })
             .delete(jwtCheck, function(req, res) {
                 sessions.resume(req, res, function(data) {
-                    io.sockets.emit('sessionUpdated', data);
+                    io.sockets.emit('sessionsUpdated');
                 });
             });
     };

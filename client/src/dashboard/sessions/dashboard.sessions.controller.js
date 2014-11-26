@@ -20,10 +20,9 @@
             vm.getSessions();
         });
 
-        socket.on('sessionUpdated', function() {
+        socket.on('sessionsUpdated', function() {
             vm.getSessions();
         });
-
 
     }
 })();

@@ -1,0 +1,22 @@
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#floor-navigation">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" ui-sref="menucard">dainingu.menucard</a>
+        </div>
+        <div class="collapse navbar-collapse" id="floor-navigation">
+            <ul class="nav navbar-nav">
+                <!--<li ui-sref-active="active"><a ui-sref=".menus">Menuer</a></li>
+                <li ui-sref-active="active" ng-show="vm.menucardActivated"><a ui-sref=".orders">Ordrer</a></li>-->
+            </ul>
+            <ul class="nav navbar-nav navbar-right" ng-hide="vm.menucardActivated">
+                <!--<li ui-sref-active="active"><a ui-sref=".activate">Aktivér</a></li>-->
+            </ul>
+        </div>
+    </div>
+</nav>

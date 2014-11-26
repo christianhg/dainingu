@@ -1,47 +1,20 @@
-<div class="row">
-    <div class="col-sm-8 col-sm-offset-2">
-        <form ng-show="vm.orders.length > 0">
-            <div class="form-group">
-                <select class="form-control" ng-model="vm.activeOrder">
-                    <option ng-repeat="order in vm.orders | filter: {committed: false}" value="{{order._id}}">Ordre fra {{order.createdOn | date: 'HH:mm:ss'}}</option>
-                </select>
-            </div>
-        </form>
-
-        <div class="panel panel-default" ng-repeat="menu in vm.menus | orderBy:name">
+<div class="panel panel-default" ng-repeat="menu in vm.menus" ng-show="menu.dishes.length">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{menu.name}}</h3>
+    </div>
+    <div class="panel-body">
+        <div class="panel panel-default" ng-repeat="dish in menu.dishes">
             <div class="panel-heading">
-                {{menu.name}}
+                <h3 class="panel-title">{{dish.name}}</h3>
             </div>
-            <div ng-repeat="dish in menu.dishes" class="panel-body">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        {{dish.name}}
-                        <button ng-show="vm.menucardActivated && vm.activeOrder" class="btn btn-success" type="submit" ng-click="vm.addDishToOrder(dish)">Tilføj til ordre</button>
-                    </div>
-                    <div class="panel-body">
-                        ...
+            <div class="panel-body">
+                <div class="well clearfix" ng-show="vm.menucardActivated">
+                    <div class="pull-right">
+                        <button type="submit" class="btn btn-success" ng-click="vm.addDishToOrder(dish)">Tilføj til ordre</button>
                     </div>
                 </div>
+                <dish-info dish="dish"></dish-info>
             </div>
         </div>
     </div>
 </div>
-
-<!--<menu ng-repeat="menu in vm.menus" menu-name="menu.name" menus="menu.menus" dishes="menu.dishes"></menu>-->
-
-
-
-
-
-<!--<ul>
-    <li ng-repeat="menu in vm.menus">{{menu.title}}
-        <ul>
-            <li ng-repeat="menu in menu.menus">{{menu.title}}
-                <ul>
-                    <li ng-repeat="dish in menu.dishes">{{dish}}</li>
-                </ul>
-            </li>
-            <li ng-repeat="dish in menu.dishes">{{dish}}</li>
-        </ul>
-    </li>
-</ul>-->

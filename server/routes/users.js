@@ -12,7 +12,7 @@
             })
             .post(jwtCheck, function(req, res) {
                 users.store(req, res, function(data) {
-                    io.sockets.emit('users:add');
+                    io.sockets.emit('usersUpdated');
                     io.sockets.emit('alert', {type: 'success', message: data.message});
                 });
             });
@@ -24,11 +24,12 @@
             })
             .put(jwtCheck, function(req, res) {
                 users.update(req, res, function(data) {
-
+                    io.sockets.emit('usersUpdated');
                 });
             })
             .delete(jwtCheck, function(req, res) {
                 users.destroy(req, res, function(data) {
+                    io.sockets.emit('usersUpdated');
                     io.sockets.emit('alert', {type: 'success', message: data.message});
                 });
             });

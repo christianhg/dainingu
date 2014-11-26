@@ -15,7 +15,7 @@
             })
             .post(jwtCheck, function(req, res) {
                 sessionsOrdersDishes.store(req, res, function(data) {
-
+                    io.emit('ordersDishesUpdated');
                 });
             });
 
@@ -30,7 +30,7 @@
             })
             .delete(jwtCheck, function(req, res) {
                 sessionsOrdersDishes.destroy(req, res, function(data) {
-
+                    io.emit('ordersDishesUpdated');
                 });
             });
     };

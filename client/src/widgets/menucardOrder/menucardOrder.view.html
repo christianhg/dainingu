@@ -18,10 +18,11 @@
     <div class="panel-body">
         <div class="well clearfix" ng-show="!vm.order.confirmed">
             <div class="pull-right" ng-show="!vm.order.committed">
-                <button type="submit" class="btn btn-info" ng-click="vm.commitOrder(order._id)">Færdiggør ordre</button>
+                <button type="submit" class="btn btn-success" ng-click="vm.activateOrder(order._id)">Aktivér</button>
+                <button type="submit" class="btn btn-info" ng-click="vm.commitOrder(order._id)">Commit</button>
             </div>
             <div class="pull-right" ng-show="vm.order.committed && !vm.order.confirmed">
-                <button type="submit" class="btn btn-default" ng-click="vm.pullOrder(order._id)">Fortryd færdiggørelse af ordre</button>
+                <button type="submit" class="btn btn-default" ng-click="vm.pullOrder(order._id)">Pull</button>
             </div>
         </div>
     </div>

@@ -21,7 +21,7 @@
         /**
          * @ngInject
          */
-        function MenucardOrderController($scope, auth, sessionsOrdersCommit, sessionsOrdersDishes) {
+        function MenucardOrderController($scope, $window, auth, sessionsOrdersCommit, sessionsOrdersDishes) {
             var vm = this;
 
             vm.order = $scope.order;
@@ -49,6 +49,10 @@
                     });
                 });
             };
+
+            vm.activateOrder = function(orderId) {
+                $window.sessionStorage.activeOrder = orderId;
+            }
         }
     }
 })();

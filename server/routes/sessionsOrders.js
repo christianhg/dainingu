@@ -15,7 +15,7 @@
             })
             .post(jwtCheck, function(req, res) {
                 sessionsOrders.store(req, res, function(data) {
-                    io.sockets.emit('ordersUpdated', data);
+                    io.sockets.emit('orders:add', data);
                 });
             });
 
@@ -30,7 +30,7 @@
             })
             .delete(jwtCheck, function(req, res) {
                 sessionsOrders.destroy(req, res, function(data) {
-                    io.sockets.emit('ordersUpdated', data);
+                    io.sockets.emit('ordersUpdated');
                 });
             });
 
@@ -40,12 +40,12 @@
         app.route('/api/sessions/:sessionId/orders/:orderId/commit')
             .put(jwtCheck, function(req, res) {
                 sessionsOrders.commit(req, res, function(data) {
-                    io.sockets.emit('ordersUpdated', data);
+                    io.sockets.emit('ordersUpdated');
                 });
             })
             .delete(jwtCheck, function(req, res) {
                 sessionsOrders.pull(req, res, function(data) {
-                    io.sockets.emit('ordersUpdated', data);
+                    io.sockets.emit('ordersUpdated');
                 });
             });
 
@@ -55,12 +55,12 @@
         app.route('/api/sessions/:sessionId/orders/:orderId/confirm')
             .put(jwtCheck, function(req, res) {
                 sessionsOrders.confirm(req, res, function(data) {
-                    io.sockets.emit('ordersUpdated', data);
+                    io.sockets.emit('ordersUpdated');
                 });
             })
             .delete(jwtCheck, function(req, res) {
                 sessionsOrders.reject(req, res, function(data) {
-                    io.sockets.emit('ordersUpdated', data);
+                    io.sockets.emit('ordersUpdated');
                 });
             });
 
@@ -70,12 +70,12 @@
         app.route('/api/sessions/:sessionId/orders/:orderId/complete')
             .put(jwtCheck, function(req, res) {
                 sessionsOrders.complete(req, res, function(data) {
-                    io.sockets.emit('ordersUpdated', data);
+                    io.sockets.emit('ordersUpdated');
                 });
             })
             .delete(jwtCheck, function(req, res) {
                 sessionsOrders.incomplete(req, res, function(data) {
-                    io.sockets.emit('ordersUpdated', data);
+                    io.sockets.emit('ordersUpdated');
                 });
             });
 
@@ -85,12 +85,12 @@
         app.route('/api/sessions/:sessionId/orders/:orderId/close')
             .put(jwtCheck, function(req, res) {
                 sessionsOrders.close(req, res, function(data) {
-                    io.sockets.emit('ordersUpdated', data);
+                    io.sockets.emit('ordersUpdated');
                 });
             })
             .delete(jwtCheck, function(req, res) {
                 sessionsOrders.open(req, res, function(data) {
-                    io.sockets.emit('ordersUpdated', data);
+                    io.sockets.emit('ordersUpdated');
                 });
             });
     };
