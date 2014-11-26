@@ -79,11 +79,7 @@
 	 * Add new dish.
 	 */
 	exports.store = function(req, res, callback) {
-		var name = req.body.name;
-
-		var dish = Dish.build({
-			name: name
-		});
+		var dish = Dish.build(req.body);
 
 		dish
 			.save()

@@ -6,7 +6,10 @@
 
 	module.exports = {
 		model: {
-			name: Sequelize.STRING
+			name: Sequelize.STRING,
+			description: Sequelize.TEXT,
+			price: Sequelize.DECIMAL(6,2),
+			stock: Sequelize.INTEGER
 		},
 		relations: {
 			belongsTo: "menu"
