@@ -9,7 +9,9 @@
         var vm = this;
 
         vm.getDishes = function() {
-            vm.dishes = dishes.query();
+            dishes.query(function(dishes) {
+                vm.dishes = dishes;
+            });
         };
 
         vm.getDishes();

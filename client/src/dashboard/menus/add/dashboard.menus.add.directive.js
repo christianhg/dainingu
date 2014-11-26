@@ -24,7 +24,8 @@
 			var vm = this;
 
 			vm.addMenu = function() {
-				menus.save(vm.menu, function(data) {
+				menus.save(vm.menu, function() {
+					// reset form
 					vm.menu = {};
 				});
 			};

@@ -24,8 +24,7 @@
 			var vm = this;
 
 			vm.addDish = function(dish) {
-				dishes.save(dish, function(data) {
-					console.log(data);
+				dishes.save(dish, function() {
 					// reset form
 					vm.dish = {};
 				});

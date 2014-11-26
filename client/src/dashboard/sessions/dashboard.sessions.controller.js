@@ -9,16 +9,18 @@
         var vm = this;
 
         vm.getSessions = function() {
-            vm.sessions = sessions.query();
+            sessions.query(function(sessions) {
+                vm.sessions = sessions;
+            });
         };
 
         vm.getSessions();
 
-        socket.on('ordersUpdated', function(data) {
+        socket.on('ordersUpdated', function() {
             vm.getSessions();
         });
 
-        socket.on('sessionUpdated', function(data) {
+        socket.on('sessionUpdated', function() {
             vm.getSessions();
         });
 

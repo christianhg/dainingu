@@ -20,6 +20,14 @@
             vm.getMenus();
         });
 
+        socket.on('menus:delete', function() {
+            vm.getMenus();
+        });
+
+        socket.on('menus:update', function() {
+            vm.getMenus();
+        });
+
         socket.on('menus:dishes:delete', function() {
             vm.getMenus();
         });

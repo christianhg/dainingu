@@ -12,8 +12,8 @@
             })
             .post(jwtCheck, function(req, res) {
                 users.store(req, res, function(data) {
-                    io.sockets.emit('userAdded', data);
-
+                    io.sockets.emit('users:add');
+                    io.sockets.emit('alert', {type: 'success', message: data.message});
                 });
             });
         app.route('/api/users/:id')
@@ -29,7 +29,7 @@
             })
             .delete(jwtCheck, function(req, res) {
                 users.destroy(req, res, function(data) {
-                    io.sockets.emit('userDeleted', data);
+                    io.sockets.emit('alert', {type: 'success', message: data.message});
                 });
             });
     };

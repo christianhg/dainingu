@@ -8,18 +8,16 @@
     function DashboardUsersController(users, socket) {
         var vm = this;
 
-        socket.on('userAdded', function(data) {
-            console.log(data.message);
-        });
+        vm.getUsers = function() {
+            users.query(function(users) {
+                vm.users = users;
+            });
+        };
 
-        socket.on('userUpdated', function(data) {
-            console.log(data.message);
-        });
+        vm.getUsers();
 
-        socket.on('userDeleted', function(data) {
-            console.log(data.message);
+        socket.on('users:add', function() {
+            vm.getUsers();
         });
-
-        vm.users = users.query();
     }
 })();

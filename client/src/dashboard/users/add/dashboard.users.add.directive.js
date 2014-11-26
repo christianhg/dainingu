@@ -24,8 +24,8 @@
 			var vm = this;
 
 			vm.addUser = function(newUser) {
-				users.save(newUser, function(user) {
-					console.log(user);
+				users.save(newUser, function() {
+					vm.menu = {};
 				});
 			};
 		}

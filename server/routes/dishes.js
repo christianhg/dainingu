@@ -12,7 +12,7 @@
             })
             .post(jwtCheck, function(req, res) {
                 dishes.store(req, res, function(data) {
-                    io.emit('dishes:updated');
+                    io.sockets.emit('dishes:updated');
                 });
             });
         app.route('/api/dishes/:id')
@@ -23,12 +23,12 @@
             })
             .put(jwtCheck, function(req, res) {
                 dishes.update(req, res, function(data) {
-                    io.emit('dishes:updated');
+                    io.sockets.emit('dishes:updated');
                 });
             })
             .delete(jwtCheck, function(req, res) {
                 dishes.destroy(req, res, function(data) {
-                    io.emit('dishes:updated');
+                    io.sockets.emit('dishes:updated');
                 });
             });
     };
