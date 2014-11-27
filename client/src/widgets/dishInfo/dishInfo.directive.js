@@ -10,7 +10,8 @@
 			templateUrl: 'widgets/dishInfo/dishInfo.view.html',
 			restrict: 'E',
 			scope: {
-				dish: '='
+				dish: '=',
+				menu: '='
 			},
 			controller: DishInfoController,
 			controllerAs: 'vm'
@@ -26,18 +27,19 @@
 
 			vm.dish = {};
 
-			$scope.$watch("dish",function(newValue,OldValue,scope){
+			vm.menu = false;
+
+			$scope.$watch("dish",function(newValue){
 				if (newValue){
 					vm.dish = newValue;
 				}
 			});
+
+			$scope.$watch("menu",function(newValue){
+				if (newValue){
+					vm.menu = newValue;
+				}
+			});
 		}
-		/*function DishFormController($scope) {
-		 var vm = this;
-
-		 vm.dish = {};
-
-
-		 }*/
 	}
 })();

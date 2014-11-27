@@ -3,6 +3,7 @@
 
 	var sequelize = require("../config/sequelize");
 	var Dish = sequelize.model('dish');
+	var Menu = sequelize.model('menu');
 
 	/**
 	 * Delete dish.
@@ -33,22 +34,46 @@
 	 * Get all dishes.
 	 */
 	exports.index = function(req, res, callback) {
-		Dish.findAll()
-			.complete(function(err, dishes) {
-				if(!!err) {
-					res.send(err);
-				}
+		var deep = req.query.deep;
 
-				var data = {
-					message: 'Dishes shown',
-					dishes: dishes
-				};
+		if(deep) {
+			Dish.findAll({
+				include: [Menu]
+			})
+				.complete(function(err, dishes) {
+					if(!!err) {
+						res.send(err);
+					}
 
-				res.json(dishes);
+					var data = {
+						message: 'Dishes shown with menu',
+						dishes: dishes
+					};
 
-				callback(data);
+					res.json(dishes);
 
-			});
+					callback(data);
+
+				});
+		} else {
+			Dish.findAll()
+				.complete(function(err, dishes) {
+					if(!!err) {
+						res.send(err);
+					}
+
+					var data = {
+						message: 'Dishes shown',
+						dishes: dishes
+					};
+
+					res.json(dishes);
+
+					callback(data);
+
+				});
+		}
+
 	};
 
 	/**
