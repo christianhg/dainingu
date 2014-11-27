@@ -13,7 +13,9 @@
                 controller: 'CashregisterOrdersController',
                 controllerAs: 'vm',
                 data: {
-                    pageTitle: 'dainingu > cashregister > orders'
+                    pageTitle: 'dainingu > cashregister > orders',
+                    restricted: true,
+                    login: 'cashregister.login'
                 }
             });
     }

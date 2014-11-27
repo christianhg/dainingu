@@ -13,7 +13,9 @@
                 controller: 'KitchenSessionsController',
                 controllerAs: 'vm',
                 data: {
-                    pageTitle: 'dainingu > kitchen > sessioner'
+                    pageTitle: 'dainingu > kitchen > sessioner',
+                    restricted: true,
+                    login: 'kitchen.login'
                 }
             });
     }

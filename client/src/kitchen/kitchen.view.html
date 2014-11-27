@@ -11,13 +11,16 @@
                 <a class="navbar-brand" ui-sref="floor">dainingu.kitchen</a>
             </div>
             <div class="collapse navbar-collapse" id="kitchen-navigation">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav" ng-show="vm.loggedIn">
                     <li ui-sref-active="active"><a ui-sref=".menus">Menuer</a></li>
                     <li ui-sref-active="active"><a ui-sref=".sessions">Sessioner</a></li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right" ng-hide="vm.loggedIn">
                     <li ui-sref-active="active"><a ui-sref=".login">Log ind</a></li>
                 </ul>
+                <form class="navbar-form navbar-right" ng-show="vm.loggedIn">
+                    <button type="submit" class="btn btn-default" ng-click="vm.kitchenLogout()">Log ud</button>
+                </form>
             </div>
         </div>
     </nav>

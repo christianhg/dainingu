@@ -14,6 +14,7 @@
                 controllerAs: 'vm',
                 data: {
                     restricted: true,
+                    login: 'dashboard.login',
                     pageTitle: 'dainingu > dashboard > menuer'
                 }
             })
@@ -28,7 +29,6 @@
                 controller: 'DashboardMenusIdDeleteController',
                 controllerAs: 'vm',
                 data: {
-                    restricted: true,
                     pageTitle: 'dainingu > dashboard > menuer'
                 }
             })
@@ -38,7 +38,6 @@
                 controller: 'DashboardMenusIdEditController',
                 controllerAs: 'vm',
                 data: {
-                    restricted: true,
                     pageTitle: 'dainingu > dashboard > menuer'
                 }
             });

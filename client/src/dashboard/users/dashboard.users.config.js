@@ -14,6 +14,7 @@
                 controllerAs: 'vm',
                 data: {
                     restricted: true,
+                    login: 'dashboard.login',
                     pageTitle: 'dainingu > dashboard > brugere'
                 }
             })
@@ -28,7 +29,6 @@
                 controller: 'DashboardUsersIdDeleteController',
                 controllerAs: 'vm',
                 data: {
-                    restricted: true,
                     pageTitle: 'dainingu > dashboard > brugere'
                 }
             })
@@ -38,7 +38,6 @@
                 controller: 'DashboardUsersIdEditController',
                 controllerAs: 'vm',
                 data: {
-                    restricted: true,
                     pageTitle: 'dainingu > dashboard > brugere'
                 }
             });

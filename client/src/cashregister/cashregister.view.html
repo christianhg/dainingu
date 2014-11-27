@@ -11,12 +11,15 @@
                 <a class="navbar-brand" ui-sref="cashregister">dainingu.cashregister</a>
             </div>
             <div class="collapse navbar-collapse" id="cashregister-navigation">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav" ng-hide="!vm.loggedIn">
                     <li ui-sref-active="active"><a ui-sref=".orders">Ordrer</a></li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right" ng-hide="vm.loggedIn">
                     <li ui-sref-active="active"><a ui-sref=".login">Log ind</a></li>
                 </ul>
+                <form class="navbar-form navbar-right" ng-show="vm.loggedIn">
+                    <button type="submit" class="btn btn-default" ng-click="vm.cashregisterLogout()">Log ud</button>
+                </form>
             </div>
         </div>
     </nav>

@@ -14,6 +14,7 @@
                 controllerAs: 'vm',
                 data: {
                     restricted: true,
+                    login: 'dashboard.login',
                     pageTitle: 'dainingu > dashboard > sessioner'
                 }
             })
@@ -28,7 +29,6 @@
                 controller: 'DashboardSessionsIdDeleteController',
                 controllerAs: 'vm',
                 data: {
-                    restricted: true,
                     pageTitle: 'dainingu > dashboard > sessioner'
                 }
             })
@@ -38,7 +38,6 @@
                 controller: 'DashboardSessionsIdEditController',
                 controllerAs: 'vm',
                 data: {
-                    restricted: true,
                     pageTitle: 'dainingu > dashboard > sessioenr'
                 }
             });

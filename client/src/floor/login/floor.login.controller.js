@@ -5,13 +5,15 @@
         .module('dainingu.floor.login')
         .controller('FloorLoginController', FloorLoginController);
 
-    function FloorLoginController() {
+    function FloorLoginController($state, auth) {
         var vm = this;
 
         vm.loginData = {};
 
         vm.floorLogin = function() {
-            console.log(vm.loginData);
+            auth.signin(vm.loginData, function(data) {
+                $state.go('floor', null, { reload: true });
+            });
         };
     }
 })();

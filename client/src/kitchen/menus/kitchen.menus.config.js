@@ -13,7 +13,9 @@
                 controller: 'KitchenMenusController',
                 controllerAs: 'vm',
                 data: {
-                    pageTitle: 'dainingu > kitchen > menuer'
+                    pageTitle: 'dainingu > kitchen > menuer',
+                    restricted: true,
+                    login: 'kitchen.login'
                 }
             });
     }

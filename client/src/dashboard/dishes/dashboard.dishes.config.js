@@ -14,6 +14,7 @@
                 controllerAs: 'vm',
                 data: {
                     restricted: true,
+                    login: 'dashboard.login',
                     pageTitle: 'dainingu > dashboard > retter'
                 }
             })
@@ -28,7 +29,6 @@
                 controller: 'DashboardDishesIdDeleteController',
                 controllerAs: 'vm',
                 data: {
-                    restricted: true,
                     pageTitle: 'dainingu > dashboard > retter'
                 }
             })
@@ -38,7 +38,6 @@
                 controller: 'DashboardDishesIdEditController',
                 controllerAs: 'vm',
                 data: {
-                    restricted: true,
                     pageTitle: 'dainingu > dashboard > retter'
                 }
             });

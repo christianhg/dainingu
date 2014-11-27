@@ -5,13 +5,15 @@
         .module('dainingu.kitchen.login')
         .controller('KitchenLoginController', KitchenLoginController);
 
-    function KitchenLoginController() {
+    function KitchenLoginController($state, auth) {
         var vm = this;
 
         vm.loginData = {};
 
         vm.kitchenLogin = function() {
-            console.log(vm.loginData);
+            auth.signin(vm.loginData, function(data) {
+                $state.go('kitchen', null, { reload: true });
+            });
         };
     }
 })();

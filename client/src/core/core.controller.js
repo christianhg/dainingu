@@ -11,12 +11,12 @@
 				auth.validateLoginToken(function(validToken) {
 					if(!validToken) {
 						event.preventDefault();
-						$state.go('dashboard.login');
+						$state.go(toState.data.login);
 					}
 				});
 			}
 		});
-		
+
 		$scope.$on('$stateChangeSuccess', function(event, toState) {
 			$scope.pageTitle = toState.data.pageTitle;
 			$scope.pageClass = toState.data.pageClass;

@@ -14,6 +14,7 @@
 				controllerAs: 'vm',
 				data: {
 					restricted: true,
+					login: 'dashboard.login',
 					pageTitle: 'dainingu > dashboard > statistik'
 				}
 			});

@@ -13,7 +13,9 @@
                 controller: 'FloorSessionsController',
                 controllerAs: 'vm',
                 data: {
-                    pageTitle: 'dainingu > floor > sessioner'
+                    pageTitle: 'dainingu > floor > sessioner',
+                    restricted: true,
+                    login: 'floor.login'
                 }
             });
     }

@@ -13,7 +13,6 @@
 		});
 
 		vm.dashboardLogout = function() {
-			//socket.disconnect();
 			delete $window.sessionStorage.loginToken;
 			$state.go('dashboard.login', null, { reload: true });
 		};

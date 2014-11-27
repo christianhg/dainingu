@@ -13,7 +13,9 @@
                 controller: 'FloorMenusController',
                 controllerAs: 'vm',
                 data: {
-                    pageTitle: 'dainingu > floor > menuer'
+                    pageTitle: 'dainingu > floor > menuer',
+                    restricted: true,
+                    login: 'floor.login'
                 }
             });
     }

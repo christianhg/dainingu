@@ -139,6 +139,18 @@
         } else {
             callback(order);
         }
+
+        /*Session.aggregate([
+            //{ $project: { orders: 1, _id: 0 }},
+            { $unwind: '$orders' }
+            //, { $match: { 'orders._id': orderId }}
+        ], function(err, order) {
+            if(err) {
+                callback(err);
+            }
+
+            callback(order);
+        });*/
     };
 
     /**
