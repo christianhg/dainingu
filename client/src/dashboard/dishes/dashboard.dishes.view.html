@@ -1,9 +1,9 @@
 <div class="row">
     <div ui-view>
-        <div class="col-sm-6 col-md-4">
+        <div class="col-sm-4">
             <add-dish></add-dish>
         </div>
-        <div class="col-sm-6 col-md-8">
+        <div class="col-sm-8">
             <div class="panel panel-default" ng-repeat="dish in vm.dishes | orderBy:name">
                 <div class="panel-heading">
                     <h3 class="panel-title">{{dish.name}}</h3>
@@ -15,7 +15,7 @@
                             <a ui-sref=".id.delete({id: dish.id})" class="btn btn-danger">Slet</a>
                         </div>
                     </div>
-                    <dish-info dish="dish"></dish-info>
+                    <dish-info dish="dish" menu="dish.menu" details="true"></dish-info>
                 </div>
             </div>
         </div>

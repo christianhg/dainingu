@@ -11,7 +11,8 @@
 			restrict: 'E',
 			scope: {
 				dish: '=',
-				menu: '='
+				menu: '=',
+				details: '='
 			},
 			controller: DishInfoController,
 			controllerAs: 'vm'
@@ -28,6 +29,14 @@
 			vm.dish = {};
 
 			vm.menu = false;
+
+			vm.details = false;
+
+			$scope.$watch("details", function(newValue) {
+				if(newValue) {
+					vm.details = newValue;
+				}
+			});
 
 			$scope.$watch("dish",function(newValue){
 				if (newValue){

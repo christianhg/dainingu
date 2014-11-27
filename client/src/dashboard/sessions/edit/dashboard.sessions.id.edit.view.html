@@ -1,7 +1,7 @@
-<div class="col-md-12">
+<div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
     <div class="panel panel-default">
         <div class="panel-heading">
-            Redigér session
+            Redigér {{vm.session.key}}
         </div>
         <div class="panel-body">
             <form name="editSessionForm" ng-submit="vm.editSession()">
@@ -18,6 +18,7 @@
                     <input type="text" name="sessionTable" id="sessionTable" class="form-control" ng-model="vm.session.table">
                 </div>
                 <button type="submit" class="btn btn-warning">Redigér</button>
+                <a ui-sref="dashboard.sessions" class="btn btn-default">Fortryd</a>
             </form>
         </div>
     </div>

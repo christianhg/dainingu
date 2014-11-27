@@ -1,10 +1,10 @@
 <div class="row">
     <div ui-view>
-        <div class="col-sm-6 col-md-4">
+        <div class="col-sm-4">
             <create-session></create-session>
         </div>
 
-        <div class="col-sm-6 col-md-8">
+        <div class="col-sm-8">
             <session ng-repeat="session in vm.sessions" session="session">
                 <order ng-repeat="order in session.orders" session="session" order="order"></order>
             </session>

@@ -5,10 +5,10 @@
     <div class="list-group-item" ng-show="vm.dish.price">
         <strong>Pris</strong>: {{vm.dish.price | currency:"DKK "}}
     </div>
-    <div class="list-group-item" ng-show="vm.dish.stock">
+    <div class="list-group-item" ng-show="vm.dish.stock && vm.details">
         <strong>Lager</strong>: {{vm.dish.stock}}
     </div>
-    <div class="list-group-item" ng-show="vm.menu">
+    <div class="list-group-item" ng-show="vm.menu && vm.details">
         <strong>Menu</strong>: {{vm.menu.name}}
     </div>
 </div>
