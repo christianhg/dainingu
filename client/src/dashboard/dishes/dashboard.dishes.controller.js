@@ -19,10 +19,5 @@
         socket.on('dishesUpdated', function() {
             vm.getDishes();
         });
-
-        socket.on('menus:dishes:delete', function() {
-            vm.getDishes();
-        });
-
     }
 })();

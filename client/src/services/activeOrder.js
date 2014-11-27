@@ -22,7 +22,7 @@
             },
             'check': function(orderId) {
                 if($window.sessionStorage.activeOrder) {
-                    if(orderId = $window.sessionStorage.activeOrder) {
+                    if(orderId === $window.sessionStorage.activeOrder) {
                         return true;
                     } else {
                         return false;

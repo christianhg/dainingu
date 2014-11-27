@@ -11,6 +11,10 @@
 
 	function sessions($resource) {
 		return $resource('/api/sessions/:id', { id: '@id' }, {
+			'get': {
+				method: 'GET',
+				isArray: false
+			},
 			'save': {
 				method: 'POST',
 				isArray: false

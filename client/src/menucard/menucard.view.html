@@ -2,6 +2,12 @@
     <!--<menucard-nav></menucard-nav>-->
     <!--<title-card></title-card>-->
     <div class="row">
+        <div class="col-sm-12">
+            <div class="alert alert-success clearfix" ng-show="vm.session">
+                <span class="pull-left">Menukort aktiveret som <strong>{{vm.session.customer.name}}</strong> ved <strong>bord {{vm.session.table}}</strong>.</span>
+                <span class="pull-right">Nøgle: <strong>{{vm.session.key}}</strong></span>
+            </div>
+        </div>
         <div class="col-sm-8">
             <menus></menus>
         </div>
