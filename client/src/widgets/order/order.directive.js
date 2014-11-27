@@ -22,7 +22,7 @@
         /**
          * @ngInject
          */
-        function OrderController($scope, sessionsOrders, sessionsOrdersCommit, sessionsOrdersConfirm, sessionsOrdersComplete, sessionsOrdersClose, socket) {
+        function OrderController($scope, sessionsOrders, sessionsOrdersCommit, sessionsOrdersConfirm, sessionsOrdersComplete, sessionsOrdersClose, sessionsOrdersDishes, socket) {
             var vm = this;
 
             vm.order = $scope.order;
@@ -32,6 +32,12 @@
             vm.deleteOrder = function(sessionId, orderId) {
                 sessionsOrders.delete({sessionId: sessionId, orderId: orderId}, function(data) {
 
+                });
+            };
+
+            vm.removeDishFromOrder = function(sessionId, orderId, dishId) {
+                sessionsOrdersDishes.delete({sessionId: sessionId, orderId: orderId, dishId: dishId}, function(data) {
+                    console.log(data);
                 });
             };
 

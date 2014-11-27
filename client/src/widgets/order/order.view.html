@@ -46,7 +46,12 @@
         </thead>
         <tbody>
         <tr ng-repeat="dish in vm.order.dishes">
-            <td>{{dish.name}}</td>
+            <td>
+                {{dish.name}}
+                <div class="pull-right">
+                    <button type="submit" class="btn btn-danger" ng-click="vm.removeDishFromOrder(vm.session._id, vm.order._id, dish._id)">Fjern fra ordre</button>
+                </div>
+            </td>
         </tr>
         </tbody>
     </table>

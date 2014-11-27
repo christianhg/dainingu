@@ -8,18 +8,20 @@
     function FloorSessionsController(sessions, socket) {
         var vm = this;
 
-        vm.sessions = sessions.query();
+        vm.getSessions = function() {
+            sessions.query(function(sessions) {
+                vm.sessions = sessions;
+            });
+        };
 
-        socket.on('sessionAdded', function(data) {
-            console.log(data.message);
+        vm.getSessions();
+
+        socket.on('ordersUpdated', function() {
+            vm.getSessions();
         });
 
-        socket.on('sessionUpdated', function(data) {
-            console.log(data.message);
-        });
-
-        socket.on('sessionDeleted', function(data) {
-            console.log(data.message);
+        socket.on('sessionsUpdated', function() {
+            vm.getSessions();
         });
     }
 })();
