@@ -11,6 +11,13 @@
 		vm.activateMenucard = function() {
 			auth.validateMenucardToken(function(validToken) {
 				vm.menucardActivated = validToken;
+				if(validToken) {
+					vm.getSessionInfo();
+					vm.getActiveOrder();
+				} else {
+					activeOrder.delete();
+				}
+
 			});
 		};
 
@@ -22,19 +29,21 @@
 					sessions.get({id: sessionId}, function(session) {
 						vm.session = session;
 					});
+				} else {
+					vm.session = {};
 				}
 			});
 		};
 
-		vm.getSessionInfo();
 
 		vm.getActiveOrder = function() {
 			return activeOrder.get();
 		};
 
+
+
 		socket.on('sessionsUpdated', function() {
 			vm.activateMenucard();
-			vm.getSessionInfo();
 		});
 	}
 })();
