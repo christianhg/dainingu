@@ -5,16 +5,15 @@
 		.module('dainingu.kitchen')
 		.controller('KitchenController', KitchenController);
 
-	function KitchenController($state, $window, auth) {
+	function KitchenController(auth) {
 		var vm = this;
 
-		auth.validateLoginToken(function(validToken) {
+		auth.validate(function(validToken) {
 			vm.loggedIn = validToken;
 		});
 
-		vm.kitchenLogout = function() {
-			delete $window.sessionStorage.loginToken;
-			$state.go('kitchen.login', null, { reload: true });
+		vm.signOut = function() {
+			auth.signout('kitchen.login');
 		};
 	}
 })();

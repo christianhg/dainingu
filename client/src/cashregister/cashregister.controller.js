@@ -5,16 +5,15 @@
 		.module('dainingu.cashregister')
 		.controller('CashRegisterController', CashRegisterController);
 
-	function CashRegisterController($state, $window, auth) {
+	function CashRegisterController(auth) {
 		var vm = this;
 
-		auth.validateLoginToken(function(validToken) {
+		auth.validate(function(validToken) {
 			vm.loggedIn = validToken;
 		});
 
-		vm.cashregisterLogout = function() {
-			delete $window.sessionStorage.loginToken;
-			$state.go('cashregister.login', null, { reload: true });
+		vm.signOut = function() {
+			auth.signout('cashregister.login');
 		};
 	}
 })();

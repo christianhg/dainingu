@@ -32,20 +32,20 @@
 
 			vm.details = false;
 
-			$scope.$watch("details", function(newValue) {
+			$scope.$watch('details', function(newValue) {
 				if(newValue) {
 					vm.details = newValue;
 				}
 			});
 
-			$scope.$watch("dish",function(newValue){
-				if (newValue){
+			$scope.$watch('dish',function(newValue){
+				if(newValue) {
 					vm.dish = newValue;
 				}
 			});
 
-			$scope.$watch("menu",function(newValue){
-				if (newValue){
+			$scope.$watch('menu', function(newValue){
+				if(newValue) {
 					vm.menu = newValue;
 				}
 			});

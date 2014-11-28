@@ -9,24 +9,8 @@
 		.module('dainingu')
 		.factory('auth', auth);
 
-	function auth($http, socket, $window) {
+	function auth($http, $state, $window) {
 		return {
-			activateSession: function(key, callback) {
-				$http.post('/auth/activateSession', { key: key })
-					.success(function(data) {
-						if(data.success) {
-							// Get generated JWT token and store token in sessionStorage.
-							$window.sessionStorage.menucardToken = data.token;
-						} else {
-							// Delete token from sessionStorage.
-							delete $window.sessionStorage.menucardToken;
-						}
-						callback(data);
-					})
-					.error(function(data) {
-						callback(data);
-					});
-			},
 			signin: function(loginData, callback) {
 				$http.post('/auth/signin', loginData)
 					.success(function(data) {
@@ -43,20 +27,11 @@
 						callback(data);
 					});
 			},
-			getSessionId: function(callback) {
-				if($window.sessionStorage.menucardToken) {
-					$http.post('/auth/getSessionId', { token: $window.sessionStorage.menucardToken })
-						.success(function(sessionId) {
-							callback(sessionId);
-						})
-						.error(function() {
-							callback(false);
-						});
-				} else {
-					callback(false);
-				}
+			signout: function(loginState) {
+				delete $window.sessionStorage.loginToken;
+				$state.go(loginState, null, { reload: true });
 			},
-			validateLoginToken: function(callback) {
+			validate: function(callback) {
 				if($window.sessionStorage.loginToken) {
 					$http.post('/auth/validateLoginToken', {token: $window.sessionStorage.loginToken})
 						.success(function(validLoginToken) {
@@ -64,22 +39,6 @@
 								delete $window.sessionStorage.loginToken;
 							}
 							callback(validLoginToken);
-						})
-						.error(function() {
-							callback(false);
-						});
-				} else {
-					callback(false);
-				}
-			},
-			validateMenucardToken: function(callback) {
-				if($window.sessionStorage.menucardToken) {
-					$http.post('/auth/validateMenucardToken', {token: $window.sessionStorage.menucardToken})
-						.success(function(validMenucardToken) {
-							if(!validMenucardToken) {
-								delete $window.sessionStorage.menucardToken;
-							}
-							callback(validMenucardToken);
 						})
 						.error(function() {
 							callback(false);

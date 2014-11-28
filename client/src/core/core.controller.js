@@ -8,7 +8,7 @@
 	function CoreController(auth, $scope, $state) {
 		$scope.$on('$stateChangeStart', function(event, toState) {
 			if(toState.data.restricted) {
-				auth.validateLoginToken(function(validToken) {
+				auth.validate(function(validToken) {
 					if(!validToken) {
 						event.preventDefault();
 						$state.go(toState.data.login);
