@@ -1,8 +1,23 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
-        Ordrer
-    </div>
-    <div class="panel-body">
-        ...
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Ordrer
+            </div>
+            <div ng-repeat="session in vm.sessions">
+                <div class="panel-body">
+                    <div class="panel panel-default" ng-repeat="order in session.orders | filter: {completed: true}">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                Ordre fra {{order.createdOn | date: 'HH:mm:ss'}}
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
