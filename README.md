@@ -46,10 +46,12 @@
             sessions.js
             users.js
         models/
-            menu.js
-            order.js
-            session.js
-            user.js
+            mongoose
+                session.js
+                user.js
+            sequelize
+                menu.js
+                order.js
         routes.js
         server.js
     .bowerrc
