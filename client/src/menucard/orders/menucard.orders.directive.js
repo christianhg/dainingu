@@ -16,11 +16,11 @@
 			controllerAs: 'vm'
 		};
 
-		function MenucardOrdersController($window, activeOrder, auth, sessionsOrders, socket, sessionsOrdersCommit, sessionsOrdersDishes) {
+		function MenucardOrdersController(activeOrder, authMenucard, sessionsOrders, socket, sessionsOrdersCommit, sessionsOrdersDishes) {
 			var vm = this;
 
 			vm.getOrders = function() {
-				auth.getSessionId(function(sessionId) {
+				authMenucard.getSessionId(function(sessionId) {
 					if(sessionId) {
 						sessionsOrders.index({sessionId: sessionId}, function(orders) {
 							vm.orders = orders;
@@ -40,7 +40,7 @@
 			});
 
 			vm.commitOrder = function(orderId) {
-				auth.getSessionId(function(sessionId) {
+				authMenucard.getSessionId(function(sessionId) {
 					sessionsOrdersCommit.commit({sessionId: sessionId, orderId: orderId}, function(data) {
 						vm.resetActiveOrder();
 					});
@@ -48,7 +48,7 @@
 			};
 
 			vm.pullOrder = function(orderId) {
-				auth.getSessionId(function(sessionId) {
+				authMenucard.getSessionId(function(sessionId) {
 					sessionsOrdersCommit.pull({sessionId: sessionId, orderId: orderId}, function(data) {
 						console.log(data);
 					});
@@ -56,7 +56,7 @@
 			};
 
 			vm.removeDishFromOrder = function(orderId, dishId) {
-				auth.getSessionId(function(sessionId) {
+				authMenucard.getSessionId(function(sessionId) {
 					sessionsOrdersDishes.delete({sessionId: sessionId, orderId: orderId, dishId: dishId}, function(data) {
 						console.log(data);
 					});

@@ -6,15 +6,47 @@
             </div>
             <div ng-repeat="session in vm.sessions">
                 <div class="panel-body">
-                    <div class="panel panel-default" ng-repeat="order in session.orders | filter: {completed: true}">
+                    <div class="panel panel-default" ng-repeat="order in session.orders" ng-class="{
+    'panel-default': !order.committed,
+    'panel-info': order.committed && !order.confirmed,
+    'panel-primary': order.confirmed && !order.completed,
+    'panel-success': order.completed && !order.closed,
+    'panel-warning': order.closed
+    }">
                         <div class="panel-heading">
                             <h3 class="panel-title">
                                 Ordre fra {{order.createdOn | date: 'HH:mm:ss'}}
+                                <span class="label label-default" ng-show="!order.committed">Current</span>
+                                <span class="label label-info" ng-show="order.committed && !order.confirmed">Committed</span>
+                                <span class="label label-primary" ng-show="order.confirmed && !order.completed">Confirmed</span>
+                                <span class="label label-success" ng-show="order.completed && !order.closed">Completed</span>
+                                <span class="label label-warning" ng-show="order.closed">Closed</span>
                             </h3>
                         </div>
                         <div class="panel-body">
-
+                            <div class="well clearfix">
+                                <div class="pull-right" ng-show="order.completed && !order.closed">
+                                    <button type="submit" class="btn btn-warning" ng-click="vm.closeOrder(session._id, order._id)">Close</button>
+                                </div>
+                                <div class="pull-right" ng-show="order.closed">
+                                    <button type="submit" class="btn btn-success" ng-click="vm.openOrder(session._id, order._id)">Open</button>
+                                </div>
+                            </div>
                         </div>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Retter</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="dish in order.dishes">
+                                <td>
+                                    {{dish.name}}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

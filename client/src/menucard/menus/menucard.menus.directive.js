@@ -16,7 +16,7 @@
 			controllerAs: 'vm'
 		};
 
-		function MenucardMenusController($window, auth, menus, sessionsOrdersDishes, socket) {
+		function MenucardMenusController($window, authMenucard, menus, sessionsOrdersDishes, socket) {
 			var vm = this;
 
 			vm.getMenus = function() {
@@ -36,7 +36,7 @@
 			});
 
 			vm.activateMenucard = function() {
-				auth.validateMenucardToken(function(validToken) {
+				authMenucard.validate(function(validToken) {
 					vm.menucardActivated = validToken;
 				});
 			};

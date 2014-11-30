@@ -6,7 +6,9 @@
 
         <div class="col-sm-8">
             <session ng-repeat="session in vm.sessions" session="session">
-                <order ng-repeat="order in session.orders" session="session" order="order"></order>
+                <order ng-repeat="order in session.orders" session="session" order="order">
+
+                </order>
             </session>
         </div>
     </div>

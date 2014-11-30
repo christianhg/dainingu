@@ -19,7 +19,6 @@
         <div class="well clearfix">
             <div class="pull-left">
                 <button type="submit" class="btn btn-danger" ng-click="vm.deleteOrder(vm.session._id, vm.order._id)">Slet</button>
-                <!--<a ui-sref=".sessionId.orders.orderId.delete" class="btn btn-danger">Slet</a>-->
             </div>
             <div class="pull-right" ng-hide="vm.order.committed">
                 <button type="submit" class="btn btn-info" ng-click="vm.commitOrder(vm.session._id, vm.order._id)">Commit</button>
