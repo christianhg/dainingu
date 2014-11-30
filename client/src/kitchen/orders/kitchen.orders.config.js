@@ -2,18 +2,18 @@
     'use strict';
 
     angular
-        .module('dainingu.kitchen.sessions')
+        .module('dainingu.kitchen.orders')
         .config(config);
 
     function config($stateProvider) {
         $stateProvider
-            .state('kitchen.sessions', {
-                url: '/sessions',
-                templateUrl: 'kitchen/sessions/kitchen.sessions.view.html',
-                controller: 'KitchenSessionsController',
+            .state('kitchen.orders', {
+                url: '/orders',
+                templateUrl: 'kitchen/orders/kitchen.orders.view.html',
+                controller: 'KitchenOrdersController',
                 controllerAs: 'vm',
                 data: {
-                    pageTitle: 'dainingu > kitchen > sessioner',
+                    pageTitle: 'dainingu > kitchen > ordrer',
                     restricted: true,
                     login: 'kitchen.login'
                 }

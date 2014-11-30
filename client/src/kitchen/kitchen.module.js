@@ -5,7 +5,7 @@
 		.module('dainingu.kitchen', [
 			'dainingu.kitchen.login',
 			'dainingu.kitchen.menus',
-			'dainingu.kitchen.sessions'
+			'dainingu.kitchen.orders'
 		]);
 
 })();

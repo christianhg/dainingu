@@ -2,7 +2,7 @@
     <div class="col-md-8 col-md-offset-2">
         <div ng-repeat="session in vm.sessions">
             <div class="panel-body">
-                <div class="panel panel-default" ng-repeat="order in session.orders | filter: {completed: true}" ng-class="{
+                <div class="panel panel-default" ng-repeat="order in session.orders | filter: {confirmed: true}" ng-class="{
     'panel-default': !order.committed,
     'panel-info': order.committed && !order.confirmed,
     'panel-primary': order.confirmed && !order.completed,
@@ -21,11 +21,12 @@
                     </div>
                     <div class="panel-body">
                         <div class="well clearfix">
-                            <div class="pull-right" ng-show="order.completed && !order.closed">
-                                <button type="submit" class="btn btn-warning" ng-click="vm.closeOrder(session._id, order._id)">Close</button>
+                            <div class="pull-right" ng-show="order.confirmed && !order.completed">
+                                <button type="submit" class="btn btn-success" ng-click="vm.completeOrder(session._id, order._id)">Complete</button>
+                                <button type="submit" class="btn btn-info" ng-click="vm.rejectOrder(session._id, order._id)">Reject</button>
                             </div>
-                            <div class="pull-right" ng-show="order.closed">
-                                <button type="submit" class="btn btn-success" ng-click="vm.openOrder(session._id, order._id)">Open</button>
+                            <div class="pull-right" ng-show="order.completed && !order.closed">
+                                <button type="submit" class="btn btn-primary" ng-click="vm.incompleteOrder(session._id, order._id)">Incomplete</button>
                             </div>
                         </div>
                     </div>

@@ -2,5 +2,5 @@
     'use strict';
 
     angular
-        .module('dainingu.kitchen.sessions', []);
+        .module('dainingu.kitchen.orders', []);
 })();

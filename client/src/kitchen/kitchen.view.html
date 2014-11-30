@@ -13,7 +13,7 @@
             <div class="collapse navbar-collapse" id="kitchen-navigation">
                 <ul class="nav navbar-nav" ng-show="vm.loggedIn">
                     <li ui-sref-active="active"><a ui-sref=".menus">Menuer</a></li>
-                    <li ui-sref-active="active"><a ui-sref=".sessions">Sessioner</a></li>
+                    <li ui-sref-active="active"><a ui-sref=".orders">Ordrer</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right" ng-hide="vm.loggedIn">
                     <li ui-sref-active="active"><a ui-sref=".login">Log ind</a></li>
@@ -30,6 +30,7 @@
                 <div class="jumbotron">
                     <h1>dainingu.kitchen</h1>
                     <p>dainingu.<strong>kitchen</strong> er til <span class="label label-default">køkkenet</span> i restauranten.</p>
+                    <p><a class="btn btn-primary" ui-sref=".login" ng-hide="vm.loggedIn">Log ind</a></p>
                 </div>
             </div>
         </div>
