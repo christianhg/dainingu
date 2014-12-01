@@ -31,6 +31,21 @@
                     io.sockets.emit('dishesUpdated');
                 });
             });
+
+        /**
+         * Add og remove active-flag from sessions
+         */
+        app.route('/api/dishes/:id/activate')
+            .put(jwtCheck, function(req, res) {
+                dishes.activate(req, res, function(data) {
+                    io.sockets.emit('dishesUpdated');
+                });
+            })
+            .delete(jwtCheck, function(req, res) {
+                dishes.deactivate(req, res, function(data) {
+                    io.sockets.emit('dishesUpdated');
+                });
+            });
     };
 
 })();

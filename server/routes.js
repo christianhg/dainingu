@@ -44,6 +44,7 @@
         /**
          * Dishes API routes.
          * Routes for reading, adding, updating and deleting dishes.
+         * Additional routes to activate/deactivate dishes.
          */
         require('./routes/dishes')(app, io, jwtCheck);
 

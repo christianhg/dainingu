@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
-        <div ng-repeat="session in vm.sessions">
+        <div ng-repeat="session in vm.sessions | filter: {active: true, expired: false}">
             <div class="panel-body">
                 <div class="panel panel-default" ng-repeat="order in session.orders | filter: {completed: true}" ng-class="{
     'panel-default': !order.committed,

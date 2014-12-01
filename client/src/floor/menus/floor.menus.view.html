@@ -1,8 +1,19 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
-        Menuer
-    </div>
-    <div class="panel-body">
-        ...
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default" ng-repeat="menu in vm.menus | orderBy:name">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{menu.name}}</h3>
+            </div>
+            <table class="table">
+                <tbody>
+                <tr ng-repeat="dish in menu.dishes | orderBy:name">
+                    <td>{{dish.name}}
+                        <button type="submit" ng-click="vm.deactivateDish(dish.id)" class="pull-right btn btn-warning">Deaktivér</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
+

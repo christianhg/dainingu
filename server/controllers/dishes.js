@@ -6,6 +6,71 @@
 	var Menu = sequelize.model('menu');
 
 	/**
+	 * Activate dish.
+	 */
+	exports.activate = function(req, res, callback) {
+		var dishId = req.params.id;
+
+		Dish.find({where: {id: dishId}})
+			.complete(function (err, dish) {
+				if (err) {
+					res.send(err);
+				}
+
+				dish.activate(function(isActive) {
+					dish.save()
+						.complete(function(err) {
+							if(err) {
+								res.send(err);
+							}
+
+							var data = {
+								message: 'Dish activated',
+								dish: dish
+							};
+
+							res.json(dish);
+
+							callback(data);
+						});
+				});
+			});
+	};
+
+
+	/**
+	 * Deactivate dish.
+	 */
+	exports.deactivate = function(req, res, callback) {
+		var dishId = req.params.id;
+
+		Dish.find({where: {id: dishId}})
+			.complete(function (err, dish) {
+				if (err) {
+					res.send(err);
+				}
+
+				dish.deactivate(function(isActive) {
+					dish.save()
+						.complete(function(err) {
+							if(err) {
+								res.send(err);
+							}
+
+							var data = {
+								message: 'Dish deactivated',
+								dish: dish
+							};
+
+							res.json(dish);
+
+							callback(data);
+						});
+				});
+			});
+	};
+
+	/**
 	 * Delete dish.
 	 */
 	exports.destroy = function(req, res, callback) {

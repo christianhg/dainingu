@@ -5,19 +5,24 @@
         .module('dainingu.floor.menus')
         .controller('FloorMenusController', FloorMenusController);
 
-    function FloorMenusController(socket) {
+    function FloorMenusController(menus, socket) {
         var vm = this;
 
-        socket.on('menuAdded', function(data) {
-            console.log(data.message);
+        vm.getMenus = function() {
+            menus.query({deep: true}, function(menus) {
+                vm.menus = menus;
+            });
+        };
+
+        vm.getMenus();
+
+        socket.on('menusUpdated', function() {
+            vm.getMenus();
         });
 
-        socket.on('menuUpdated', function(data) {
-            console.log(data.message);
-        });
 
-        socket.on('menuDeleted', function(data) {
-            console.log(data.message);
-        });
+        vm.deactivateDish = function(dishId) {
+
+        };
     }
 })();

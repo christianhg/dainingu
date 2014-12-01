@@ -8,7 +8,7 @@
 	function FloorController(auth) {
 		var vm = this;
 
-		auth.validateLoginToken(function(validToken) {
+		auth.validate(function(validToken) {
 			vm.loggedIn = validToken;
 		});
 
