@@ -108,6 +108,7 @@
      */
     sessionSchema.methods.expire = function(callback) {
         this.expired = true;
+        this.active = false;
         callback(this.expired);
     };
 

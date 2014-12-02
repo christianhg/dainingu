@@ -3,7 +3,7 @@
         <h3 class="panel-title">{{menu.name}}</h3>
     </div>
     <div class="panel-body">
-        <div class="panel panel-default" ng-repeat="dish in menu.dishes">
+        <div ng-hide="!dish.active" class="panel panel-default" ng-repeat="dish in menu.dishes">
             <div class="panel-heading">
                 <h3 class="panel-title">{{dish.name}}</h3>
             </div>

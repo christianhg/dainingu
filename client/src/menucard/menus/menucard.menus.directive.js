@@ -59,7 +59,7 @@
 				var orderId = vm.getActiveOrder();
 
 				if(orderId) {
-					auth.getSessionId(function(sessionId) {
+					authMenucard.getSessionId(function(sessionId) {
 						if(sessionId && orderId) {
 							sessionsOrdersDishes.save({sessionId: sessionId, orderId: orderId}, dish, function() {
 

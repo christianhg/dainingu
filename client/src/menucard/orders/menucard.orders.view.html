@@ -9,26 +9,24 @@
     <div class="panel-heading">
         <h3 class="panel-title">
             Ordre fra {{order.createdOn | date: 'HH:mm:ss'}}
-            <span class="label label-default" ng-show="!order.committed">Current</span>
-            <span class="label label-info" ng-show="order.committed && !order.confirmed">Committed</span>
-            <span class="label label-primary" ng-show="order.confirmed && !order.completed">Confirmed</span>
-            <span class="label label-success" ng-show="order.completed && !order.closed">Completed</span>
-            <span class="label label-warning" ng-show="order.closed">Closed</span>
-            <span class="label label-success" ng-show="vm.orderActive(order._id)">Active</span>
+            <span class="label label-info" ng-show="order.committed && !order.confirmed">Indsendt til tjener</span>
+            <span class="label label-primary" ng-show="order.confirmed && !order.completed">Konfirmeret</span>
+            <span class="label label-success" ng-show="order.completed && !order.closed">Færdig</span>
+            <span class="label label-warning" ng-show="order.closed">Lukket</span>
+            <span class="label label-success" ng-show="vm.orderActive(order._id)">Aktiv</span>
         </h3>
     </div>
     <div class="panel-body">
-        <div class="well clearfix" ng-show="!order.confirmed">
-            <div class="pull-right" ng-show="!order.committed">
-                <button type="submit" class="btn btn-success" ng-hide="vm.orderActive(order._id)" ng-click="vm.activateOrder(order._id)">Aktivér</button>
-                <button type="submit" class="btn btn-info" ng-click="vm.commitOrder(order._id)">Commit</button>
+        <div class="well clearfix" ng-hide="order.committed || (vm.orderActive(order._id) && order.dishes.length < 1)">
+            <div class="pull-left">
+                <button type="submit" class="btn btn-success" ng-hide="vm.orderActive(order._id) || order.committed" ng-click="vm.activateOrder(order._id)">Aktivér</button>
             </div>
-            <div class="pull-right" ng-show="order.committed && !order.confirmed">
-                <button type="submit" class="btn btn-default" ng-click="vm.pullOrder(order._id)">Pull</button>
+            <div class="pull-right">
+                <button ng-hide="order.committed || order.dishes.length < 1" type="submit" class="btn btn-info" ng-click="vm.commitOrder(order._id)">Send ordre</button>
             </div>
         </div>
     </div>
-    <table class="table">
+    <table class="table" ng-show="order.dishes.length">
         <thead>
         <tr>
             <th>Retter</th>

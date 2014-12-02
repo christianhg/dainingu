@@ -4,7 +4,45 @@
     </div>
     <div class="col-md-8">
         <session ng-repeat="session in vm.sessions" session="session">
-            <order ng-repeat="order in session.orders" session="session" order="order"></order>
+            <!--<order ng-repeat="order in session.orders" session="session" order="order"></order>-->
+            <div ng-repeat="order in session.orders" class="panel" ng-class="{
+                'panel-default': !order.committed,
+                'panel-info': order.committed && !order.confirmed,
+                'panel-primary': order.confirmed && !order.completed,
+                'panel-success': order.completed && !order.closed,
+                'panel-warning': order.closed
+                }">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Ordre fra {{order.createdOn | date: 'HH:mm:ss'}}
+                        <!--<span class="label label-info" ng-show="vm.order.committed && !vm.order.confirmed">Committed</span>
+                        <span class="label label-primary" ng-show="vm.order.confirmed && !vm.order.completed">Confirmed</span>
+                        <span class="label label-success" ng-show="vm.order.completed && !vm.order.closed">Completed</span>
+                        <span class="label label-warning" ng-show="vm.order.closed">Closed</span>-->
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <div ng-hide="order.committed" class="alert">Ordren er endnu ikke indsendt fra bordet.</div>
+                    <div ng-show="order.committed && !order.confirmed" class="alert">Ordren er indsendt fra bordet. <strong>Konfirmér</strong> ordren eller send den tilbage.</div>
+                    <div ng-show="order.confirmed" class="alert">Ordren er <strong>konfirmeret</strong>.</div>
+                    <div class="well clearfix">
+                        <div class="pull-left">
+                            <button ng-hide="order.confirmed || !order.committed" type="submit" class="btn btn-default" ng-click="vm.pullOrder(session._id, order._id)">Send ordre tilbage</button>
+                            <button ng-show="order.completed" type="submit" class="btn btn-warning" ng-click="vm.closeOrder(session._id, order._id)">Luk ordre</button>
+                        </div>
+                        <div class="pull-right">
+                            <button ng-hide="order.confirmed || !order.committed" type="submit" class="btn btn-primary" ng-click="vm.confirmOrder(session._id, order._id)">Konfirmer ordre</button>
+                            <button ng-show="order.completed" type="submit" class="btn btn-primary" ng-click="vm.incompleteOrder(session._id, order._id)">Marker som ufærdig</button>
+                        </div>
+                    </div>
+                    <div class="list-group">
+                        <div class="list-group-item clearfix" ng-repeat="dish in order.dishes">
+                            <span class="pull-left">{{dish.name}}</span>
+                            <button ng-hide="order.confirmed" type="submit" class="pull-right btn btn-sm btn-danger" ng-click="vm.removeDishFromOrder(session._id, order._id, dish._id)">Fjern fra ordre</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </session>
     </div>
 </div>

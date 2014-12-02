@@ -16,11 +16,11 @@
 			controllerAs: 'vm'
 		};
 
-		function MenucardOrdersAddController($window, activeOrder, auth, sessionsOrders) {
+		function MenucardOrdersAddController(activeOrder, authMenucard, sessionsOrders) {
 			var vm = this;
 
 			vm.addOrder = function() {
-				auth.getSessionId(function(sessionId) {
+				authMenucard.getSessionId(function(sessionId) {
 					if(sessionId) {
 						sessionsOrders.save({sessionId: sessionId}, {}, function(data) {
 							activeOrder.set(data.order._id);
