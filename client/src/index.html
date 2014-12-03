@@ -1,16 +1,16 @@
 <!doctype html>
-<html lang="da" ng-app="dainingu" ng-controller="CoreController">
+<html lang="da" ng-app="dainingu" ng-controller="CoreController as vm">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title ng-bind="pageTitle"></title>
+    <title ng-bind="vm.pageTitle"></title>
     <!-- vendor:css -->
     <!-- endinject -->
     <!-- app:css -->
     <!-- endinject -->
 </head>
-<body ng-class="pageClass">
+<body ng-class="vm.pageClass">
     <div id="page">
         <div class="container-fluid">
             <!--<main-nav></main-nav>-->

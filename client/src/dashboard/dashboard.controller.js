@@ -8,6 +8,9 @@
 	function DashboardController(auth, socket) {
 		var vm = this;
 
+		vm.alerts = [];
+		vm.user = auth.userInfo();
+
 		auth.validate(function(validToken) {
 			vm.loggedIn = validToken;
 		});
@@ -17,12 +20,12 @@
 		};
 
 		socket.on('alert', function(alert) {
+			// push new alert to alert array
 			vm.alerts.push(alert);
 		});
 
-		vm.alerts = [];
-
 		vm.closeAlert = function(index) {
+			// remove alert from alert array
 			vm.alerts.splice(index, 1);
 		};
 	}

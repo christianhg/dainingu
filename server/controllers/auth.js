@@ -120,7 +120,9 @@
 						message: 'User signin successful.',
 						success: true,
 						token: token,
-						user: user._id
+						user: {
+							username: user.username
+						}
 					};
 
 					res.json(data);

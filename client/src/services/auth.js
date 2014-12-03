@@ -11,10 +11,14 @@
 
 	function auth($http, $state, $window) {
 		return {
+			userInfo: function() {
+				return $window.sessionStorage.user || '';
+			},
 			signin: function(loginData, callback) {
 				$http.post('/auth/signin', loginData)
 					.success(function(data) {
 						if(data.success) {
+							$window.sessionStorage.user = data.user.username;
 							// Get generated JWT token and store token in sessionStorage.
 							$window.sessionStorage.loginToken = data.token;
 						} else {
@@ -28,6 +32,7 @@
 					});
 			},
 			signout: function(loginState) {
+				delete $window.sessionStorage.user;
 				delete $window.sessionStorage.loginToken;
 				$state.go(loginState, null, { reload: true });
 			},
