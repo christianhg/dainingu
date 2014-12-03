@@ -5,7 +5,7 @@
         .module('dainingu.floor.sessions')
         .controller('FloorSessionsController', FloorSessionsController);
 
-    function FloorSessionsController(sessions, sessionsOrdersCommit, sessionsOrdersConfirm, socket) {
+    function FloorSessionsController(sessions, sessionsOrdersClose, sessionsOrdersCommit, sessionsOrdersComplete, sessionsOrdersConfirm, socket) {
         var vm = this;
 
         vm.getSessions = function() {
@@ -32,6 +32,18 @@
 
         vm.confirmOrder = function(sessionId, orderId) {
             sessionsOrdersConfirm.confirm({sessionId: sessionId, orderId: orderId}, function(data) {
+                console.log(data);
+            });
+        };
+
+        vm.incompleteOrder = function(sessionId, orderId) {
+            sessionsOrdersComplete.incomplete({sessionId: sessionId, orderId: orderId}, function(data) {
+                console.log(data);
+            });
+        };
+
+        vm.closeOrder = function(sessionId, orderId) {
+            sessionsOrdersClose.close({sessionId: sessionId, orderId: orderId}, function(data) {
                 console.log(data);
             });
         };

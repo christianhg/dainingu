@@ -8,11 +8,10 @@
     <div class="panel-heading">
         <h3 class="panel-title">
             Ordre fra {{vm.order.createdOn | date: 'HH:mm:ss'}}
-            <span class="label label-default" ng-show="!vm.order.committed">Current</span>
-            <span class="label label-info" ng-show="vm.order.committed && !vm.order.confirmed">Committed</span>
-            <span class="label label-primary" ng-show="vm.order.confirmed && !vm.order.completed">Confirmed</span>
-            <span class="label label-success" ng-show="vm.order.completed && !vm.order.closed">Completed</span>
-            <span class="label label-warning" ng-show="vm.order.closed">Closed</span>
+            <span class="label label-info" ng-show="vm.order.committed && !vm.order.confirmed">Indsendt</span>
+            <span class="label label-primary" ng-show="vm.order.confirmed && !vm.order.completed">Konfirmeret</span>
+            <span class="label label-success" ng-show="vm.order.completed && !vm.order.closed">Færdiggjort</span>
+            <span class="label label-warning" ng-show="vm.order.closed">Lukket</span>
         </h3>
     </div>
     <div class="panel-body">
@@ -39,22 +38,13 @@
                 <button type="submit" class="btn btn-success" ng-click="vm.openOrder(vm.session._id, vm.order._id)">Åben ordre</button>
             </div>
         </div>
-    </div>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Retter</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="dish in vm.order.dishes">
-            <td>
+        <div class="list-group" ng-show="vm.order.dishes.length">
+            <div class="list-group-item clearfix" ng-repeat="dish in vm.order.dishes">
                 {{dish.name}}
                 <div class="pull-right">
-                    <button type="submit" class="btn btn-danger" ng-click="vm.removeDishFromOrder(vm.session._id, vm.order._id, dish._id)">Fjern fra ordre</button>
+                    <button type="submit" class="btn btn-sm btn-danger" ng-click="vm.removeDishFromOrder(vm.session._id, vm.order._id, dish._id)">Fjern fra ordre</button>
                 </div>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+            </div>
+        </div>
+    </div>
 </div>

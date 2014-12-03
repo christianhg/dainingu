@@ -20,10 +20,10 @@
                     <div class="panel-body">
                         <div class="well clearfix">
                             <div class="pull-left">
-                                <button ng-show="!order.completed" type="submit" class="btn btn-info" ng-click="vm.rejectOrder(session._id, order._id)">Reject</button>
+                                <button ng-show="!order.completed" type="submit" class="btn btn-info" ng-click="vm.rejectOrder(session._id, order._id)">Afvis ordre</button>
                             </div>
                             <div class="pull-right">
-                                <button ng-show="order.confirmed && !order.completed" type="submit" class="btn btn-success" ng-click="vm.completeOrder(session._id, order._id)">Complete</button>
+                                <button ng-show="order.confirmed && !order.completed" type="submit" class="btn btn-success" ng-click="vm.completeOrder(session._id, order._id)">Marker som færdig</button>
                             </div>
                         </div>
                     </div>
