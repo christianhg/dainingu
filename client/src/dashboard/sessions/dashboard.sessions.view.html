@@ -3,15 +3,7 @@
         <div class="col-sm-4">
             <create-session></create-session>
         </div>
-
         <div class="col-sm-8">
-            <!--<session ng-repeat="session in vm.sessions" session="session">
-                <order ng-repeat="order in session.orders" session="session" order="order">
-
-                </order>
-            </session>-->
-
-
             <div class="panel" ng-repeat="session in vm.sessions" ng-class="{'panel-info': !session.active, 'panel-success': session.active, 'panel-warning': session.expired}">
                 <div class="panel-heading">
                     <h3 class="panel-title">

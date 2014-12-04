@@ -17,9 +17,10 @@
         </h3>
     </div>
     <div class="panel-body clearfix">
-        <button type="submit" class="btn btn-success" ng-hide="vm.orderActive(order._id) || order.committed" ng-click="vm.activateOrder(order._id)">Aktivér</button>
-        <button ng-show="vm.orderActive(order._id) && order.dishes.length" type="submit" class="btn btn-info" ng-click="vm.commitOrder(order._id)">Send ordre</button>
-
+        <div class="well">
+            <button type="submit" class="btn btn-success" ng-hide="vm.orderActive(order._id) || order.committed" ng-click="vm.activateOrder(order._id)">Aktivér</button>
+            <button ng-show="vm.orderActive(order._id) && order.dishes.length" type="submit" class="btn btn-info" ng-click="vm.commitOrder(order._id)">Send ordre</button>
+        </div>
         <div class="list-group">
             <div class="list-group-item clearfix" ng-repeat="dish in order.dishes">
                 <span class="pull-left">{{dish.name}}</span>

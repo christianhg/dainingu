@@ -1,48 +1,11 @@
-<div class="row">
-    <div class="col-md-8 col-md-offset-2">
-        <div ng-repeat="session in vm.sessions | filter: {active: true, expired: false}">
-            <div class="panel-body">
-                <div class="panel panel-default" ng-repeat="order in session.orders | filter: {confirmed: true, completed: false}" ng-class="{
-    'panel-default': !order.committed,
-    'panel-info': order.committed && !order.confirmed,
-    'panel-primary': order.confirmed && !order.completed,
-    'panel-success': order.completed && !order.closed,
-    'panel-warning': order.closed
-    }">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            Ordre fra {{order.createdOn | date: 'HH:mm:ss'}}
-                            <span class="label label-primary" ng-show="order.confirmed && !order.completed">Konfirmeret</span>
-                            <span class="label label-success" ng-show="order.completed && !order.closed">Færdig</span>
-                            <span class="label label-warning" ng-show="order.closed">Lukket</span>
-                        </h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="well clearfix">
-                            <div class="pull-left">
-                                <button ng-show="!order.completed" type="submit" class="btn btn-info" ng-click="vm.rejectOrder(session._id, order._id)">Afvis ordre</button>
-                            </div>
-                            <div class="pull-right">
-                                <button ng-show="order.confirmed && !order.completed" type="submit" class="btn btn-success" ng-click="vm.completeOrder(session._id, order._id)">Marker som færdig</button>
-                            </div>
-                        </div>
-                    </div>
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>Retter</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="dish in order.dishes">
-                            <td>
-                                {{dish.name}}
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+<div class="row" ng-repeat="session in vm.sessions | filter: {active: true}">
+    <div class="col-md-4">
+        <order ng-repeat="order in session.orders | filter: {committed: true, confirmed: false}" sessionId="session.id" order="order"></order>
+    </div>
+    <div class="col-md-4">
+        <order ng-repeat="order in session.orders | filter: {confirmed: true, completed: false}" sessionId="session.id" order="order"></order>
+    </div>
+    <div class="col-md-4">
+        <order ng-repeat="order in session.orders | filter: {completed: true, closed: false}" sessionId="session.id" order="order"></order>
     </div>
 </div>
