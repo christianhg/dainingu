@@ -1,11 +1,21 @@
-<div class="row" ng-repeat="session in vm.sessions | filter: {active: true}">
-    <div class="col-md-4">
-        <order ng-repeat="order in session.orders | filter: {committed: true, confirmed: false}" sessionId="session.id" order="order"></order>
+<div class="panel panel-default" ng-repeat="session in vm.sessions | filter: {active: true}">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <h3 class="panel-title clearfix">
+                <strong>{{session.customer.name}}</strong> (bord {{session.table}})
+                <strong class="pull-right">{{session.key}}</strong>
+            </h3>
+        </h3>
     </div>
-    <div class="col-md-4">
-        <order ng-repeat="order in session.orders | filter: {confirmed: true, completed: false}" sessionId="session.id" order="order"></order>
-    </div>
-    <div class="col-md-4">
-        <order ng-repeat="order in session.orders | filter: {completed: true, closed: false}" sessionId="session.id" order="order"></order>
+    <div class="panel-body row">
+        <div class="col-md-4">
+            <kitchen-order ng-repeat="order in session.orders | filter: {committed: true, confirmed: false}" order="order" session-id="session._id"></kitchen-order>
+        </div>
+        <div class="col-md-4">
+            <kitchen-order ng-repeat="order in session.orders | filter: {confirmed: true, completed: false}" order="order" session-id="session._id"></kitchen-order>
+        </div>
+        <div class="col-md-4">
+            <kitchen-order ng-repeat="order in session.orders | filter: {completed: true, closed: false}" order="order" session-id="session._id"></kitchen-order>
+        </div>
     </div>
 </div>

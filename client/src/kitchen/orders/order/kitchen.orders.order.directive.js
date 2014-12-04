@@ -3,15 +3,15 @@
 
     angular
         .module('dainingu.kitchen.orders')
-        .directive('order', order);
+        .directive('kitchenOrder', kitchenOrder);
 
-    function order() {
+    function kitchenOrder() {
         var directive = {
             templateUrl: 'kitchen/orders/order/kitchen.orders.order.view.html',
             restrict: 'E',
             scope: {
                 order: '=',
-                sessionId: '@'
+                sessionId: '='
             },
             controller: KitchenOrdersOrderController,
             controllerAs: 'vm'

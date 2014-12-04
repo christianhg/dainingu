@@ -1,0 +1,33 @@
+<div class="panel panel-default" ng-class="{
+    'panel-default': !vm.order.committed,
+    'panel-info': vm.order.committed && !vm.order.confirmed,
+    'panel-primary': vm.order.confirmed && !vm.order.completed,
+    'panel-success': vm.order.completed && !vm.order.closed,
+    'panel-warning': vm.order.closed
+    }">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            Ordre fra {{vm.order.createdOn | date: 'HH:mm:ss'}}
+            <span class="label label-default" ng-hide="vm.order.committed">1. Ikke indsendt</span>
+            <span class="label label-info" ng-show="vm.order.committed && !vm.order.confirmed">2. Indsendt til tjener</span>
+            <span class="label label-primary" ng-show="vm.order.confirmed && !vm.order.completed">3. Konfirmeret af tjener</span>
+            <span class="label label-success" ng-show="vm.order.completed && !vm.order.closed">4. Færdig i køkken</span>
+            <span class="label label-warning" ng-show="vm.order.closed">5. Betalt i kasseapparat</span>
+        </h3>
+    </div>
+    <div class="panel-body">
+        <div class="well clearfix" ng-show="vm.order.committed && !vm.order.confirmed">
+            <button type="submit" class="pull-left btn btn-default" ng-click="vm.pullOrder(vm.session._id, vm.order._id)">Send tilbage</button>
+            <button type="submit" class="pull-right btn btn-primary" ng-click="vm.confirmOrder(vm.session._id, vm.order._id)">Konfirmér</button>
+        </div>
+        <div class="well clearfix" ng-show="vm.order.completed && !vm.order.closed">
+            <button type="submit" class="pull-left btn btn-primary" ng-click="vm.incompleteOrder(vm.session._id, vm.order._id)">Ufærdig</button>
+            <button type="submit" class="pull-right btn btn-warning" ng-click="vm.closeOrder(vm.session._id, vm.order._id)">Luk</button>
+        </div>
+        <div class="list-group" ng-show="vm.order.dishes">
+            <div class="list-group-item" ng-repeat="dish in vm.order.dishes">
+                {{dish.name}}
+            </div>
+        </div>
+    </div>
+</div>
