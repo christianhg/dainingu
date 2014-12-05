@@ -11,7 +11,8 @@
             Ordre fra {{order.createdOn | date: 'HH:mm:ss'}}
             <span class="label label-info" ng-show="order.committed && !order.confirmed">Indsendt til tjener</span>
             <span class="label label-primary" ng-show="order.confirmed && !order.completed">Konfirmeret</span>
-            <span class="label label-success" ng-show="order.completed && !order.closed">Færdig</span>
+            <span class="label label-success" ng-show="order.completed && !order.served">Færdig</span>
+            <span class="label label-success" ng-show="order.served && !order.closed">Serveret</span>
             <span class="label label-warning" ng-show="order.closed">Lukket</span>
             <span class="label label-success" ng-show="vm.orderActive(order._id)">Aktiv</span>
         </h3>
@@ -20,6 +21,7 @@
         <div class="well">
             <button type="submit" class="btn btn-success" ng-hide="vm.orderActive(order._id) || order.committed" ng-click="vm.activateOrder(order._id)">Aktivér</button>
             <button ng-show="vm.orderActive(order._id) && order.dishes.length" type="submit" class="btn btn-info" ng-click="vm.commitOrder(order._id)">Send ordre</button>
+            <button ng-show="order.served" class="btn btn-success" ng-click="vm.returnOrder(order._id)">Returnér</button>
         </div>
         <div class="list-group">
             <div class="list-group-item clearfix" ng-repeat="dish in order.dishes">

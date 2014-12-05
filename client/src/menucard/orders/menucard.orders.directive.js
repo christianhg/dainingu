@@ -16,7 +16,7 @@
 			controllerAs: 'vm'
 		};
 
-		function MenucardOrdersController(activeOrder, authMenucard, sessionsOrders, socket, sessionsOrdersCommit, sessionsOrdersDishes) {
+		function MenucardOrdersController(activeOrder, authMenucard, sessionsOrders, socket, sessionsOrdersCommit, sessionsOrdersDishes, sessionsOrdersServe) {
 			var vm = this;
 
 			vm.getOrders = function() {
@@ -51,6 +51,14 @@
 				authMenucard.getSessionId(function(sessionId) {
 					sessionsOrdersCommit.pull({sessionId: sessionId, orderId: orderId}, function(data) {
 						console.log(data);
+					});
+				});
+			};
+
+			vm.returnOrder = function(orderId) {
+				authMenucard.getSessionId(function(sessionId) {
+					sessionsOrdersServe.return({sessionId: sessionId, orderId: orderId}, function(data) {
+
 					});
 				});
 			};

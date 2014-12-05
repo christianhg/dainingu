@@ -47,6 +47,10 @@
                 type: Boolean,
                 default: false
             },
+            served: {
+                type: Boolean,
+                default: false
+            },
             closed: {
                 type: Boolean,
                 default: false
@@ -434,6 +438,56 @@
                 order = this.orders[i];
 
                 this.orders[i].completed = false;
+
+                break;
+            }
+        }
+
+        if(!order) {
+            callback(false);
+        } else {
+            callback(order);
+        }
+    };
+
+    /**
+     * Mark specific order in session as served.
+     * @param orderId
+     * @param callback
+     */
+    sessionSchema.methods.serveOrder = function(orderId, callback) {
+        var order;
+
+        for(var i = 0; i < this.orders.length; i++) {
+            if(this.orders[i]._id == orderId) {
+                order = this.orders[i];
+
+                this.orders[i].served = true;
+
+                break;
+            }
+        }
+
+        if(!order) {
+            callback(false);
+        } else {
+            callback(order);
+        }
+    };
+
+    /**
+     * Mark specific order in session as returned.
+     * @param orderId
+     * @param callback
+     */
+    sessionSchema.methods.returnOrder = function(orderId, callback) {
+        var order;
+
+        for(var i = 0; i < this.orders.length; i++) {
+            if(this.orders[i]._id == orderId) {
+                order = this.orders[i];
+
+                this.orders[i].served = false;
 
                 break;
             }

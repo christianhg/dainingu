@@ -23,17 +23,5 @@
         socket.on('sessionsUpdated', function() {
             vm.getSessions();
         });
-
-        vm.closeOrder = function(sessionId, orderId) {
-            sessionsOrdersClose.close({sessionId: sessionId, orderId: orderId}, function(data) {
-                console.log(data);
-            });
-        };
-
-        vm.openOrder = function(sessionId, orderId) {
-            sessionsOrdersClose.open({sessionId: sessionId, orderId: orderId}, function(data) {
-                console.log(data);
-            });
-        };
     }
 })();

@@ -17,8 +17,11 @@
         <div class="col-md-2">
             <floor-order ng-repeat="order in session.orders | filter: {confirmed: true, completed: false}" order="order" session-id="session._id"></floor-order>
         </div>
-        <div class="col-md-4">
-            <floor-order ng-repeat="order in session.orders | filter: {completed: true, closed: false}" order="order" session-id="session._id"></floor-order>
+        <div class="col-md-2">
+            <floor-order ng-repeat="order in session.orders | filter: {completed: true, served: false}" order="order" session-id="session._id"></floor-order>
         </div>
+        <!--<div class="col-md-4">
+            <floor-order ng-repeat="order in session.orders | filter: {completed: true, closed: false}" order="order" session-id="session._id"></floor-order>
+        </div>-->
     </div>
 </div>

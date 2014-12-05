@@ -17,7 +17,7 @@
             controllerAs: 'vm'
         };
 
-        function FloorOrdersOrderController($scope, sessionsOrdersClose, sessionsOrdersCommit, sessionsOrdersComplete, sessionsOrdersConfirm) {
+        function FloorOrdersOrderController($scope, sessionsOrdersCommit, sessionsOrdersComplete, sessionsOrdersConfirm, sessionsOrdersServe) {
             var vm = this;
 
             vm.order = $scope.order;
@@ -42,9 +42,9 @@
                 });
             };
 
-            vm.closeOrder = function(sessionId, orderId) {
-                sessionsOrdersClose.close({sessionId: sessionId, orderId: orderId}, function(data) {
-                    console.log(data);
+            vm.serveOrder = function(sessionId, orderId) {
+                sessionsOrdersServe.serve({sessionId: sessionId, orderId: orderId}, function(data) {
+
                 });
             };
         }

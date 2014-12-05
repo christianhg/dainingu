@@ -35,7 +35,7 @@
             });
 
         /**
-         * Add or remove commit-flag from order
+         * Add or remove committed-flag from order
          */
         app.route('/api/sessions/:sessionId/orders/:orderId/commit')
             .put(jwtCheck, function(req, res) {
@@ -50,7 +50,7 @@
             });
 
         /**
-         * Add or remove confirm-flag from order
+         * Add or remove confirmed-flag from order
          */
         app.route('/api/sessions/:sessionId/orders/:orderId/confirm')
             .put(jwtCheck, function(req, res) {
@@ -65,7 +65,7 @@
             });
 
         /**
-         * Add or remove complete-flag from order
+         * Add or remove completed-flag from order
          */
         app.route('/api/sessions/:sessionId/orders/:orderId/complete')
             .put(jwtCheck, function(req, res) {
@@ -80,7 +80,22 @@
             });
 
         /**
-         * Add or remove close-flag from order
+         * Add or remove served-flag from order
+         */
+        app.route('/api/sessions/:sessionId/orders/:orderId/serve')
+            .put(jwtCheck, function(req, res) {
+                sessionsOrders.serve(req, res, function(data) {
+                    io.sockets.emit('ordersUpdated');
+                });
+            })
+            .delete(jwtCheck, function(req, res) {
+                sessionsOrders.return(req, res, function(data) {
+                    io.sockets.emit('ordersUpdated');
+                });
+            });
+
+        /**
+         * Add or remove closed-flag from order
          */
         app.route('/api/sessions/:sessionId/orders/:orderId/close')
             .put(jwtCheck, function(req, res) {
