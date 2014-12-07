@@ -3,11 +3,11 @@
 
     angular
         .module('dainingu.widgets')
-        .directive('sessionLabels', sessionLabels);
+        .directive('sessionAlerts', sessionAlerts);
 
-    function sessionLabels() {
+    function sessionAlerts() {
         var directive = {
-            templateUrl: 'widgets/session/labels/session.labels.view.html',
+            templateUrl: 'widgets/session/alerts/session.alerts.view.html',
             restrict: 'E'
         };
 

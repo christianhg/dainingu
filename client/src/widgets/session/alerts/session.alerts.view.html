@@ -1,0 +1,9 @@
+<div ng-hide="vm.session.active || vm.session.expired" class="alert alert-info clearfix" role="alert">
+    <p>Sessionen er endnu ikke brugt til at aktivere menukortet.</p>
+</div>
+<div ng-show="vm.session.active" class="alert alert-success" role="alert">
+    <p>Sessionen er blevet brugt til aktivere menukortet.</p>
+</div>
+<div class="alert alert-warning" role="alert" ng-show="vm.session.expired">
+    <p>Sessionen er udløbet og kan ikke benyttes til at aktivere menukortet.</p>
+</div>

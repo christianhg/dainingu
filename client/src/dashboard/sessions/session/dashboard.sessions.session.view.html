@@ -3,21 +3,14 @@
         <h3 class="panel-title">
             <h3 class="panel-title clearfix">
                 <strong>{{vm.session.customer.name}}</strong> (bord {{vm.session.table}})
-                <session-labels session="session"></session-labels>
+                <session-labels></session-labels>
                 <strong class="pull-right">{{vm.session.key}}</strong>
             </h3>
         </h3>
     </div>
     <div class="panel-body">
-        <div ng-hide="session.active || session.expired" class="alert alert-info clearfix" role="alert">
-            <p>Sessionen er endnu ikke brugt til at aktivere menukortet.</p>
-        </div>
-        <div ng-show="session.active" class="alert alert-success" role="alert">
-            <p>Sessionen er blevet brugt til aktivere menukortet.</p>
-        </div>
-        <div class="alert alert-warning" role="alert" ng-show="session.expired">
-            <p>Sessionen er udløbet og kan ikke benyttes til at aktivere menukortet.</p>
-        </div>
+        <session-alerts></session-alerts>
+
         <div class="well clearfix">
             <div class="pull-left">
                 <a ui-sref=".id.edit({id: session._id})" class="btn btn-warning">Redigér session</a>
@@ -29,17 +22,7 @@
                 <button ng-show="session.expired" type="submit" ng-click="vm.resumeSession(session._id)" class="btn btn-info">Genoptag session</button>
             </div>
         </div>
-        <div class="list-group">
-            <div class="list-group-item">
-                <strong>Kunde</strong>: {{session.customer.name}}
-            </div>
-            <div class="list-group-item">
-                <strong>Bord</strong>: {{session.table}}
-            </div>
-            <div class="list-group-item">
-                <strong>Nøgle</strong>: {{session.key}}
-            </div>
-        </div>
+        <session-info></session-info>
 
         <div ng-repeat="order in session.orders" class="panel" ng-class="{
                         'panel-default': !order.committed,
