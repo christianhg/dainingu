@@ -10,6 +10,13 @@
         Session
             .aggregate()
             .unwind('orders')
+            .project({
+                _id: 0,
+                order: '$orders',
+                session: {
+                    _id: '$_id'
+                }
+            })
             .exec(function(err, orders) {
                 if(err) {
                     res.send(err);

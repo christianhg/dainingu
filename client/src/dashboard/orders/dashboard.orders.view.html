@@ -1,7 +1,10 @@
 <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
-        <div ng-repeat="session in vm.sessions">
-            <dashboard-order ng-repeat="order in session.orders" order="order" session-id="session._id"></dashboard-order>
-        </div>
+        <dashboard-order ng-repeat="order in vm.orders" ng-show="order.order.closed" order="order.order" session-id="order.session._id"></dashboard-order>
+        <dashboard-order ng-repeat="order in vm.orders" ng-show="order.order.served && !order.order.closed" order="order.order" session-id="order.session._id"></dashboard-order>
+        <dashboard-order ng-repeat="order in vm.orders" ng-show="order.order.completed && !order.order.served" order="order.order" session-id="order.session._id"></dashboard-order>
+        <dashboard-order ng-repeat="order in vm.orders" ng-show="order.order.confirmed && !order.order.completed" order="order.order" session-id="order.session._id"></dashboard-order>
+        <dashboard-order ng-repeat="order in vm.orders" ng-show="order.order.committed && !order.order.confirmed" order="order.order" session-id="order.session._id"></dashboard-order>
+        <dashboard-order ng-repeat="order in vm.orders" ng-show="!order.order.committed" order="order.order" session-id="order.session._id"></dashboard-order>
     </div>
 </div>

@@ -5,8 +5,16 @@
         .module('dainingu.dashboard.sessions')
         .controller('DashboardOrdersController', DashboardOrdersController);
 
-    function DashboardOrdersController(sessions, socket) {
+    function DashboardOrdersController(orders, sessions, socket) {
         var vm = this;
+
+        vm.getOrders = function() {
+            orders.query(function(orders) {
+                vm.orders = orders;
+            });
+        };
+
+        vm.getOrders();
 
         vm.getSessions = function() {
             sessions.query(function(sessions) {
@@ -17,11 +25,11 @@
         vm.getSessions();
 
         socket.on('ordersUpdated', function() {
-            vm.getSessions();
+            vm.getOrders();
         });
 
         socket.on('sessionsUpdated', function() {
-            vm.getSessions();
+            vm.getOrders();
         });
     }
 })();
