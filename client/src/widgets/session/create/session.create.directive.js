@@ -3,15 +3,15 @@
 
     angular
         .module('dainingu.widgets')
-        .directive('createSession', createSession);
+        .directive('sessionCreate', sessionCreate);
 
-    function createSession() {
+    function sessionCreate() {
         var directive = {
-            templateUrl: 'widgets/createSession/createSession.view.html',
+            templateUrl: 'widgets/session/create/session.create.view.html',
             restrict: 'E',
             scope: {
             },
-            controller: CreateSessionController,
+            controller: SessionCreateController,
             controllerAs: 'vm'
         };
 
@@ -20,7 +20,7 @@
         /**
          * @ngInject
          */
-        function CreateSessionController(sessions) {
+        function SessionCreateController(sessions) {
             var vm = this;
 
             vm.addSession = function() {

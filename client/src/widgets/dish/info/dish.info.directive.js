@@ -7,7 +7,7 @@
 
 	function dishInfo() {
 		var directive = {
-			templateUrl: 'widgets/dishInfo/dishInfo.view.html',
+			templateUrl: 'widgets/dish/info/dish.info.view.html',
 			restrict: 'E',
 			scope: {
 				dish: '=',

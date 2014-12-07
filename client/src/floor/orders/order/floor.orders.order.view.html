@@ -8,11 +8,7 @@
     <div class="panel-heading">
         <h3 class="panel-title">
             Ordre fra {{vm.order.createdOn | date: 'HH:mm:ss'}}
-            <span class="label label-default" ng-hide="vm.order.committed">1. Ikke indsendt</span>
-            <span class="label label-info" ng-show="vm.order.committed && !vm.order.confirmed">2. Indsendt til tjener</span>
-            <span class="label label-primary" ng-show="vm.order.confirmed && !vm.order.completed">3. Konfirmeret af tjener</span>
-            <span class="label label-success" ng-show="vm.order.completed && !vm.order.closed">4. Færdig i køkken</span>
-            <span class="label label-warning" ng-show="vm.order.closed">5. Betalt i kasseapparat</span>
+            <order-labels></order-labels>
         </h3>
     </div>
     <div class="panel-body">

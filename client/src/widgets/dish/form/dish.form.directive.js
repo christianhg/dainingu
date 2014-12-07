@@ -7,7 +7,7 @@
 
 	function dishForm() {
 		var directive = {
-			templateUrl: 'widgets/dishForm/dishForm.view.html',
+			templateUrl: 'widgets/dish/form/dish.form.view.html',
 			restrict: 'E'
 		};
 

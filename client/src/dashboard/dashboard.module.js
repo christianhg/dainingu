@@ -6,6 +6,7 @@
 			'dainingu.dashboard.dishes',
 			'dainingu.dashboard.login',
 			'dainingu.dashboard.menus',
+			'dainingu.dashboard.orders',
 			'dainingu.dashboard.users',
 			'dainingu.dashboard.sessions',
 			'dainingu.dashboard.statistics'
