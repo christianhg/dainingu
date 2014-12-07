@@ -1,0 +1,42 @@
+<div class="panel" ng-class="{'panel-info': !vm.session.active, 'panel-success': vm.session.active, 'panel-warning': vm.session.expired}">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <h3 class="panel-title clearfix">
+                <strong>{{vm.session.customer.name}}</strong> (bord {{vm.session.table}})
+                <!--<span class="label label-info" ng-hide="vm.session.active">Inaktiv</span>
+                <span class="label label-success" ng-show="vm.session.active">Aktiveret</span>
+                <span class="label label-warning" ng-show="vm.session.expired">Udløbet</span>-->
+                <strong class="pull-right">{{vm.session.key}}</strong>
+            </h3>
+        </h3>
+    </div>
+    <div class="panel-body">
+        <div ng-hide="vm.session.active || vm.session.expired" class="alert alert-info clearfix" role="alert">
+            <p>Sessionen er endnu ikke brugt til at aktivere menukortet.</p>
+        </div>
+        <div ng-show="vm.session.active" class="alert alert-success" role="alert">
+            <p>Sessionen er blevet brugt til aktivere menukortet.</p>
+        </div>
+        <div class="alert alert-warning" role="alert" ng-show="vm.session.expired">
+            <p>Sessionen er udløbet og kan ikke benyttes til at aktivere menukortet.</p>
+        </div>
+        <div class="well clearfix">
+            <div class="pull-right">
+                <button ng-show="vm.session.active && !vm.session.expired" type="submit" ng-click="vm.deactivateSession(session._id)" class="btn btn-info">Deaktivér session</button>
+                <button ng-hide="vm.session.expired" type="submit" ng-click="vm.expireSession(session._id)" class="btn btn-warning">Ophør session</button>
+                <button ng-show="vm.session.expired" type="submit" ng-click="vm.resumeSession(session._id)" class="btn btn-info">Genoptag session</button>
+            </div>
+        </div>
+        <div class="list-group">
+            <div class="list-group-item">
+                <strong>Kunde</strong>: {{vm.session.customer.name}}
+            </div>
+            <div class="list-group-item">
+                <strong>Bord</strong>: {{vm.session.table}}
+            </div>
+            <div class="list-group-item">
+                <strong>Nøgle</strong>: {{vm.session.key}}
+            </div>
+        </div>
+    </div>
+</div>
