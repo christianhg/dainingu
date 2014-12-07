@@ -9,9 +9,7 @@
                     <h3 class="panel-title">
                         <h3 class="panel-title clearfix">
                             <strong>{{session.customer.name}}</strong> (bord {{session.table}})
-                            <!--<span class="label label-info" ng-hide="vm.session.active">Inaktiv</span>
-                            <span class="label label-success" ng-show="vm.session.active">Aktiveret</span>
-                            <span class="label label-warning" ng-show="vm.session.expired">Udløbet</span>-->
+                            <session-labels session="session"></session-labels>
                             <strong class="pull-right">{{session.key}}</strong>
                         </h3>
                     </h3>
