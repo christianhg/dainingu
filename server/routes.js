@@ -23,6 +23,12 @@
         require('./routes/auth')(app, io, jwtCheck);
 
         /**
+         * Menucard authentication routes.
+         *
+         */
+        require('./routes/authMenucard')(app, io, jwtCheck);
+
+        /**
          * Users API routes.
          * Routes for reading, adding, updating and deleting users.
          */

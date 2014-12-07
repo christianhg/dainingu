@@ -38,7 +38,7 @@
 			},
 			validate: function(callback) {
 				if($window.sessionStorage.loginToken) {
-					$http.post('/auth/validateLoginToken', {token: $window.sessionStorage.loginToken})
+					$http.post('/auth/validate', {token: $window.sessionStorage.loginToken})
 						.success(function(validLoginToken) {
 							if(!validLoginToken) {
 								delete $window.sessionStorage.loginToken;
