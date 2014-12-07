@@ -17,7 +17,7 @@
                 <button type="submit" class="btn btn-danger" ng-click="vm.deleteOrder(vm.session._id, vm.order._id)">Slet ordre</button>
             </div>
             <div class="pull-right" ng-hide="vm.order.committed">
-                <!--<button type="submit" class="btn btn-info" ng-click="vm.commitOrder(vm.session._id, vm.order._id)">Commit</button>-->
+                <button type="submit" class="btn btn-info" ng-click="vm.commitOrder(vm.session._id, vm.order._id)">Commit</button>
             </div>
             <div class="pull-right" ng-show="vm.order.committed && !vm.order.confirmed">
                 <button type="submit" class="btn btn-primary" ng-click="vm.confirmOrder(vm.session._id, vm.order._id)">Konfirmer ordre</button>

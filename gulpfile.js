@@ -45,6 +45,7 @@
 			'angular-ui-bootstrap-bower/ui-bootstrap-tpls.js',
 			'angular-animate/angular-animate.js',
 			'angular-resource/angular-resource.js',
+			'angular-filter/dist/angular-filter.js',
 			'angular-touch/angular-touch.js',
 			'ui-router/release/angular-ui-router.js',
 			'socket.io-client/socket.io.js',

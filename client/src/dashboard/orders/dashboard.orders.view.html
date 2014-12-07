@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
         <div ng-repeat="session in vm.sessions">
-            <dashboard-order ng-repeat="order in session.orders" order="order"></dashboard-order>
+            <dashboard-order ng-repeat="order in session.orders" order="order" session-id="session._id"></dashboard-order>
         </div>
     </div>
 </div>

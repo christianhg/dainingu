@@ -76,5 +76,10 @@
          */
         require('./routes/sessionsOrdersDishes')(app, io, jwtCheck);
 
+        /**
+         * Orders API routes.
+         * Routes for reading orders.
+         */
+        require('./routes/orders')(app, io, jwtCheck);
     };
 })();
