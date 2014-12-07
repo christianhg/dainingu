@@ -25,16 +25,6 @@
                 <button ng-show="vm.session.expired" type="submit" ng-click="vm.resumeSession(session._id)" class="btn btn-info">Genoptag session</button>
             </div>
         </div>
-        <div class="list-group">
-            <div class="list-group-item">
-                <strong>Kunde</strong>: {{vm.session.customer.name}}
-            </div>
-            <div class="list-group-item">
-                <strong>Bord</strong>: {{vm.session.table}}
-            </div>
-            <div class="list-group-item">
-                <strong>Nøgle</strong>: {{vm.session.key}}
-            </div>
-        </div>
+        <session-info></session-info>
     </div>
 </div>
