@@ -5,14 +5,14 @@
 		.module('dainingu.menucard')
 		.controller('MenucardController', MenucardController);
 
-	function MenucardController(activeOrder, authMenucard, sessions, socket) {
+	function MenucardController(activeOrder, authMenucard, menucard, socket) {
 		var vm = this;
 
-		vm.activateMenucard = function() {
+		vm.validateMenucard = function() {
 			authMenucard.validate(function(validToken) {
 				vm.menucardActivated = validToken;
 				if(validToken) {
-					vm.getSessionInfo();
+					vm.getSession();
 					vm.getActiveOrder();
 				} else {
 					activeOrder.delete();
@@ -21,17 +21,11 @@
 			});
 		};
 
-		vm.activateMenucard();
+		vm.validateMenucard();
 
-		vm.getSessionInfo = function() {
-			authMenucard.getSessionId(function(sessionId) {
-				if(sessionId) {
-					sessions.get({id: sessionId}, function(session) {
-						vm.session = session;
-					});
-				} else {
-					vm.session = {};
-				}
+		vm.getSession = function() {
+			menucard.getSession(function(session) {
+				vm.session = session;
 			});
 		};
 
@@ -40,7 +34,7 @@
 		};
 
 		socket.on('sessionsUpdated', function() {
-			vm.activateMenucard();
+			vm.validateMenucard();
 		});
 	}
 })();

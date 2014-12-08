@@ -35,11 +35,19 @@
                 type: Date,
                 default: Date.now
             },
+            pristine: {
+                type: Boolean,
+                default: true
+            },
             committed: {
                 type: Boolean,
                 default: false
             },
             confirmed: {
+                type: Boolean,
+                default: false
+            },
+            begun: {
                 type: Boolean,
                 default: false
             },
@@ -265,7 +273,7 @@
         if(!order) {
             callback(false);
         } else {
-            callback(order.dishes);
+            callback(dish);
         }
     };
 
@@ -312,6 +320,7 @@
             if(this.orders[i]._id == orderId) {
                 order = this.orders[i];
 
+                this.orders[i].pristine = false;
                 this.orders[i].committed = true;
 
                 break;
@@ -337,6 +346,7 @@
             if(this.orders[i]._id == orderId) {
                 order = this.orders[i];
 
+                this.orders[i].pristine = true;
                 this.orders[i].committed = false;
 
                 break;
@@ -362,6 +372,7 @@
             if(this.orders[i]._id == orderId) {
                 order = this.orders[i];
 
+                this.orders[i].committed = false;
                 this.orders[i].confirmed = true;
 
                 break;
@@ -387,6 +398,7 @@
             if(this.orders[i]._id == orderId) {
                 order = this.orders[i];
 
+                this.orders[i].committed = true;
                 this.orders[i].confirmed = false;
 
                 break;
@@ -401,6 +413,59 @@
     };
 
     /**
+     * Mark specific order in session as begun.
+     * @param orderId
+     * @param callback
+     */
+    sessionSchema.methods.beginOrder = function(orderId, callback) {
+        var order;
+
+        for(var i = 0; i < this.orders.length; i++) {
+            if(this.orders[i]._id == orderId) {
+                order = this.orders[i];
+
+                this.orders[i].confirmed = false;
+                this.orders[i].begun = true;
+
+                break;
+            }
+        }
+
+        if(!order) {
+            callback(false);
+        } else {
+            callback(order);
+        }
+    };
+
+    /**
+     * Mark specific order in session as stopped.
+     * @param orderId
+     * @param callback
+     */
+    sessionSchema.methods.stopOrder = function(orderId, callback) {
+        var order;
+
+        for(var i = 0; i < this.orders.length; i++) {
+            if(this.orders[i]._id == orderId) {
+                order = this.orders[i];
+
+                this.orders[i].confirmed = true;
+                this.orders[i].begun = false;
+
+                break;
+            }
+        }
+
+        if(!order) {
+            callback(false);
+        } else {
+            callback(order);
+        }
+    };
+
+
+    /**
      * Mark specific order in session as completed.
      * @param orderId
      * @param callback
@@ -412,6 +477,7 @@
             if(this.orders[i]._id == orderId) {
                 order = this.orders[i];
 
+                this.orders[i].begun = false;
                 this.orders[i].completed = true;
 
                 break;
@@ -437,6 +503,7 @@
             if(this.orders[i]._id == orderId) {
                 order = this.orders[i];
 
+                this.orders[i].begun = true;
                 this.orders[i].completed = false;
 
                 break;
@@ -462,6 +529,7 @@
             if(this.orders[i]._id == orderId) {
                 order = this.orders[i];
 
+                this.orders[i].completed = false;
                 this.orders[i].served = true;
 
                 break;
@@ -487,6 +555,7 @@
             if(this.orders[i]._id == orderId) {
                 order = this.orders[i];
 
+                this.orders[i].completed = true;
                 this.orders[i].served = false;
 
                 break;
@@ -512,6 +581,7 @@
             if(this.orders[i]._id == orderId) {
                 order = this.orders[i];
 
+                this.orders[i].served = false;
                 this.orders[i].closed = true;
 
                 break;
@@ -537,6 +607,7 @@
             if(this.orders[i]._id == orderId) {
                 order = this.orders[i];
 
+                this.orders[i].served = true;
                 this.orders[i].closed = false;
 
                 break;

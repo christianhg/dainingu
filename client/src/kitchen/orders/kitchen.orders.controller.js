@@ -5,23 +5,23 @@
         .module('dainingu.kitchen.orders')
         .controller('KitchenOrdersController', KitchenOrdersController);
 
-    function KitchenOrdersController(sessions, sessionsOrdersConfirm, sessionsOrdersComplete, socket) {
+    function KitchenOrdersController(orders, sessionsOrdersConfirm, sessionsOrdersComplete, socket) {
         var vm = this;
 
-        vm.getSessions = function() {
-            sessions.query(function(sessions) {
-                vm.sessions = sessions;
+        vm.getOrders = function() {
+            orders.query(function(orders) {
+                vm.orders = orders;
             });
         };
 
-        vm.getSessions();
+        vm.getOrders();
 
         socket.on('ordersUpdated', function() {
-            vm.getSessions();
+            vm.getOrders();
         });
 
         socket.on('sessionsUpdated', function() {
-            vm.getSessions();
+            vm.getOrders();
         });
 
         vm.rejectOrder = function(sessionId, orderId) {

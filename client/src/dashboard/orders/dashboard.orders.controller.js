@@ -5,7 +5,7 @@
         .module('dainingu.dashboard.sessions')
         .controller('DashboardOrdersController', DashboardOrdersController);
 
-    function DashboardOrdersController(orders, sessions, socket) {
+    function DashboardOrdersController(orders, socket) {
         var vm = this;
 
         vm.getOrders = function() {
@@ -15,14 +15,6 @@
         };
 
         vm.getOrders();
-
-        vm.getSessions = function() {
-            sessions.query(function(sessions) {
-                vm.sessions = sessions;
-            });
-        };
-
-        vm.getSessions();
 
         socket.on('ordersUpdated', function() {
             vm.getOrders();

@@ -33,7 +33,7 @@
 				var data = {};
 
 				if(isMatch) {
-					var token = jwt.sign(user._id, secrets.jwt_secret, { expiresInMinutes: 60*5 });
+					var token = jwt.sign(user._id, secrets.jwtSecrets.auth, { expiresInMinutes: 60*5 });
 
 					data = {
 						message: 'User signin successful.',
@@ -68,7 +68,7 @@
 	exports.validate = function(req, res, callback) {
 		var candidateToken = req.body.token;
 
-		jwt.verify(candidateToken, secrets.jwt_secret, function(err, userId) {
+		jwt.verify(candidateToken, secrets.jwtSecrets.auth, function(err, userId) {
 			User.findOne({ _id: userId }, function(err, user) {
 				if(err) {
 					res.send(err);

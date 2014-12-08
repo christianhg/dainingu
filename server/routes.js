@@ -12,47 +12,57 @@
         var jwt = require('jsonwebtoken');
         var secrets = require('./config/secrets');
 
-        var jwtCheck = expressJwt({
-            secret: secrets.jwt_secret
+        var jwtAuth = expressJwt({
+            secret: secrets.jwtSecrets.auth
+        });
+
+        var jwtAuthMenucard = expressJwt({
+            secret: secrets.jwtSecrets.authMenucard
         });
 
         /**
          * Authentication routes.
          *
          */
-        require('./routes/auth')(app, io, jwtCheck);
+        require('./routes/auth')(app, io, jwtAuth);
 
         /**
          * Menucard authentication routes.
          *
          */
-        require('./routes/authMenucard')(app, io, jwtCheck);
+        require('./routes/authMenucard')(app, io, jwtAuthMenucard);
+
+        /**
+         * Menucard API routes.
+         *
+         */
+        require('./routes/menucard')(app, io, jwtAuthMenucard);
 
         /**
          * Users API routes.
          * Routes for reading, adding, updating and deleting users.
          */
-        require('./routes/users')(app, io, jwtCheck);
+        require('./routes/users')(app, io, jwtAuth);
 
         /**
          * Menus API routes.
          * Routes for reading, adding, updating and deleting menus.
          */
-        require('./routes/menus')(app, io, jwtCheck);
+        require('./routes/menus')(app, io, jwtAuth);
 
         /**
          * Menus Dishes API routes.
          * Routes for reading, adding, updating and deleting
          * dishes from menus.
          */
-        require('./routes/menusDishes')(app, io, jwtCheck);
+        require('./routes/menusDishes')(app, io, jwtAuth);
 
         /**
          * Dishes API routes.
          * Routes for reading, adding, updating and deleting dishes.
          * Additional routes to activate/deactivate dishes.
          */
-        require('./routes/dishes')(app, io, jwtCheck);
+        require('./routes/dishes')(app, io, jwtAuth);
 
         /**
          * Sessions API routes.
@@ -60,7 +70,7 @@
          * Additional routes to activate/deactivate
          * and expire/resume sessions.
          */
-        require('./routes/sessions')(app, io, jwtCheck);
+        require('./routes/sessions')(app, io, jwtAuth, jwtAuthMenucard);
 
         /**
          * SessionsOrders API routes.
@@ -68,18 +78,18 @@
          * Additional routes to commit/pull, confirm/reject,
          * complete/incomplete and close/open orders.
          */
-        require('./routes/sessionsOrders')(app, io, jwtCheck);
+        require('./routes/sessionsOrders')(app, io, jwtAuth);
 
         /**
          * SessionsOrdersDishes API routes.
          * Routes for reading, adding and deleting dishes from orders.
          */
-        require('./routes/sessionsOrdersDishes')(app, io, jwtCheck);
+        require('./routes/sessionsOrdersDishes')(app, io, jwtAuth);
 
         /**
          * Orders API routes.
          * Routes for reading orders.
          */
-        require('./routes/orders')(app, io, jwtCheck);
+        require('./routes/orders')(app, io, jwtAuth);
     };
 })();

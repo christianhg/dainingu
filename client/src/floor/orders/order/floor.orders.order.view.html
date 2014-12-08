@@ -1,10 +1,4 @@
-<div class="panel panel-default" ng-class="{
-    'panel-default': !vm.order.committed,
-    'panel-info': vm.order.committed && !vm.order.confirmed,
-    'panel-primary': vm.order.confirmed && !vm.order.completed,
-    'panel-success': vm.order.completed && !vm.order.closed,
-    'panel-warning': vm.order.closed
-    }">
+<div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">
             Ordre fra {{vm.order.createdOn | date: 'HH:mm:ss'}}
@@ -12,11 +6,11 @@
         </h3>
     </div>
     <div class="panel-body">
-        <div class="well clearfix" ng-show="vm.order.committed && !vm.order.confirmed">
+        <div class="well clearfix" ng-show="vm.order.committed">
             <button type="submit" class="pull-left btn btn-default" ng-click="vm.pullOrder(vm.session._id, vm.order._id)">Send tilbage</button>
             <button type="submit" class="pull-right btn btn-primary" ng-click="vm.confirmOrder(vm.session._id, vm.order._id)">Konfirmér</button>
         </div>
-        <div class="well clearfix" ng-show="vm.order.completed && !vm.order.served">
+        <div class="well clearfix" ng-show="vm.order.completed">
             <button type="submit" class="pull-left btn btn-primary" ng-click="vm.incompleteOrder(vm.session._id, vm.order._id)">Ufærdig</button>
             <button type="submit" class="pull-right btn btn-warning" ng-click="vm.serveOrder(vm.session._id, vm.order._id)">Servér</button>
         </div>

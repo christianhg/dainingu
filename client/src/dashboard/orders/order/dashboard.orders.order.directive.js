@@ -17,7 +17,7 @@
             controllerAs: 'vm'
         };
 
-        function DashboardOrdersOrderController($scope, sessionsOrdersCommit, sessionsOrdersComplete, sessionsOrdersConfirm, sessionsOrdersServe) {
+        function DashboardOrdersOrderController($scope, sessionsOrders, sessionsOrdersBegin, sessionsOrdersCommit, sessionsOrdersComplete, sessionsOrdersConfirm, sessionsOrdersServe, sessionsOrdersClose) {
             var vm = this;
 
             vm.order = $scope.order;
@@ -60,6 +60,18 @@
                 });
             };
 
+            vm.beginOrder = function(sessionId, orderId) {
+                sessionsOrdersBegin.begin({sessionId: sessionId, orderId: orderId}, function(data) {
+                    console.log(data);
+                });
+            };
+
+            vm.stopOrder = function(sessionId, orderId) {
+                sessionsOrdersBegin.stop({sessionId: sessionId, orderId: orderId}, function(data) {
+                    console.log(data);
+                });
+            };
+
             vm.completeOrder = function(sessionId, orderId) {
                 sessionsOrdersComplete.complete({sessionId: sessionId, orderId: orderId}, function(data) {
                     console.log(data);
@@ -68,6 +80,18 @@
 
             vm.incompleteOrder = function(sessionId, orderId) {
                 sessionsOrdersComplete.incomplete({sessionId: sessionId, orderId: orderId}, function(data) {
+                    console.log(data);
+                });
+            };
+
+            vm.serveOrder = function(sessionId, orderId) {
+                sessionsOrdersServe.serve({sessionId: sessionId, orderId: orderId}, function(data) {
+                    console.log(data);
+                });
+            };
+
+            vm.returnOrder = function(sessionId, orderId) {
+                sessionsOrdersServe.return({sessionId: sessionId, orderId: orderId}, function(data) {
                     console.log(data);
                 });
             };

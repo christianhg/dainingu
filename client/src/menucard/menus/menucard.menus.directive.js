@@ -16,7 +16,7 @@
 			controllerAs: 'vm'
 		};
 
-		function MenucardMenusController($window, authMenucard, menus, sessionsOrdersDishes, socket) {
+		function MenucardMenusController(activeOrder, menucard, menus, socket) {
 			var vm = this;
 
 			vm.getMenus = function() {
@@ -35,39 +35,15 @@
 				vm.getMenus();
 			});
 
-			vm.activateMenucard = function() {
-				authMenucard.validate(function(validToken) {
-					vm.menucardActivated = validToken;
-				});
-			};
-
-			vm.activateMenucard();
-
 			vm.getActiveOrder = function() {
-				if($window.sessionStorage.activeOrder) {
-					return $window.sessionStorage.activeOrder;
-				} else {
-					return false;
-				}
+				return activeOrder.get();
 			};
-
-			socket.on('sessionsUpdated', function() {
-				vm.activateMenucard();
-			});
 
 			vm.addDishToOrder = function(dish) {
 				var orderId = vm.getActiveOrder();
+				menucard.addDishToOrder(orderId, dish, function() {
 
-				if(orderId) {
-					authMenucard.getSessionId(function(sessionId) {
-						if(sessionId && orderId) {
-							sessionsOrdersDishes.save({sessionId: sessionId, orderId: orderId}, dish, function() {
-
-							});
-						}
-					});
-				}
-
+				});
 			};
 		}
 

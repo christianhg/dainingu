@@ -1,0 +1,26 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            Ordre fra {{vm.order.createdOn | date: 'HH:mm:ss'}}
+            <order-labels></order-labels>
+            <span class="label label-success" ng-show="vm.orderActive(vm.order._id)">Aktiv</span>
+        </h3>
+    </div>
+    <div class="panel-body clearfix">
+        <div class="well" ng-show="!vm.orderActive(vm.order._id) && vm.order.pristine">
+            <button type="submit" class="btn btn-success" ng-click="vm.activateOrder(vm.order._id)">Aktivér</button>
+        </div>
+        <div class="well" ng-show="vm.orderActive(vm.order._id) && order.dishes.length">
+            <button type="submit" class="btn btn-info" ng-click="vm.commitOrder(vm.order._id)">Send ordre</button>
+        </div>
+        <div class="well clearfix" ng-show="vm.order.served">
+            <button class="btn btn-default pull-right" ng-click="vm.returnOrder(vm.order._id)">Returnér</button>
+        </div>
+        <div class="list-group">
+            <div class="list-group-item clearfix" ng-repeat="dish in vm.order.dishes">
+                <span class="pull-left">{{dish.name}}</span>
+                <button ng-show="vm.orderActive(vm.order._id)" type="submit" class="pull-right btn btn-sm btn-danger" ng-click="vm.removeDishFromOrder(vm.order._id, dish._id)">Fjern fra ordre</button>
+            </div>
+        </div>
+    </div>
+</div>

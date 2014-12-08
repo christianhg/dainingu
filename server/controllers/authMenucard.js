@@ -44,7 +44,7 @@
                             }
                         });
 
-                        var token = jwt.sign(session._id, secrets.jwt_secret, { expiresInMinutes: 60*5 });
+                        var token = jwt.sign(session._id, secrets.jwtSecrets.authMenucard, { expiresInMinutes: 60*5 });
 
                         var data = {
                             message: 'Session activation successful.',
@@ -68,7 +68,7 @@
     exports.getSessionId = function(req, res, callback) {
         var menucardToken = req.body.token;
 
-        jwt.verify(menucardToken, secrets.jwt_secret, function(err, sessionId) {
+        jwt.verify(menucardToken, secrets.jwtSecrets.authMenucard, function(err, sessionId) {
 
             Session.findOne({ _id: sessionId }, function(err, session) {
                 if(err) {
@@ -91,7 +91,7 @@
     exports.validate = function(req, res, callback) {
         var menucardToken = req.body.token;
 
-        jwt.verify(menucardToken, secrets.jwt_secret, function(err, sessionId) {
+        jwt.verify(menucardToken, secrets.jwtSecrets.authMenucard, function(err, sessionId) {
 
             Session.findOne({ _id: sessionId }, function(err, session) {
                 if(err) {

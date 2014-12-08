@@ -65,6 +65,21 @@
             });
 
         /**
+         * Add or remove begun-flag from order
+         */
+        app.route('/api/sessions/:sessionId/orders/:orderId/begin')
+            .put(jwtCheck, function(req, res) {
+                sessionsOrders.begin(req, res, function(data) {
+                    io.sockets.emit('ordersUpdated');
+                });
+            })
+            .delete(jwtCheck, function(req, res) {
+                sessionsOrders.stop(req, res, function(data) {
+                    io.sockets.emit('ordersUpdated');
+                });
+            });
+
+        /**
          * Add or remove completed-flag from order
          */
         app.route('/api/sessions/:sessionId/orders/:orderId/complete')

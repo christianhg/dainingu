@@ -222,7 +222,7 @@
 
                         var data = {
                             message: 'Order confirmed',
-                            session: session
+                            order: order
                         };
 
                         res.json(data);
@@ -258,6 +258,76 @@
                         var data = {
                             message: 'Order rejected',
                             session: session
+                        };
+
+                        res.json(data);
+
+                        callback(data);
+                    });
+                });
+            }
+        });
+    };
+
+    /**
+     * Begin order in specific session.
+     */
+    exports.begin = function(req, res, callback) {
+        var sessionId = req.params.sessionId;
+        var orderId = req.params.orderId;
+
+        Session.findOne({_id: sessionId}, function(err, session) {
+            if(err) {
+                res.send(err);
+            }
+
+            if(!session) {
+                res.send(false);
+            } else {
+                session.beginOrder(orderId, function(order) {
+                    session.save(function(err) {
+                        if(err) {
+                            res.send(err);
+                        }
+
+                        var data = {
+                            message: 'Order begun',
+                            order: order
+                        };
+
+                        res.json(data);
+
+                        callback(data);
+                    });
+                });
+            }
+        });
+    };
+
+    /**
+     * Stop order in specific session.
+     */
+    exports.stop = function(req, res, callback) {
+        var sessionId = req.params.sessionId;
+        var orderId = req.params.orderId;
+
+        Session.findOne({_id: sessionId}, function(err, session) {
+            if(err) {
+                res.send(err);
+            }
+
+            if(!session) {
+                res.send(false);
+            } else {
+                session.stopOrder(orderId, function(order) {
+                    session.save(function(err) {
+                        if(err) {
+                            res.send(err);
+                        }
+
+                        var data = {
+                            message: 'Order stopped',
+                            order: order
                         };
 
                         res.json(data);
@@ -327,6 +397,76 @@
 
                         var data = {
                             message: 'Order incompleted',
+                            session: session
+                        };
+
+                        res.json(data);
+
+                        callback(data);
+                    });
+                });
+            }
+        });
+    };
+
+    /**
+     * Begin order in specific session.
+     */
+    exports.serve = function(req, res, callback) {
+        var sessionId = req.params.sessionId;
+        var orderId = req.params.orderId;
+
+        Session.findOne({_id: sessionId}, function(err, session) {
+            if(err) {
+                res.send(err);
+            }
+
+            if(!session) {
+                res.send(false);
+            } else {
+                session.beginOrder(orderId, function(order) {
+                    session.save(function(err) {
+                        if(err) {
+                            res.send(err);
+                        }
+
+                        var data = {
+                            message: 'Order begun',
+                            session: session
+                        };
+
+                        res.json(data);
+
+                        callback(data);
+                    });
+                });
+            }
+        });
+    };
+
+    /**
+     * Stop order in specific session.
+     */
+    exports.serve = function(req, res, callback) {
+        var sessionId = req.params.sessionId;
+        var orderId = req.params.orderId;
+
+        Session.findOne({_id: sessionId}, function(err, session) {
+            if(err) {
+                res.send(err);
+            }
+
+            if(!session) {
+                res.send(false);
+            } else {
+                session.stopOrder(orderId, function(order) {
+                    session.save(function(err) {
+                        if(err) {
+                            res.send(err);
+                        }
+
+                        var data = {
+                            message: 'Order stopped',
                             session: session
                         };
 

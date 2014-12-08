@@ -17,7 +17,7 @@
             controllerAs: 'vm'
         };
 
-        function KitchenOrdersOrderController($scope, sessionsOrdersComplete, sessionsOrdersConfirm) {
+        function KitchenOrdersOrderController($scope, sessionsOrdersBegin, sessionsOrdersComplete, sessionsOrdersConfirm) {
             var vm = this;
 
             vm.order = $scope.order;
@@ -28,6 +28,18 @@
                 sessionsOrdersConfirm.reject({sessionId: sessionId, orderId: orderId}, function(data) {
                     console.log(data);
                 });
+            };
+
+            vm.beginOrder = function(sessionId, orderId) {
+                sessionsOrdersBegin.begin({ sessionId: sessionId, orderId: orderId }, function(data) {
+                    console.log(data);
+                })
+            };
+
+            vm.stopOrder = function(sessionId, orderId) {
+                sessionsOrdersBegin.stop({ sessionId: sessionId, orderId: orderId }, function(data) {
+                    console.log(data);
+                })
             };
 
             vm.completeOrder = function(sessionId, orderId) {

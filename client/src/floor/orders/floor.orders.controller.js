@@ -5,47 +5,23 @@
         .module('dainingu.floor.orders')
         .controller('FloorOrdersController', FloorOrdersController);
 
-    function FloorOrdersController(sessions, sessionsOrdersClose, sessionsOrdersCommit, sessionsOrdersComplete, sessionsOrdersConfirm, socket) {
+    function FloorOrdersController(orders, socket) {
         var vm = this;
 
-        vm.getSessions = function() {
-            sessions.query(function(sessions) {
-                vm.sessions = sessions;
+        vm.getOrders = function() {
+            orders.query(function(orders) {
+                vm.orders = orders;
             });
         };
 
-        vm.getSessions();
+        vm.getOrders();
 
         socket.on('ordersUpdated', function() {
-            vm.getSessions();
+            vm.getOrders();
         });
 
         socket.on('sessionsUpdated', function() {
-            vm.getSessions();
+            vm.getOrders();
         });
-
-        vm.pullOrder = function(sessionId, orderId) {
-            sessionsOrdersCommit.pull({sessionId: sessionId, orderId: orderId}, function(data) {
-                console.log(data);
-            });
-        };
-
-        vm.confirmOrder = function(sessionId, orderId) {
-            sessionsOrdersConfirm.confirm({sessionId: sessionId, orderId: orderId}, function(data) {
-                console.log(data);
-            });
-        };
-
-        vm.incompleteOrder = function(sessionId, orderId) {
-            sessionsOrdersComplete.incomplete({sessionId: sessionId, orderId: orderId}, function(data) {
-                console.log(data);
-            });
-        };
-
-        vm.closeOrder = function(sessionId, orderId) {
-            sessionsOrdersClose.close({sessionId: sessionId, orderId: orderId}, function(data) {
-                console.log(data);
-            });
-        };
     }
 })();
