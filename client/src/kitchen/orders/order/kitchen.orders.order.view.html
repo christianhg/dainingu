@@ -7,7 +7,7 @@
     </div>
     <div class="panel-body">
         <div class="well clearfix"  ng-show="vm.order.confirmed">
-            <button type="submit" class="pull-left btn btn-info" ng-click="vm.rejectOrder(vm.session._id, vm.order._id)">Afvis ordre</button>
+            <button type="submit" class="pull-left btn btn-default" ng-click="vm.rejectOrder(vm.session._id, vm.order._id)">Afvis ordre</button>
             <button type="submit" class="pull-right btn btn-success" ng-click="vm.beginOrder(vm.session._id, vm.order._id)">Begynd ordre</button>
         </div>
         <div class="well clearfix" ng-show="vm.order.begun">

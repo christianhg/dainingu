@@ -8,11 +8,11 @@
     <div class="panel-body">
         <div class="well clearfix" ng-show="vm.order.committed">
             <button type="submit" class="pull-left btn btn-default" ng-click="vm.pullOrder(vm.session._id, vm.order._id)">Send tilbage</button>
-            <button type="submit" class="pull-right btn btn-primary" ng-click="vm.confirmOrder(vm.session._id, vm.order._id)">Konfirmér</button>
+            <button type="submit" class="pull-right btn btn-success" ng-click="vm.confirmOrder(vm.session._id, vm.order._id)">Konfirmér</button>
         </div>
         <div class="well clearfix" ng-show="vm.order.completed">
-            <button type="submit" class="pull-left btn btn-primary" ng-click="vm.incompleteOrder(vm.session._id, vm.order._id)">Ufærdig</button>
-            <button type="submit" class="pull-right btn btn-warning" ng-click="vm.serveOrder(vm.session._id, vm.order._id)">Servér</button>
+            <button type="submit" class="pull-left btn btn-default" ng-click="vm.incompleteOrder(vm.session._id, vm.order._id)">Ufærdig</button>
+            <button type="submit" class="pull-right btn btn-success" ng-click="vm.serveOrder(vm.session._id, vm.order._id)">Servér</button>
         </div>
         <div class="list-group" ng-show="vm.order.dishes">
             <div class="list-group-item" ng-repeat="dish in vm.order.dishes">
