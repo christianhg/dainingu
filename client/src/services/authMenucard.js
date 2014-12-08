@@ -11,8 +11,13 @@
 
     function authMenucard($http, $window) {
         return {
+            /**
+             * Activate menucard with key.
+             * @param key
+             * @param callback
+             */
             activate: function(key, callback) {
-                $http.post('/auth/menucard/activate', { key: key })
+                $http.post('/api/auth/menucard/activate', { key: key })
                     .success(function(data) {
                         if(data.success) {
                             // Get generated JWT token and store token in sessionStorage.
@@ -27,22 +32,13 @@
                         callback(data);
                     });
             },
-            getSessionId: function(callback) {
-                if($window.sessionStorage.menucardToken) {
-                    $http.post('/auth/menucard/getSessionId', { token: $window.sessionStorage.menucardToken })
-                        .success(function(sessionId) {
-                            callback(sessionId);
-                        })
-                        .error(function() {
-                            callback(false);
-                        });
-                } else {
-                    callback(false);
-                }
-            },
+            /**
+             * Validate menucard with stored token.
+             * @param callback
+             */
             validate: function(callback) {
                 if($window.sessionStorage.menucardToken) {
-                    $http.post('/auth/menucard/validate', {token: $window.sessionStorage.menucardToken})
+                    $http.post('/api/auth/menucard/validate', {token: $window.sessionStorage.menucardToken})
                         .success(function(validMenucardToken) {
                             if(!validMenucardToken) {
                                 delete $window.sessionStorage.menucardToken;

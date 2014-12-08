@@ -15,7 +15,7 @@
 				return $window.sessionStorage.user || '';
 			},
 			signin: function(loginData, callback) {
-				$http.post('/auth/signin', loginData)
+				$http.post('/api/auth/signin', loginData)
 					.success(function(data) {
 						if(data.success) {
 							$window.sessionStorage.user = data.user.username;
@@ -38,7 +38,7 @@
 			},
 			validate: function(callback) {
 				if($window.sessionStorage.loginToken) {
-					$http.post('/auth/validate', {token: $window.sessionStorage.loginToken})
+					$http.post('/api/auth/validate', {token: $window.sessionStorage.loginToken})
 						.success(function(validLoginToken) {
 							if(!validLoginToken) {
 								delete $window.sessionStorage.loginToken;

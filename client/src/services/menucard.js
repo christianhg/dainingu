@@ -9,8 +9,14 @@
         .module('dainingu')
         .factory('menucard', menucard);
 
-    function menucard($http, $state, $window) {
+    function menucard($http) {
         return {
+            /**
+             * Add dish to order.
+             * @param orderId
+             * @param dish
+             * @param callback
+             */
             addDishToOrder: function(orderId, dish, callback) {
                 $http.post('/api/menucard/orders/dishes', { orderId: orderId, dish: dish })
                     .success(function(order) {
@@ -30,7 +36,7 @@
                     });
             },
             commitOrder: function(orderId, callback) {
-                $http.post('/api/menucard/orders/commit', { orderId: orderId })
+                $http.put('/api/menucard/orders/commit', { orderId: orderId })
                     .success(function(data) {
                         callback(data);
                     })
@@ -57,7 +63,7 @@
                     });
             },
             returnOrder: function(orderId, callback) {
-                $http.post('/api/menucard/orders/return', { orderId: orderId })
+                $http.put('/api/menucard/orders/return', { orderId: orderId })
                     .success(function(data) {
                         callback(data);
                     })

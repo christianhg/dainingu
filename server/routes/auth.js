@@ -7,7 +7,7 @@
         /**
          *
          */
-        app.route('/auth/signin')
+        app.route('/api/auth/signin')
             .post(function(req, res) {
                 auth.signin(req, res, function(isAuthenticated, data) {
 
@@ -17,7 +17,7 @@
         /**
          *
          */
-        app.route('/auth/validate')
+        app.route('/api/auth/validate')
             .post(function(req, res) {
                 auth.validate(req, res, function(data) {
 
