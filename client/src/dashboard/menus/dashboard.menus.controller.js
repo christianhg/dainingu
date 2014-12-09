@@ -16,35 +16,18 @@
 
         vm.getMenus();
 
-        socket.on('menus:add', function() {
+        socket.on('menusUpdated', function() {
             vm.getMenus();
         });
-
-        socket.on('menus:delete', function() {
-            vm.getMenus();
-        });
-
-        socket.on('menus:update', function() {
-            vm.getMenus();
-        });
-
-        socket.on('menus:dishes:delete', function() {
-            vm.getMenus();
-        });
-
-        socket.on('menus:dishes:add', function() {
-            vm.getMenus();
-        });
-
 
         vm.addDishToMenu = function(menuId, dish) {
-            menusDishes.save({'id': menuId}, dish, function(dish) {
+            menusDishes.save({ 'id': menuId }, dish, function(data) {
 
             });
         };
 
         vm.deleteDishFromMenu = function(menuId, dishId) {
-            menusDishes.delete({ 'menuId': menuId, 'dishId': dishId }, function(dish) {
+            menusDishes.delete({ 'menuId': menuId, 'dishId': dishId }, function(data) {
 
             });
         };

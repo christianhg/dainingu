@@ -11,7 +11,7 @@
                 <a class="navbar-brand" ui-sref="cashregister">dainingu.cashregister</a>
             </div>
             <div class="collapse navbar-collapse" id="cashregister-navigation">
-                <ul class="nav navbar-nav" ng-hide="!vm.loggedIn">
+                <ul class="nav navbar-nav" ng-show="vm.loggedIn">
                     <li ui-sref-active="active"><a ui-sref=".orders">Ordrer</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right" ng-hide="vm.loggedIn">

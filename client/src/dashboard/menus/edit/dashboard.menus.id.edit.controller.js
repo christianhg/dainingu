@@ -8,7 +8,7 @@
     function DashboardMenusIdEditController(dishes, menus, $state, $stateParams) {
         var vm = this;
 
-        menus.get({id: $stateParams.id}, function(menu) {
+        menus.get({ id: $stateParams.id }, function(menu) {
             vm.menu = menu;
         });
 
@@ -17,8 +17,8 @@
         });
 
         vm.editMenu = function() {
-            menus.update({id: vm.menu.id}, vm.menu, function(menu) {
-                $state.go('dashboard.menus', null, {reload: true});
+            menus.update({id: vm.menu.id}, vm.menu, function(data) {
+                $state.go('dashboard.menus', null, { reload: true });
             });
         };
 

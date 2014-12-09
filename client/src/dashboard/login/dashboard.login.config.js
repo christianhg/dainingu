@@ -7,13 +7,16 @@
 
     function config($stateProvider) {
         $stateProvider
+            /**
+             * Route for dashboard login.
+             */
             .state('dashboard.login', {
                 url: '/login',
                 templateUrl: 'dashboard/login/dashboard.login.view.html',
                 controller: 'DashboardLoginController',
                 controllerAs: 'vm',
                 data: {
-                    pageTitle: 'Dashboard > login'
+                    pageTitle: 'dainingu > dashboard > log ind'
                 }
             });
     }

@@ -5,7 +5,7 @@
         .module('dainingu.dashboard.dishes')
         .controller('DashboardDishesIdDeleteController', DashboardDishesIdDeleteController);
 
-    function DashboardDishesIdDeleteController(dishes, menus, $state, $stateParams) {
+    function DashboardDishesIdDeleteController(dishes, $state, $stateParams) {
         var vm = this;
 
         dishes.get({id: $stateParams.id}, function(dish) {
@@ -13,8 +13,8 @@
         });
 
         vm.deleteDish = function() {
-            dishes.delete({id: vm.dish.id}, function(dish) {
-                $state.go('dashboard.dishes', null, {reload: true});
+            dishes.delete({id: vm.dish.id}, function(data) {
+                $state.go('dashboard.dishes', null, { reload: true });
             });
         };
     }

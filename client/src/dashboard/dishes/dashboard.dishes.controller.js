@@ -9,7 +9,8 @@
         var vm = this;
 
         vm.getDishes = function() {
-            dishes.query({deep: true}, function(dishes) {
+            // Add deep query parameter to get related menus.
+            dishes.query({ deep: true }, function(dishes) {
                 vm.dishes = dishes;
             });
         };
