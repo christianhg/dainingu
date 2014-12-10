@@ -1,3 +1,7 @@
+/**
+ * Orders Factory
+ * @namespace Factories
+ */
 (function () {
 	'use strict';
 
@@ -6,7 +10,7 @@
 		.factory('orders', orders);
 
 	function orders($resource) {
-		return $resource('/api/orders/', {
+		return $resource('/api/orders', {
 			'get': {
 				method: 'GET',
 				isArray: false

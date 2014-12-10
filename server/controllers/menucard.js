@@ -76,6 +76,12 @@
         });
     };
 
+    /**
+     * Add dish to order.
+     * @param req
+     * @param res
+     * @param callback
+     */
     exports.addDishToOrder = function(req, res, callback) {
         var authorization = req.headers.authorization;
         var menucardToken = authorization.substring(7, authorization.length);
@@ -83,8 +89,8 @@
         var dish = req.body.dish;
 
         jwt.verify(menucardToken, secrets.jwtSecrets.authMenucard, function(err, sessionId) {
+            Session.findOne({ _id: sessionId }, function(err, session) {
 
-            Session.findOne({_id: sessionId}, function(err, session) {
                 session.addDish(orderId, dish, function(dish) {
                     session.save(function(err) {
                         if(err) {
@@ -96,7 +102,7 @@
                             dish: dish
                         };
 
-                        res.send(dish);
+                        res.json(data);
 
                         callback(data);
                     });
@@ -104,6 +110,41 @@
             });
         });
     };
+
+    /**
+     * Remove dish from order.
+     * @param req
+     * @param res
+     * @param callback
+     */
+    exports.removeDishFromOrder = function(req, res, callback) {
+        var authorization = req.headers.authorization;
+        var menucardToken = authorization.substring(7, authorization.length);
+        var orderId = req.body.orderId;
+        var dishId = req.body.dishId;
+
+        jwt.verify(menucardToken, secrets.jwtSecrets.authMenucard, function(err, sessionId) {
+            Session.findOne({ _id: sessionId }, function(err, session) {
+                session.removeDish(orderId, dishId, function(dish) {
+                    session.save(function(err) {
+                        if(err) {
+                            res.send(err);
+                        }
+
+                        var data = {
+                            message: 'Dish removed',
+                            dish: dish
+                        };
+
+                        res.json(data);
+
+                        callback(data);
+                    });
+                });
+            });
+        });
+    };
+
 
     /**
      * Commit order.

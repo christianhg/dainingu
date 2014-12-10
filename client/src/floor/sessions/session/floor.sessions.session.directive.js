@@ -16,24 +16,27 @@
             controllerAs: 'vm'
         };
 
+        /**
+         * @ngInject
+         */
         function FloorSessionsSessionController($scope, sessionsActivate, sessionsExpire) {
             var vm = this;
 
             vm.session = $scope.session;
 
-            vm.deactivateSession = function(sessionId) {
+            $scope.deactivateSession = function(sessionId) {
                 sessionsActivate.deactivate({sessionId: sessionId}, function(data) {
                     console.log(data);
                 });
             };
 
-            vm.expireSession = function(sessionId) {
+            $scope.expireSession = function(sessionId) {
                 sessionsExpire.expire({sessionId: sessionId}, function(data) {
                     console.log(data);
                 });
             };
 
-            vm.resumeSession = function(sessionId) {
+            $scope.resumeSession = function(sessionId) {
                 sessionsExpire.resume({sessionId: sessionId}, function(data) {
                     console.log(data);
                 });

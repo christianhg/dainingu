@@ -5,14 +5,14 @@
 		.module('dainingu.cashregister')
 		.controller('CashRegisterController', CashRegisterController);
 
-	function CashRegisterController(auth) {
+	function CashRegisterController($scope, auth) {
 		var vm = this;
 
 		auth.validate(function(validToken) {
 			vm.loggedIn = validToken;
 		});
 
-		vm.signOut = function() {
+		$scope.signOut = function() {
 			auth.signout('cashregister.login');
 		};
 	}

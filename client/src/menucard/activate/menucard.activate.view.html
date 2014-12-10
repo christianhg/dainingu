@@ -6,16 +6,11 @@
         <div class="alert alert-info" role="alert">
             Menukortet er endnu ikke aktiveret og kan ikke bruges til madbestilling. Få udleveret en <strong>nøgle</strong> af din tjener til at aktivere menukortet.
         </div>
-        <form name="activateMenucardForm" ng-submit="activateMenucardForm.$valid && vm.activateMenucard(vm.session.key)" novalidate autocomplete="off">
-
-            <!--<div class="alert alert-warning" role="alert" ng-show="activateMenucardForm.$submitted && activateMenucardForm.key.$error.required">
-                Husk at indtaste en nøgle.</div>-->
-
+        <form name="activateMenucardForm" ng-submit="activateMenucard(vm.session.key)" novalidate autocomplete="off">
             <div class="form-group">
                 <label for="key">Nøgle</label>
                 <input type="text" id="key" name="key" ng-model="vm.session.key" class="form-control" placeholder="Indtast nøgle" required>
             </div>
-
             <button type="submit" class="btn btn-success">Aktivér menukort</button>
         </form>
     </div>

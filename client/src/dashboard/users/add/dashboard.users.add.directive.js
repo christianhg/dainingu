@@ -20,10 +20,10 @@
 		/**
 		 * @ngInject
 		 */
-		function AddUserController(users) {
+		function AddUserController($scope, users) {
 			var vm = this;
 
-			vm.addUser = function(newUser) {
+			$scope.addUser = function(newUser) {
 				users.save(newUser, function() {
 					vm.menu = {};
 				});

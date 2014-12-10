@@ -17,6 +17,9 @@
             controllerAs: 'vm'
         };
 
+        /**
+         * @ngInject
+         */
         function CashregisterOrdersOrderController($scope, sessionsOrdersClose) {
             var vm = this;
 
@@ -24,13 +27,13 @@
             vm.session = {};
             vm.session._id = $scope.sessionId;
 
-            vm.closeOrder = function(sessionId, orderId) {
+            $scope.closeOrder = function(sessionId, orderId) {
                 sessionsOrdersClose.close({sessionId: sessionId, orderId: orderId}, function(data) {
                     console.log(data);
                 });
             };
 
-            vm.openOrder = function(sessionId, orderId) {
+            $scope.openOrder = function(sessionId, orderId) {
                 sessionsOrdersClose.open({sessionId: sessionId, orderId: orderId}, function(data) {
                     console.log(data);
                 });

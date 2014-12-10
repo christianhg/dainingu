@@ -21,7 +21,7 @@
                 </ul>
                 <form class="navbar-form navbar-right" ng-show="vm.loggedIn">
                     {{vm.user}}
-                    <button type="submit" class="btn btn-default" ng-click="vm.signOut()">Log ud</button>
+                    <button type="submit" class="btn btn-default" ng-click="signOut()">Log ud</button>
                 </form>
                 <ul class="nav navbar-nav navbar-right" ng-hide="vm.loggedIn">
                     <li ui-sref-active="active"><a ui-sref=".login">Log ind</a></li>
@@ -31,7 +31,7 @@
     </nav>
     <div class="row">
         <div class="col-md-12">
-            <alert ng-repeat="alert in vm.alerts" type="{{alert.type}}" close="vm.closeAlert($index)">{{alert.message}}</alert>
+            <alert ng-repeat="alert in vm.alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.message}}</alert>
         </div>
     </div>
     <div ui-view>

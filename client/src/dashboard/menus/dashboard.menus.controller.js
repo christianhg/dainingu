@@ -5,7 +5,7 @@
         .module('dainingu.dashboard.menus')
         .controller('DashboardMenusController', DashboardMenusController);
 
-    function DashboardMenusController(menus, menusDishes, socket) {
+    function DashboardMenusController($scope, menus, menusDishes, socket) {
         var vm = this;
 
         vm.getMenus = function() {
@@ -20,13 +20,7 @@
             vm.getMenus();
         });
 
-        vm.addDishToMenu = function(menuId, dish) {
-            menusDishes.save({ 'id': menuId }, dish, function(data) {
-
-            });
-        };
-
-        vm.deleteDishFromMenu = function(menuId, dishId) {
+        $scope.deleteDishFromMenu = function(menuId, dishId) {
             menusDishes.delete({ 'menuId': menuId, 'dishId': dishId }, function(data) {
 
             });

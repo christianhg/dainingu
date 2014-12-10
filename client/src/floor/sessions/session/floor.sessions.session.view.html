@@ -12,9 +12,9 @@
         <session-alerts></session-alerts>
         <div class="well clearfix">
             <div class="pull-right">
-                <button ng-show="vm.session.active && !vm.session.expired" type="submit" ng-click="vm.deactivateSession(session._id)" class="btn btn-info">Deaktivér session</button>
-                <button ng-hide="vm.session.expired" type="submit" ng-click="vm.expireSession(session._id)" class="btn btn-warning">Ophør session</button>
-                <button ng-show="vm.session.expired" type="submit" ng-click="vm.resumeSession(session._id)" class="btn btn-info">Genoptag session</button>
+                <button ng-show="vm.session.active && !vm.session.expired" type="submit" ng-click="deactivateSession(session._id)" class="btn btn-info">Deaktivér session</button>
+                <button ng-hide="vm.session.expired" type="submit" ng-click="expireSession(session._id)" class="btn btn-warning">Ophør session</button>
+                <button ng-show="vm.session.expired" type="submit" ng-click="resumeSession(session._id)" class="btn btn-info">Genoptag session</button>
             </div>
         </div>
         <session-info></session-info>

@@ -17,6 +17,9 @@
             controllerAs: 'vm'
         };
 
+        /**
+         * @ngInject
+         */
         function FloorOrdersOrderController($scope, sessionsOrdersCommit, sessionsOrdersComplete, sessionsOrdersConfirm, sessionsOrdersServe) {
             var vm = this;
 
@@ -24,27 +27,27 @@
             vm.session = {};
             vm.session._id = $scope.sessionId;
 
-            vm.pullOrder = function(sessionId, orderId) {
+            $scope.pullOrder = function(sessionId, orderId) {
                 sessionsOrdersCommit.pull({sessionId: sessionId, orderId: orderId}, function(data) {
                     console.log(data);
                 });
             };
 
-            vm.confirmOrder = function(sessionId, orderId) {
+            $scope.confirmOrder = function(sessionId, orderId) {
                 sessionsOrdersConfirm.confirm({sessionId: sessionId, orderId: orderId}, function(data) {
                     console.log(data);
                 });
             };
 
-            vm.incompleteOrder = function(sessionId, orderId) {
+            $scope.incompleteOrder = function(sessionId, orderId) {
                 sessionsOrdersComplete.incomplete({sessionId: sessionId, orderId: orderId}, function(data) {
                     console.log(data);
                 });
             };
 
-            vm.serveOrder = function(sessionId, orderId) {
+            $scope.serveOrder = function(sessionId, orderId) {
                 sessionsOrdersServe.serve({sessionId: sessionId, orderId: orderId}, function(data) {
-
+                    console.log(data);
                 });
             };
         }

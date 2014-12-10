@@ -5,14 +5,14 @@
         .module('dainingu.dashboard.dishes')
         .controller('DashboardDishesIdEditController', DashboardDishesIdEditController);
 
-    function DashboardDishesIdEditController(dishes, $state, $stateParams) {
+    function DashboardDishesIdEditController($scope, dishes, $state, $stateParams) {
         var vm = this;
 
         dishes.get({id: $stateParams.id}, function(dish) {
             vm.dish = dish;
         });
 
-        vm.editDish = function() {
+        $scope.editDish = function() {
             dishes.update({id: vm.dish.id}, vm.dish, function(data) {
                 $state.go('dashboard.dishes', null, { reload: true });
             });

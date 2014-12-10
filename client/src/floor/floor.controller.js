@@ -5,14 +5,14 @@
 		.module('dainingu.floor')
 		.controller('FloorController', FloorController);
 
-	function FloorController(auth) {
+	function FloorController($scope, auth) {
 		var vm = this;
 
 		auth.validate(function(validToken) {
 			vm.loggedIn = validToken;
 		});
 
-		vm.signOut = function() {
+		$scope.signOut = function() {
 			auth.signout('floor.login');
 		};
 	}

@@ -20,10 +20,10 @@
 		/**
 		 * @ngInject
 		 */
-		function AddDishController(dishes, menus) {
+		function AddDishController($scope, dishes, menus) {
 			var vm = this;
 
-			vm.addDish = function(dish) {
+			$scope.addDish = function(dish) {
 				dishes.save(dish, function(data) {
 					// reset form
 					vm.dish = {};

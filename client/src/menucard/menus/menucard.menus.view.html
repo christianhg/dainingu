@@ -8,9 +8,9 @@
                 <h3 class="panel-title">{{dish.name}}</h3>
             </div>
             <div class="panel-body">
-                <div class="well clearfix" ng-show="vm.getActiveOrder()">
+                <div class="well clearfix" ng-show="getActiveOrder()">
                     <div class="pull-right">
-                        <button type="submit" class="btn btn-success" ng-click="vm.addDishToOrder(dish)">Tilføj til ordre</button>
+                        <button type="submit" class="btn btn-success" ng-click="addDishToOrder(dish)">Tilføj til ordre</button>
                     </div>
                 </div>
                 <dish-info dish="dish"></dish-info>

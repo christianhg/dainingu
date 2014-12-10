@@ -5,12 +5,12 @@
         .module('dainingu.kitchen.login')
         .controller('KitchenLoginController', KitchenLoginController);
 
-    function KitchenLoginController($state, auth) {
+    function KitchenLoginController($scope, $state, auth) {
         var vm = this;
 
         vm.loginData = {};
 
-        vm.kitchenLogin = function() {
+        $scope.kitchenLogin = function() {
             auth.signin(vm.loginData, function(data) {
                 $state.go('kitchen', null, { reload: true });
             });

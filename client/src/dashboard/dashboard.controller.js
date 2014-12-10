@@ -5,7 +5,7 @@
 		.module('dainingu.dashboard')
 		.controller('DashboardController', DashboardController);
 
-	function DashboardController(auth, socket) {
+	function DashboardController($scope, auth, socket) {
 		var vm = this;
 
 		vm.alerts = [];
@@ -15,7 +15,7 @@
 			vm.loggedIn = validToken;
 		});
 
-		vm.signOut = function() {
+		$scope.signOut = function() {
 			auth.signout('dashboard.login');
 		};
 
@@ -24,7 +24,7 @@
 			vm.alerts.push(alert);
 		});
 
-		vm.closeAlert = function(index) {
+		$scope.closeAlert = function(index) {
 			// remove alert from alert array
 			vm.alerts.splice(index, 1);
 		};

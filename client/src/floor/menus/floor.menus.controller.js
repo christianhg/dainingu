@@ -5,7 +5,7 @@
         .module('dainingu.floor.menus')
         .controller('FloorMenusController', FloorMenusController);
 
-    function FloorMenusController(menus, socket) {
+    function FloorMenusController($scope, dishesActivate, menus, socket) {
         var vm = this;
 
         vm.getMenus = function() {
@@ -20,9 +20,16 @@
             vm.getMenus();
         });
 
+        $scope.activateDish = function(dishId) {
+            dishesActivate.activate({dishId: dishId}, function(data) {
+                console.log(data);
+            });
+        };
 
-        vm.deactivateDish = function(dishId) {
-
+        $scope.deactivateDish = function(dishId) {
+            dishesActivate.deactivate({dishId: dishId}, function(data) {
+                console.log(data);
+            });
         };
     }
 })();

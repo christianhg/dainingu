@@ -5,7 +5,7 @@
         .module('dainingu.dashboard.users')
         .controller('DashboardUsersController', DashboardUsersController);
 
-    function DashboardUsersController(users, socket) {
+    function DashboardUsersController($scope, users, socket) {
         var vm = this;
 
         vm.getUsers = function() {

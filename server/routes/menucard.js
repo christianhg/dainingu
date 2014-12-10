@@ -38,9 +38,17 @@
             // Add dish to menucard order.
             .post(jwtCheck, function(req, res) {
                 menucard.addDishToOrder(req, res, function(data) {
+                    console.log(data);
+                    io.sockets.emit('ordersUpdated');
+                });
+            })
+            .put(jwtCheck, function(req, res) {
+                menucard.removeDishFromOrder(req, res, function(data) {
+                    console.log(data);
                     io.sockets.emit('ordersUpdated');
                 });
             });
+
 
         app.route('/api/menucard/session')
             // Get menucard session.

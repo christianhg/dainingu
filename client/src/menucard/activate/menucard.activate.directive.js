@@ -20,10 +20,10 @@
 		/**
 		 * @ngInject
 		 */
-		function ActivateMenucardController(authMenucard) {
+		function ActivateMenucardController($scope, authMenucard) {
 			var vm = this;
 
-			vm.activateMenucard = function(key) {
+			$scope.activateMenucard = function(key) {
 				authMenucard.activate(key, function(data) {
 					vm.session = {};
 					console.log(data);

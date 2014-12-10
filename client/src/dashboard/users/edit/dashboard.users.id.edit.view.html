@@ -4,7 +4,7 @@
             Redigér {{vm.user.username}}
         </div>
         <div class="panel-body">
-            <form name="editUserForm" ng-submit="vm.editUser()">
+            <form name="editUserForm" ng-submit="editUser()">
                 <div class="form-group">
                     <label for="userUsername">Brugernavn</label>
                     <input type="text" name="userUsername" id="userUsername" class="form-control" ng-model="vm.user.username">

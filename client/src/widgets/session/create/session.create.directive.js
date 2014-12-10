@@ -20,11 +20,11 @@
         /**
          * @ngInject
          */
-        function SessionCreateController(sessions) {
+        function SessionCreateController($scope, sessions) {
             var vm = this;
 
-            vm.addSession = function() {
-                sessions.save(vm.session, function(session) {
+            $scope.addSession = function() {
+                sessions.save(vm.session, function(data) {
                     vm.session = {};
                 });
             };

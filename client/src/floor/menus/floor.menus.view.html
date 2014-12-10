@@ -8,7 +8,8 @@
                 <tbody>
                 <tr ng-repeat="dish in menu.dishes | orderBy:name">
                     <td>{{dish.name}}
-                        <button type="submit" ng-click="vm.deactivateDish(dish.id)" class="pull-right btn btn-warning">Deaktivér</button>
+                        <button type="submit" ng-show="dish.active" ng-click="deactivateDish(dish.id)" class="pull-right btn btn-warning">Deaktivér</button>
+                        <button type="submit" ng-show="!dish.active" ng-click="activateDish(dish.id)" class="pull-right btn btn-success">Aktivér</button>
                     </td>
                 </tr>
                 </tbody>

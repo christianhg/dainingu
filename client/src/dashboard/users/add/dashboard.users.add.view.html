@@ -4,7 +4,7 @@
     </div>
     <div class="panel-body">
         <p>Opret bruger med <strong>brugernavn</strong> og <strong>password</strong>.</p>
-        <form name="addUserForm" ng-submit="addUserForm.$valid && vm.addUser(vm.user)" novalidate autocomplete="off">
+        <form name="addUserForm" ng-submit="addUser(vm.user)" novalidate autocomplete="off">
             <div class="form-group">
                 <label for="username">Brugernavn</label>
                 <input type="text" id="username" class="form-control" placeholder="Brugernavn" ng-model="vm.user.username" required>

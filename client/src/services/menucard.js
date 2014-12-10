@@ -62,6 +62,15 @@
                         callback(false);
                     });
             },
+            removeDishFromOrder: function(orderId, dishId, callback) {
+                $http.put('/api/menucard/orders/dishes', { orderId: orderId, dishId: dishId })
+                    .success(function(order) {
+                        callback(order);
+                    })
+                    .error(function() {
+                        callback(false);
+                    });
+            },
             returnOrder: function(orderId, callback) {
                 $http.put('/api/menucard/orders/return', { orderId: orderId })
                     .success(function(data) {

@@ -17,6 +17,9 @@
             controllerAs: 'vm'
         };
 
+        /**
+         * @ngInject
+         */
         function KitchenOrdersOrderController($scope, sessionsOrdersBegin, sessionsOrdersComplete, sessionsOrdersConfirm) {
             var vm = this;
 
@@ -24,25 +27,25 @@
             vm.session = {};
             vm.session._id = $scope.sessionId;
 
-            vm.rejectOrder = function(sessionId, orderId) {
+            $scope.rejectOrder = function(sessionId, orderId) {
                 sessionsOrdersConfirm.reject({sessionId: sessionId, orderId: orderId}, function(data) {
                     console.log(data);
                 });
             };
 
-            vm.beginOrder = function(sessionId, orderId) {
+            $scope.beginOrder = function(sessionId, orderId) {
                 sessionsOrdersBegin.begin({ sessionId: sessionId, orderId: orderId }, function(data) {
                     console.log(data);
                 });
             };
 
-            vm.stopOrder = function(sessionId, orderId) {
+            $scope.stopOrder = function(sessionId, orderId) {
                 sessionsOrdersBegin.stop({ sessionId: sessionId, orderId: orderId }, function(data) {
                     console.log(data);
                 });
             };
 
-            vm.completeOrder = function(sessionId, orderId) {
+            $scope.completeOrder = function(sessionId, orderId) {
                 sessionsOrdersComplete.complete({sessionId: sessionId, orderId: orderId}, function(data) {
                     console.log(data);
                 });

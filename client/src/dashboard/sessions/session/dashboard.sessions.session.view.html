@@ -17,9 +17,9 @@
                 <a ui-sref=".id.delete({id: session._id})" class="btn btn-danger">Slet session</a>
             </div>
             <div class="pull-right">
-                <button ng-show="session.active && !session.expired" type="submit" ng-click="vm.deactivateSession(session._id)" class="btn btn-info">Deaktivér session</button>
-                <button ng-hide="session.expired" type="submit" ng-click="vm.expireSession(session._id)" class="btn btn-warning">Ophør session</button>
-                <button ng-show="session.expired" type="submit" ng-click="vm.resumeSession(session._id)" class="btn btn-info">Genoptag session</button>
+                <button ng-show="session.active && !session.expired" type="submit" ng-click="deactivateSession(session._id)" class="btn btn-info">Deaktivér session</button>
+                <button ng-hide="session.expired" type="submit" ng-click="expireSession(session._id)" class="btn btn-warning">Ophør session</button>
+                <button ng-show="session.expired" type="submit" ng-click="resumeSession(session._id)" class="btn btn-info">Genoptag session</button>
             </div>
         </div>
         <session-info></session-info>

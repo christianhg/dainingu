@@ -412,7 +412,7 @@
     /**
      * Begin order in specific session.
      */
-    exports.serve = function(req, res, callback) {
+    exports.begin = function(req, res, callback) {
         var sessionId = req.params.sessionId;
         var orderId = req.params.orderId;
 
@@ -447,7 +447,7 @@
     /**
      * Stop order in specific session.
      */
-    exports.serve = function(req, res, callback) {
+    exports.stop = function(req, res, callback) {
         var sessionId = req.params.sessionId;
         var orderId = req.params.orderId;
 
@@ -502,7 +502,7 @@
 
                         var data = {
                             message: 'Order served',
-                            session: session
+                            order: order
                         };
 
                         res.json(data);

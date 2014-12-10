@@ -16,10 +16,13 @@
 			controllerAs: 'vm'
 		};
 
-		function MenucardOrdersAddController(menucard, activeOrder) {
+		/**
+		 * @ngInject
+		 */
+		function MenucardOrdersAddController($scope, menucard, activeOrder) {
 			var vm = this;
 
-			vm.addOrder = function() {
+			$scope.addOrder = function() {
 				menucard.addOrder(function(data) {
 					activeOrder.set(data.order._id);
 				});

@@ -31,8 +31,7 @@
 
                     if(isExpired) {
                         data = {
-                            message: 'Session activation failed.',
-                            session: session._id
+                            message: 'Session activation failed.'
                         };
 
                         res.json(data);
@@ -50,7 +49,6 @@
 
                         data = {
                             message: 'Session activation successful.',
-                            session: session._id,
                             success: true,
                             token: token
                         };

@@ -4,7 +4,7 @@
             Slet session med nøglen <strong>{{vm.session.key}}</strong>
         </div>
         <div class="panel-body">
-            <form name="deleteSessionForm" ng-submit="vm.deleteSession()">
+            <form name="deleteSessionForm" ng-submit="deleteSession()">
                 <button type="submit" class="btn btn-danger">Slet</button>
                 <a ui-sref="dashboard.sessions" class="btn btn-default">Fortryd</a>
             </form>

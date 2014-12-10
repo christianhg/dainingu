@@ -4,7 +4,7 @@
     </div>
     <div class="panel-body">
         <p>Opret menu med <strong>navn</strong>. Herefter er det muligt at tilføje retter til menuen.</p>
-        <form name="addMenuForm" ng-submit="addMenuForm.$valid && vm.addMenu()" novalidate>
+        <form name="addMenuForm" ng-submit="addMenu()" novalidate>
             <div class="form-group">
                 <label for="menuName">Navn</label>
                 <input type="text" id="menuName" name="menuName" class="form-control" ng-model="vm.menu.name" placeholder="Navn" required>

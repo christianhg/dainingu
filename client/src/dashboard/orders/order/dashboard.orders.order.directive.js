@@ -24,85 +24,85 @@
             vm.session = {};
             vm.session._id = $scope.sessionId;
 
-            vm.deleteOrder = function(sessionId, orderId) {
+            $scope.deleteOrder = function(sessionId, orderId) {
                 sessionsOrders.delete({sessionId: sessionId, orderId: orderId}, function(data) {
 
                 });
             };
 
-            vm.removeDishFromOrder = function(sessionId, orderId, dishId) {
+            $scope.removeDishFromOrder = function(sessionId, orderId, dishId) {
                 sessionsOrdersDishes.delete({sessionId: sessionId, orderId: orderId, dishId: dishId}, function(data) {
                     console.log(data);
                 });
             };
 
-            vm.commitOrder = function(sessionId, orderId) {
+            $scope.commitOrder = function(sessionId, orderId) {
                 sessionsOrdersCommit.commit({sessionId: sessionId, orderId: orderId}, function(data) {
                     console.log(data);
                 });
             };
 
-            vm.pullOrder = function(sessionId, orderId) {
+            $scope.pullOrder = function(sessionId, orderId) {
                 sessionsOrdersCommit.pull({sessionId: sessionId, orderId: orderId}, function(data) {
                     console.log(data);
                 });
             };
 
-            vm.confirmOrder = function(sessionId, orderId) {
+            $scope.confirmOrder = function(sessionId, orderId) {
                 sessionsOrdersConfirm.confirm({sessionId: sessionId, orderId: orderId}, function(data) {
                     console.log(data);
                 });
             };
 
-            vm.rejectOrder = function(sessionId, orderId) {
+            $scope.rejectOrder = function(sessionId, orderId) {
                 sessionsOrdersConfirm.reject({sessionId: sessionId, orderId: orderId}, function(data) {
                     console.log(data);
                 });
             };
 
-            vm.beginOrder = function(sessionId, orderId) {
+            $scope.beginOrder = function(sessionId, orderId) {
                 sessionsOrdersBegin.begin({sessionId: sessionId, orderId: orderId}, function(data) {
                     console.log(data);
                 });
             };
 
-            vm.stopOrder = function(sessionId, orderId) {
+            $scope.stopOrder = function(sessionId, orderId) {
                 sessionsOrdersBegin.stop({sessionId: sessionId, orderId: orderId}, function(data) {
                     console.log(data);
                 });
             };
 
-            vm.completeOrder = function(sessionId, orderId) {
+            $scope.completeOrder = function(sessionId, orderId) {
                 sessionsOrdersComplete.complete({sessionId: sessionId, orderId: orderId}, function(data) {
                     console.log(data);
                 });
             };
 
-            vm.incompleteOrder = function(sessionId, orderId) {
+            $scope.incompleteOrder = function(sessionId, orderId) {
                 sessionsOrdersComplete.incomplete({sessionId: sessionId, orderId: orderId}, function(data) {
                     console.log(data);
                 });
             };
 
-            vm.serveOrder = function(sessionId, orderId) {
+            $scope.serveOrder = function(sessionId, orderId) {
                 sessionsOrdersServe.serve({sessionId: sessionId, orderId: orderId}, function(data) {
                     console.log(data);
                 });
             };
 
-            vm.returnOrder = function(sessionId, orderId) {
+            $scope.returnOrder = function(sessionId, orderId) {
                 sessionsOrdersServe.return({sessionId: sessionId, orderId: orderId}, function(data) {
                     console.log(data);
                 });
             };
 
-            vm.closeOrder = function(sessionId, orderId) {
+            $scope.closeOrder = function(sessionId, orderId) {
                 sessionsOrdersClose.close({sessionId: sessionId, orderId: orderId}, function(data) {
                     console.log(data);
                 });
             };
 
-            vm.openOrder = function(sessionId, orderId) {
+            $scope.openOrder = function(sessionId, orderId) {
                 sessionsOrdersClose.open({sessionId: sessionId, orderId: orderId}, function(data) {
                     console.log(data);
                 });

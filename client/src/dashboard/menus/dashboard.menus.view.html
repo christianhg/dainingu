@@ -23,7 +23,7 @@
                     <tbody>
                         <tr ng-repeat="dish in menu.dishes | orderBy:name">
                             <td>{{dish.name}}
-                                <button type="submit" ng-click="vm.deleteDishFromMenu(menu.id, dish.id)" class="pull-right btn btn-warning">Fjern fra menu
+                                <button type="submit" ng-click="deleteDishFromMenu(menu.id, dish.id)" class="pull-right btn btn-warning">Fjern fra menu
                                 </button>
                             </td>
                         </tr>

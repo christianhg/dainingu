@@ -4,7 +4,7 @@
             Redigér {{vm.dish.name}}
         </div>
         <div class="panel-body">
-            <form name="editDishForm" ng-submit="vm.editDish()">
+            <form name="editDishForm" ng-submit="editDish()">
                 <dish-form></dish-form>
                 <button type="submit" class="btn btn-warning">Redigér</button>
                 <a ui-sref="dashboard.dishes" class="btn btn-default">Fortryd</a>

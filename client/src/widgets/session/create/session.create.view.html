@@ -4,7 +4,7 @@
     </div>
     <div class="panel-body">
         <p>Indtast kundens <strong>navn</strong> og <strong>bord</strong> for at oprette session med tilknyttet <strong>nøgle</strong> til aktivering af menukort.</p>
-        <form name="addSessionForm" ng-submit="addSessionForm.$valid && vm.addSession()" novalidate>
+        <form name="addSessionForm" ng-submit="addSession()" novalidate>
             <div class="form-group">
                 <label for="sessionCustomerName">Kundens navn</label>
                 <input type="text" id="sessionCustomerName" class="form-control" ng-model="vm.session.customer.name" placeholder="Kundens navn" required>

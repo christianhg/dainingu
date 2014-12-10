@@ -10,7 +10,7 @@
 
         vm.loginData = {};
 
-        vm.floorLogin = function() {
+        $scope.floorLogin = function() {
             auth.signin(vm.loginData, function(data) {
                 $state.go('floor', null, { reload: true });
             });

@@ -20,10 +20,10 @@
 		/**
 		 * @ngInject
 		 */
-		function AddMenuController(menus) {
+		function AddMenuController($scope, menus) {
 			var vm = this;
 
-			vm.addMenu = function() {
+			$scope.addMenu = function() {
 				menus.save(vm.menu, function() {
 					// reset form
 					vm.menu = {};

@@ -5,7 +5,7 @@
         .module('dainingu.cashregister.orders')
         .controller('CashregisterOrdersController', CashregisterOrdersController);
 
-    function CashregisterOrdersController(sessions, sessionsOrdersClose, socket) {
+    function CashregisterOrdersController(sessions, socket) {
         var vm = this;
 
         vm.getSessions = function() {

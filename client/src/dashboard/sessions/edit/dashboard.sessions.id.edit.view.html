@@ -4,7 +4,7 @@
             Redigér {{vm.session.key}}
         </div>
         <div class="panel-body">
-            <form name="editSessionForm" ng-submit="vm.editSession()">
+            <form name="editSessionForm" ng-submit="editSession()">
                 <div class="form-group">
                     <label for="sessionKey">Nøgle</label>
                     <input type="text" name="sessionKey" id="sessionKey" class="form-control" ng-model="vm.session.key" disabled>

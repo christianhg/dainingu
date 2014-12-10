@@ -5,14 +5,14 @@
 		.module('dainingu.kitchen')
 		.controller('KitchenController', KitchenController);
 
-	function KitchenController(auth) {
+	function KitchenController($scope, auth) {
 		var vm = this;
 
 		auth.validate(function(validToken) {
 			vm.loggedIn = validToken;
 		});
 
-		vm.signOut = function() {
+		$scope.signOut = function() {
 			auth.signout('kitchen.login');
 		};
 	}

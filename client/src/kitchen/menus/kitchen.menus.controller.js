@@ -5,7 +5,7 @@
         .module('dainingu.kitchen.menus')
         .controller('KitchenMenusController', KitchenMenusController);
 
-    function KitchenMenusController(dishesActivate, menus, socket) {
+    function KitchenMenusController($scope, dishesActivate, menus, socket) {
         var vm = this;
 
         vm.getMenus = function() {
@@ -24,13 +24,13 @@
             vm.getMenus();
         });
 
-        vm.activateDish = function(dishId) {
+        $scope.activateDish = function(dishId) {
             dishesActivate.activate({dishId: dishId}, function(data) {
                 console.log(data);
             });
         };
 
-        vm.deactivateDish = function(dishId) {
+        $scope.deactivateDish = function(dishId) {
             dishesActivate.deactivate({dishId: dishId}, function(data) {
                 console.log(data);
             });
