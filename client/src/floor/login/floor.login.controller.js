@@ -5,7 +5,7 @@
         .module('dainingu.floor.login')
         .controller('FloorLoginController', FloorLoginController);
 
-    function FloorLoginController($state, auth) {
+    function FloorLoginController($scope, $state, auth) {
         var vm = this;
 
         vm.loginData = {};

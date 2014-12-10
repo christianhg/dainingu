@@ -105,15 +105,29 @@ $ gulp dist
 
         dainingu.home,
 
-        dainingu.cashregister,
-        dainingu.floor,
-        dainingu.kitchen,
+        dainingu.cashregister --> [
+            dainingu.cashregister.login,
+            dainingu.cashregister.orders
+        ],
+        dainingu.floor --> [
+            dainingu.floor.login,
+            dainingu.floor.menus,
+            dainingu.floor.orders,
+            dainingu.floor.sessions
+        ],
+        dainingu.kitchen --> [
+            dainingu.kitchen.login,
+            dainingu.kitchen.menus,
+            dainingu.kitchen.orders
+        ],
         dainingu.menucard,
 
         dainingu.dashboard --> [
+            dainingu.dashboard.dishes,
             dainingu.dashboard.login,
             dainingu.dashboard.menus,
             dainingu.dashboard.sessions,
+            dainingu.dashboard.statistics,
             dainingu.dashboard.users
         ],
 
