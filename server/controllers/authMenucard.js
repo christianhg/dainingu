@@ -27,8 +27,10 @@
                 return callback(data);
             } else {
                 session.status(function(isActive, isExpired) {
+                    var data = {};
+
                     if(isExpired) {
-                        var data = {
+                        data = {
                             message: 'Session activation failed.',
                             session: session._id
                         };
@@ -46,7 +48,7 @@
 
                         var token = jwt.sign(session._id, secrets.jwtSecrets.authMenucard, { expiresInMinutes: 60*5 });
 
-                        var data = {
+                        data = {
                             message: 'Session activation successful.',
                             session: session._id,
                             success: true,
@@ -57,7 +59,7 @@
 
                         return callback(data);
                     }
-                })
+                });
             }
         });
     };
@@ -110,7 +112,7 @@
                     });
                 }
             });
-        })
-    }
+        });
+    };
 
 })();

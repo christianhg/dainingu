@@ -1,7 +1,7 @@
 (function () {
 	'use strict';
 
-	var sequelize = require("../../config/sequelize");
+	var sequelize = require('../../config/sequelize');
 	var Sequelize = sequelize.Seq();
 
 	module.exports = {
@@ -16,7 +16,7 @@
 			}
 		},
 		relations: {
-			belongsTo: "menu"
+			belongsTo: 'menu'
 		},
 		options: {
 			tableName: 'dishes',
@@ -31,5 +31,5 @@
 				}
 			}
 		}
-	}
+	};
 })();

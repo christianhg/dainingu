@@ -19,12 +19,12 @@
             .get(jwtCheck, function(req, res) {
                 sessions.show(req, res, function(data) {
 
-                })
+                });
             })
             .put(jwtCheck, function(req, res) {
                 sessions.update(req, res, function(data) {
                     io.sockets.emit('sessionsUpdated');
-                })
+                });
             })
             .delete(jwtCheck, function(req, res) {
                 sessions.destroy(req, res, function(data) {

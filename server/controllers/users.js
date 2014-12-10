@@ -42,7 +42,7 @@
             res.json(users);
 
             callback(data);
-        })
+        });
     };
 
     /**

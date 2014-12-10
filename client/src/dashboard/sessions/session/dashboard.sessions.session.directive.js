@@ -44,12 +44,6 @@
                     console.log(data);
                 });
             };
-
-            vm.deleteSession = function(id) {
-                sessions.delete({}, {'id': id}, function(data) {
-                    console.log(data);
-                });
-            };
         }
 
         return directive;

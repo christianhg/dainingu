@@ -33,13 +33,13 @@
             vm.beginOrder = function(sessionId, orderId) {
                 sessionsOrdersBegin.begin({ sessionId: sessionId, orderId: orderId }, function(data) {
                     console.log(data);
-                })
+                });
             };
 
             vm.stopOrder = function(sessionId, orderId) {
                 sessionsOrdersBegin.stop({ sessionId: sessionId, orderId: orderId }, function(data) {
                     console.log(data);
-                })
+                });
             };
 
             vm.completeOrder = function(sessionId, orderId) {

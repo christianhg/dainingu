@@ -25,7 +25,7 @@
             .get(function(req, res) {
                 dishes.show(req, res, function(data) {
 
-                })
+                });
             })
             // Update specific dish.
             .put(jwtCheck, function(req, res) {

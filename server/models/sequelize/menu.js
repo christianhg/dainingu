@@ -1,7 +1,7 @@
 (function () {
 	'use strict';
 
-	var sequelize = require("../../config/sequelize");
+	var sequelize = require('../../config/sequelize');
 	var Sequelize = sequelize.Seq();
 
 	module.exports = {
@@ -9,10 +9,10 @@
 			name: Sequelize.STRING
 		},
 		relations: {
-			hasMany: "dish"
+			hasMany: 'dish'
 		},
 		options: {
 			tableName: 'menus'
 		}
-	}
+	};
 })();

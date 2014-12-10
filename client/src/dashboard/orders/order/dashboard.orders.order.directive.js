@@ -17,7 +17,7 @@
             controllerAs: 'vm'
         };
 
-        function DashboardOrdersOrderController($scope, sessionsOrders, sessionsOrdersBegin, sessionsOrdersCommit, sessionsOrdersComplete, sessionsOrdersConfirm, sessionsOrdersServe, sessionsOrdersClose) {
+        function DashboardOrdersOrderController($scope, sessionsOrders, sessionsOrdersBegin, sessionsOrdersCommit, sessionsOrdersComplete, sessionsOrdersConfirm, sessionsOrdersDishes, sessionsOrdersServe, sessionsOrdersClose) {
             var vm = this;
 
             vm.order = $scope.order;

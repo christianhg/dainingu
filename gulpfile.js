@@ -241,8 +241,8 @@
 		'injectApp',
 		'injectVendor',
 		'jshint',
+		'jshintServer'
 		//'karma'
-		//'jshintServer'
 	], function () {
 		reloadBuildServer();
 	});
@@ -251,7 +251,7 @@
 	 * Watch project
 	 */
 	gulp.task('watch', ['build'], function () {
-		//gulp.watch(prefixPath(paths.server.base, files.js.all), ['build']);
+		gulp.watch(prefixPath(paths.server.base, files.js.all), ['build']);
 		gulp.watch(files.gulpfile, ['build']);
 		gulp.watch(prefixPath(paths.client.src.base, files.js.all), ['build']);
 		gulp.watch(prefixPath(paths.client.src.base, files.scss.all), ['build']);
@@ -438,6 +438,20 @@
 	});
 
 	/**
+	 * jshint server JS
+	 */
+	gulp.task('jshintServer', function () {
+		var sources = {
+			js: prefixPath(paths.server.base, files.js.all)
+		};
+
+		return gulp.src(sources.js)
+			.pipe(plumber())
+			.pipe(jshint())
+			.pipe(jshint.reporter(stylish));
+	 });
+
+	/**
 	 * Given all .js files, run unit tests.
 	 */
 	gulp.task('karma', ['jshint'], function () {
@@ -457,17 +471,6 @@
 				throw error;
 			});
 	});
-
-
-	/**
-	 * jshint server JS
-	 */
-	/*gulp.task('jshintServer', function () {
-		return gulp.src([paths.server.base + files.js.server])
-			.pipe(plumber())
-			.pipe(jshint())
-			.pipe(jshint.reporter(stylish));
-	});*/
 
 	/**
 	 * Concatenate the contents of all .html files and save as template.js

@@ -141,7 +141,7 @@
         var order;
 
         for(var i = 0; i < this.orders.length; i++) {
-            if(this.orders[i]._id == orderId) {
+            if(this.orders[i]._id === orderId) {
                 order = this.orders[i];
                 break;
             }
@@ -175,7 +175,7 @@
         var orders;
 
         for(var i = 0; i < this.orders.length; i++) {
-            if(this.orders[i]._id == orderId) {
+            if(this.orders[i]._id === orderId) {
                 this.orders.splice(i, 1);
                 orders = this.orders;
                 break;
@@ -209,10 +209,10 @@
         var dish;
 
         for(var i = 0; i < this.orders.length; i++) {
-            if(this.orders[i]._id == orderId) {
+            if(this.orders[i]._id === orderId) {
 
                 for(var j = 0; j < this.orders[i].dishes.length; j++) {
-                    if(this.orders[i].dishes[j]._id == dishId) {
+                    if(this.orders[i].dishes[j]._id === dishId) {
                         dish = this.orders[i].dishes[j];
 
                         break;
@@ -237,7 +237,7 @@
         var dishes;
 
         for(var i = 0; i < this.orders.length; i++) {
-            if(this.orders[i]._id == orderId) {
+            if(this.orders[i]._id === orderId) {
                 dishes = this.orders[i].dishes;
 
                 break;
@@ -261,7 +261,7 @@
         var order;
 
         for(var i = 0; i < this.orders.length; i++) {
-            if(this.orders[i]._id == orderId) {
+            if(this.orders[i]._id === orderId) {
                 order = this.orders[i];
 
                 this.orders[i].dishes.push(dish);
@@ -287,10 +287,10 @@
         var dishes;
 
         for(var i = 0; i < this.orders.length; i++) {
-            if(this.orders[i]._id == orderId) {
+            if(this.orders[i]._id === orderId) {
 
                 for(var j = 0; j < this.orders[i].dishes.length; j++) {
-                    if(this.orders[i].dishes[j]._id == dishId) {
+                    if(this.orders[i].dishes[j]._id === dishId) {
                         this.orders[i].dishes.splice(j, 1);
 
                         dishes = this.orders[i].dishes;
@@ -317,7 +317,7 @@
         var order;
 
         for(var i = 0; i < this.orders.length; i++) {
-            if(this.orders[i]._id == orderId) {
+            if(this.orders[i]._id === orderId) {
                 order = this.orders[i];
 
                 this.orders[i].pristine = false;
@@ -343,7 +343,7 @@
         var order;
 
         for(var i = 0; i < this.orders.length; i++) {
-            if(this.orders[i]._id == orderId) {
+            if(this.orders[i]._id === orderId) {
                 order = this.orders[i];
 
                 this.orders[i].pristine = true;
@@ -369,7 +369,7 @@
         var order;
 
         for(var i = 0; i < this.orders.length; i++) {
-            if(this.orders[i]._id == orderId) {
+            if(this.orders[i]._id === orderId) {
                 order = this.orders[i];
 
                 this.orders[i].committed = false;
@@ -395,7 +395,7 @@
         var order;
 
         for(var i = 0; i < this.orders.length; i++) {
-            if(this.orders[i]._id == orderId) {
+            if(this.orders[i]._id === orderId) {
                 order = this.orders[i];
 
                 this.orders[i].committed = true;
@@ -421,7 +421,7 @@
         var order;
 
         for(var i = 0; i < this.orders.length; i++) {
-            if(this.orders[i]._id == orderId) {
+            if(this.orders[i]._id === orderId) {
                 order = this.orders[i];
 
                 this.orders[i].confirmed = false;
@@ -447,7 +447,7 @@
         var order;
 
         for(var i = 0; i < this.orders.length; i++) {
-            if(this.orders[i]._id == orderId) {
+            if(this.orders[i]._id === orderId) {
                 order = this.orders[i];
 
                 this.orders[i].confirmed = true;
@@ -474,7 +474,7 @@
         var order;
 
         for(var i = 0; i < this.orders.length; i++) {
-            if(this.orders[i]._id == orderId) {
+            if(this.orders[i]._id === orderId) {
                 order = this.orders[i];
 
                 this.orders[i].begun = false;
@@ -500,7 +500,7 @@
         var order;
 
         for(var i = 0; i < this.orders.length; i++) {
-            if(this.orders[i]._id == orderId) {
+            if(this.orders[i]._id === orderId) {
                 order = this.orders[i];
 
                 this.orders[i].begun = true;
@@ -526,7 +526,7 @@
         var order;
 
         for(var i = 0; i < this.orders.length; i++) {
-            if(this.orders[i]._id == orderId) {
+            if(this.orders[i]._id === orderId) {
                 order = this.orders[i];
 
                 this.orders[i].completed = false;
@@ -552,7 +552,7 @@
         var order;
 
         for(var i = 0; i < this.orders.length; i++) {
-            if(this.orders[i]._id == orderId) {
+            if(this.orders[i]._id === orderId) {
                 order = this.orders[i];
 
                 this.orders[i].completed = true;
@@ -578,7 +578,7 @@
         var order;
 
         for(var i = 0; i < this.orders.length; i++) {
-            if(this.orders[i]._id == orderId) {
+            if(this.orders[i]._id === orderId) {
                 order = this.orders[i];
 
                 this.orders[i].served = false;
@@ -604,7 +604,7 @@
         var order;
 
         for(var i = 0; i < this.orders.length; i++) {
-            if(this.orders[i]._id == orderId) {
+            if(this.orders[i]._id === orderId) {
                 order = this.orders[i];
 
                 this.orders[i].served = true;

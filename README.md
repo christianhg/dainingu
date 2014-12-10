@@ -39,7 +39,7 @@ Install dependencies using npm. This will automatically run `bower install` afte
 $ npm install
 ```
 
-### Setup databases
+### Configure application
 Create the a `server/config/secrets.js` file with the following content:
 
     module.exports = {

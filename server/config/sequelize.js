@@ -5,28 +5,27 @@
 	var models = {};
 	var relationships = {};
 
-	var singleton = function singleton() {
-		var Sequelize = require("sequelize");
+	var Singleton = function singleton() {
+		var Sequelize = require('sequelize');
 		var sequelize = null;
-		var modelsPath = "";
+		var modelsPath = '';
 
 		this.setup = function (path, database, username, password, obj){
 			modelsPath = path;
 
-			if(arguments.length == 3){
+			if(arguments.length === 3){
 				sequelize = new Sequelize(database, username);
 			}
-			else if(arguments.length == 4){
+			else if(arguments.length === 4){
 				sequelize = new Sequelize(database, username, password);
 			}
-			else if(arguments.length == 5){
+			else if(arguments.length === 5){
 				sequelize = new Sequelize(database, username, password, obj);
 			}
 
 			sequelize.sync();
 
 			init();
-
 		};
 
 		this.model = function (name){
@@ -40,38 +39,38 @@
 		function init() {
 			filesystem.readdirSync(modelsPath).forEach(function(name){
 
-				var object = require(modelsPath + "/" + name);
-				var options = object.options || {}
-				var modelName = name.replace(/\.js$/i, "");
+				var object = require(modelsPath + '/' + name);
+				var options = object.options || {};
+				var modelName = name.replace(/\.js$/i, '');
 				models[modelName] = sequelize.define(modelName, object.model, options);
-				if("relations" in object){
+				if('relations' in object){
 					relationships[modelName] = object.relations;
 				}
 			});
 
-			for(var name in relationships){
-				var relation = relationships[name];
-				for(var relName in relation){
-					var related = relation[relName];
-					models[name][relName](models[related]);
+			for(var name in relationships) {
+				if(relationships.hasOwnProperty(name)) {
+					var relation = relationships[name];
+					for(var relName in relation) {
+						if(relation.hasOwnProperty(relName)) {
+							var related = relation[relName];
+							models[name][relName](models[related]);
+						}
+					}
 				}
 			}
 		}
-
-		/*if(singleton.caller != singleton.getInstance){
-			throw new Error("This object cannot be instanciated");
-		}*/
 	};
 
-	singleton.instance = null;
+	Singleton.instance = null;
 
-	singleton.getInstance = function(){
+	Singleton.getInstance = function(){
 		if(this.instance === null){
-			this.instance = new singleton();
+			this.instance = new Singleton();
 		}
 		return this.instance;
 	};
 
-	module.exports = singleton.getInstance();
+	module.exports = Singleton.getInstance();
 
 })();

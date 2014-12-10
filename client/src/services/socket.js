@@ -9,10 +9,5 @@
 		return socketFactory({
 			ioSocket: io.connect()
 		});
-		/*return socketFactory({
-			ioSocket:  io.connect('http://localhost:2000', {
-				query: 'token=' + $window.sessionStorage.loginToken
-			})
-		});*/
 	}
 })();

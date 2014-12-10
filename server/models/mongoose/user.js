@@ -4,6 +4,9 @@
     var bcrypt = require('bcrypt');
     var mongoose = require('mongoose');
 
+    /**
+     * Define Mongoose user schema.
+     */
     var userSchema = new mongoose.Schema({
         username: {
             type: String,
@@ -15,27 +18,6 @@
             level: Number
         }
     });
-
-    /*,
-     profile: {
-     email: {
-     type: String,
-     unique: true,
-     lowercase: true
-     },
-     name: {
-     type: String,
-     default: ''
-     },
-     phone: {
-     type: Number,
-     default: ''
-     },
-     picture: {
-     type: String,
-     default: ''
-     }
-     }*/
 
     /**
      * Hash password before creating user.
@@ -62,8 +44,6 @@
                 next();
             });
         });
-
-
     });
 
     /**
@@ -80,8 +60,9 @@
         });
     };
 
+    // Create user model.
     var User = mongoose.model('User', userSchema, 'users');
 
-    // Expose model
+    // Expose model.
     module.exports = User;
 })();

@@ -6,13 +6,10 @@
      */
     var bodyParser = require('body-parser');
     var express = require('express');
-    var expressJwt = require('express-jwt');
-    var jwt = require('jsonwebtoken');
     var methodOverride = require('method-override');
     var mongoose = require('mongoose');
     var morgan = require('morgan');
     var socketIo = require('socket.io');
-    var socketioJwt = require('socketio-jwt');
     var secrets = require('./config/secrets');
 
     /**
@@ -35,7 +32,7 @@
     /**
      * Connect to MySQL and wire up Sequelize models.
      */
-    require("./config/sequelize").setup(__dirname + '/models/sequelize', secrets.mysql.database, secrets.mysql.user, secrets.mysql.password, {
+    require('./config/sequelize').setup(__dirname + '/models/sequelize', secrets.mysql.database, secrets.mysql.user, secrets.mysql.password, {
         host: secrets.mysql.host
     });
 
@@ -51,17 +48,11 @@
     // Log requests in console.
     app.use(morgan('dev'));
 
-    /*io.use(socketioJwt.authorize({
-        secret: secrets.jwt_secret,
-        handshake: true
-    }));*/
-
     io.on('connection', function(socket) {
-        //console.log(socket.decoded_token, 'connected');
         console.log('connection established');
-        socket.emit('connected')
+        socket.emit('connected');
     }).on('disconnect', function() {
-        console.log('disconnected');
+        console.log('connection closed');
     });
 
     /**

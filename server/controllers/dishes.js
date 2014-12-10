@@ -1,7 +1,7 @@
 (function () {
 	'use strict';
 
-	var sequelize = require("../config/sequelize");
+	var sequelize = require('../config/sequelize');
 	var Dish = sequelize.model('dish');
 	var Menu = sequelize.model('menu');
 
