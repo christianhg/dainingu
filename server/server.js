@@ -30,13 +30,13 @@
     /**
      * Connect to MongoDB.
      */
-    mongoose.connect(secrets.mongodb);
+    mongoose.connect('mongodb://' + secrets.mongodb.user + ':' + secrets.mongodb.password + '@' + secrets.mongodb.host + '/' + secrets.mongodb.database);
 
     /**
      * Connect to MySQL and wire up Sequelize models.
      */
-    require("./config/sequelize").setup(__dirname + '/models/sequelize', "dainingu", "root", null, {
-        host: 'localhost'
+    require("./config/sequelize").setup(__dirname + '/models/sequelize', secrets.mysql.database, secrets.mysql.user, secrets.mysql.password, {
+        host: secrets.mysql.host
     });
 
     /**

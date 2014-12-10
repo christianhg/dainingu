@@ -1,7 +1,7 @@
 {
   "name": "dainingu",
-  "version": "0.0.1",
-  "description": "",
+  "version": "0.1.0",
+  "description": "Digital menu card system.",
   "private": false,
   "repository": {
     "type": "git",
@@ -17,7 +17,7 @@
     }
   ],
   "authors": [
-    "Christian Grøngaard <christianhg@gmail.com>"
+    "Christian H. Grøngaard <christianhg@gmail.com>"
   ],
   "license": "MIT",
   "devDependencies": {
