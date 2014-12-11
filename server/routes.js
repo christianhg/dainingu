@@ -22,13 +22,13 @@
 
         /**
          * Authentication routes.
-         *
+         * Routes for signin and validation of login token.
          */
         require('./routes/auth')(app, io, jwtAuth);
 
         /**
          * Menucard authentication routes.
-         *
+         * Routes for activating and validation of menucard token.
          */
         require('./routes/authMenucard')(app, io, jwtAuthMenucard);
 
@@ -70,7 +70,7 @@
          * Additional routes to activate/deactivate
          * and expire/resume sessions.
          */
-        require('./routes/sessions')(app, io, jwtAuth, jwtAuthMenucard);
+        require('./routes/sessions')(app, io, jwtAuth);
 
         /**
          * SessionsOrders API routes.

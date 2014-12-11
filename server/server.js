@@ -10,7 +10,9 @@
     var mongoose = require('mongoose');
     var morgan = require('morgan');
     var socketIo = require('socket.io');
-    var secrets = require('./config/secrets');
+    var sequelize = require('./config/sequelize');
+    var appConfig = require('./config/app');
+    var dbConfig = require('./config/db');
 
     /**
      * Create Express server.
@@ -21,20 +23,28 @@
     /**
      * Start Express server and have socket.io listen to the server.
      */
-    var server = app.listen(secrets.port);
+    var server = app.listen(appConfig.port);
     var io = socketIo.listen(server);
 
     /**
      * Connect to MongoDB.
      */
-    mongoose.connect('mongodb://' + secrets.mongodb.user + ':' + secrets.mongodb.password + '@' + secrets.mongodb.host + '/' + secrets.mongodb.database);
+    mongoose.connect('mongodb://' +
+        dbConfig.mongodb.user + ':' +
+        dbConfig.mongodb.password + '@' +
+        dbConfig.mongodb.host + '/' +
+        dbConfig.mongodb.database);
 
     /**
      * Connect to MySQL and wire up Sequelize models.
      */
-    require('./config/sequelize').setup(__dirname + '/models/sequelize', secrets.mysql.database, secrets.mysql.user, secrets.mysql.password, {
-        host: secrets.mysql.host
-    });
+    sequelize.setup(__dirname + '/models/sequelize',
+        dbConfig.mysql.database,
+        dbConfig.mysql.user,
+        dbConfig.mysql.password,
+        {
+            host: dbConfig.mysql.host
+        });
 
     /**
      * Express configuration.
