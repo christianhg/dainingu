@@ -132,13 +132,28 @@
         callback(this.expired);
     };
 
+    var findOrder = function(orders, orderId, callback) {
+        var order = false;
+        var index = false;
+
+        for(var i = 0; i < orders.length; i++) {
+            if(orders[i]._id == orderId) {
+                order = orders[i];
+                index = i;
+                break;
+            }
+        }
+
+        callback(order, index);
+    };
+
     /**
      * Find specific order in session.
      * @param orderId
      * @param callback
      */
     sessionSchema.methods.findOrder = function(orderId, callback) {
-        var order;
+        /*var order;
 
         for(var i = 0; i < this.orders.length; i++) {
             if(this.orders[i]._id == orderId) {
@@ -151,7 +166,11 @@
             callback(false);
         } else {
             callback(order);
-        }
+        }*/
+
+        findOrder(this.orders, orderId, function(order) {
+            callback(order);
+        });
 
         /*Session.aggregate([
             //{ $project: { orders: 1, _id: 0 }},
@@ -258,23 +277,18 @@
      * @param callback
      */
     sessionSchema.methods.addDish = function(orderId, dish, callback) {
-        var order;
+        var orders = this.orders;
 
-        for(var i = 0; i < this.orders.length; i++) {
-            if(this.orders[i]._id == orderId) {
-                order = this.orders[i];
-
-                this.orders[i].dishes.push(dish);
-
-                break;
+        findOrder(orders, orderId, function(order, index) {
+            if(order) {
+                orders[index].dishes.push(dish);
+                callback(dish);
+            } else {
+                callback(false);
             }
-        }
+        });
 
-        if(!order) {
-            callback(false);
-        } else {
-            callback(dish);
-        }
+        this.orders = orders;
     };
 
     /**

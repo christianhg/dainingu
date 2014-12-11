@@ -5,6 +5,81 @@
 	var secrets = require('../config/secrets');
 	var User = require('../models/mongoose/user');
 
+	var checkSignupToken = function(candidateToken, callback) {
+		if(candidateToken === secrets.signupToken) {
+			callback(true);
+		} else {
+			callback(false);
+		}
+	};
+
+
+	/**
+	 * Sign up new user.
+	 */
+	exports.signup = function(req, res, callback) {
+		var username = req.body.username;
+		var password = req.body.password;
+		var signupToken = req.body.signupToken;
+		var data = {};
+
+		checkSignupToken(signupToken, function(validToken) {
+			if(!validToken) {
+				res.send(false);
+			}
+		});
+
+		User.findOne({ username: username }, function(err, user) {
+			if(err) {
+				data = {
+					message: 'Signup failed',
+					error: err
+				};
+
+				res.json(data);
+
+				return callback(data);
+			}
+
+			if(user) {
+				data = {
+					message: 'Signup failed'
+				};
+
+				res.json(data);
+
+				return callback(data);
+			}
+
+			var newUser = User();
+			newUser.username = username;
+			newUser.password = password;
+
+			newUser.save(function(err) {
+				if(err) {
+					data = {
+						message: 'Signup failed',
+						error: err
+					};
+
+					res.json(data);
+
+					return callback(data);
+				}
+
+				data = {
+					message: 'User added'
+				};
+
+				res.json(data);
+
+				callback(data);
+			});
+		});
+	};
+
+
+
 	/**
 	 * Sign user in.
 	 */

@@ -36,6 +36,15 @@
 				delete $window.sessionStorage.loginToken;
 				$state.go(loginState, null, { reload: true });
 			},
+			signup: function(signupData, callback) {
+				$http.post('/api/auth/signup', signupData)
+					.success(function(data) {
+						callback(data);
+					})
+					.error(function(data) {
+						callback(data);
+					});
+			},
 			validate: function(callback) {
 				if($window.sessionStorage.loginToken) {
 					$http.post('/api/auth/validate', { token: $window.sessionStorage.loginToken })

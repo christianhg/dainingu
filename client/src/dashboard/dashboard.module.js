@@ -9,6 +9,7 @@
 			'dainingu.dashboard.orders',
 			'dainingu.dashboard.users',
 			'dainingu.dashboard.sessions',
+			'dainingu.dashboard.signup',
 			'dainingu.dashboard.statistics'
 		]);
 })();
