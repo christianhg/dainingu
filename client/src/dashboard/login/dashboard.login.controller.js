@@ -10,7 +10,11 @@
 
         $scope.dashboardLogin = function(loginData) {
             auth.signin(loginData, function(data) {
-                $state.go('dashboard', null, { reload: true });
+                vm.loginData = {};
+                console.log(data);
+                if(data.success) {
+                    $state.go('dashboard', null, { reload: true });
+                }
             });
         };
     }

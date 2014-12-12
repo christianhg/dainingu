@@ -12,10 +12,18 @@
             type: String,
             unique: true
         },
-        password: String,
+        password: {
+            type: String
+        },
         access: {
-            group: String,
-            level: Number
+            group: {
+                type: String,
+                select: false
+            },
+            level: {
+                type: Number,
+                select: false
+            }
         }
     });
 
@@ -40,7 +48,6 @@
                 }
 
                 user.password = hash;
-
                 next();
             });
         });

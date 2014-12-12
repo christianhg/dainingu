@@ -20,6 +20,7 @@
 		};
 
 		socket.on('alert', function(alert) {
+			vm.alerts = [];
 			// push new alert to alert array
 			vm.alerts.push(alert);
 		});

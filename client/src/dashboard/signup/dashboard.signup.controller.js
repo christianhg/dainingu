@@ -12,7 +12,11 @@
 
         $scope.dashboardSignup = function() {
             auth.signup({ username: vm.user.username, password: vm.user.password, signupToken: vm.signupToken }, function(data) {
-                $state.go('dashboard.login', null, { reload: true });
+                console.log(data);
+                vm.user = {};
+                if(data.success) {
+                    $state.go('dashboard.login', null, { reload: true });
+                }
             });
         };
     }

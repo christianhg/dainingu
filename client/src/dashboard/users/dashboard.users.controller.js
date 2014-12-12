@@ -16,7 +16,16 @@
 
         vm.getUsers();
 
-        socket.on('users:add', function() {
+        socket.on('userAdded', function(data) {
+            vm.getUsers();
+            console.log(data);
+        });
+
+        socket.on('userUpdated', function(data) {
+            vm.getUsers();
+        });
+
+        socket.on('userDeleted', function(data) {
             vm.getUsers();
         });
     }

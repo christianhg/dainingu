@@ -10,6 +10,10 @@
                 </div>
                 <div class="panel-body">
                     <div class="well clearfix">
+                        <div class="pull-left">
+                            <button type="submit" ng-show="dish.active" ng-click="deactivateDish(dish.id)" class="pull-right btn btn-warning">Deaktivér</button>
+                            <button type="submit" ng-hide="dish.active" ng-click="activateDish(dish.id)" class="pull-right btn btn-success">Aktivér</button>
+                        </div>
                         <div class="pull-right">
                             <a ui-sref=".id.edit({id: dish.id})" class="btn btn-warning">Redigér</a>
                             <a ui-sref=".id.delete({id: dish.id})" class="btn btn-danger">Slet</a>

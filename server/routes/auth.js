@@ -9,8 +9,8 @@
          */
         app.route('/api/auth/signup')
             .post(function(req, res) {
-                auth.signup(req, res, function(isAuthenticated, data) {
-
+                auth.signup(req, res, function(data) {
+                    io.sockets.emit('alert', { type: 'success', message: data.message });
                 });
             });
 
@@ -20,7 +20,7 @@
         app.route('/api/auth/signin')
             .post(function(req, res) {
                 auth.signin(req, res, function(isAuthenticated, data) {
-
+                    io.sockets.emit('alert', { type: 'success', message: data.message });
                 });
             });
 

@@ -18,6 +18,7 @@
             .post(jwtCheck, function(req, res) {
                 dishes.store(req, res, function(data) {
                     io.sockets.emit('dishesUpdated');
+                    io.sockets.emit('alert', { type: 'success', message: data.message });
                 });
             });
         app.route('/api/dishes/:id')
@@ -31,12 +32,14 @@
             .put(jwtCheck, function(req, res) {
                 dishes.update(req, res, function(data) {
                     io.sockets.emit('dishesUpdated');
+                    io.sockets.emit('alert', { type: 'warning', message: data.message });
                 });
             })
             // Delete specific dish.
             .delete(jwtCheck, function(req, res) {
                 dishes.destroy(req, res, function(data) {
                     io.sockets.emit('dishesUpdated');
+                    io.sockets.emit('alert', { type: 'danger', message: data.message });
                 });
             });
 
@@ -48,12 +51,14 @@
             .put(jwtCheck, function(req, res) {
                 dishes.activate(req, res, function(data) {
                     io.sockets.emit('dishesUpdated');
+                    io.sockets.emit('alert', { type: 'success', message: data.message });
                 });
             })
             // Remove active flag.
             .delete(jwtCheck, function(req, res) {
                 dishes.deactivate(req, res, function(data) {
                     io.sockets.emit('dishesUpdated');
+                    io.sockets.emit('alert', { type: 'warning', message: data.message });
                 });
             });
     };

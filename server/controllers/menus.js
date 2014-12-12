@@ -23,7 +23,7 @@
 
 				menu.destroy().success(function() {
 					var data = {
-						message: 'Menu deleted',
+						message: 'Menuen ' + menu.name + ' blev slettet',
 						menu: menu
 					};
 
@@ -155,7 +155,7 @@
 			}
 
 			var data = {
-				message: 'Menu tilføjet.',
+				message: 'Menuen ' + menu.name + ' er tilføjet',
 				menu: menu
 			};
 
@@ -183,7 +183,7 @@
 					name: name
 				}).complete(function(err, menu) {
 					var data = {
-						message: 'Menu updated',
+						message: 'Menuen ' + menu.name + ' er opdateret',
 						menu: menu
 					};
 

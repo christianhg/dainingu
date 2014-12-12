@@ -5,7 +5,7 @@
         .module('dainingu.dashboard.dishes')
         .controller('DashboardDishesController', DashboardDishesController);
 
-    function DashboardDishesController(dishes, socket) {
+    function DashboardDishesController($scope, dishes, dishesActivate, socket) {
         var vm = this;
 
         vm.getDishes = function() {
@@ -20,5 +20,17 @@
         socket.on('dishesUpdated', function() {
             vm.getDishes();
         });
+
+        $scope.activateDish = function(dishId) {
+            dishesActivate.activate({dishId: dishId}, function(data) {
+
+            });
+        };
+
+        $scope.deactivateDish = function(dishId) {
+            dishesActivate.deactivate({dishId: dishId}, function(data) {
+
+            });
+        };
     }
 })();

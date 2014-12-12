@@ -20,15 +20,19 @@
             vm.getMenus();
         });
 
+        socket.on('dishesUpdated', function() {
+            vm.getMenus();
+        });
+
         $scope.activateDish = function(dishId) {
             dishesActivate.activate({dishId: dishId}, function(data) {
-                console.log(data);
+
             });
         };
 
         $scope.deactivateDish = function(dishId) {
             dishesActivate.deactivate({dishId: dishId}, function(data) {
-                console.log(data);
+
             });
         };
     }

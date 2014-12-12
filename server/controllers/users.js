@@ -14,7 +14,7 @@
                 }
 
                 var data = {
-                    message: 'User deleted',
+                    message: 'Brugeren ' + user.username + ' er slettet',
                     user: user
                 };
 
@@ -29,20 +29,21 @@
      * Get all users.
      */
     exports.index = function(req, res, callback) {
-        User.find(function(err, users) {
-            if(err) {
-                res.send(err);
-            }
+        User
+            .find(function(err, users) {
+                if(err) {
+                    res.send(err);
+                }
 
-            var data = {
-                message: 'Users shown',
-                users: users
-            };
+                var data = {
+                    message: 'Users shown',
+                    users: users
+                };
 
-            res.json(users);
+                res.json(users);
 
-            callback(data);
-        });
+                callback(data);
+            });
     };
 
     /**
@@ -82,7 +83,7 @@
             }
 
             var data = {
-                message: 'User added',
+                message: 'Brugeren ' + user.username + ' er tilføjet',
                 user: user
             };
 
@@ -112,7 +113,7 @@
                 }
 
                 var data = {
-                    message: 'User updated',
+                    message: 'Brugeren ' + user.username + ' er opdateret',
                     user: user
                 };
 

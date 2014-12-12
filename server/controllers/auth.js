@@ -33,6 +33,7 @@
 			if(err) {
 				data = {
 					message: 'Signup failed',
+					success: false,
 					error: err
 				};
 
@@ -43,7 +44,8 @@
 
 			if(user) {
 				data = {
-					message: 'Signup failed'
+					message: 'Signup failed',
+					success: false
 				};
 
 				res.json(data);
@@ -57,18 +59,13 @@
 
 			newUser.save(function(err) {
 				if(err) {
-					data = {
-						message: 'Signup failed',
-						error: err
-					};
-
-					res.json(data);
-
-					return callback(data);
+					res.send(err);
 				}
 
-				data = {
-					message: 'User added'
+				var data = {
+					message: 'Brugeren ' + newUser.username + ' er tilføjet',
+					success: true,
+					user: newUser
 				};
 
 				res.json(data);
@@ -95,12 +92,13 @@
 			// username doesn't exist
 			if(!user) {
 				var data = {
-					message: 'User signin failed.'
+					message: 'User signin failed',
+					success: false
 				};
 
 				res.json(data);
 
-				return callback(false, data);
+				return callback(data);
 			}
 
 			user.comparePassword(password, function(err, isMatch) {
@@ -111,10 +109,11 @@
 					var token = jwt.sign(user._id, secrets.jwtSecrets.auth, { expiresInMinutes: 60*5 });
 
 					data = {
-						message: 'User signin successful.',
+						message: 'Du er nu logged ind som ' + user.username,
 						success: true,
 						token: token,
 						user: {
+							_id: user._id,
 							username: user.username
 						}
 					};
@@ -124,12 +123,13 @@
 					callback(true, data);
 				} else {
 					data = {
-						message: 'User signin failed.'
+						message: 'User signin failed.',
+						success: false
 					};
 
 					res.json(data);
 
-					callback(false, data);
+					callback(data);
 				}
 
 

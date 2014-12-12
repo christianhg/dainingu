@@ -25,7 +25,7 @@
 							}
 
 							var data = {
-								message: 'Dish activated',
+								message: 'Retten ' + dish.name + ' er aktiveret',
 								dish: dish
 							};
 
@@ -58,7 +58,7 @@
 							}
 
 							var data = {
-								message: 'Dish deactivated',
+								message: 'Retten ' + dish.name + ' er deaktiveret',
 								dish: dish
 							};
 
@@ -84,7 +84,7 @@
 
 				dish.destroy().success(function() {
 					var data = {
-						message: 'Dish deleted',
+						message: 'Retten ' + dish.name + ' er slettet',
 						dish: dish
 					};
 
@@ -179,7 +179,7 @@
 				}
 
 				var data = {
-					message: 'Dish added',
+					message: 'Retten ' + dish.name + ' er tilføjet',
 					dish: dish
 				};
 
@@ -214,7 +214,7 @@
 					menuId: menuId
 				}).success(function() {
 					var data = {
-						message: 'Dish updated',
+						message: 'Retten ' + dish.name + ' er opdateret',
 						dish: dish
 					};
 

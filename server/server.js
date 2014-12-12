@@ -32,7 +32,7 @@
 
     io.on('connection', function(socket) {
         socket.emit('connected');
-    }).on('disconnect', function() {
+    }).on('disconnect', function(socket) {
         socket.emit('disconnected');
     });
 
