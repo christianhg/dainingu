@@ -51,7 +51,7 @@
 				return callback(data);
 			}
 
-			var newUser = User();
+			var newUser = new User();
 			newUser.username = username;
 			newUser.password = password;
 

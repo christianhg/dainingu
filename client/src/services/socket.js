@@ -6,8 +6,6 @@
 		.factory('socket', socket);
 
 	function socket(socketFactory) {
-		return socketFactory({
-			ioSocket: io.connect()
-		});
+		return socketFactory();
 	}
 })();

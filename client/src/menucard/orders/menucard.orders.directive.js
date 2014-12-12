@@ -16,12 +16,16 @@
 			controllerAs: 'vm'
 		};
 
-		function MenucardOrdersController(menucard, socket) {
+		function MenucardOrdersController(authMenucard, menucard, socket) {
 			var vm = this;
 
 			vm.getOrders = function() {
-				menucard.getOrders(function(orders) {
-					vm.orders = orders;
+				authMenucard.validate(function(validToken) {
+					if(validToken) {
+						menucard.getOrders(function (orders) {
+							vm.orders = orders;
+						});
+					}
 				});
 			};
 

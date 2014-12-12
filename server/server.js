@@ -21,10 +21,20 @@
     var routes = require('./routes');
 
     /**
-     * Start Express server and have socket.io listen to the server.
+     * Start Express server.
      */
     var server = app.listen(appConfig.port);
+
+    /**
+     * Setup WebSocket.
+     */
     var io = socketIo.listen(server);
+
+    io.on('connection', function(socket) {
+        socket.emit('connected');
+    }).on('disconnect', function() {
+        socket.emit('disconnected');
+    });
 
     /**
      * Connect to MongoDB.
@@ -49,6 +59,11 @@
     /**
      * Express configuration.
      */
+    // Disable cache on all API responses.
+    app.get('/api/*', function(req, res, next) {
+        res.set({'Cache-Control': 'no-cache'});
+        next();
+    });
     // set static dir.
     app.use(express.static(__dirname + '/../client/build'));
     // Get data from html forms.
@@ -57,13 +72,6 @@
     app.use(methodOverride());
     // Log requests in console.
     app.use(morgan('dev'));
-
-    io.on('connection', function(socket) {
-        console.log('connection established');
-        socket.emit('connected');
-    }).on('disconnect', function() {
-        console.log('connection closed');
-    });
 
     /**
      * Bootstrap routes and inject our app and WebSocket.
