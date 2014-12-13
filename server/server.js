@@ -49,13 +49,11 @@
     /**
      * Connect to MySQL and wire up Sequelize models.
      */
-    sequelize.setup(__dirname + '/models/sequelize',
-        dbConfig.mysql.database,
+    sequelize.connect(
         dbConfig.mysql.user,
         dbConfig.mysql.password,
-        {
-            host: dbConfig.mysql.host
-        });
+        dbConfig.mysql.host,
+        dbConfig.mysql.database);
 
     /**
      * Express configuration.

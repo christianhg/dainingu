@@ -1,27 +1,17 @@
 (function () {
 	'use strict';
 
-	var filesystem = require('fs');
+	var fs = require('fs');
 	var models = {};
+	var modelsPath = __dirname + '/../models/sequelize';
 	var relationships = {};
 
 	var Singleton = function singleton() {
 		var Sequelize = require('sequelize');
 		var sequelize = null;
-		var modelsPath = '';
 
-		this.setup = function (path, database, username, password, obj){
-			modelsPath = path;
-
-			if(arguments.length === 3){
-				sequelize = new Sequelize(database, username);
-			}
-			else if(arguments.length === 4){
-				sequelize = new Sequelize(database, username, password);
-			}
-			else if(arguments.length === 5){
-				sequelize = new Sequelize(database, username, password, obj);
-			}
+		this.connect = function(username, password, host, database) {
+			sequelize = new Sequelize(database, username, password, { host: host });
 
 			sequelize.sync();
 
@@ -37,8 +27,7 @@
 		};
 
 		function init() {
-			filesystem.readdirSync(modelsPath).forEach(function(name){
-
+			fs.readdirSync(modelsPath).forEach(function(name){
 				var object = require(modelsPath + '/' + name);
 				var options = object.options || {};
 				var modelName = name.replace(/\.js$/i, '');
