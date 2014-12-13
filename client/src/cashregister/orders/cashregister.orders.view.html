@@ -1,15 +1,15 @@
-<div class="col-md-6 col-md-offset-3">
-    <div class="panel panel-default" ng-repeat="session in vm.sessions | filter: {active: true}">
-        <div class="panel-heading">
-            <h3 class="panel-title">
-                <h3 class="panel-title clearfix">
-                    <strong>{{session.customer.name}}</strong> (bord {{session.table}})
-                    <strong class="pull-right">{{session.key}}</strong>
-                </h3>
-            </h3>
-        </div>
-        <div class="panel-body">
-            <cashregister-order ng-repeat="order in session.orders | filter: { served : true }" order="order" session-id="session._id"></cashregister-order>
-        </div>
+<div class="row">
+    <div class="col-sm-4">
+        <cashregister-order ng-repeat="order in vm.orders | filter: { session: { active: true }, order: { completed: true } }" order="order.order" session="order.session"></cashregister-order>
+        <cashregister-order ng-repeat="order in vm.orders | filter: { session: { active: true }, order: { begun: true } }" order="order.order" session="order.session"></cashregister-order>
+        <cashregister-order ng-repeat="order in vm.orders | filter: { session: { active: true }, order: { confirmed: true } }" order="order.order" session="order.session"></cashregister-order>
+        <cashregister-order ng-repeat="order in vm.orders | filter: { session: { active: true }, order: { committed: true } }" order="order.order" session="order.session"></cashregister-order>
+        <cashregister-order ng-repeat="order in vm.orders | filter: { session: { active: true }, order: { pristine: true } }" order="order.order" session="order.session"></cashregister-order>
+    </div>
+    <div class="col-sm-4">
+        <cashregister-order ng-repeat="order in vm.orders | filter: { session: { active: true }, order: { served: true } }" order="order.order" session="order.session"></cashregister-order>
+    </div>
+    <div class="col-sm-4">
+        <cashregister-order ng-repeat="order in vm.orders | filter: { session: { active: true }, order: { closed: true } }" order="order.order" session="order.session"></cashregister-order>
     </div>
 </div>

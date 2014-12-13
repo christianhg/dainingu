@@ -5,7 +5,6 @@
 @import "../modules/mixins";
 
 body {
-  //background: rgb(230,230,230);
   font-family: 'PT Sans', sans-serif;
 }
 
@@ -38,6 +37,30 @@ header {
   #logo {
     margin: 0 auto;
     width: 100px;
+  }
+}
+
+.label {
+  &.pristine {
+    background-color: $pristine;
+  }
+  &.committed {
+    background-color: $committed;
+  }
+  &.confirmed {
+    background-color: $confirmed;
+  }
+  &.begun {
+    background-color: $begun;
+  }
+  &.completed {
+    background-color: $completed;
+  }
+  &.served {
+    background-color: $served;
+  }
+  &.closed {
+    background-color: $closed;
   }
 }
 
@@ -78,6 +101,14 @@ header {
         background: $dark-orange !important;
       }
     }
+    .btn-default {
+      background: lighten($orange, 10%);
+      border-color: lighten($dark-orange, 10%);
+      color: $white;
+      &:hover {
+        background: $dark-orange;
+      }
+    }
   }
 
   .cashregister & {
@@ -89,6 +120,14 @@ header {
       a:active,
       .active a {
         background: $dark-purple !important;
+      }
+    }
+    .btn-default {
+      background: lighten($purple, 10%);
+      border-color: lighten($dark-purple, 10%);
+      color: $white;
+      &:hover {
+        background: $dark-purple;
       }
     }
   }
@@ -104,6 +143,15 @@ header {
         background: $dark-red !important;
       }
     }
+    .btn-default {
+      background: lighten($red, 10%);
+      border-color: lighten($dark-red, 10%);
+      color: $white;
+      &:hover {
+        background: $dark-red;
+      }
+    }
   }
 
 }
+

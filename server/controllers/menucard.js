@@ -5,13 +5,19 @@
     var secrets = require('../config/secrets');
     var Session = require('../models/mongoose/session');
 
+    /**
+     * Get token from authorization header.
+     * TODO: I need to find a better solution.
+     */
+    var getToken = function(authorization) {
+        return authorization.substring(7, authorization.length);
+    };
 
     /**
      * Get orders.
      */
     exports.orders = function(req, res, callback) {
-        var authorization = req.headers.authorization;
-        var menucardToken = authorization.substring(7, authorization.length);
+        var menucardToken = getToken(req.headers.authorization);
 
         jwt.verify(menucardToken, secrets.jwtSecrets.authMenucard, function(err, sessionId) {
 
@@ -41,8 +47,7 @@
      * Add new order.
      */
     exports.addOrder = function(req, res, callback) {
-        var authorization = req.headers.authorization;
-        var menucardToken = authorization.substring(7, authorization.length);
+        var menucardToken = getToken(req.headers.authorization);
 
         jwt.verify(menucardToken, secrets.jwtSecrets.authMenucard, function(err, sessionId) {
 
@@ -83,8 +88,7 @@
      * @param callback
      */
     exports.addDishToOrder = function(req, res, callback) {
-        var authorization = req.headers.authorization;
-        var menucardToken = authorization.substring(7, authorization.length);
+        var menucardToken = getToken(req.headers.authorization);
         var orderId = req.body.orderId;
         var dish = req.body.dish;
 
@@ -118,8 +122,7 @@
      * @param callback
      */
     exports.removeDishFromOrder = function(req, res, callback) {
-        var authorization = req.headers.authorization;
-        var menucardToken = authorization.substring(7, authorization.length);
+        var menucardToken = getToken(req.headers.authorization);
         var orderId = req.body.orderId;
         var dishId = req.body.dishId;
 
@@ -150,8 +153,7 @@
      * Commit order.
      */
     exports.commitOrder = function(req, res, callback) {
-        var authorization = req.headers.authorization;
-        var menucardToken = authorization.substring(7, authorization.length);
+        var menucardToken = getToken(req.headers.authorization);
         var orderId = req.body.orderId;
 
         jwt.verify(menucardToken, secrets.jwtSecrets.authMenucard, function(err, sessionId) {
@@ -188,8 +190,7 @@
      * Return order.
      */
     exports.returnOrder = function(req, res, callback) {
-        var authorization = req.headers.authorization;
-        var menucardToken = authorization.substring(7, authorization.length);
+        var menucardToken = getToken(req.headers.authorization);
         var orderId = req.body.orderId;
 
         jwt.verify(menucardToken, secrets.jwtSecrets.authMenucard, function(err, sessionId) {
@@ -226,8 +227,7 @@
      * Get session.
      */
     exports.getSession = function(req, res, callback) {
-        var authorization = req.headers.authorization;
-        var menucardToken = authorization.substring(7, authorization.length);
+        var menucardToken = getToken(req.headers.authorization);
 
         jwt.verify(menucardToken, secrets.jwtSecrets.authMenucard, function(err, sessionId) {
 

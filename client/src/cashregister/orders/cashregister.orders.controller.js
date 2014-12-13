@@ -5,23 +5,23 @@
         .module('dainingu.cashregister.orders')
         .controller('CashregisterOrdersController', CashregisterOrdersController);
 
-    function CashregisterOrdersController(sessions, socket) {
+    function CashregisterOrdersController(orders, socket) {
         var vm = this;
 
-        vm.getSessions = function() {
-            sessions.query(function(sessions) {
-               vm.sessions = sessions;
+        vm.getOrders = function() {
+            orders.query(function(orders) {
+                vm.orders = orders;
             });
         };
 
-        vm.getSessions();
+        vm.getOrders();
 
         socket.on('ordersUpdated', function() {
-            vm.getSessions();
+            vm.getOrders();
         });
 
         socket.on('sessionsUpdated', function() {
-            vm.getSessions();
+            vm.getOrders();
         });
     }
 })();

@@ -14,10 +14,7 @@
             <button type="submit" class="pull-left btn btn-default" ng-click="incompleteOrder(vm.session._id, vm.order._id)">Ufærdig</button>
             <button type="submit" class="pull-right btn btn-success" ng-click="serveOrder(vm.session._id, vm.order._id)">Servér</button>
         </div>
-        <div class="list-group" ng-show="vm.order.dishes">
-            <div class="list-group-item" ng-repeat="dish in vm.order.dishes">
-                {{dish.name}}
-            </div>
-        </div>
+        <order-dishes></order-dishes>
+        <order-info></order-info>
     </div>
 </div>

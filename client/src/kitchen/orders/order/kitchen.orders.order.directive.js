@@ -11,7 +11,7 @@
             restrict: 'E',
             scope: {
                 order: '=',
-                sessionId: '='
+                session: '='
             },
             controller: KitchenOrdersOrderController,
             controllerAs: 'vm'
@@ -24,8 +24,7 @@
             var vm = this;
 
             vm.order = $scope.order;
-            vm.session = {};
-            vm.session._id = $scope.sessionId;
+            vm.session = $scope.session;
 
             $scope.rejectOrder = function(sessionId, orderId) {
                 sessionsOrdersConfirm.reject({sessionId: sessionId, orderId: orderId}, function(data) {

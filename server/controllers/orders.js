@@ -14,7 +14,11 @@
                 _id: 0,
                 order: '$orders',
                 session: {
-                    _id: '$_id'
+                    _id: '$_id',
+                    active: '$active',
+                    key: '$key',
+                    customer: '$customer',
+                    table: '$table'
                 }
             })
             .exec(function(err, orders) {

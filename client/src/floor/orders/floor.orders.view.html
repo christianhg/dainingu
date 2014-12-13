@@ -1,19 +1,16 @@
 <div class="row">
-    <!--<pre>
-        {{vm.orders | json}}
-    </pre>-->
     <div class="col-sm-4">
-        <floor-order ng-repeat="order in vm.orders | filter: { order: { committed: true } }" order="order.order" session-id="order.session._id"></floor-order>
-        <floor-order ng-repeat="order in vm.orders | filter: { order: { pristine: true } }" order="order.order" session-id="order.session._id"></floor-order>
+        <floor-order ng-repeat="order in vm.orders | filter: { session: { active: true }, order: { committed: true } }" order="order.order" session="order.session"></floor-order>
+        <floor-order ng-repeat="order in vm.orders | filter: { session: { active: true }, order: { pristine: true } }" order="order.order" session="order.session"></floor-order>
     </div>
     <div class="col-sm-4">
-        <floor-order ng-repeat="order in vm.orders | filter: { order: { completed: true } }" order="order.order" session-id="order.session._id"></floor-order>
-        <floor-order ng-repeat="order in vm.orders | filter: { order: { begun: true } }" order="order.order" session-id="order.session._id"></floor-order>
-        <floor-order ng-repeat="order in vm.orders | filter: { order: { confirmed: true } }" order="order.order" session-id="order.session._id"></floor-order>
+        <floor-order ng-repeat="order in vm.orders | filter: { session: { active: true }, order: { completed: true } }" order="order.order" session="order.session"></floor-order>
+        <floor-order ng-repeat="order in vm.orders | filter: { session: { active: true }, order: { begun: true } }" order="order.order" session="order.session"></floor-order>
+        <floor-order ng-repeat="order in vm.orders | filter: { session: { active: true }, order: { confirmed: true } }" order="order.order" session="order.session"></floor-order>
     </div>
     <div class="col-sm-4">
-        <floor-order ng-repeat="order in vm.orders | filter: { order: { closed: true } }" order="order.order" session-id="order.session._id"></floor-order>
-        <floor-order ng-repeat="order in vm.orders | filter: { order: { served: true } }" order="order.order" session-id="order.session._id"></floor-order>
+        <floor-order ng-repeat="order in vm.orders | filter: { session: { active: true }, order: { closed: true } }" order="order.order" session="order.session"></floor-order>
+        <floor-order ng-repeat="order in vm.orders | filter: { session: { active: true }, order: { served: true } }" order="order.order" session="order.session"></floor-order>
     </div>
 </div>
 
