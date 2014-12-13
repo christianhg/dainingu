@@ -1,12 +1,16 @@
 @import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic);
 
+@import "../modules/colors";
+@import "../modules/functions";
+@import "../modules/mixins";
+
 body {
   //background: rgb(230,230,230);
   font-family: 'PT Sans', sans-serif;
 }
 
 #page {
-  padding: 20px 0;
+  //padding: 20px 0;
 }
 
 ul {
@@ -17,9 +21,89 @@ h1 {
   font-weight: 700;
 }
 
+img {
+  max-width: 100%;
+  display: block;
+}
+
 alert {
   &.ng-enter {
     -webkit-transition:0.5s linear all;
     transition:0.5s linear all;
   }
+}
+
+header {
+  padding: 20px 0;
+  #logo {
+    margin: 0 auto;
+    width: 100px;
+  }
+}
+
+.navbar-default {
+  a {
+    color: $white!important;
+
+  }
+  .floor & {
+    background: $blue;
+    border-color: $dark-blue;
+    .navbar-nav {
+      a:hover,
+      a:focus,
+      a:active,
+      .active a {
+        background: $dark-blue !important;
+      }
+    }
+    .btn-default {
+      background: lighten($blue, 10%);
+      border-color: lighten($dark-blue, 10%);
+      color: $white;
+      &:hover {
+        background: $dark-blue;
+      }
+    }
+  }
+
+  .kitchen & {
+    background: $orange;
+    border-color: $dark-orange;
+    .navbar-nav {
+      a:hover,
+      a:focus,
+      a:active,
+      .active a {
+        background: $dark-orange !important;
+      }
+    }
+  }
+
+  .cashregister & {
+    background: $purple;
+    border-color: $dark-purple;
+    .navbar-nav {
+      a:hover,
+      a:focus,
+      a:active,
+      .active a {
+        background: $dark-purple !important;
+      }
+    }
+  }
+
+  .dashboard & {
+    background: $red;
+    border-color: $dark-red;
+    .navbar-nav {
+      a:hover,
+      a:focus,
+      a:active,
+      .active a {
+        background: $dark-red !important;
+      }
+    }
+  }
+
 }

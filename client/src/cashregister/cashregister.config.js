@@ -13,7 +13,8 @@
 				controller: 'CashRegisterController',
 				controllerAs: 'vm',
 				data: {
-					pageTitle: 'dainingu > cashregister'
+					pageTitle: 'dainingu > cashregister',
+					pageClass: 'cashregister'
 				}
 			});
 	}

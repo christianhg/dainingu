@@ -13,7 +13,8 @@
 				controller: 'KitchenController',
 				controllerAs: 'vm',
 				data: {
-					pageTitle: 'dainingu > kitchen'
+					pageTitle: 'dainingu > kitchen',
+					pageClass: 'kitchen'
 				}
 			});
 	}

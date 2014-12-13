@@ -13,7 +13,8 @@
 				controller: 'DashboardController',
 				controllerAs: 'vm',
 				data: {
-					pageTitle: 'dainingu > dashboard'
+					pageTitle: 'dainingu > dashboard',
+					pageClass: 'dashboard'
 				}
 			});
 	}
