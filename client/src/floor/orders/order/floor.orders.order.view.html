@@ -10,9 +10,15 @@
             <button type="submit" class="pull-left btn btn-default" ng-click="pullOrder(vm.session._id, vm.order._id)">Send tilbage</button>
             <button type="submit" class="pull-right btn btn-success" ng-click="confirmOrder(vm.session._id, vm.order._id)">Konfirmér</button>
         </div>
+        <div class="well clearfix" ng-show="vm.order.confirmed">
+            <button type="submit" class="pull-left btn btn-default" ng-click="rejectOrder(vm.session._id, vm.order._id)">Afvis</button>
+        </div>
         <div class="well clearfix" ng-show="vm.order.completed">
             <button type="submit" class="pull-left btn btn-default" ng-click="incompleteOrder(vm.session._id, vm.order._id)">Ufærdig</button>
             <button type="submit" class="pull-right btn btn-success" ng-click="serveOrder(vm.session._id, vm.order._id)">Servér</button>
+        </div>
+        <div class="well clearfix" ng-show="vm.order.served">
+            <button type="submit" class="pull-left btn btn-default" ng-click="returnOrder(vm.session._id, vm.order._id)">Returnér</button>
         </div>
         <order-dishes></order-dishes>
         <order-info></order-info>

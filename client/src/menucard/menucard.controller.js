@@ -5,6 +5,9 @@
 		.module('dainingu.menucard')
 		.controller('MenucardController', MenucardController);
 
+	/**
+	 * @ngInject
+	 */
 	function MenucardController(activeOrder, authMenucard, menucard, socket) {
 		var vm = this;
 

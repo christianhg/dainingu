@@ -16,6 +16,9 @@
 			controllerAs: 'vm'
 		};
 
+		/**
+		 * @ngInject
+		 */
 		function MenucardOrdersController(authMenucard, menucard, socket) {
 			var vm = this;
 

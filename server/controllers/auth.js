@@ -109,7 +109,7 @@
 					var token = jwt.sign(user._id, secrets.jwtSecrets.auth, { expiresInMinutes: 60*5 });
 
 					data = {
-						message: 'Du er nu logged ind som ' + user.username,
+						message: 'Brugeren ' + user.username + ' loggede ind',
 						success: true,
 						token: token,
 						user: {

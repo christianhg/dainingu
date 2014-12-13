@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    module.exports = function(app, io, jwtCheck) {
+    module.exports = function(app, io) {
         var auth = require('./../controllers/auth');
 
         /**
@@ -19,7 +19,7 @@
          */
         app.route('/api/auth/signin')
             .post(function(req, res) {
-                auth.signin(req, res, function(isAuthenticated, data) {
+                auth.signin(req, res, function(data) {
                     io.sockets.emit('alert', { type: 'success', message: data.message });
                 });
             });

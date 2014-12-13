@@ -17,6 +17,9 @@
             controllerAs: 'vm'
         };
 
+        /**
+         * @ngInject
+         */
         function DashboardOrdersOrderController($scope, sessionsOrders, sessionsOrdersBegin, sessionsOrdersCommit, sessionsOrdersComplete, sessionsOrdersConfirm, sessionsOrdersDishes, sessionsOrdersServe, sessionsOrdersClose) {
             var vm = this;
 

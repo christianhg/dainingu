@@ -38,6 +38,12 @@
                 });
             };
 
+            $scope.rejectOrder = function(sessionId, orderId) {
+                sessionsOrdersConfirm.reject({sessionId: sessionId, orderId: orderId}, function(data) {
+                    console.log(data);
+                });
+            };
+
             $scope.incompleteOrder = function(sessionId, orderId) {
                 sessionsOrdersComplete.incomplete({sessionId: sessionId, orderId: orderId}, function(data) {
                     console.log(data);
@@ -46,6 +52,12 @@
 
             $scope.serveOrder = function(sessionId, orderId) {
                 sessionsOrdersServe.serve({sessionId: sessionId, orderId: orderId}, function(data) {
+                    console.log(data);
+                });
+            };
+
+            $scope.returnOrder = function(sessionId, orderId) {
+                sessionsOrdersServe.return({sessionId: sessionId, orderId: orderId}, function(data) {
                     console.log(data);
                 });
             };

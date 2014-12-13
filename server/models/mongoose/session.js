@@ -132,6 +132,13 @@
         callback(this.expired);
     };
 
+    /**
+     * Find specific order by order id.
+     * Return the order and it's array index.
+     * @param orders
+     * @param orderId
+     * @param callback
+     */
     var findOrder = function(orders, orderId, callback) {
         var order = false;
         var index = false;
@@ -153,40 +160,14 @@
      * @param callback
      */
     sessionSchema.methods.findOrder = function(orderId, callback) {
-        /*var order;
-
-        for(var i = 0; i < this.orders.length; i++) {
-            if(this.orders[i]._id == orderId) {
-                order = this.orders[i];
-                break;
-            }
-        }
-
-        if(!order) {
-            callback(false);
-        } else {
-            callback(order);
-        }*/
-
         findOrder(this.orders, orderId, function(order) {
             callback(order);
         });
-
-        /*Session.aggregate([
-            //{ $project: { orders: 1, _id: 0 }},
-            { $unwind: '$orders' }
-            //, { $match: { 'orders._id': orderId }}
-        ], function(err, order) {
-            if(err) {
-                callback(err);
-            }
-
-            callback(order);
-        });*/
     };
 
     /**
      * Remove specific order in session.
+     * TODO: Rewrite to find order using aggregation operations.
      * @param orderId
      * @param callback
      */
@@ -220,6 +201,7 @@
 
     /**
      * Find specific dish in specific order in session.
+     * TODO: Rewrite to find order and dishes using aggregation operations.
      * @param orderId
      * @param dishId
      * @param callback
@@ -249,6 +231,7 @@
 
     /**
      * Find all dishes in specific order in session.
+     * TODO: Rewrite to find order using aggregation operations.
      * @param orderId
      * @param callback
      */
@@ -293,6 +276,7 @@
 
     /**
      * Remove dish from specific order in session.
+     * TODO: Rewrite to find order and dishes using aggregation operations.
      * @param orderId
      * @param dishId
      * @param callback
@@ -324,6 +308,7 @@
 
     /**
      * Mark specific order in session as committed.
+     * TODO: Rewrite to find order using aggregation operations.
      * @param orderId
      * @param callback
      */
@@ -350,6 +335,7 @@
 
     /**
      * Mark specific order in session as pulled.
+     * TODO: Rewrite to find order using aggregation operations.
      * @param orderId
      * @param callback
      */
@@ -376,6 +362,7 @@
 
     /**
      * Mark specific order in session as confirmed.
+     * TODO: Rewrite to find order using aggregation operations.
      * @param orderId
      * @param callback
      */
@@ -402,6 +389,7 @@
 
     /**
      * Mark specific order in session as rejected.
+     * TODO: Rewrite to find order using aggregation operations.
      * @param orderId
      * @param callback
      */
@@ -428,6 +416,7 @@
 
     /**
      * Mark specific order in session as begun.
+     * TODO: Rewrite to find order using aggregation operations.
      * @param orderId
      * @param callback
      */
@@ -454,6 +443,7 @@
 
     /**
      * Mark specific order in session as stopped.
+     * TODO: Rewrite to find order using aggregation operations.
      * @param orderId
      * @param callback
      */
@@ -481,6 +471,7 @@
 
     /**
      * Mark specific order in session as completed.
+     * TODO: Rewrite to find order using aggregation operations.
      * @param orderId
      * @param callback
      */
@@ -507,6 +498,7 @@
 
     /**
      * Mark specific order in session as incompleted.
+     * TODO: Rewrite to find order using aggregation operations.
      * @param orderId
      * @param callback
      */
@@ -533,6 +525,7 @@
 
     /**
      * Mark specific order in session as served.
+     * TODO: Rewrite to find order using aggregation operations.
      * @param orderId
      * @param callback
      */
@@ -559,6 +552,7 @@
 
     /**
      * Mark specific order in session as returned.
+     * TODO: Rewrite to find order using aggregation operations.
      * @param orderId
      * @param callback
      */
@@ -585,6 +579,7 @@
 
     /**
      * Mark specific order in session as closed.
+     * TODO: Rewrite to find order using aggregation operations.
      * @param orderId
      * @param callback
      */
@@ -611,6 +606,7 @@
 
     /**
      * Mark specific order in session as opened.
+     * TODO: Rewrite to find order using aggregation operations.
      * @param orderId
      * @param callback
      */
