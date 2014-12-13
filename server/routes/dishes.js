@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    module.exports = function(app, io, jwtCheck) {
+    module.exports = function(app, io, jwtAuth) {
         var dishes = require('./../controllers/dishes');
 
         /**
@@ -15,7 +15,7 @@
                 });
             })
             // Store new dish.
-            .post(jwtCheck, function(req, res) {
+            .post(jwtAuth, function(req, res) {
                 dishes.store(req, res, function(data) {
                     io.sockets.emit('dishesUpdated');
                     io.sockets.emit('alert', { type: 'success', message: data.message });
@@ -29,14 +29,14 @@
                 });
             })
             // Update specific dish.
-            .put(jwtCheck, function(req, res) {
+            .put(jwtAuth, function(req, res) {
                 dishes.update(req, res, function(data) {
                     io.sockets.emit('dishesUpdated');
                     io.sockets.emit('alert', { type: 'warning', message: data.message });
                 });
             })
             // Delete specific dish.
-            .delete(jwtCheck, function(req, res) {
+            .delete(jwtAuth, function(req, res) {
                 dishes.destroy(req, res, function(data) {
                     io.sockets.emit('dishesUpdated');
                     io.sockets.emit('alert', { type: 'danger', message: data.message });
@@ -48,14 +48,14 @@
          */
         app.route('/api/dishes/:id/activate')
             // Add active flag.
-            .put(jwtCheck, function(req, res) {
+            .put(jwtAuth, function(req, res) {
                 dishes.activate(req, res, function(data) {
                     io.sockets.emit('dishesUpdated');
                     io.sockets.emit('alert', { type: 'success', message: data.message });
                 });
             })
             // Remove active flag.
-            .delete(jwtCheck, function(req, res) {
+            .delete(jwtAuth, function(req, res) {
                 dishes.deactivate(req, res, function(data) {
                     io.sockets.emit('dishesUpdated');
                     io.sockets.emit('alert', { type: 'warning', message: data.message });

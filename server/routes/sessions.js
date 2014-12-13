@@ -36,11 +36,13 @@
             .put(jwtCheck, function(req, res) {
                 sessions.activate(req, res, function(data) {
                     io.sockets.emit('sessionsUpdated');
+                    io.sockets.emit('alert', { type: 'success', message: data.message });
                 });
             })
             .delete(jwtCheck, function(req, res) {
                 sessions.deactivate(req, res, function(data) {
                     io.sockets.emit('sessionsUpdated');
+                    io.sockets.emit('alert', { type: 'info', message: data.message });
                 });
             });
 

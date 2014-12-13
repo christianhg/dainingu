@@ -148,7 +148,7 @@
                         }
 
                         var data = {
-                            message: 'Session activated',
+                            message: 'Session aktiveret',
                             session: session
                         };
 
@@ -182,7 +182,7 @@
                         }
 
                         var data = {
-                            message: 'Session deactivated',
+                            message: 'Session deaktiveret',
                             session: session
                         };
 

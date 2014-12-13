@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    module.exports = function(app, io, jwtCheck) {
+    module.exports = function(app, io, jwtAuth) {
         var menusDishes = require('./../controllers/menusDishes');
 
         app.route('/api/menus/dishes')
@@ -16,14 +16,14 @@
 
                 });
             }).
-            post(jwtCheck, function(req, res) {
+            post(jwtAuth, function(req, res) {
                 menusDishes.store(req, res, function(data) {
                     io.emit('alert', {type: 'success', message: data.message});
                     io.emit('menusDishesUpdated');
                 });
             });
         app.route('/api/menus/:menuId/dishes/:dishId')
-            .delete(jwtCheck, function(req, res) {
+            .delete(jwtAuth, function(req, res) {
                 menusDishes.destroy(req, res, function(data) {
                     io.emit('alert', {type: 'success', message: data.message});
                     io.emit('menusDishesUpdated');

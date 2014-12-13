@@ -151,7 +151,7 @@
                         }
 
                         var data = {
-                            message: 'Order committed',
+                            message: 'Ordre blev indsendt til tjener',
                             session: session
                         };
 
@@ -186,7 +186,7 @@
                         }
 
                         var data = {
-                            message: 'Order pulled',
+                            message: 'Ordre blev sendt tilbage af tjener',
                             session: session
                         };
 
