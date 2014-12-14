@@ -13,7 +13,8 @@
 				controller: 'MenucardController',
 				controllerAs: 'vm',
 				data: {
-					pageTitle: 'dainingu > menucard'
+					pageTitle: 'dainingu > menucard',
+					pageClass: 'menucard'
 				}
 			});
 	}

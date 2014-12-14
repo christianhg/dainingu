@@ -11,15 +11,19 @@
 			 */
 			'dainingu.core',
 
+		    /**
+			 * Home module
+			 */
+			'dainingu.home',
+
 			/**
 			 * Feature areas
 			 */
 			'dainingu.cashregister',
 			'dainingu.dashboard',
-			'dainingu.home',
+			'dainingu.floor',
 			'dainingu.kitchen',
 			'dainingu.menucard',
-			'dainingu.floor',
 
 			/**
 			 * Widgets
@@ -29,6 +33,6 @@
 			/**
 			 * Misc
 			 */
-			'dainingu.templates',
+			'dainingu.templates'
 		]);
 })();

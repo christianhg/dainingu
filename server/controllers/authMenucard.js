@@ -63,29 +63,6 @@
     };
 
     /**
-     * Get session id.
-     */
-    exports.getSessionId = function(req, res, callback) {
-        var menucardToken = req.body.token;
-
-        jwt.verify(menucardToken, secrets.jwtSecrets.authMenucard, function(err, sessionId) {
-
-            Session.findOne({ _id: sessionId }, function(err, session) {
-                if(err) {
-                    res.send(err);
-                }
-
-                if(!session) {
-                    res.send(false);
-                } else {
-                    res.send(sessionId);
-
-                }
-            });
-        });
-    };
-
-    /**
      * Validate menucard token.
      */
     exports.validate = function(req, res, callback) {

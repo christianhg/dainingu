@@ -6,8 +6,11 @@
         </h3>
     </div>
     <div class="panel-body">
+        <div class="well clearfix" ng-show="vm.order.pristine">
+            <order-button-commit session-id="vm.session._id" order-id="vm.order._id"></order-button-commit>
+        </div>
         <div class="well clearfix" ng-show="vm.order.committed">
-            <button type="submit" class="pull-left btn btn-default" ng-click="pullOrder(vm.session._id, vm.order._id)">Send tilbage</button>
+            <order-button-pull session-id="vm.session._id" order-id="vm.order._id"></order-button-pull>
             <button type="submit" class="pull-right btn btn-success" ng-click="confirmOrder(vm.session._id, vm.order._id)">Konfirmér</button>
         </div>
         <div class="well clearfix" ng-show="vm.order.confirmed">

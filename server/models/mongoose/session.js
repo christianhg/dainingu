@@ -5,6 +5,53 @@
     var mongoose = require('mongoose');
     var randToken = require('rand-token');
 
+    var dishSchema = new mongoose.Schema({
+        id: {
+            type: Number,
+            required: true
+        },
+        name: {
+            type: String,
+            required: true
+        }
+    });
+
+    var orderSchema = new mongoose.Schema({
+        createdOn: {
+            type: Date,
+            default: Date.now
+        },
+        pristine: {
+            type: Boolean,
+            default: true
+        },
+        committed: {
+            type: Boolean,
+            default: false
+        },
+        confirmed: {
+            type: Boolean,
+            default: false
+        },
+        begun: {
+            type: Boolean,
+            default: false
+        },
+        completed: {
+            type: Boolean,
+            default: false
+        },
+        served: {
+            type: Boolean,
+            default: false
+        },
+        closed: {
+            type: Boolean,
+            default: false
+        },
+        dishes: [dishSchema]
+    });
+
     var sessionSchema = new mongoose.Schema({
         active: {
             type: Boolean,
@@ -30,50 +77,7 @@
         table: {
             type: String
         },
-        orders: [{
-            createdOn: {
-                type: Date,
-                default: Date.now
-            },
-            pristine: {
-                type: Boolean,
-                default: true
-            },
-            committed: {
-                type: Boolean,
-                default: false
-            },
-            confirmed: {
-                type: Boolean,
-                default: false
-            },
-            begun: {
-                type: Boolean,
-                default: false
-            },
-            completed: {
-                type: Boolean,
-                default: false
-            },
-            served: {
-                type: Boolean,
-                default: false
-            },
-            closed: {
-                type: Boolean,
-                default: false
-            },
-            dishes: [{
-                id: {
-                    type: Number,
-                    required: true
-                },
-                name: {
-                    type: String,
-                    required: true
-                }
-            }]
-        }]
+        orders: [orderSchema]
     });
 
     /**

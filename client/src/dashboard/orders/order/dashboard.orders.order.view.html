@@ -11,30 +11,30 @@
                 <button type="submit" class="btn btn-danger" ng-click="deleteOrder(vm.session._id, vm.order._id)">Slet ordre</button>
             </div>
             <div class="pull-right" ng-show="vm.order.pristine">
-                <button type="submit" class="btn btn-info" ng-click="commitOrder(vm.session._id, vm.order._id)">Commit</button>
+                <order-button-commit session-id="vm.session._id" order-id="vm.order._id"></order-button-commit>
             </div>
             <div class="pull-right" ng-show="vm.order.committed">
-                <button type="submit" class="btn btn-default" ng-click="pullOrder(vm.session._id, vm.order._id)">Send ordre tilbage</button>
-                <button type="submit" class="btn btn-success" ng-click="confirmOrder(vm.session._id, vm.order._id)">Konfirmer ordre</button>
+                <order-button-pull session-id="vm.session._id" order-id="vm.order._id"></order-button-pull>
+                <order-button-confirm session-id="vm.session._id" order-id="vm.order._id"></order-button-confirm>
             </div>
             <div class="pull-right" ng-show="vm.order.confirmed">
-                <button type="submit" class="btn btn-default" ng-click="rejectOrder(vm.session._id, vm.order._id)">Afvis ordre</button>
-                <button type="submit" class="btn btn-success" ng-click="beginOrder(vm.session._id, vm.order._id)">Begynd ordre</button>
+                <order-button-reject session-id="vm.session._id" order-id="vm.order._id"></order-button-reject>
+                <order-button-begin session-id="vm.session._id" order-id="vm.order._id"></order-button-begin>
             </div>
             <div class="pull-right" ng-show="vm.order.begun">
-                <button type="submit" class="btn btn-default" ng-click="stopOrder(vm.session._id, vm.order._id)">Stop forberedelse</button>
-                <button type="submit" class="btn btn-success" ng-click="completeOrder(vm.session._id, vm.order._id)">Færdiggør ordre</button>
+                <order-button-stop session-id="vm.session._id" order-id="vm.order._id"></order-button-stop>
+                <order-button-complete session-id="vm.session._id" order-id="vm.order._id"></order-button-complete>
             </div>
             <div class="pull-right" ng-show="vm.order.completed">
-                <button type="submit" class="btn btn-default" ng-click="incompleteOrder(vm.session._id, vm.order._id)">Marker som ufærdig</button>
-                <button type="submit" class="btn btn-success" ng-click="serveOrder(vm.session._id, vm.order._id)">Servér ordre</button>
+                <order-button-incomplete session-id="vm.session._id" order-id="vm.order._id"></order-button-incomplete>
+                <order-button-serve session-id="vm.session._id" order-id="vm.order._id"></order-button-serve>
             </div>
             <div class="pull-right" ng-show="vm.order.served">
-                <button type="submit" class="btn btn-default" ng-click="returnOrder(vm.session._id, vm.order._id)">Returnér ordre</button>
-                <button type="submit" class="btn btn-success" ng-click="closeOrder(vm.session._id, vm.order._id)">Luk ordre</button>
+                <order-button-return session-id="vm.session._id" order-id="vm.order._id"></order-button-return>
+                <order-button-close session-id="vm.session._id" order-id="vm.order._id"></order-button-close>
             </div>
             <div class="pull-right" ng-show="vm.order.closed">
-                <button type="submit" class="btn btn-default" ng-click="openOrder(vm.session._id, vm.order._id)">Åben ordre</button>
+                <order-button-open session-id="vm.session._id" order-id="vm.order._id"></order-button-open>
             </div>
         </div>
         <div class="list-group" ng-show="vm.order.dishes.length">

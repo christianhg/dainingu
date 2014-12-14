@@ -8,7 +8,7 @@
         mongodb: {
             database: 'dainingu',
             user: '',
-            host: 'localhost:',
+            host: 'localhost',
             password: null
         },
         /**

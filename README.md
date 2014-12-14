@@ -15,12 +15,13 @@ Prerequisites
 -------------------
 Be sure to have the following prerequisites installed.
 
-- [Bower](http://bower.io)
+- [Bower](http://bower.io) (1.3.7 or newer)
 - [Gulp](http://gulpjs.com/) (3.8.10)
 - [MongoDB](http://mongodb.org) (2.4 or newer)
-- [MySQL](http://mysqk.com) (2.5 or newer)
+- [MySQL](http://mysql.com) (2.5 or newer)
 - [Node](http://nodejs.org/) (0.10.x)
-- [NPM](https://www.npmjs.org/) (1.4.x)
+- [NPM](https://www.npmjs.org/) (1.6.x)
+- [SASS](http://sass-lang.com) (3.3.2 or newer)
 
 Installation
 -------------------

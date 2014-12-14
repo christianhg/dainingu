@@ -64,7 +64,7 @@
         next();
     });
     // set static dir.
-    app.use(express.static(__dirname + '/../client/build'));
+    app.use(express.static(__dirname + appConfig.staticDir));
     // Get data from html forms.
     app.use(bodyParser.json());
     // Faux http method support.

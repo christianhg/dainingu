@@ -12,22 +12,18 @@
 	function menus($resource) {
 		return $resource('/api/menus/:id', { id: '@id' }, {
 			'save': {
-				method: 'POST',
-				isArray: false
+				method: 'POST'
 			},
 			'update': {
-				method: 'PUT',
-				isArray: false
+				method: 'PUT'
 			},
 			'delete': {
-				method: 'DELETE',
-				isArray: false
+				method: 'DELETE'
 			},
 			'get': {
-				method: 'GET',
-				isArray: false
+				method: 'GET'
 			},
-			'index': {
+			'query': {
 				method: 'GET',
 				isArray: true
 			}

@@ -3,16 +3,12 @@
 
 	angular
 		.module('dainingu.core')
-		.config(config)
-		.run(run);
+		.config(config);
 
-	function config($urlRouterProvider) {
+	function config($httpProvider, $urlRouterProvider) {
 		$urlRouterProvider
 			.otherwise('/');
+
+		$httpProvider.interceptors.push('authInterceptor');
 	}
-
-	function run() {
-
-	}
-
 })();

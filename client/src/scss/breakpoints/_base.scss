@@ -69,6 +69,27 @@ header {
     color: $white!important;
 
   }
+  .menucard & {
+    background: $green;
+    border-color: $dark-green;
+    .navbar-nav {
+      a:hover,
+      a:focus,
+      a:active,
+      .active a {
+        background: $dark-green !important;
+      }
+    }
+    .btn-default {
+      background: lighten($green, 10%);
+      border-color: lighten($dark-green, 10%);
+      color: $white;
+      &:hover {
+        background: $dark-green;
+      }
+    }
+  }
+
   .floor & {
     background: $blue;
     border-color: $dark-blue;

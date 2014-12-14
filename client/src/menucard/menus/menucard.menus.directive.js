@@ -23,7 +23,7 @@
 			var vm = this;
 
 			vm.getMenus = function() {
-				menus.index({ deep: true }, function(menus) {
+				menus.query({ deep: true }, function(menus) {
 					vm.menus = menus;
 				});
 			};

@@ -20,17 +20,11 @@
         /**
          * @ngInject
          */
-        function FloorOrdersOrderController($scope, sessionsOrdersCommit, sessionsOrdersComplete, sessionsOrdersConfirm, sessionsOrdersServe) {
+        function FloorOrdersOrderController($scope, sessionsOrdersComplete, sessionsOrdersConfirm, sessionsOrdersServe) {
             var vm = this;
 
             vm.order = $scope.order;
             vm.session = $scope.session;
-
-            $scope.pullOrder = function(sessionId, orderId) {
-                sessionsOrdersCommit.pull({sessionId: sessionId, orderId: orderId}, function(data) {
-                    console.log(data);
-                });
-            };
 
             $scope.confirmOrder = function(sessionId, orderId) {
                 sessionsOrdersConfirm.confirm({sessionId: sessionId, orderId: orderId}, function(data) {
