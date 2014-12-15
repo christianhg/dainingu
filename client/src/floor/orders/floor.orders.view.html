@@ -1,10 +1,10 @@
 <div class="row">
     <div class="col-sm-4">
-        <floor-order ng-repeat="order in vm.orders | filter: { session: { active: true }, order: { committed: true } }" order="order.order" session="order.session"></floor-order>
+        <floor-order class="action" ng-repeat="order in vm.orders | filter: { session: { active: true }, order: { committed: true } }" order="order.order" session="order.session"></floor-order>
         <floor-order ng-repeat="order in vm.orders | filter: { session: { active: true }, order: { pristine: true } }" order="order.order" session="order.session"></floor-order>
     </div>
     <div class="col-sm-4">
-        <floor-order ng-repeat="order in vm.orders | filter: { session: { active: true }, order: { completed: true } }" order="order.order" session="order.session"></floor-order>
+        <floor-order class="action" ng-repeat="order in vm.orders | filter: { session: { active: true }, order: { completed: true } }" order="order.order" session="order.session"></floor-order>
         <floor-order ng-repeat="order in vm.orders | filter: { session: { active: true }, order: { begun: true } }" order="order.order" session="order.session"></floor-order>
         <floor-order ng-repeat="order in vm.orders | filter: { session: { active: true }, order: { confirmed: true } }" order="order.order" session="order.session"></floor-order>
     </div>

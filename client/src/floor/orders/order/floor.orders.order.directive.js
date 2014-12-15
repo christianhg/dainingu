@@ -20,41 +20,11 @@
         /**
          * @ngInject
          */
-        function FloorOrdersOrderController($scope, sessionsOrdersComplete, sessionsOrdersConfirm, sessionsOrdersServe) {
+        function FloorOrdersOrderController($scope) {
             var vm = this;
 
             vm.order = $scope.order;
             vm.session = $scope.session;
-
-            $scope.confirmOrder = function(sessionId, orderId) {
-                sessionsOrdersConfirm.confirm({sessionId: sessionId, orderId: orderId}, function(data) {
-                    console.log(data);
-                });
-            };
-
-            $scope.rejectOrder = function(sessionId, orderId) {
-                sessionsOrdersConfirm.reject({sessionId: sessionId, orderId: orderId}, function(data) {
-                    console.log(data);
-                });
-            };
-
-            $scope.incompleteOrder = function(sessionId, orderId) {
-                sessionsOrdersComplete.incomplete({sessionId: sessionId, orderId: orderId}, function(data) {
-                    console.log(data);
-                });
-            };
-
-            $scope.serveOrder = function(sessionId, orderId) {
-                sessionsOrdersServe.serve({sessionId: sessionId, orderId: orderId}, function(data) {
-                    console.log(data);
-                });
-            };
-
-            $scope.returnOrder = function(sessionId, orderId) {
-                sessionsOrdersServe.return({sessionId: sessionId, orderId: orderId}, function(data) {
-                    console.log(data);
-                });
-            };
         }
 
         return directive;

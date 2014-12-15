@@ -7,7 +7,7 @@
         <cashregister-order ng-repeat="order in vm.orders | filter: { session: { active: true }, order: { pristine: true } }" order="order.order" session="order.session"></cashregister-order>
     </div>
     <div class="col-sm-4">
-        <cashregister-order ng-repeat="order in vm.orders | filter: { session: { active: true }, order: { served: true } }" order="order.order" session="order.session"></cashregister-order>
+        <cashregister-order class="action" ng-repeat="order in vm.orders | filter: { session: { active: true }, order: { served: true } }" order="order.order" session="order.session"></cashregister-order>
     </div>
     <div class="col-sm-4">
         <cashregister-order ng-repeat="order in vm.orders | filter: { session: { active: true }, order: { closed: true } }" order="order.order" session="order.session"></cashregister-order>

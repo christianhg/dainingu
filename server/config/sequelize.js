@@ -1,6 +1,12 @@
 (function () {
 	'use strict';
 
+	/**
+	 * The following code is based on the solution presented by
+	 * Jeysson Guevara in the blog article:
+	 * http://jeydotc.github.io/blog/2012/10/30/EXPRESS-WITH-SEQUELIZE.html
+	 */
+
 	var fs = require('fs');
 	var models = {};
 	var modelsPath = __dirname + '/../models/sequelize';
@@ -31,8 +37,10 @@
 				var object = require(modelsPath + '/' + name);
 				var options = object.options || {};
 				var modelName = name.replace(/\.js$/i, '');
+
 				models[modelName] = sequelize.define(modelName, object.model, options);
-				if('relations' in object){
+
+				if('relations' in object) {
 					relationships[modelName] = object.relations;
 				}
 			});

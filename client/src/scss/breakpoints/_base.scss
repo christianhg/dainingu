@@ -40,6 +40,30 @@ header {
   }
 }
 
+cashregister-order.action,
+floor-order.action,
+kitchen-order.action{
+  .panel-heading {
+    background-color: lighten($success-green, 30%);
+  }
+  .panel-body {
+    background-color: lighten($success-green, 40%);
+  }
+}
+
+
+.row {
+  &.action {
+    //padding-top: 20px;
+    //background: lighten($success-green, 30%);
+    //margin-bottom: 20px;
+
+  }
+  &.passive {
+    //background: $light-grey;
+  }
+}
+
 .label {
   &.pristine {
     background-color: $pristine;

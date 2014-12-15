@@ -7,10 +7,10 @@
     </div>
     <div class="panel-body">
         <div class="well clearfix" ng-show="vm.order.served">
-            <button type="submit" class="btn btn-success" ng-click="closeOrder(vm.session._id, vm.order._id)">Luk ordre</button>
+            <order-button-close session-id="vm.session._id" order-id="vm.order._id"></order-button-close>
         </div>
         <div class="well clearfix" ng-show="vm.order.closed">
-            <button type="submit" class="btn btn-default" ng-click="openOrder(vm.session._id, vm.order._id)">Åben ordre</button>
+            <order-button-open session-id="vm.session._id" order-id="vm.order._id"></order-button-open>
         </div>
         <order-dishes></order-dishes>
         <order-info></order-info>

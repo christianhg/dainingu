@@ -20,35 +20,11 @@
         /**
          * @ngInject
          */
-        function KitchenOrdersOrderController($scope, sessionsOrdersBegin, sessionsOrdersComplete, sessionsOrdersConfirm) {
+        function KitchenOrdersOrderController($scope) {
             var vm = this;
 
             vm.order = $scope.order;
             vm.session = $scope.session;
-
-            $scope.rejectOrder = function(sessionId, orderId) {
-                sessionsOrdersConfirm.reject({sessionId: sessionId, orderId: orderId}, function(data) {
-                    console.log(data);
-                });
-            };
-
-            $scope.beginOrder = function(sessionId, orderId) {
-                sessionsOrdersBegin.begin({ sessionId: sessionId, orderId: orderId }, function(data) {
-                    console.log(data);
-                });
-            };
-
-            $scope.stopOrder = function(sessionId, orderId) {
-                sessionsOrdersBegin.stop({ sessionId: sessionId, orderId: orderId }, function(data) {
-                    console.log(data);
-                });
-            };
-
-            $scope.completeOrder = function(sessionId, orderId) {
-                sessionsOrdersComplete.complete({sessionId: sessionId, orderId: orderId}, function(data) {
-                    console.log(data);
-                });
-            };
         }
 
         return directive;
