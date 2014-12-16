@@ -6,3 +6,4 @@ dist
 node_modules
 .sass-cache
 Thumbs.db
+npm-debug.log
