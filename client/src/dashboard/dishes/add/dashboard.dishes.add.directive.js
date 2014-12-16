@@ -25,14 +25,19 @@
 
 			$scope.addDish = function(dish) {
 				dishes.save(dish, function(data) {
+					console.log(data);
 					// reset form
 					vm.dish = {};
 				});
 			};
 
-			menus.query(function(menus) {
-				vm.menus = menus;
-			});
+			vm.getMenus = function() {
+				menus.query(function(menus) {
+					vm.menus = menus;
+				});
+			};
+
+			vm.getMenus();
 		}
 	}
 })();

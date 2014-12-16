@@ -24,6 +24,7 @@
 
 			$scope.addOrder = function() {
 				menucard.addOrder(function(data) {
+					console.log(data);
 					activeOrder.set(data.order._id);
 				});
 			};

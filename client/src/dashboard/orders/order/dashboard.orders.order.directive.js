@@ -29,7 +29,7 @@
 
             $scope.deleteOrder = function(sessionId, orderId) {
                 sessionsOrders.delete({sessionId: sessionId, orderId: orderId}, function(data) {
-
+                    console.log(data);
                 });
             };
 

@@ -8,6 +8,5 @@
 	function DashboardStatisticsController() {
 		var vm = this;
 
-
 	}
 })();

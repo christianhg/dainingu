@@ -24,7 +24,8 @@
 			var vm = this;
 
 			$scope.addMenu = function() {
-				menus.save(vm.menu, function() {
+				menus.save(vm.menu, function(data) {
+					console.log(data);
 					// reset form
 					vm.menu = {};
 				});

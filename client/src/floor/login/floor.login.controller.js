@@ -12,6 +12,7 @@
 
         $scope.floorLogin = function() {
             auth.signin(vm.loginData, function(data) {
+                console.log(data);
                 $state.go('floor', null, { reload: true });
             });
         };

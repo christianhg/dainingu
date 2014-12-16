@@ -8,12 +8,17 @@
     function DashboardUsersIdDeleteController($scope, users, $state, $stateParams) {
         var vm = this;
 
-        users.get({id: $stateParams.id}, function(user) {
-            vm.user = user;
-        });
+        vm.getUser = function() {
+            users.get({id: $stateParams.id}, function(user) {
+                vm.user = user;
+            });
+        };
+
+        vm.getUser();
 
         $scope.deleteUser = function() {
-            users.delete({id: vm.user._id}, function(user) {
+            users.delete({id: vm.user._id}, function(data) {
+                console.log(data);
                 $state.go('dashboard.users', null, { reload: true });
             });
         };

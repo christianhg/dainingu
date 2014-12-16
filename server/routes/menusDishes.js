@@ -19,14 +19,14 @@
             post(jwtAuth, function(req, res) {
                 menusDishes.store(req, res, function(data) {
                     io.emit('alert', {type: 'success', message: data.message});
-                    io.emit('menusDishesUpdated');
+                    io.emit('dishesUpdated');
                 });
             });
         app.route('/api/menus/:menuId/dishes/:dishId')
             .delete(jwtAuth, function(req, res) {
                 menusDishes.destroy(req, res, function(data) {
                     io.emit('alert', {type: 'success', message: data.message});
-                    io.emit('menusDishesUpdated');
+                    io.emit('dishesUpdated');
                 });
             });
     };

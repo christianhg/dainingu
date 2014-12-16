@@ -12,6 +12,7 @@
 
         $scope.kitchenLogin = function() {
             auth.signin(vm.loginData, function(data) {
+                console.log(data);
                 $state.go('kitchen', null, { reload: true });
             });
         };

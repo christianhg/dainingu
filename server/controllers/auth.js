@@ -120,7 +120,7 @@
 
 					res.json(data);
 
-					callback(true, data);
+					callback(data);
 				} else {
 					data = {
 						message: 'User signin failed.',

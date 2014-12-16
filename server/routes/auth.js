@@ -20,6 +20,7 @@
         app.route('/api/auth/signin')
             .post(function(req, res) {
                 auth.signin(req, res, function(data) {
+                    console.log(data);
                     io.sockets.emit('alert', { type: 'success', message: data.message });
                 });
             });

@@ -10,8 +10,8 @@
 
         $scope.dashboardLogin = function(loginData) {
             auth.signin(loginData, function(data) {
-                vm.loginData = {};
                 console.log(data);
+                vm.loginData = {};
                 if(data.success) {
                     $state.go('dashboard', null, { reload: true });
                 }

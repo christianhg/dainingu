@@ -25,6 +25,7 @@
 
             $scope.addSession = function() {
                 sessions.save(vm.session, function(data) {
+                    console.log(data);
                     vm.session = {};
                 });
             };

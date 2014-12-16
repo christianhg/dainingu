@@ -26,12 +26,14 @@
 
             $scope.commitOrder = function(orderId) {
                 menucard.commitOrder(orderId, function(data) {
+                    console.log(data);
                     $scope.resetActiveOrder();
                 });
             };
 
             $scope.returnOrder = function(orderId) {
                 menucard.returnOrder(orderId, function(data) {
+                    console.log(data);
                     $scope.resetActiveOrder();
                 });
             };

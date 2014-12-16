@@ -20,9 +20,13 @@
             vm.getMenus();
         });
 
+        socket.on('dishesUpdated', function() {
+            vm.getMenus();
+        });
+
         $scope.deleteDishFromMenu = function(menuId, dishId) {
             menusDishes.delete({ 'menuId': menuId, 'dishId': dishId }, function(data) {
-
+                console.log(data);
             });
         };
     }
