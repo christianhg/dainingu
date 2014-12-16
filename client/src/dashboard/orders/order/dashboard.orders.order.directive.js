@@ -20,7 +20,7 @@
         /**
          * @ngInject
          */
-        function DashboardOrdersOrderController($scope, sessionsOrdersDishes) {
+        function DashboardOrdersOrderController($scope, sessionsOrders, sessionsOrdersDishes) {
             var vm = this;
 
             vm.order = $scope.order;

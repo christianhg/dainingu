@@ -80,11 +80,6 @@
         orders: [orderSchema]
     });
 
-    var Session = mongoose.model('Session', sessionSchema);
-
-    // Expose model
-    module.exports = Session;
-
     /**
      * Generate random session key before session creation.
      * TODO: The function needs to check if the key is unique.
@@ -639,4 +634,9 @@
             callback(order);
         }
     };
+
+    var Session = mongoose.model('Session', sessionSchema);
+
+    // Expose model
+    module.exports = Session;
 })();
