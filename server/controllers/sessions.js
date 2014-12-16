@@ -15,7 +15,7 @@
                     }
 
                     var data = {
-                        message: 'Session deleted',
+                        message: 'Session med nøglen ' + session.key + ' er slettet',
                         session: session
                     };
 
@@ -37,7 +37,7 @@
             }
 
             var data = {
-                message: 'Sessions shown',
+                message: 'Sessioner vist',
                 sessions: sessions
             };
 
@@ -57,7 +57,7 @@
             }
 
             var data = {
-                message: 'Session shown',
+                message: 'Session vist',
                 session: session
             };
 
@@ -88,7 +88,7 @@
             }
 
             var data = {
-                message: 'Session added',
+                message: 'Session med nøglen ' + session.key + ' er tilføjet',
                 session: session
             };
 
@@ -116,7 +116,7 @@
                 }
 
                 var data = {
-                    message: 'Session updated',
+                    message: 'Session med nøglen ' + session.key + ' er opdateret',
                     session: session
                 };
 
@@ -148,7 +148,7 @@
                         }
 
                         var data = {
-                            message: 'Session aktiveret',
+                            message: 'Session med nøglen ' + session.key + ' er aktiveret',
                             session: session
                         };
 
@@ -182,7 +182,7 @@
                         }
 
                         var data = {
-                            message: 'Session deaktiveret',
+                            message: 'Session med nøglen ' + session.key + ' er deaktiveret',
                             session: session
                         };
 
@@ -216,7 +216,7 @@
                         }
 
                         var data = {
-                            message: 'Session expired',
+                            message: 'Session med nøglen ' + session.key + ' er udløbet',
                             session: session
                         };
 
@@ -250,7 +250,7 @@
                         }
 
                         var data = {
-                            message: 'Session resumed',
+                            message: 'Session med nøglen ' + session.key + ' er gentaget',
                             session: session
                         };
 
