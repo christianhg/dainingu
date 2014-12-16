@@ -19,7 +19,7 @@
                     }
 
                     var data = {
-                        message: 'Dish deleted',
+                        message: 'Ret slettet fra ordre',
                         dish: dish
                     };
 
@@ -41,7 +41,7 @@
         Session.findOne({_id: sessionId}, function(err, session) {
             session.findDishes(orderId, function(dishes) {
                 var data = {
-                    message: 'Dishes shown',
+                    message: 'Retter til ordre vist',
                     dishes: dishes
                 };
 
@@ -63,7 +63,7 @@
         Session.findOne({_id: sessionId}, function(err, session) {
             session.findDish(orderId, dishId, function(dish) {
                 var data = {
-                    message: 'Dish shown',
+                    message: 'Ret til ordre vist',
                     dish: dish
                 };
 
@@ -91,7 +91,7 @@
                     }
 
                     var data = {
-                        message: 'Dish saved',
+                        message: 'Ret gemt til ordre',
                         dish: dish
                     };
 

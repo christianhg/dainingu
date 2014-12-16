@@ -16,6 +16,7 @@
             .post(jwtAuth, function(req, res) {
                 sessionsOrdersDishes.store(req, res, function(data) {
                     io.sockets.emit('sessionsUpdated');
+                    io.sockets.emit('alert', { type: 'success', message: data.message });
                 });
             });
 
@@ -31,6 +32,7 @@
             .delete(jwtAuth, function(req, res) {
                 sessionsOrdersDishes.destroy(req, res, function(data) {
                     io.sockets.emit('sessionsUpdated');
+                    io.sockets.emit('alert', { type: 'danger', message: data.message });
                 });
             });
     };

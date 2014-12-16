@@ -16,12 +16,10 @@
                 isArray: true
             },
             'save': {
-                method: 'POST',
-                isArray: false
+                method: 'POST'
             },
             'delete': {
-                method: 'DELETE',
-                isArray: true
+                method: 'DELETE'
             }
         });
     }
