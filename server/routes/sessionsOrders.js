@@ -16,6 +16,7 @@
             .post(jwtAuth, function(req, res) {
                 sessionsOrders.store(req, res, function(data) {
                     io.sockets.emit('ordersUpdated', data);
+                    io.sockets.emit('alert', { type: 'success', message: data.message });
                 });
             });
 
@@ -31,6 +32,7 @@
             .delete(jwtAuth, function(req, res) {
                 sessionsOrders.destroy(req, res, function(data) {
                     io.sockets.emit('ordersUpdated');
+                    io.sockets.emit('alert', { type: 'danger', message: data.message });
                 });
             });
 
@@ -58,11 +60,13 @@
             .put(jwtAuth, function(req, res) {
                 sessionsOrders.confirm(req, res, function(data) {
                     io.sockets.emit('ordersUpdated');
+                    io.sockets.emit('alert', { type: 'success', message: data.message });
                 });
             })
             .delete(jwtAuth, function(req, res) {
                 sessionsOrders.reject(req, res, function(data) {
                     io.sockets.emit('ordersUpdated');
+                    io.sockets.emit('alert', { type: 'warning', message: data.message });
                 });
             });
 
@@ -73,11 +77,13 @@
             .put(jwtAuth, function(req, res) {
                 sessionsOrders.begin(req, res, function(data) {
                     io.sockets.emit('ordersUpdated');
+                    io.sockets.emit('alert', { type: 'success', message: data.message });
                 });
             })
             .delete(jwtAuth, function(req, res) {
                 sessionsOrders.stop(req, res, function(data) {
                     io.sockets.emit('ordersUpdated');
+                    io.sockets.emit('alert', { type: 'warning', message: data.message });
                 });
             });
 
@@ -88,11 +94,13 @@
             .put(jwtAuth, function(req, res) {
                 sessionsOrders.complete(req, res, function(data) {
                     io.sockets.emit('ordersUpdated');
+                    io.sockets.emit('alert', { type: 'success', message: data.message });
                 });
             })
             .delete(jwtAuth, function(req, res) {
                 sessionsOrders.incomplete(req, res, function(data) {
                     io.sockets.emit('ordersUpdated');
+                    io.sockets.emit('alert', { type: 'warning', message: data.message });
                 });
             });
 
@@ -103,11 +111,13 @@
             .put(jwtAuth, function(req, res) {
                 sessionsOrders.serve(req, res, function(data) {
                     io.sockets.emit('ordersUpdated');
+                    io.sockets.emit('alert', { type: 'success', message: data.message });
                 });
             })
             .delete(jwtAuth, function(req, res) {
                 sessionsOrders.return(req, res, function(data) {
                     io.sockets.emit('ordersUpdated');
+                    io.sockets.emit('alert', { type: 'warning', message: data.message });
                 });
             });
 
@@ -118,11 +128,13 @@
             .put(jwtAuth, function(req, res) {
                 sessionsOrders.close(req, res, function(data) {
                     io.sockets.emit('ordersUpdated');
+                    io.sockets.emit('alert', { type: 'success', message: data.message });
                 });
             })
             .delete(jwtAuth, function(req, res) {
                 sessionsOrders.open(req, res, function(data) {
                     io.sockets.emit('ordersUpdated');
+                    io.sockets.emit('alert', { type: 'warning', message: data.message });
                 });
             });
     };

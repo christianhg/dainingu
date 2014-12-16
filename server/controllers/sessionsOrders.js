@@ -25,7 +25,7 @@
                         }
 
                         var data = {
-                            message: 'Order deleted',
+                            message: 'Ordre fra sessionen med nøglen ' + session.key + ' er slettet',
                             session: session
                         };
 
@@ -53,7 +53,7 @@
                 res.send(false);
             } else {
                 var data = {
-                    message: 'Orders shown',
+                    message: 'Ordrer fra sessionen med nøglen ' + session.key + ' vist',
                     orders: session.orders
                 };
 
@@ -81,7 +81,7 @@
             } else {
                 session.findOrder(orderId, function(order) {
                     var data = {
-                        message: 'Order shown',
+                        message: 'Ordre fra sessionen med nøglen ' + session.key + ' vist',
                         order: order
                     };
 
@@ -114,7 +114,7 @@
                         }
 
                         var data = {
-                            message: 'Order added to session',
+                            message: 'Ordre tilføjet til sessionen med nøglen ' + session.key,
                             order: order
                         };
 
@@ -151,7 +151,7 @@
                         }
 
                         var data = {
-                            message: 'Ordre blev indsendt til tjener',
+                            message: 'Ordre (' + session.key + ':' + order.createdOn + ') blev indsendt',
                             session: session
                         };
 
@@ -186,7 +186,7 @@
                         }
 
                         var data = {
-                            message: 'Ordre blev sendt tilbage af tjener',
+                            message: 'Ordre (' + session.key + ':' + order.createdOn + ') blev indsendt tilbage',
                             session: session
                         };
 
@@ -221,7 +221,7 @@
                         }
 
                         var data = {
-                            message: 'Order confirmed',
+                            message: 'Ordre (' + session.key + ':' + order.createdOn + ') blev konfirmeret',
                             order: order
                         };
 
@@ -256,7 +256,7 @@
                         }
 
                         var data = {
-                            message: 'Order rejected',
+                            message: 'Ordre (' + session.key + ':' + order.createdOn + ') blev afvist',
                             session: session
                         };
 
@@ -291,7 +291,7 @@
                         }
 
                         var data = {
-                            message: 'Order begun',
+                            message: 'Ordre (' + session.key + ':' + order.createdOn + ') blev begyndt',
                             order: order
                         };
 
@@ -326,7 +326,7 @@
                         }
 
                         var data = {
-                            message: 'Order stopped',
+                            message: 'Ordre (' + session.key + ':' + order.createdOn + ') blev stoppet',
                             order: order
                         };
 
@@ -361,7 +361,7 @@
                         }
 
                         var data = {
-                            message: 'Order completed',
+                            message: 'Ordre (' + session.key + ':' + order.createdOn + ') blev færdiggjort',
                             session: session
                         };
 
@@ -396,77 +396,7 @@
                         }
 
                         var data = {
-                            message: 'Order incompleted',
-                            session: session
-                        };
-
-                        res.json(data);
-
-                        callback(data);
-                    });
-                });
-            }
-        });
-    };
-
-    /**
-     * Begin order in specific session.
-     */
-    exports.begin = function(req, res, callback) {
-        var sessionId = req.params.sessionId;
-        var orderId = req.params.orderId;
-
-        Session.findOne({_id: sessionId}, function(err, session) {
-            if(err) {
-                res.send(err);
-            }
-
-            if(!session) {
-                res.send(false);
-            } else {
-                session.beginOrder(orderId, function(order) {
-                    session.save(function(err) {
-                        if(err) {
-                            res.send(err);
-                        }
-
-                        var data = {
-                            message: 'Order begun',
-                            session: session
-                        };
-
-                        res.json(data);
-
-                        callback(data);
-                    });
-                });
-            }
-        });
-    };
-
-    /**
-     * Stop order in specific session.
-     */
-    exports.stop = function(req, res, callback) {
-        var sessionId = req.params.sessionId;
-        var orderId = req.params.orderId;
-
-        Session.findOne({_id: sessionId}, function(err, session) {
-            if(err) {
-                res.send(err);
-            }
-
-            if(!session) {
-                res.send(false);
-            } else {
-                session.stopOrder(orderId, function(order) {
-                    session.save(function(err) {
-                        if(err) {
-                            res.send(err);
-                        }
-
-                        var data = {
-                            message: 'Order stopped',
+                            message: 'Ordre (' + session.key + ':' + order.createdOn + ') blev ufærdiggjort',
                             session: session
                         };
 
@@ -501,7 +431,7 @@
                         }
 
                         var data = {
-                            message: 'Order served',
+                            message: 'Ordre (' + session.key + ':' + order.createdOn + ') blev serveret',
                             order: order
                         };
 
@@ -536,7 +466,7 @@
                         }
 
                         var data = {
-                            message: 'Order returned',
+                            message: 'Ordre (' + session.key + ':' + order.createdOn + ') blev returneret',
                             session: session
                         };
 
@@ -571,7 +501,7 @@
                         }
 
                         var data = {
-                            message: 'Order closed',
+                            message: 'Ordre (' + session.key + ':' + order.createdOn + ') blev lukket',
                             session: session
                         };
 
@@ -606,7 +536,7 @@
                         }
 
                         var data = {
-                            message: 'Order opened',
+                            message: 'Ordre (' + session.key + ':' + order.createdOn + ') blev åbnet',
                             session: session
                         };
 
