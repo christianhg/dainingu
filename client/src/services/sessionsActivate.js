@@ -10,7 +10,7 @@
         .factory('sessionsActivate', sessionsActivate);
 
     function sessionsActivate($resource) {
-        return $resource('/api/sessions/:sessionId/active', {sessionId: '@sessionId', orderId: '@orderId'}, {
+        return $resource('/api/sessions/:sessionId/activate', {sessionId: '@sessionId', orderId: '@orderId'}, {
             'activate': {
                 method: 'PUT',
                 isArray: false

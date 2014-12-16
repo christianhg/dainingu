@@ -26,7 +26,7 @@
 			$scope.addUser = function(newUser) {
 				users.save(newUser, function(data) {
 					console.log(data);
-					vm.menu = {};
+					vm.user = {};
 				});
 			};
 		}

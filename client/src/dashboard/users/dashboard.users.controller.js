@@ -16,7 +16,7 @@
 
         vm.getUsers();
 
-        socket.on('usersAdded', function() {
+        socket.on('usersUpdated', function() {
             vm.getUsers();
         });
     }

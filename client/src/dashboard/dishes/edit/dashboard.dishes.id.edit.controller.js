@@ -5,7 +5,7 @@
         .module('dainingu.dashboard.dishes')
         .controller('DashboardDishesIdEditController', DashboardDishesIdEditController);
 
-    function DashboardDishesIdEditController($scope, dishes, $state, $stateParams) {
+    function DashboardDishesIdEditController($scope, $state, $stateParams, dishes, menus) {
         var vm = this;
 
         vm.getDish = function() {
@@ -15,6 +15,14 @@
         };
 
         vm.getDish();
+
+        vm.getMenus = function() {
+            menus.query(function(menus) {
+                vm.menus = menus;
+            });
+        };
+
+        vm.getMenus();
 
         $scope.editDish = function() {
             dishes.update({id: vm.dish.id}, vm.dish, function(data) {

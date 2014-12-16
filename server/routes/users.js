@@ -12,7 +12,7 @@
             })
             .post(jwtAuth, function(req, res) {
                 users.store(req, res, function(data) {
-                    io.sockets.emit('userAdded', data);
+                    io.sockets.emit('usersUpdated', data);
                     io.sockets.emit('alert', { type: 'success', message: data.message });
                 });
             });
@@ -24,13 +24,13 @@
             })
             .put(jwtAuth, function(req, res) {
                 users.update(req, res, function(data) {
-                    io.sockets.emit('userUpdated');
+                    io.sockets.emit('usersUpdated');
                     io.sockets.emit('alert', { type: 'warning', message: data.message });
                 });
             })
             .delete(jwtAuth, function(req, res) {
                 users.destroy(req, res, function(data) {
-                    io.sockets.emit('userDeleted');
+                    io.sockets.emit('usersUpdated');
                     io.sockets.emit('alert', { type: 'danger', message: data.message });
                 });
             });

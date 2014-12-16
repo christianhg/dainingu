@@ -111,7 +111,7 @@
 					}
 
 					var data = {
-						message: 'Dishes shown with menu',
+						message: 'Retter til menuen vist',
 						dishes: dishes
 					};
 
@@ -128,7 +128,7 @@
 					}
 
 					var data = {
-						message: 'Dishes shown',
+						message: 'Retter vist',
 						dishes: dishes
 					};
 
